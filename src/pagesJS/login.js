@@ -44,7 +44,6 @@ const handleLogin = async (event) => {
       const user = userCredential.user;
       console.log("Utilisateur connecté");
       window.location.href = "../../accueil/acceuil.html";
-  
     } catch (error) {
       const errorCode = error.code;
       const errorMessage = error.message;
