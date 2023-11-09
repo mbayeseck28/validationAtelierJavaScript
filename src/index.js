@@ -40,4 +40,7 @@ if (pageName === 'inscription.html') {
 } else if (pageName === 'comptabilite.html') {
   import('./pagesJS/sidebar');
   import('./pagesJS/compta');
+}else if (pageName === 'personnel.html') {
+  import('./pagesJS/sidebar');
+  import('./pagesJS/personnel.js');
 }
