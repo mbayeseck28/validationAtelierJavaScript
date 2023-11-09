@@ -41,11 +41,11 @@ export function gestionProfesseurs(utilisateurs) {
                 <td class="mx-auto text-center m-0 d-none d-lg-block">${utilisateur.classe}</td>
                 <td class="mx-auto text-center m-0 py-auto ">
                     <button class="btn bouton me-1 my-1 supprimer text-white rounded-circle" data-id=${utilisateur.id}>
-                        <i class="fa-solid fa-trash-can"></i>
+                        <i class="fa-solid fa-trash-can supprimer" data-id=${utilisateur.id}></i>
                     </button>
                     <button data-bs-toggle="modal" data-bs-target="#exampleModal" 
                         class="btn bouton modifier me-1 my-1 rounded-circle text-white" data-id=${utilisateur.id}>
-                        <i class="fa-solid fa-pencil"></i>
+                        <i class="fa-solid fa-pencil modifier" data-id=${utilisateur.id}></i>
                     </button>
                 </td>
             `;
