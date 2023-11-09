@@ -9,7 +9,7 @@ btnConnexion.addEventListener('click', ()=>{
     const mdpAdminValide = "Maybossbi2023"
     if (emailAdmin.value === emailAdminValide && mdpAdmin.value === mdpAdminValide){
         console.log("Conexxion reussit");
-        window.location.href="inscription.html";
+        window.location.href="../auth/inscription/inscription.html";
     }else{
         alert('Email ou mot de passe incorrect')
         emailAdmin.value = ""
