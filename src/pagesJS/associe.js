@@ -54,7 +54,7 @@ export function gestionAssocie() {
     logoEntreprise.innerHTML = "";
     associe.forEach((ins) => {
       const div = document.createElement("div");
-      div.className = "col-lg-2 align-items-center ";
+      div.className = "col-6 col-lg-2 col-md- col-sm ";
       div.innerHTML = `
       <button class="btn k rounded-pill">
         <img src="${ins.logo}" alt="Logo de l'associe" class="img ">                                                           
@@ -66,18 +66,4 @@ export function gestionAssocie() {
   });
 }
 
-// export function ajouterAssocier(formAssocie) {
-//     const db = getFirestore();
-//     const associe = collection(db, "associe");
 
-//     addDoc(associe, {
-//       nom: formAssocie.nomAss.value,
-//       coordonnee: formAssocie.coordonneeAss.value,
-//       email: formAssocie.emailAss.value,
-//       logo: formAssocie.fileInput.value
-
-//     }).then(() => {
-//         console.log(formAssocie.nomAss.value);
-//         formAssocie.reset()
-//     });
-//   }
