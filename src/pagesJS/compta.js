@@ -27,8 +27,10 @@ const db = getFirestore(app);
 
 // Récupérer la collection
 const eleve = collection(db, 'inscScolarite');
+const certiesRef = collection(db, 'inscrireActivite');
+const certiesRef2 = collection(db, 'mensualites');
 
-getDocs(eleve).then((snapshot) => {});
+
 
 // Realtime Update
 onSnapshot(eleve, (snapshot) => {
@@ -59,48 +61,169 @@ onSnapshot(eleve, (snapshot) => {
 //___________________________________________________
 //partie pape cheikh
 
-// var database = firebase.database()
+
+
+
+
+
+
+
+
+
 
 onSnapshot(eleve, (snapshot) => {
   let eleve = [];
   snapshot.docs.forEach((doc) => {
     eleve.push({ ...doc.data(), id: doc.id });
   });
-  let totalEtatFin = 0;
-  const revenue = document.getElementById('revenue');
-  revenue.innerHTML = '';
+  const revenue = document.getElementById("revenue");
+  
   eleve.forEach((utili) => {
-    let trbody = document.createElement('tr');
+    let trbody = document.createElement("tr");
     trbody.innerHTML = `
-    <td class="border border-1">${utili.dateDajout
-      .toDate()
-      .toLocaleDateString()}</td>
-      <td class="text-center">${utili.type}</td>
-      <td class="text-center border border-1">${utili.prenom} ${utili.nom}</td>
-      <td class="border border-1">${utili.etatFin.toLocaleString(
-        'en-US'
-      )} Fcfa</td>
-      `;
+      <td class="border border-1">${utili.dateDajout
+        .toDate()
+        .toLocaleDateString()}</td>
+        <td class="text-center">${utili.type}</td>
+        <td class="text-center border border-1">${utili.prenom} ${
+      utili.nom
+    }</td>
+        <td class="border border-1">${utili.etatFin.toLocaleString(
+          "en-US"
+        )} Fcfa</td>
+        `;
+    revenue.appendChild(trbody);
+  });
+});
+
+onSnapshot(certiesRef, (snapshot) => {
+  let certiesRef = [];
+  snapshot.docs.forEach((doc) => {
+    certiesRef.push({ ...doc.data(), id: doc.id });
+  });
+  certiesRef.sort((a, b) => b.dateDajout - a.dateDajout);
+  certiesRef.forEach((utili) => {
+    let trbody = document.createElement("tr");
+    trbody.innerHTML = `
+      <td class="border border-1">${utili.dateDajout
+        .toDate()
+        .toLocaleDateString()}</td>
+        <td class="text-center">${utili.type}</td>
+        <td class="text-center border border-1">${utili.prenom} ${
+      utili.nom
+    }</td>
+        <td class="border border-1">${utili.etat}Fcfa</td>
+        `;
     revenue.appendChild(trbody);
 
-    //Calcule du revenue total
-    totalEtatFin += parseInt(utili.etatFin);
+    // console.log(utili.type);
+  });
+});
+
+onSnapshot(certiesRef2, (snapshot) => {
+  let certiesRef2 = [];
+  snapshot.docs.forEach((doc) => {
+    certiesRef2.push({ ...doc.data(), id: doc.id });
+  });
+  certiesRef2.sort((a, b) => b.dateDajout - a.dateDajout);
+
+  certiesRef2.forEach((utili) => {
+    let trbody = document.createElement("tr");
+    trbody.innerHTML = `
+      <td class="border border-1">${utili.dateDajout
+        .toDate()
+        .toLocaleDateString()}</td>
+        <td class="text-center">${utili.type}</td>
+        <td class="text-center border border-1">${utili.prenom} ${
+      utili.nom
+    }</td>
+        <td class="border border-1">${utili.etat}Fcfa</td>
+        `;
+    revenue.appendChild(trbody);
+
+    // console.log(utili.type);
+  });
+});
+
+getDocs(eleve).then((snapshot) => {
+    let eleve = [];
+    snapshot.docs.forEach((doc) => {
+      eleve.push({ ...doc.data(), id: doc.id });
+    });
+    let totalInscription = 0;
+    eleve.forEach((utili) => {
+      totalInscription += parseInt(utili.etatFin);
+    });
+    console.log(totalInscription);
   });
 
-  const total = document.getElementById('total');
-  total.innerHTML = '';
-  let trfoot = document.createElement('tr');
-  trfoot.innerHTML = `
-  <td colspan="3"><b>Total</b></td>
-  <td><b>${totalEtatFin.toLocaleString('en-US')} Fcfa </b></td>
-  `;
-  total.appendChild(trfoot);
-  total.appendChild(trfoot);
-  const revTotal = document.getElementById('revenuTotal');
-  revTotal.innerHTML = `${totalEtatFin.toLocaleString(
-    'en-US'
-  )} <span class="fw-bold">FCFA</span>`;
+getDocs(certiesRef).then((snapshot) => {
+  let certiesRef = [];
+  snapshot.docs.forEach((doc) => {
+    certiesRef.push({ ...doc.data(), id: doc.id });
+  });
+  let totalCertieRef = 0;
+  certiesRef.forEach((utili) => {
+    totalCertieRef += parseInt(utili.etat);
+  });
+  console.log(totalCertieRef);
 });
+
+getDocs(certiesRef2).then((snapshot) => {
+    let certiesRef2 = [];
+    snapshot.docs.forEach((doc) => {
+        certiesRef2.push({ ...doc.data(), id: doc.id });
+    });
+    let totalCertieRef2 = 0;
+    certiesRef2.forEach((utili) => {
+      totalCertieRef2 += parseInt(utili.etat);
+    });
+    console.log(totalCertieRef2);
+});
+
+
+// console.log(total);
+
+function totalGlobal(data) {
+    return getDocs(data).then((snapshot) => {
+      let items = [];
+      snapshot.docs.forEach((doc) => {
+        items.push({ ...doc.data(), id: doc.id });
+      });
+      return items;
+    });
+  }
+
+  Promise.all([
+    totalGlobal(eleve),
+    totalGlobal(certiesRef),
+    totalGlobal(certiesRef2)
+  ]).then(([eleveData, certiesRefData, certiesRef2Data]) => {
+    let totalInscription = eleveData.reduce((total, utili) => total + parseInt(utili.etatFin), 0);
+    let totalCertieRef = certiesRefData.reduce((total, utili) => total + parseInt(utili.etat), 0);
+    let totalCertieRef2 = certiesRef2Data.reduce((total, utili) => total + parseInt(utili.etat), 0);
+  
+    let totaleDuRevenu = totalInscription + totalCertieRef + totalCertieRef2;
+
+    //Calcule du revenue total
+
+    const total = document.getElementById("total");
+    total.innerHTML = "";
+    let trfoot = document.createElement("tr");
+    trfoot.innerHTML = `
+      <td colspan="3"><b>Total</b></td>
+      <td><b>${totaleDuRevenu.toLocaleString("en-US")} Fcfa </b></td>
+      `;
+    total.appendChild(trfoot);
+    const revTotal = document.getElementById('revenuTotal');
+    revTotal.innerHTML = `${totaleDuRevenu.toLocaleString(
+      'en-US'
+    )} <span class="fw-bold">FCFA</span>`;
+    console.log("Total global:", totaleDuRevenu);
+  }).catch((error) => {
+    console.error("Une erreur s'est produite :", error);
+  });
+
 
 // Enregistrer des données dans le Firebase
 const form = document.querySelector('.addToFirebase');
@@ -140,9 +263,7 @@ if (alertTrigger) {
 
 // _________________________
 // Parti Ladji Timéra
-const certiesRef = collection(db, 'inscrireActivite');
 
-getDocs(certiesRef).then((snapshot) => {});
 onSnapshot(certiesRef, (snapshot) => {
   let certiesRef = [];
   snapshot.docs.forEach((doc) => {
@@ -183,9 +304,7 @@ myForm.addEventListener('submit', (e) => {
 });
 // Mensualite Ladji
 
-const certiesRef2 = collection(db, 'mensualites');
 
-getDocs(certiesRef2).then((snapshot) => {});
 onSnapshot(certiesRef2, (snapshot) => {
   let certiesRef2 = [];
   snapshot.docs.forEach((doc) => {

@@ -44,6 +44,23 @@ input {
     height: 50px;
 }
 
+.img{
+    max-width: 100%;
+    height: 70px;
+    object-fit: contain;
+    box-shadow: 0px 4px 30px 0px #0000001A;
+    /* display: none; */
+    /* background: #00E100; */
+    /* border: 5px solid cornflowerblue; */
+    /* padding: 15px; */
+    border-radius: 150px 75px;
+    padding: 0;
+}
+
+.imageUploaded{
+    margin-top: 10px;
+}
+
 .divProfile{
     background: url(../../../src/assets/images/Group\ 803.png) no-repeat center center/cover;
     width: 100%;
