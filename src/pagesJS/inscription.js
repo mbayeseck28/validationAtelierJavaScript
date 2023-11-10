@@ -29,30 +29,42 @@ const auth = getAuth(app);
 const db = getFirestore(app); 
 
 const handleRegistration = async (event) => {
-    event.preventDefault();
+  event.preventDefault();
   
-    const email = document.getElementById("email").value;
-    const password = document.getElementById("password").value;
-    const nom = document.getElementById("nom").value;
-    const prenom = document.getElementById("prenom").value;
-    const status = document.getElementById("status").value;
-    const adresse = document.getElementById("adresse").value;
-    const tel = document.getElementById("tel").value;
-    const adresseecole = document.getElementById("adresseecole").value;
-    const emailecole = document.getElementById("emailecole").value;
-    const secteur = document.getElementById("secteur").value;
-    const nomecole = document.getElementById("nomecole").value;
+  const emailInput = document.getElementById("email");
+  const passwordInput = document.getElementById("password");
+  const nomInput = document.getElementById("nom");
+  const prenomInput = document.getElementById("prenom");
+  const statusInput = document.getElementById("status");
+  const adresseInput = document.getElementById("adresse");
+  const telInput = document.getElementById("tel");
+  const adresseecoleInput = document.getElementById("adresseecole");
+  const emailecoleInput = document.getElementById("emailecole");
+  const secteurInput = document.getElementById("secteur");
+  const nomecoleInput = document.getElementById("nomecole");
   
+    const email = emailInput.value;
+    const password = passwordInput.value;
+    const nom = nomInput.value;
+    const prenom = prenomInput.value;
+    const status = statusInput.value;
+    const adresse = adresseInput.value;
+    const tel = telInput.value;
+    const adresseecole = adresseecoleInput.value;
+    const emailecole = emailecoleInput.value;
+    const secteur = secteurInput.value;
+    const nomecole = nomInput.value;
+    
     try {
       const userCredential = await createUserWithEmailAndPassword(
         auth,
         email,
         password
-      );
-      const user = userCredential.user;
-  
-      const userData = {
-        nom: nom,
+        );
+        const user = userCredential.user;
+        
+        const userData = {
+          nom: nom,
         prenom: prenom,
         status: status,
         adresse: adresse,
@@ -64,19 +76,30 @@ const handleRegistration = async (event) => {
         email: email,
         password: password,
       };
-  
+      
       const userRef = collection(db, "utilisateurs");
       await addDoc(userRef, userData);
-  
-      console.log(
-        "Utilisateur enregistré avec succès dans la base de données Firestore"
-      );
+      
+      alert("Utilisateur enregistré avec succès");
+      
       // Vous pouvez rediriger l'utilisateur vers une autre page ici si nécessaire
     } catch (error) {
       const errorCode = error.code;
       const errorMessage = error.message;
       console.error("Erreur lors de l'inscription :", errorCode, errorMessage);
     }
+    emailInput.value = ""
+    passwordInput.value = ""
+    nomInput.value = ""
+    prenomInput.value = ""
+    statusInput.value = ""
+    adresseInput.value = ""
+    telInput.value = ""
+    adresseecoleInput.value = ""
+    emailecoleInput.value = ""
+    secteurInput.value = ""
+    nomecoleInput.value = ""
+
   };
 
 console.log('page inscription')
