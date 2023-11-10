@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .dashboard {
+        display: flex;
+        justify-content: space-around;
+        margin: 20px;
+      }
+
+      .kpi {
+        background-color: #f3f3f3;
+        padding: 20px;
+        border-radius: 8px;
+        text-align: center;
+        width: 200px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        margin: 10px;
+      }
+
+      span {
+        font-size: 24px;
+        font-weight: bold;
+      }
+
+      h2 {
+        font-size: 18px;
+        margin-bottom: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="dashboard">
+      <div class="kpi">
+        <h2>Taux d'Inscription</h2>
+        <span id="inscriptionRate">80%</span>
+      </div>
+      <div class="kpi">
+        <h2>Taux de Rétention des Élèves</h2>
+        <span id="retentionRate">85%</span>
+      </div>
+      <!-- Ajoutez d'autres KPI ici -->
+    </div>
+  </body>
+</html>
