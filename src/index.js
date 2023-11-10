@@ -41,9 +41,9 @@ if (pageName === 'inscription.html') {
   import('./pagesJS/sidebar');
   import('./pagesJS/compta');
 }else if (pageName === 'personnel.html') {
-  import('./pagesJS/sidebar');
+  // import('./pagesJS/sidebar');
   import('./pagesJS/personnel.js');
 }else if (pageName === 'professeur.html') {
-  import('./pagesJS/sidebar');
+  // import('./pagesJS/sidebar');
   import('./pagesJS/proff.js');
 }
