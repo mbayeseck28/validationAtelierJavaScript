@@ -63,7 +63,7 @@ export function ajouterProfesseur(form) {
     form.prenom.value &&
     form.matiere.value &&
     form.classe.value &&
-    form.coordonnee.value
+    form.coordonnee.value 
   ) {
     addDoc(professeurs, {
       nom: form.nom.value,
