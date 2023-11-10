@@ -42,4 +42,7 @@ if (pageName === 'inscription.html') {
 } else if (pageName === 'professeur.html') {
   // import('./pagesJS/sidebar');
   import('./pagesJS/proff.js');
+} else if (pageName === 'eleve.html') {
+  // import('./pagesJS/sidebar');
+  import('./pagesJS/eleve.js');
 }
