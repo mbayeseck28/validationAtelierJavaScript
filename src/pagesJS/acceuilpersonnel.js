@@ -9,7 +9,7 @@ export function nombreProfesseur() {
     });
     let nombreProfesseur = professeurs.length;
     const countProfeseeur = document.querySelector('.num1')
- let interval = 500;  
+ let interval = 5000;  
   console.log(countProfeseeur);
    let startValue = 0;
    countProfeseeur.setAttribute("data-val", `${nombreProfesseur}`);
@@ -38,7 +38,7 @@ export function nombreEmployer() {
     });
      let nombreEmployer = employer.length;
      const countEmployers = document.querySelector('.num2')
-  let interval = 500;  
+  let interval = 5000;  
   //  countElement.forEach((countElement) => {
      console.log(countEmployers);
     let startValue = 0;
@@ -74,7 +74,7 @@ export function nombreAssocie() {
     const countElement = document.querySelector('.num3');
     console.log(countElement);
     
-     let interval = 500;
+     let interval = 5000;
       console.log(countElement);
       let startValue = 0;
        countElement.setAttribute("data-val", `${nombreAssocie}`);
