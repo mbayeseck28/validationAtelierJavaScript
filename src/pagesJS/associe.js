@@ -56,10 +56,10 @@ export function gestionAssocie() {
       const div = document.createElement("div");
       div.className = "col-lg-2 align-items-center ";
       div.innerHTML = `
-      <button class="btn btn-dark rounded-pill">
-        <img src="${ins.logo}" alt="Logo de l'associe" class="img rounded-pill">                                                           
+      <button class="btn k rounded-pill">
+        <img src="${ins.logo}" alt="Logo de l'associe" class="img ">                                                           
       </button>
-          <p>${ins.nom}</p>
+          <p class="fw-bold text-capitalize">${ins.nom}</p>
         `;
       logoEntreprise.appendChild(div);
     });
