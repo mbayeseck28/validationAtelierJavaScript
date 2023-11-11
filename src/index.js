@@ -28,21 +28,23 @@ if (pageName === 'inscription.html') {
   import('./pagesJS/inscription');
 } else if (pageName === 'login.html') {
   import('./pagesJS/login');
-} else if (pageName === 'accueil.html') {
+} else if (pageName === 'acceuil.html') {
   import('./pagesJS/sidebar');
 } else if (pageName === 'profil.html') {
   import('./pagesJS/sidebar');
   import('./pagesJS/profil');
 } else if (pageName === 'comptabilite.html') {
-  // import('./pagesJS/sidebar');
+  import('./pagesJS/sidebar');
   import('./pagesJS/compta');
 } else if (pageName === 'personnel.html') {
-  // import('./pagesJS/sidebar');
+  import('./pagesJS/sidebar');
   import('./pagesJS/personnel.js');
 } else if (pageName === 'professeur.html') {
-  // import('./pagesJS/sidebar');
+  import('./pagesJS/sidebar');
   import('./pagesJS/proff.js');
+}else if (pageName === 'droit.html') {
+  import('./pagesJS/sidebar');
 } else if (pageName === 'eleve.html') {
-  // import('./pagesJS/sidebar');
+  import('./pagesJS/sidebar');
   import('./pagesJS/eleve.js');
 }
