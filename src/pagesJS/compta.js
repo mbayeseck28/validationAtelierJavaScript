@@ -30,9 +30,15 @@ const eleve = collection(db, 'inscScolarite');
 const certiesRef = collection(db, 'inscrireActivite');
 const certiesRef2 = collection(db, 'mensualites');
 
-
-
 // Realtime Update
+let prixInsc = [
+  {
+    sizieme: 25000,
+    cinquieme: 25000,
+    quatrieme: 30000,
+    troisieme: 35000,
+  },
+];
 onSnapshot(eleve, (snapshot) => {
   let eleve = [];
   snapshot.docs.forEach((doc) => {
@@ -61,25 +67,15 @@ onSnapshot(eleve, (snapshot) => {
 //___________________________________________________
 //partie pape cheikh
 
-
-
-
-
-
-
-
-
-
-
 onSnapshot(eleve, (snapshot) => {
   let eleve = [];
   snapshot.docs.forEach((doc) => {
     eleve.push({ ...doc.data(), id: doc.id });
   });
-  const revenue = document.getElementById("revenue");
-  
+  const revenue = document.getElementById('revenue');
+
   eleve.forEach((utili) => {
-    let trbody = document.createElement("tr");
+    let trbody = document.createElement('tr');
     trbody.innerHTML = `
       <td class="border border-1">${utili.dateDajout
         .toDate()
@@ -89,36 +85,36 @@ onSnapshot(eleve, (snapshot) => {
       utili.nom
     }</td>
         <td class="border border-1">${utili.etatFin.toLocaleString(
-          "en-US"
+          'en-US'
         )} Fcfa</td>
         `;
     revenue.appendChild(trbody);
   });
 });
 
-onSnapshot(certiesRef, (snapshot) => {
-  let certiesRef = [];
-  snapshot.docs.forEach((doc) => {
-    certiesRef.push({ ...doc.data(), id: doc.id });
-  });
-  certiesRef.sort((a, b) => b.dateDajout - a.dateDajout);
-  certiesRef.forEach((utili) => {
-    let trbody = document.createElement("tr");
-    trbody.innerHTML = `
-      <td class="border border-1">${utili.dateDajout
-        .toDate()
-        .toLocaleDateString()}</td>
-        <td class="text-center">${utili.type}</td>
-        <td class="text-center border border-1">${utili.prenom} ${
-      utili.nom
-    }</td>
-        <td class="border border-1">${utili.etat}Fcfa</td>
-        `;
-    revenue.appendChild(trbody);
+// onSnapshot(certiesRef, (snapshot) => {
+//   let certiesRef = [];
+//   snapshot.docs.forEach((doc) => {
+//     certiesRef.push({ ...doc.data(), id: doc.id });
+//   });
+//   certiesRef.sort((a, b) => b.dateDajout - a.dateDajout);
+//   certiesRef.forEach((utili) => {
+//     let trbody = document.createElement('tr');
+//     trbody.innerHTML = `
+//       <td class="border border-1">${utili.dateDajout
+//         .toDate()
+//         .toLocaleDateString()}</td>
+//         <td class="text-center">${utili.type}</td>
+//         <td class="text-center border border-1">${utili.prenom} ${
+//       utili.nom
+//     }</td>
+//         <td class="border border-1">${utili.etat}Fcfa</td>
+//         `;
+//     revenue.appendChild(trbody);
 
-    // console.log(utili.type);
-  });
-});
+//     // console.log(utili.type);
+//   });
+// });
 
 onSnapshot(certiesRef2, (snapshot) => {
   let certiesRef2 = [];
@@ -128,7 +124,7 @@ onSnapshot(certiesRef2, (snapshot) => {
   certiesRef2.sort((a, b) => b.dateDajout - a.dateDajout);
 
   certiesRef2.forEach((utili) => {
-    let trbody = document.createElement("tr");
+    let trbody = document.createElement('tr');
     trbody.innerHTML = `
       <td class="border border-1">${utili.dateDajout
         .toDate()
@@ -146,86 +142,96 @@ onSnapshot(certiesRef2, (snapshot) => {
 });
 
 getDocs(eleve).then((snapshot) => {
-    let eleve = [];
-    snapshot.docs.forEach((doc) => {
-      eleve.push({ ...doc.data(), id: doc.id });
-    });
-    let totalInscription = 0;
-    eleve.forEach((utili) => {
-      totalInscription += parseInt(utili.etatFin);
-    });
-    console.log(totalInscription);
-  });
-
-getDocs(certiesRef).then((snapshot) => {
-  let certiesRef = [];
+  let eleve = [];
   snapshot.docs.forEach((doc) => {
-    certiesRef.push({ ...doc.data(), id: doc.id });
+    eleve.push({ ...doc.data(), id: doc.id });
   });
-  let totalCertieRef = 0;
-  certiesRef.forEach((utili) => {
-    totalCertieRef += parseInt(utili.etat);
+  let totalInscription = 0;
+  eleve.forEach((utili) => {
+    totalInscription += parseInt(utili.etatFin);
   });
-  console.log(totalCertieRef);
+  console.log(totalInscription);
 });
+
+// getDocs(certiesRef).then((snapshot) => {
+//   let certiesRef = [];
+//   snapshot.docs.forEach((doc) => {
+//     certiesRef.push({ ...doc.data(), id: doc.id });
+//   });
+//   let totalCertieRef = 0;
+//   certiesRef.forEach((utili) => {
+//     totalCertieRef += parseInt(utili.etat);
+//   });
+//   console.log(totalCertieRef);
+// });
 
 getDocs(certiesRef2).then((snapshot) => {
-    let certiesRef2 = [];
-    snapshot.docs.forEach((doc) => {
-        certiesRef2.push({ ...doc.data(), id: doc.id });
-    });
-    let totalCertieRef2 = 0;
-    certiesRef2.forEach((utili) => {
-      totalCertieRef2 += parseInt(utili.etat);
-    });
-    console.log(totalCertieRef2);
+  let certiesRef2 = [];
+  snapshot.docs.forEach((doc) => {
+    certiesRef2.push({ ...doc.data(), id: doc.id });
+  });
+  let totalCertieRef2 = 0;
+  certiesRef2.forEach((utili) => {
+    totalCertieRef2 += parseInt(utili.etat);
+  });
+  console.log(totalCertieRef2);
 });
-
 
 // console.log(total);
 
 function totalGlobal(data) {
-    return getDocs(data).then((snapshot) => {
-      let items = [];
-      snapshot.docs.forEach((doc) => {
-        items.push({ ...doc.data(), id: doc.id });
-      });
-      return items;
+  return getDocs(data).then((snapshot) => {
+    let items = [];
+    snapshot.docs.forEach((doc) => {
+      items.push({ ...doc.data(), id: doc.id });
     });
-  }
+    return items;
+  });
+}
 
-  Promise.all([
-    totalGlobal(eleve),
-    totalGlobal(certiesRef),
-    totalGlobal(certiesRef2)
-  ]).then(([eleveData, certiesRefData, certiesRef2Data]) => {
-    let totalInscription = eleveData.reduce((total, utili) => total + parseInt(utili.etatFin), 0);
-    let totalCertieRef = certiesRefData.reduce((total, utili) => total + parseInt(utili.etat), 0);
-    let totalCertieRef2 = certiesRef2Data.reduce((total, utili) => total + parseInt(utili.etat), 0);
-  
+Promise.all([
+  totalGlobal(eleve),
+  totalGlobal(certiesRef),
+  totalGlobal(certiesRef2),
+])
+  .then(([eleveData, certiesRefData, certiesRef2Data]) => {
+    let totalInscription = eleveData.reduce(
+      (total, utili) => total + parseInt(utili.etatFin),
+      0
+    );
+    let totalCertieRef = certiesRefData.reduce(
+      (total, utili) => total + parseInt(utili.etat),
+      0
+    );
+    let totalCertieRef2 = certiesRef2Data.reduce(
+      (total, utili) => total + parseInt(utili.etat),
+      0
+    );
+
     let totaleDuRevenu = totalInscription + totalCertieRef + totalCertieRef2;
 
     //Calcule du revenue total
 
-    const total = document.getElementById("total");
-    total.innerHTML = "";
-    let trfoot = document.createElement("tr");
+    const total = document.getElementById('total');
+    total.innerHTML = '';
+    let trfoot = document.createElement('tr');
     trfoot.innerHTML = `
       <td colspan="3"><b>Total</b></td>
-      <td><b>${totaleDuRevenu.toLocaleString("en-US")} Fcfa </b></td>
+      <td><b>${totaleDuRevenu.toLocaleString('en-US')} Fcfa </b></td>
       `;
     total.appendChild(trfoot);
     const revTotal = document.getElementById('revenuTotal');
     revTotal.innerHTML = `${totaleDuRevenu.toLocaleString(
       'en-US'
     )} <span class="fw-bold">FCFA</span>`;
-    console.log("Total global:", totaleDuRevenu);
-  }).catch((error) => {
+    console.log('Total global:', totaleDuRevenu);
+  })
+  .catch((error) => {
     console.error("Une erreur s'est produite :", error);
   });
 
-
 // Enregistrer des données dans le Firebase
+
 const form = document.querySelector('.addToFirebase');
 form.addEventListener('submit', (e) => {
   e.preventDefault();
@@ -264,46 +270,7 @@ if (alertTrigger) {
 // _________________________
 // Parti Ladji Timéra
 
-onSnapshot(certiesRef, (snapshot) => {
-  let certiesRef = [];
-  snapshot.docs.forEach((doc) => {
-    certiesRef.push({ ...doc.data(), id: doc.id });
-  });
-  certiesRef.sort((a, b) => b.dateDajout - a.dateDajout);
-  const list = document.querySelector('.mytbody');
-  list.innerHTML = '';
-  // console.log(certiesRef);
-  certiesRef.forEach((utili) => {
-    const list = document.querySelector('.mytbody');
-    const tr = document.createElement('tr');
-
-    tr.innerHTML = `
-    <td class="text-start ps-2 border border-1">${utili.prenom}</td> <td class="text-start ps-2 border border-1">${utili.nom}</td>
-        <td class="text-center border border-1">
-        <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#detail">
-          <i class="fa-regular fa-eye opacity-50"></i>
-        </button>
-        </td>`;
-    list.appendChild(tr);
-  });
-});
-
-const myForm = document.querySelector('.myForm');
-
-myForm.addEventListener('submit', (e) => {
-  e.preventDefault();
-  //Ajouter un nouveau document avec un id généré
-  addDoc(certiesRef, {
-    prenom: myForm.prenom.value,
-    nom: myForm.nom.value,
-    etat: myForm.etat.value,
-    classe: myForm.classe.value,
-    type: myForm.type.value,
-    dateDajout: serverTimestamp(),
-  }).then(() => myForm.reset());
-});
 // Mensualite Ladji
-
 
 onSnapshot(certiesRef2, (snapshot) => {
   let certiesRef2 = [];
