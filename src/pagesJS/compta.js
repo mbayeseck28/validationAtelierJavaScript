@@ -30,15 +30,6 @@ const eleve = collection(db, 'inscScolarite');
 const certiesRef = collection(db, 'inscrireActivite');
 const certiesRef2 = collection(db, 'mensualites');
 
-// Realtime Update
-let prixInsc = [
-  {
-    sizieme: 25000,
-    cinquieme: 25000,
-    quatrieme: 30000,
-    troisieme: 35000,
-  },
-];
 onSnapshot(eleve, (snapshot) => {
   let eleve = [];
   snapshot.docs.forEach((doc) => {
@@ -53,19 +44,134 @@ onSnapshot(eleve, (snapshot) => {
     const tr = document.createElement('tr');
 
     tr.innerHTML = `
-    <td class="text-start ps-2 border border-1">${utili.prenom}</td> <td class="text-start ps-2 border border-1">${utili.nom}</td>
-        <td class="text-center border border-1">
-        <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#detail">
-          <i class="fa-regular fa-eye opacity-50"></i>
-        </button>
-        </td>`;
+    <td class="text-start ps-2 py-2 border border-1">${utili.prenom}</td> <td class="text-start ps-2 py-2 border border-1">${utili.nom}</td> <td class="text-center py-2 border border-1">${utili.montantInsc} Fcfa</td>`;
     list.appendChild(tr);
   });
 });
 
-//recuperer les données(nom, prenom, date) et les afficher dans revenue
+// Enregistrer des données dans le Firebase
+
+const form = document.querySelector('.addToFirebase');
+form.addEventListener('submit', (e) => {
+  e.preventDefault();
+  //Ajouter un nouveau document avec un id généré
+  addDoc(eleve, {
+    nom: form.nom.value,
+    prenom: form.prenom.value,
+    type: form.type.value,
+    classe: form.classeSelect.value,
+    montantInsc: form.montantPaye.value,
+    dateDajout: serverTimestamp(),
+  }).then(() => form.reset());
+});
+// Montant à inscrire
+let selectElement = document.getElementById('classeSelect');
+selectElement.addEventListener('change', function () {
+  let selectedOption = selectElement.options[selectElement.selectedIndex];
+  let selectedValue = selectedOption.value;
+  console.log(selectedValue);
+
+  document.getElementById('montantPaye').value = montant(selectedValue);
+});
+
+function montant(classe) {
+  const montantMapping = {
+    sizieme: 25000,
+    cinquieme: 25000,
+    quatrieme: 30000,
+    troisieme: 35000,
+  };
+
+  return montantMapping[classe] || 0;
+}
+
+// Alert Après ajout
+const alertPlaceholder = document.getElementById('liveAlertPlaceholder');
+const appendAlert = (message, type) => {
+  const wrapper = document.createElement('div');
+  wrapper.innerHTML = [
+    `<div class="alert alert-${type} alert-dismissible" role="alert">`,
+    `   <div>${message}</div>`,
+    '   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>',
+    '</div>',
+  ].join('');
+
+  alertPlaceholder.append(wrapper);
+};
+
+const alertTrigger = document.getElementById('liveAlertBtn');
+if (alertTrigger) {
+  alertTrigger.addEventListener('click', () => {
+    appendAlert('Linscription est effectué avec succès', 'success');
+  });
+}
+// _________________________
+// Parti Ladji Timéra
+
+// Mensualite
+
+onSnapshot(certiesRef2, (snapshot) => {
+  let certiesRef2 = [];
+  snapshot.docs.forEach((doc) => {
+    certiesRef2.push({ ...doc.data(), id: doc.id });
+  });
+  certiesRef2.sort((a, b) => b.dateDajout - a.dateDajout);
+  const list = document.querySelector('.mytbodyIns');
+  list.innerHTML = '';
+
+  // console.log(certiesRef2);
+  certiesRef2.forEach((utili) => {
+    const list = document.querySelector('.mytbodyIns');
+    const tr = document.createElement('tr');
+
+    tr.innerHTML = `
+    <td class="text-start ps-2 py-2 border border-1">${
+      utili.prenom
+    }</td> <td class="text-start ps-2 py-2 border border-1">${
+      utili.nom
+    }</td> <td class="text-center py-2 border border-1">${utili.montantpay.toLocaleString(
+      'en-US'
+    )} Fcfa</td>`;
+    list.appendChild(tr);
+  });
+});
+
+const myForm = document.querySelector('.myForm');
+
+myForm.addEventListener('submit', (e) => {
+  e.preventDefault();
+  //Ajouter un nouveau document avec un id généré
+  addDoc(certiesRef2, {
+    nom: myForm.nom.value,
+    prenom: myForm.prenom.value,
+    type: myForm.type.value,
+    classe: myForm.classeSelect2.value,
+    montantpay: myForm.montantAPaye.value,
+    dateDajout: serverTimestamp(),
+  }).then(() => myForm.reset());
+});
+// Montant à inscrire
+let selectElement2 = document.getElementById('classeSelect2');
+selectElement2.addEventListener('change', function () {
+  let selectedOption = selectElement2.options[selectElement2.selectedIndex];
+  let selectedValue = selectedOption.value;
+  console.log(selectedValue);
+  document.getElementById('montantAPaye').value = montant2(selectedValue);
+});
+
+function montant2(classe) {
+  const montantMapping = {
+    sizieme: 10000,
+    cinquieme: 15000,
+    quatrieme: 20000,
+    troisieme: 25000,
+  };
+
+  return montantMapping[classe] || 0;
+}
+
 //___________________________________________________
-//partie pape cheikh
+// //partie pape cheikh
 
 onSnapshot(eleve, (snapshot) => {
   let eleve = [];
@@ -84,7 +190,7 @@ onSnapshot(eleve, (snapshot) => {
         <td class="text-center border border-1">${utili.prenom} ${
       utili.nom
     }</td>
-        <td class="border border-1">${utili.etatFin.toLocaleString(
+        <td class="border border-1">${utili.montantInsc.toLocaleString(
           'en-US'
         )} Fcfa</td>
         `;
@@ -133,7 +239,7 @@ onSnapshot(certiesRef2, (snapshot) => {
         <td class="text-center border border-1">${utili.prenom} ${
       utili.nom
     }</td>
-        <td class="border border-1">${utili.etat}Fcfa</td>
+        <td class="border border-1">${utili.montantpay}Fcfa</td>
         `;
     revenue.appendChild(trbody);
 
@@ -148,7 +254,7 @@ getDocs(eleve).then((snapshot) => {
   });
   let totalInscription = 0;
   eleve.forEach((utili) => {
-    totalInscription += parseInt(utili.etatFin);
+    totalInscription += parseInt(utili.montantInsc);
   });
   console.log(totalInscription);
 });
@@ -172,7 +278,7 @@ getDocs(certiesRef2).then((snapshot) => {
   });
   let totalCertieRef2 = 0;
   certiesRef2.forEach((utili) => {
-    totalCertieRef2 += parseInt(utili.etat);
+    totalCertieRef2 += parseInt(utili.montantpay);
   });
   console.log(totalCertieRef2);
 });
@@ -189,26 +295,18 @@ function totalGlobal(data) {
   });
 }
 
-Promise.all([
-  totalGlobal(eleve),
-  totalGlobal(certiesRef),
-  totalGlobal(certiesRef2),
-])
-  .then(([eleveData, certiesRefData, certiesRef2Data]) => {
+Promise.all([totalGlobal(eleve), totalGlobal(certiesRef2)])
+  .then(([eleveData, certiesRef2Data]) => {
     let totalInscription = eleveData.reduce(
-      (total, utili) => total + parseInt(utili.etatFin),
-      0
-    );
-    let totalCertieRef = certiesRefData.reduce(
-      (total, utili) => total + parseInt(utili.etat),
+      (total, utili) => total + parseInt(utili.montantInsc),
       0
     );
     let totalCertieRef2 = certiesRef2Data.reduce(
-      (total, utili) => total + parseInt(utili.etat),
+      (total, utili) => total + parseInt(utili.montantpay),
       0
     );
 
-    let totaleDuRevenu = totalInscription + totalCertieRef + totalCertieRef2;
+    let totaleDuRevenu = totalInscription + totalCertieRef2;
 
     //Calcule du revenue total
 
@@ -229,85 +327,3 @@ Promise.all([
   .catch((error) => {
     console.error("Une erreur s'est produite :", error);
   });
-
-// Enregistrer des données dans le Firebase
-
-const form = document.querySelector('.addToFirebase');
-form.addEventListener('submit', (e) => {
-  e.preventDefault();
-  //Ajouter un nouveau document avec un id généré
-  addDoc(eleve, {
-    nom: form.nom.value,
-    prenom: form.prenom.value,
-    etatFin: form.etatFin.value,
-    type: form.type.value,
-    classe: form.classe.value,
-    dateDajout: serverTimestamp(),
-  }).then(() => form.reset());
-});
-
-// Alert Après ajout
-const alertPlaceholder = document.getElementById('liveAlertPlaceholder');
-const appendAlert = (message, type) => {
-  const wrapper = document.createElement('div');
-  wrapper.innerHTML = [
-    `<div class="alert alert-${type} alert-dismissible" role="alert">`,
-    `   <div>${message}</div>`,
-    '   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>',
-    '</div>',
-  ].join('');
-
-  alertPlaceholder.append(wrapper);
-};
-
-const alertTrigger = document.getElementById('liveAlertBtn');
-if (alertTrigger) {
-  alertTrigger.addEventListener('click', () => {
-    appendAlert('Linscription est effectué avec succès', 'success');
-  });
-}
-
-// _________________________
-// Parti Ladji Timéra
-
-// Mensualite Ladji
-
-onSnapshot(certiesRef2, (snapshot) => {
-  let certiesRef2 = [];
-  snapshot.docs.forEach((doc) => {
-    certiesRef2.push({ ...doc.data(), id: doc.id });
-  });
-  certiesRef2.sort((a, b) => b.dateDajout - a.dateDajout);
-  const list = document.querySelector('.mytbodyIns');
-  list.innerHTML = '';
-
-  // console.log(certiesRef2);
-  certiesRef2.forEach((utili) => {
-    const list = document.querySelector('.mytbodyIns');
-    const tr = document.createElement('tr');
-
-    tr.innerHTML = `
-    <td class="text-start ps-2 border border-1">${utili.prenom}</td> <td class="text-start ps-2 border border-1">${utili.nom}</td>
-        <td class="text-center border border-1">
-        <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#detail">
-          <i class="fa-regular fa-eye opacity-50"></i>
-        </button>
-        </td>`;
-    list.appendChild(tr);
-  });
-});
-
-const myFormInscrip = document.querySelector('.myFormInscrip');
-
-myFormInscrip.addEventListener('submit', (e) => {
-  e.preventDefault();
-  //Ajouter un nouveau document avec un id généré
-  addDoc(certiesRef2, {
-    prenom: myFormInscrip.prenomIns.value,
-    nom: myFormInscrip.nomIns.value,
-    etat: myFormInscrip.etatIns.value,
-    classe: myFormInscrip.classe.value,
-    type: myFormInscrip.type.value,
-    dateDajout: serverTimestamp(),
-  }).then(() => myFormInscrip.reset());
-});
