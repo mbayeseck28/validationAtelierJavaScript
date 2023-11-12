@@ -179,13 +179,11 @@ onSnapshot(eleve, (snapshot) => {
     eleve.push({ ...doc.data(), id: doc.id });
   });
   const revenue = document.getElementById('revenue');
-
+  revenue.innerHTML = ''
   eleve.forEach((utili) => {
     let trbody = document.createElement('tr');
     trbody.innerHTML = `
-      <td class="border border-1">${utili.dateDajout
-        .toDate()
-        .toLocaleDateString()}</td>
+      <td class="border border-1">${utili.dateDajout.toDate().toLocaleDateString()}</td>
         <td class="text-center">${utili.type}</td>
         <td class="text-center border border-1">${utili.prenom} ${
       utili.nom
@@ -197,36 +195,13 @@ onSnapshot(eleve, (snapshot) => {
     revenue.appendChild(trbody);
   });
 });
-
-// onSnapshot(certiesRef, (snapshot) => {
-//   let certiesRef = [];
-//   snapshot.docs.forEach((doc) => {
-//     certiesRef.push({ ...doc.data(), id: doc.id });
-//   });
-//   certiesRef.sort((a, b) => b.dateDajout - a.dateDajout);
-//   certiesRef.forEach((utili) => {
-//     let trbody = document.createElement('tr');
-//     trbody.innerHTML = `
-//       <td class="border border-1">${utili.dateDajout
-//         .toDate()
-//         .toLocaleDateString()}</td>
-//         <td class="text-center">${utili.type}</td>
-//         <td class="text-center border border-1">${utili.prenom} ${
-//       utili.nom
-//     }</td>
-//         <td class="border border-1">${utili.etat}Fcfa</td>
-//         `;
-//     revenue.appendChild(trbody);
-
-//     // console.log(utili.type);
-//   });
-// });
-
 onSnapshot(certiesRef2, (snapshot) => {
   let certiesRef2 = [];
   snapshot.docs.forEach((doc) => {
     certiesRef2.push({ ...doc.data(), id: doc.id });
   });
+  const mens = document.getElementById('mens');
+  mens.innerHTML = ''
   certiesRef2.sort((a, b) => b.dateDajout - a.dateDajout);
 
   certiesRef2.forEach((utili) => {
@@ -241,7 +216,7 @@ onSnapshot(certiesRef2, (snapshot) => {
     }</td>
         <td class="border border-1">${utili.montantpay}Fcfa</td>
         `;
-    revenue.appendChild(trbody);
+    mens.appendChild(trbody);
 
     // console.log(utili.type);
   });
@@ -258,18 +233,6 @@ getDocs(eleve).then((snapshot) => {
   });
   console.log(totalInscription);
 });
-
-// getDocs(certiesRef).then((snapshot) => {
-//   let certiesRef = [];
-//   snapshot.docs.forEach((doc) => {
-//     certiesRef.push({ ...doc.data(), id: doc.id });
-//   });
-//   let totalCertieRef = 0;
-//   certiesRef.forEach((utili) => {
-//     totalCertieRef += parseInt(utili.etat);
-//   });
-//   console.log(totalCertieRef);
-// });
 
 getDocs(certiesRef2).then((snapshot) => {
   let certiesRef2 = [];
@@ -309,21 +272,24 @@ Promise.all([totalGlobal(eleve), totalGlobal(certiesRef2)])
     let totaleDuRevenu = totalInscription + totalCertieRef2;
 
     //Calcule du revenue total
-
-    const total = document.getElementById('total');
-    total.innerHTML = '';
-    let trfoot = document.createElement('tr');
-    trfoot.innerHTML = `
-      <td colspan="3"><b>Total</b></td>
-      <td><b>${totaleDuRevenu.toLocaleString('en-US')} Fcfa </b></td>
-      `;
-    total.appendChild(trfoot);
-    const revTotal = document.getElementById('revenuTotal');
-    revTotal.innerHTML = `${totaleDuRevenu.toLocaleString(
-      'en-US'
-    )} <span class="fw-bold">FCFA</span>`;
-    console.log('Total global:', totaleDuRevenu);
-  })
+function CalculDeLaSommeTotale() {
+  
+  const total = document.getElementById('total');
+  total.innerHTML = '';
+  let trfoot = document.createElement('tr');
+  trfoot.innerHTML = `
+    <td colspan="3"><b>Total</b></td>
+    <td><b>${totaleDuRevenu.toLocaleString('en-US')} Fcfa </b></td>
+    `;
+  total.appendChild(trfoot);
+  const revTotal = document.getElementById('revenuTotal');
+  revTotal.innerHTML = `${totaleDuRevenu.toLocaleString(
+    'en-US'
+  )} <span class="fw-bold">FCFA</span>`;
+  console.log('Total global:', totaleDuRevenu);
+}
+CalculDeLaSommeTotale()
+})
   .catch((error) => {
     console.error("Une erreur s'est produite :", error);
   });
