@@ -109,7 +109,6 @@ if (alertTrigger) {
 // Parti Ladji Timéra
 
 // Mensualite
-
 onSnapshot(certiesRef2, (snapshot) => {
   let certiesRef2 = [];
   snapshot.docs.forEach((doc) => {
