@@ -15,7 +15,12 @@ import {
   rechercheProff,
 } from "./professeurs.js";
 
-import { gestionAssocie, ajouterAssocier } from "./associe.js";
+import { 
+  gestionAssocie,
+  asso,
+  ajouterAssocier,
+  rechercheAssocie 
+} from "./associe.js";
 
 import {
   getEmployer,
@@ -126,6 +131,13 @@ ajoutAsso.addEventListener("click", function (e) {
   console.log(formAssocie);
   ajouterAssocier(formAssocie);
 });
+
+// gestionAssocie(function (associe) {
+//   console.log(associe);
+//   const rechercheInput = document.getElementById("formAssocie");
+//   console.log(rechercheInput);
+//   rechercheAssocie(rechercheInput, associe);
+// })
 
 /*******************PARTIE EMPLOYER***************************** */
 const formEmployer = document.querySelector(".formEmployer");
