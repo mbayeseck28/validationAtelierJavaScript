@@ -218,7 +218,7 @@
                         <div class="card border-0 shadow rounded-3 my-3">
                             <div class="card-body">
                                 <h5 class="my-3 pb-3 px-2">Inscription scolarité</h5>
-                                <form class="d-flex justify-content-between flex-wrap">
+                                <form class="d-flex justify-content-between flex-wrap" id="chercheInsc">
                                     <div class="mb-2 d-flex h-75 justify-content-between myInput2">
                                         <label for="classe" class="form-label mt-2 me-2">Classe: </label>
                                         <select class="form-select form-select-lg mb-3 fs-6 p-1 shadow" id="classe" aria-label="Large select example">
@@ -234,7 +234,7 @@
                                     </div> -->
                                     <div class="shadow d-flex mb-lg-0 align-items-center p-0 rounded-3 ps-2 myInput h-75">
                                       <input
-                                        type="search" class="w-100 bg-transparent border-0 border-outline-none  myInput" placeholder="Rechercher..." />
+                                        type="search" class="w-100 bg-transparent border-0 border-outline-none  myInput" placeholder="Rechercher..." id="nomPren" />
                                       <span class=" me-2"><i class="fa-solid fa-magnifying-glass"></i></span>
                                     </div>
                                   </form>
@@ -254,6 +254,7 @@
                                 </div>
                               </div>
                             </div>
+                            <p id="erreurRefProff" class="text-center text-danger "></p>
                 </section>
             
             
@@ -328,10 +329,10 @@
                 <div class="card border-0 shadow rounded-3 my-3">
                     <div class="card-body">
                         <h5 class="my-3 pb-3 px-2">Mensualité</h5>
-                        <form class="d-flex justify-content-between flex-wrap">
+                        <form class="d-flex justify-content-between flex-wrap" id="chercheMens">
                             <div class="mb-2 d-flex justify-content-between myInput2">
                                 <label for="classe" class="form-label mt-2 me-2">Classe: </label>
-                                <select class="form-select form-select-lg mb-3 fs-6 p-1 shadow" id="classe"
+                                <select class="form-select form-select-lg mb-3 fs-6 p-1 shadow" id="classe2"
                                     aria-label="Large select example">
                                     <option class="dis" disabled selected>Classe</option>
                                     <option value="sizieme">6ème</option>
@@ -342,7 +343,7 @@
                             </div>
                             <div class="mb-2 myInput">
                                 <input class="form-control shadow w-100 myInput" type="search"
-                                    placeholder="Rechercher" id="country-search" aria-label="Search">
+                                    placeholder="Rechercher" id="nomPren2" aria-label="Search">
                             </div>
                         </form>
                         <div class="">
@@ -404,6 +405,7 @@
                                   </div>
                                 </div>
                                 <div id="liveAlertPlaceholder"></div>
+                                <div class="d-none text-danger mb-3 alertMens mx-auto"></div>
                                 <button type="submit" class="btn myBtn" id="liveAlertBtn">Enregistrer</button>
                               </form>
                         </div>

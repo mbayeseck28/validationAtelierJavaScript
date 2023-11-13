@@ -27,19 +27,22 @@ const db = getFirestore(app);
 
 // Récupérer la collection
 const eleve = collection(db, 'inscScolarite');
-const certiesRef = collection(db, 'inscrireActivite');
 const certiesRef2 = collection(db, 'mensualites');
 
+let eleves = [];
+let tabInsc = [];
+let tabMens = [];
+
 onSnapshot(eleve, (snapshot) => {
-  let eleve = [];
   snapshot.docs.forEach((doc) => {
-    eleve.push({ ...doc.data(), id: doc.id });
+    eleves.push({ ...doc.data(), id: doc.id });
+    tabInsc.push({ ...doc.data(), id: doc.id });
   });
-  eleve.sort((a, b) => b.dateDajout - a.dateDajout);
+  eleves.sort((a, b) => b.dateDajout - a.dateDajout);
   const list = document.querySelector('#list');
   list.innerHTML = '';
 
-  eleve.forEach((utili) => {
+  eleves.forEach((utili) => {
     const list = document.querySelector('#list');
     const tr = document.createElement('tr');
 
@@ -120,6 +123,7 @@ onSnapshot(certiesRef2, (snapshot) => {
   let certiesRef2 = [];
   snapshot.docs.forEach((doc) => {
     certiesRef2.push({ ...doc.data(), id: doc.id });
+    tabMens.push({ ...doc.data(), id: doc.id });
   });
   certiesRef2.sort((a, b) => b.dateDajout - a.dateDajout);
   const list = document.querySelector('.mytbodyIns');
@@ -142,19 +146,41 @@ onSnapshot(certiesRef2, (snapshot) => {
   });
 });
 
+// ajout d'une mensualite
 const myForm = document.querySelector('.myForm');
+const alertMens = document.querySelector('.alertMens');
+let listNom = [];
+getDocs(eleve).then((snapshot) => {
+  let myTabeleve = [];
+  snapshot.docs.forEach((doc) => {
+    myTabeleve.push({ ...doc.data(), id: doc.id });
+  });
+
+  myTabeleve.forEach((utili) => {
+    listNom.push(utili.nom, utili.prenom);
+  });
+  console.log(listNom);
+});
 
 myForm.addEventListener('submit', (e) => {
   e.preventDefault();
   //Ajouter un nouveau document avec un id généré
-  addDoc(certiesRef2, {
-    nom: myForm.nom.value,
-    prenom: myForm.prenom.value,
-    type: myForm.type.value,
-    classe: myForm.classeSelect2.value,
-    montantpay: parseInt(myForm.montantAPaye.value),
-    dateDajout: serverTimestamp(),
-  }).then(() => myForm.reset());
+  if (
+    listNom.includes(myForm.nom.value) &&
+    listNom.includes(myForm.prenom.value)
+  ) {
+    addDoc(certiesRef2, {
+      nom: myForm.nom.value,
+      prenom: myForm.prenom.value,
+      type: myForm.type.value,
+      classe: myForm.classeSelect2.value,
+      montantpay: parseInt(myForm.montantAPaye.value),
+      dateDajout: serverTimestamp(),
+    }).then(() => myForm.reset());
+  } else {
+    alertMens.classList.remove('d-none');
+    alertMens.innerHTML = "Cet eleve n'existe pas...";
+  }
 });
 // Montant à inscrire
 let selectElement2 = document.getElementById('classeSelect2');
@@ -175,6 +201,67 @@ function montant2(classe) {
 
   return montantMapping[classe] || 0;
 }
+// Fonction Rechercher
+
+// function chercher(rechercheInput, list, input1, input2, collec) {
+//   rechercheInput.addEventListener('input', (e) => {
+//     let valeurInput1 = '';
+//     let valeurInput2 = '';
+//     let collectionFilter;
+//     if (e.target === input1) {
+//       valeurInput1 = e.target.value;
+//       // console.log('Input 1:', valeurInput1);
+//       collectionFilter = collec.filter((element) =>
+//         element.classe.toLowerCase().includes(valeurInput1.toLowerCase())
+//       );
+//     } else if (e.target === input2) {
+//       valeurInput2 = e.target.value;
+//       // console.log('Input 2:', valeurInput2);
+//       collectionFilter = collec.filter(
+//         (element) =>
+//           element.nom.toLowerCase().includes(valeurInput2.toLowerCase()) ||
+//           element.prenom.toLowerCase().includes(valeurInput2.toLowerCase())
+//       );
+//     }
+//     list.innerHTML = '';
+
+//     // console.log(collectionFilter);
+
+//     if (collectionFilter.length) {
+//       document.getElementById('erreurRefProff').innerHTML = '';
+//       list.innerHTML = '';
+//       collectionFilter.forEach((utili) => {
+//         // console.log(utili.nom);
+//         const tr = document.createElement('tr');
+//         tr.innerHTML = `
+//         <td class="text-start ps-2 py-2 border border-1">${
+//           utili.prenom
+//         }</td> <td class="text-start ps-2 py-2 border border-1">${
+//           utili.nom
+//         }</td> <td class="text-center py-2 border border-1">${
+//           utili.montantInsc.toLocaleString('en-US') ||
+//           utili.montantInsc.toLocaleString('en-US')
+//         } Fcfa</td>`;
+//         list.appendChild(tr);
+//       });
+//     } else {
+//       document.getElementById('erreurRefProff').innerHTML =
+//         'Aucun resultat trouver';
+//     }
+//   });
+// }
+
+// // Appael du fonction rechercher
+// const rechercheInput = document.querySelector('#chercheInsc');
+// const rechercheInput2 = document.querySelector('#chercheMens');
+// const list = document.querySelector('#list');
+// const list2 = document.querySelector('#list3');
+// const valeurInscInput1 = document.getElementById('classe');
+// const valeurInscInput2 = document.getElementById('nomPren');
+// const valeurMensInput1 = document.getElementById('classe2');
+// const valeurMensInput2 = document.getElementById('nomPren2');
+// chercher(rechercheInput, list, valeurInscInput1, valeurInscInput2, tabInsc);
+// chercher(rechercheInput2, list2, valeurMensInput1, valeurMensInput2, tabMens);
 
 //___________________________________________________
 // //partie pape cheikh
