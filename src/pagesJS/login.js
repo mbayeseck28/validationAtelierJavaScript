@@ -28,9 +28,7 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app); 
 const handleLogin = async (event) => {
-    console.log('before prevent')
     event.preventDefault();
-    console.log('after prevent')
   
     const email = document.getElementById("email").value;
     const password = document.getElementById("password").value;
@@ -47,7 +45,8 @@ const handleLogin = async (event) => {
     } catch (error) {
       const errorCode = error.code;
       const errorMessage = error.message;
-      console.error("Erreur lors de la connexion :", errorCode, errorMessage);
+      alert(`Erreur lors de la connexion :
+identifiants incorrects`);
     }
   };
   
