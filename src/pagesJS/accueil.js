@@ -1,27 +1,6 @@
 
-let circularProgress = document.querySelector('.circular-progress');
-let progressValue = document.querySelector('.progress-value');
-
-let progressStartValue = 0;
-let progressEndValue = 90;
-let speed = 70;
-
-let progress = setInterval(() => {
-  progressStartValue++;
-
-  progressValue.textContent = `${progressStartValue}%`;
-  circularProgress.style.background = `conic-gradient(rgb(32, 215, 32) ${
-    progressStartValue * 3.6
-  }deg, #ededed 0deg)`;
-
-  if (progressStartValue == progressEndValue) {
-    clearInterval(progress);
-  }
-  //   console.log(progressStartValue);
-}, speed);
-
 // Import the functions you need from the SDKs you need
-import { initializeApp } from "firebase/app";
+import { initializeApp } from 'firebase/app';
 // Importation des  services
 import {
   addDoc,
@@ -67,6 +46,7 @@ onSnapshot(eleve, (snapshot) => {
   let effectifClass5 = [];
   let effectifClass4 = [];
   let effectifClass3 = [];
+  const myTbody = document.querySelector('.myTbody');
   eleves.forEach((utili) => {
     if (utili.classe === "sizieme") {
       effectifClass6.push(utili.classe);
@@ -84,6 +64,13 @@ onSnapshot(eleve, (snapshot) => {
       effectifClass3.push(utili.classe);
       effectif3.innerHTML = effectifClass3.length + " élèves";
     }
+
+    const tr = document.createElement('tr')       
+        tr.innerHTML`
+        <td>${utili.dateDajout.toDate().toLocaleDateString()}</td>
+        `;
+        // revenue.appendChild(trbody);
+        myTbody.appendChild(tr)
   });
 });
 
@@ -161,3 +148,24 @@ const list = document.querySelector('.mytbodyIns');
     });
 */
 
+
+let circularProgress = document.querySelector('.circular-progress');
+let progressValue = document.querySelector('.progress-value');
+
+let progressStartValue = 0;
+let progressEndValue = 90;
+let speed = 70;
+
+let progress = setInterval(() => {
+  progressStartValue++;
+
+  progressValue.textContent = `${progressStartValue}%`;
+  circularProgress.style.background = `conic-gradient(rgb(32, 215, 32) ${
+    progressStartValue * 3.6
+  }deg, #ededed 0deg)`;
+
+  if (progressStartValue == progressEndValue) {
+    clearInterval(progress);
+  }
+  //   console.log(progressStartValue);
+}, speed);
