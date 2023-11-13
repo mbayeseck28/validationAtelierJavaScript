@@ -65,16 +65,16 @@ const handleRegistration = async (event) => {
         
         const userData = {
           nom: nom,
-        prenom: prenom,
-        status: status,
-        adresse: adresse,
-        tel: tel,
-        adresseecole: adresseecole,
-        emailecole: emailecole,
-        secteur: secteur,
-        nomecole: nomecole,
-        email: email,
-        password: password,
+          prenom: prenom,
+          status: status,
+          adresse: adresse,
+          tel: tel,
+          adresseecole: adresseecole,
+          emailecole: emailecole,
+          secteur: secteur,
+          nomecole: nomecole,
+          email: email,
+          password: password,
       };
       
       const userRef = collection(db, "utilisateurs");

@@ -33,6 +33,8 @@
         <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
 
         <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
         <link rel="stylesheet" href="droit.css">
         <link rel="stylesheet" href="sidebare.css">
         
@@ -133,7 +135,7 @@
                            <span class="tooltip">Comptablité</span>
                        </li>
                        <li>
-                           <a href="../professeur/professeur.html">
+                           <a href="../eleve/eleve.html">
                                <i class="fa-solid fa-graduation-cap"></i>
                                <span class="links_name">Eléves</span>
                            </a>
@@ -163,7 +165,7 @@
                    </ul>
                 </div>
             </div>
-            <div class="col-12 col-md-8 offset-md-1 mt-5 pt-5">
+            <div class="col-12 col-md-10 myContain mt-5 pt-5">
 
                 <!-- TU INSERES ICI TON CODE -->
 
@@ -182,7 +184,14 @@
                       
           
                       <div class="center2 container bg-light rounded-4 mt-5 p-5">
+                        <div class="col-md-12 la mb-3">
+                          <button class="btn btn-primary download" onclick="telechargerPDF()">
+                            Telecharger le PDF
+                          </button>
+                          
+                        </div>
                             <div id="editor-container" class="content" contenteditable="true">
+                              
                               <h2 class="border border-3 border-black text-center" contenteditable>Hygiéne</h2>
                               <h4 contenteditable>Hygiene</h4>
                               <p class="mb-3" contenteditable>Lorem ipsum dolor sit amet consectetur adipisicing elit. <br>
@@ -255,6 +264,40 @@
                                     var deltaString = JSON.stringify(delta);
                                     localStorage.setItem('editor-content', deltaString);
                                 });
+
+                                
+                                  
+
+                                function telechargerPDF() {
+                                  // Récupérer le contenu avec les classes CSS
+                                  var contentWithStyles = document.getElementById('editor-container').innerHTML;
+                              
+                                  // Ajouter les styles CSS pour le PDF, y compris la bordure de page
+                                  var styles = `
+                                      <style>
+                                          
+                                          h2 {
+                                              border: 1px solid black;
+                                              padding: 5px;
+                                              text-align: center;
+                                              margin-bottom: 40px;
+                                          }
+                              
+                                          h4 {
+                                              margin-bottom: 20px;
+                                              margin-top : 15px;
+                                          }
+                                      </style>
+                                  `;
+                              
+                                  // Créer le contenu final avec les styles CSS
+                                  var finalContent = styles + contentWithStyles;
+                              
+                                  // Convertir le contenu HTML en PDF
+                                  html2pdf().from(finalContent).save();
+                              }
+
+                              
                         
                         
                         </script>
@@ -272,6 +315,7 @@
 
     </script>
      <script src="droit.js"></script>
-     <script src="sidebar.js"></script>
+     <script src="../../bundle.js"></script>
+     <!-- <script src="sidebar.js"></script> -->
 </body>
 </html>
