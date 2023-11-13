@@ -292,3 +292,12 @@ CalculDeLaSommeTotale()
   .catch((error) => {
     console.error("Une erreur s'est produite :", error);
   });
+
+
+ 
+
+document.addEventListener("DOMContentLoaded", (event) => {
+  // Supprimer le loader une fois que le contenu principal est chargé
+  let loaderContainer = document.querySelector(".loader-container");
+  loaderContainer.style.display = "none";
+});
