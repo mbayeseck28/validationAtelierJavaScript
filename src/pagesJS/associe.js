@@ -7,6 +7,8 @@ import {
 
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 
+let asso;
+
 async function storageImage(file) {
   const storage = getStorage();
   const storageRef = ref(storage, "images/" + file.name);
@@ -35,6 +37,23 @@ export async function ajouterAssocier(formAssocie) {
     console.error("Erreur lors de l'ajout de l'associe :", error);
     alert("Erreur lors de l'ajout de l'associe :", error)
   }
+}
+
+export function recherche(rechercheInput, asso) {
+  rechercheInput.addEventListener("input", (e) => {
+    const nomSaisie = e.target.value;
+    document.getElementById("logo-entreprise").innerHTML = "";
+    const nomFilter = asso.filter(
+      (asso) => 
+      asso.nom === nomSaisie || asso.logo === nomSaisie
+    );
+    if (nomFilter.length) {
+      document.getElementById("resultAsso").innerHTML = "";
+      gestionAssocie(nomFilter);
+    } else {
+      document.getElementById("resultAsso").innerHTML = "<p>Aucun résultat</p>"; 
+    }
+  })
 }
 
 export function gestionAssocie() {

@@ -39,6 +39,7 @@ if (pageName === 'inscription.html') {
 } else if (pageName === 'personnel.html') {
   // import('./pagesJS/sidebar');
   import('./pagesJS/personnel.js');
+  import ('./pagesJS/associe.js');
 } else if (pageName === 'professeur.html') {
   // import('./pagesJS/sidebar');
   import('./pagesJS/proff.js');
