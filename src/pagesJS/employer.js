@@ -51,6 +51,8 @@ export function gestionEmployer(utilisateurs) {
             `;
 
     container.appendChild(ligne);
+    let loaderContainer = document.querySelector(".loader5");
+            loaderContainer.style.display = "none";
   });
 }
 

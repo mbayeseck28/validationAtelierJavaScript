@@ -1,5 +1,5 @@
 // Import the functions you need from the SDKs you need
-import { initializeApp } from 'firebase/app';
+import { initializeApp, onLog } from 'firebase/app';
 // Importation des  services
 import {
   addDoc,
@@ -28,6 +28,7 @@ const db = getFirestore(app);
 // Récupérer la collection
 const eleve = collection(db, 'inscScolarite');
 const certiesRef2 = collection(db, 'mensualites');
+let veri;
 
 let eleves = [];
 let tabInsc = [];
@@ -39,6 +40,7 @@ onSnapshot(eleve, (snapshot) => {
     tabInsc.push({ ...doc.data(), id: doc.id });
   });
   eleves.sort((a, b) => b.dateDajout - a.dateDajout);
+
   const list = document.querySelector('#list');
   list.innerHTML = '';
 
@@ -55,6 +57,8 @@ onSnapshot(eleve, (snapshot) => {
       'en-US'
     )} Fcfa</td>`;
     list.appendChild(tr);
+    let loaderContainer = document.querySelector('.chargement-page');
+    loaderContainer.style.display = 'none';
   });
 });
 
@@ -118,7 +122,6 @@ if (alertTrigger) {
 // Parti Ladji Timéra
 
 // Mensualite
-
 onSnapshot(certiesRef2, (snapshot) => {
   let certiesRef2 = [];
   snapshot.docs.forEach((doc) => {
@@ -143,6 +146,8 @@ onSnapshot(certiesRef2, (snapshot) => {
       'en-US'
     )} Fcfa</td>`;
     list.appendChild(tr);
+    let loaderContainer = document.querySelector('.loader2');
+    loaderContainer.style.display = 'none';
   });
 });
 
@@ -288,6 +293,8 @@ onSnapshot(eleve, (snapshot) => {
         )} Fcfa</td>
         `;
     revenue.appendChild(trbody);
+    let loaderContainer = document.querySelector('.loader3');
+    loaderContainer.style.display = 'none';
   });
 });
 onSnapshot(certiesRef2, (snapshot) => {
@@ -384,6 +391,7 @@ Promise.all([totalGlobal(eleve), totalGlobal(certiesRef2)])
     }
     CalculDeLaSommeTotale();
   })
+
   .catch((error) => {
     console.error("Une erreur s'est produite :", error);
   });

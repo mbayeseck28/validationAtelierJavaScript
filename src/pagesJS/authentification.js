@@ -28,6 +28,8 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
     
+let tableBody = document.getElementById("container");
+
 const userRef = collection(db, "utilisateurs");
     onSnapshot(userRef, (snapshot) => {
         let userRef = [];
@@ -37,22 +39,35 @@ const userRef = collection(db, "utilisateurs");
         userRef.forEach((utilisateur => {
             let ligne = document.createElement("tr");
             ligne.innerHTML = `
-                        <td class="mx-auto text-center d-none d-lg-block m-0">${utilisateur.nom}</td>
-                        <td class="mx-auto text-center m-0">${utilisateur.prenom}</td>
-                        <td class="mx-auto text-center m-0 d-none d-lg-block">${utilisateur.status}</td>
-                        <td class="mx-auto text-center m-0">${utilisateur.secteur}</td>
-                        <td class="mx-auto text-center m-0 d-none d-lg-block">${utilisateur.adresse}</td>
-                    `;
-    
-            container.appendChild(ligne);
+            <td class="mx-auto text-center d-none d-lg-block m-0">${utilisateur.nom}</td>
+            <td class="mx-auto text-center m-0">${utilisateur.prenom}</td>
+            <td class="mx-auto text-center m-0 d-none d-lg-block">${utilisateur.status}</td>
+            <td class="mx-auto text-center m-0">${utilisateur.secteur}</td>
+            <td class="mx-auto text-center m-0 d-none d-lg-block">${utilisateur.adresse}</td>
+            `;
+            let loaderContainer = document.querySelector(".chargement-page");
+            loaderContainer.style.display = "none";
+            
+            tableBody.appendChild(ligne);
         }))
     });
 
+    // tableBody.addEventListener("load", () => {
+    //     // Supprimer le loader une fois que le contenu principal est chargé
+        // let loaderContainer = document.querySelector(".chargement-page");
+        // loaderContainer.style.display = "none";
+    //   });
+
+    // firebase.firestore().collection('userRef').onSnapshot((snapshot) => {
+    //     // handle the data
+    //     let loaderContainer = document.querySelector(".chargement-page");
+    //     loaderContainer.style.display = "none";
+    //    });
+       
   
 let rechercheUser = document.getElementById('inputRecherche')
 function myFunction() {
     let filter = rechercheUser.value.toUpperCase() || rechercheUser.value.toLowerCase();
-    let tableBody = document.getElementById("container");
     let tr = tableBody.getElementsByTagName("tr");
        
     for (let i = 0; i < tr.length; i++) {
