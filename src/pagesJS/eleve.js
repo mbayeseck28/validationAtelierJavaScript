@@ -28,7 +28,7 @@ const db = getFirestore(app);
 
 // Récupérer la collection
 const eleve = collection(db, 'inscScolarite');
-let eleves;
+let eleves = [];
 // Realtime Update
 let prixInsc = [
   {
@@ -39,21 +39,18 @@ let prixInsc = [
   },
 ];
 onSnapshot(eleve, (snapshot) => {
-  let eleve = [];
   snapshot.docs.forEach((doc) => {
-    eleve.push({ ...doc.data(), id: doc.id });
+    eleves.push({ ...doc.data(), id: doc.id });
   });
-  eleve.sort((a, b) => b.dateDajout - a.dateDajout);
-  eleves = eleve;
+  eleves.sort((a, b) => b.dateDajout - a.dateDajout);
   const list = document.querySelector('#list');
   list.innerHTML = '';
 
-  eleve.forEach((utili) => {
-    const list = document.querySelector('#list');
+  eleves.forEach((utili) => {
     const tr = document.createElement('tr');
 
     tr.innerHTML = `
-    <td class="mx-auto text-center d-none d-lg-block m-0">${utili.nom}</td>
+    <td class="mx-auto text-center m-0">${utili.nom}</td>
     <td class="mx-auto text-center m-0">${utili.prenom}</td>
     <td class="mx-auto text-center m-0 d-none d-lg-block">${utili.classe}</td>
     <td class="mx-auto text-center m-0 py-auto ">
@@ -69,7 +66,8 @@ onSnapshot(eleve, (snapshot) => {
     list.appendChild(tr);
   });
 });
-console.log(eleves);
+
+// Rechercher un élève
 const rechercheInput = document.querySelector('#formEleve');
 rechercheInput.addEventListener('input', (e) => {
   const elementSaisie = e.target.value;
@@ -81,10 +79,33 @@ rechercheInput.addEventListener('input', (e) => {
   );
 
   if (collectionFilter.length) {
-    // document.getElementById('erreurRefProff').innerHTML = '';
-    console.log(collectionFilter);
+    document.getElementById('erreurRefProff').innerHTML = '';
+    const list = document.querySelector('#list');
+    list.innerHTML = '';
+    collectionFilter.forEach((utili) => {
+      const tr = document.createElement('tr');
+
+      tr.innerHTML = `
+      <td class="mx-auto text-center d-none d-lg-block m-0">${utili.nom}</td>
+      <td class="mx-auto text-center m-0">${utili.prenom}</td>
+      <td class="mx-auto text-center m-0 d-none d-lg-block">${utili.classe}</td>
+      <td class="mx-auto text-center m-0 py-auto ">
+          <button class="btn bouton me-1 my-1 supprimer text-white rounded-circle bg-dark " data-id=${utili.id}>
+              <i class="fa-solid fa-trash-can supprimer" data-id=${utili.id}></i>
+          </button>
+          <button data-bs-toggle="modal" data-bs-target="#exampleModal" 
+              class="btn bouton modifier me-1 my-1 rounded-circle text-white bg-dark" data-id=${utili.id}>
+              <i class="fa-solid fa-pencil modifier" data-id=${utili.id}></i>
+          </button>
+      </td>
+      `;
+      list.appendChild(tr);
+    });
   } else {
-    // document.getElementById('erreurRefProff').innerHTML =
-    //   'Aucun resultat trouver';
+    document.getElementById('erreurRefProff').innerHTML =
+      'Aucun resultat trouver';
   }
 });
+
+// Modification
+const btnModifier = document.getElementById('modifier');

@@ -120,14 +120,14 @@
                            <span class="tooltip">Personnel</span>
                        </li>
                        <li>
-                           <a href="comptabilite.html">
+                           <a href="../comptabilite/comptabilite.html">
                                <i class="fa-solid fa-chart-pie"></i>
                                <span class="links_name">Comptablité</span>
                            </a>
                            <span class="tooltip">Comptablité</span>
                        </li>
                        <li>
-                           <a href="#">
+                           <a href="eleve.html">
                                <i class="fa-solid fa-graduation-cap"></i>
                                <span class="links_name">Eléves</span>
                            </a>
@@ -161,10 +161,10 @@
 
                 <!-- __________________________ -->
                 <!-- Mbaye Seck -->
-                <section class="mb-5" id="inscSco">
+                <section class="my-5 myContDiv" id="">
                     <h3>Liste des élèves</h3>
-                    <div class="Professeurs myContDiv">
-                          <div class="myContDiv mb-5">
+                    <div class="">
+                          <div class=" mb-5">
                             <div class="card border-0 shadow rounded-5 my-3">
                                 <p id="erreurProf" class="text-danger text-center fs-6 fw-bold"></p>
                               <div class="card-body ">
@@ -183,13 +183,13 @@
                                 </div>
               
                                 <div class="col-12 mt-5">
-                                  <table class="w-100 px-3 m-0 table  table-bordered">
+                                  <table class="w-100 px-3 m-0 table  table-bordered  table-hover">
                                     <thead>
                                       <tr>
-                                          <th class="text-center d-none d-lg-block" scope="col">
+                                          <th class="text-center" scope="col">
                                             Nom
                                           </th>
-                                          <th class="text-center " scope="col">
+                                          <th class="text-center" scope="col">
                                             Prénom
                                           </th>
                                           <th class="text-center d-none d-lg-block" scope="col">
@@ -209,12 +209,68 @@
                             </div>
                             </div>
                           </div>
+                          <p id="erreurRefProff" class="text-center text-danger "></p>
                 </section>
             </div>
         </div>
     </div> 
+    <!-- Modal professeurs -->
+    <div
+    class="modal fade"
+    id="exampleModal"
+    tabindex="-1"
+    aria-labelledby="exampleModalLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">
+            Modification de l'élève
+          </h1>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div class="modal-body">
+          <form class="addToFirebase">
+            <div class="mb-3">
+              <label for="nom" class="form-label">Nom</label>
+              <input type="text" class="form-control shadow-sm" required id="nom">
+            </div>
+            <div class="mb-3">
+              <label for="prenom" class="form-label">Prénom</label>
+              <input type="text" class="form-control shadow-sm" required id="prenom">
+            </div>
+            <div class="mb-3 d-none">
+              <label for="type" class="form-label">Type</label>
+              <select class="form-select" id="type">
+                <option class="" selected>Inscription Scolarité</option>
+              </select>
+            </div>
+            <div class="mb-3">
+              <label for="classe" class="form-label">Classe</label>
+              <select class="form-select" id="classe">
+                <option selected>Classe</option>
+                <option class="dis" disabled selected>Classe</option>
+                    <option value="sizieme">6ème</option>
+                    <option value="cinquieme">5ème</option>
+                    <option value="quatrieme">4ème</option>
+                    <option value="troisieme">3ème</option>
+              </select>
+            </div>
+            <div id="liveAlertPlaceholder"></div>
+            <button type="submit" class="btn myBtn" id="liveAlertBtn">Enregistrer</button>
+          </form>
+        </div>
+      </div>
+    </div>
+    </div>
 
      <script src="https://cdn.jsdelivr.net/npm/chart.js@3.5.1/dist/chart.min.js"></script>
-     <script src="sidebar.js"></script>
+     <!-- <script src="sidebar.js"></script> -->
 </body>
 </html>
