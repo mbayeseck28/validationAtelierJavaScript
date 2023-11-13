@@ -1,5 +1,5 @@
 // Import the functions you need from the SDKs you need
-import { initializeApp } from 'firebase/app';
+import { initializeApp, onLog } from 'firebase/app';
 // Importation des  services
 import {
   addDoc,
@@ -29,6 +29,7 @@ const db = getFirestore(app);
 const eleve = collection(db, 'inscScolarite');
 const certiesRef = collection(db, 'inscrireActivite');
 const certiesRef2 = collection(db, 'mensualites');
+let veri 
 
 onSnapshot(eleve, (snapshot) => {
   let eleve = [];
@@ -36,6 +37,8 @@ onSnapshot(eleve, (snapshot) => {
     eleve.push({ ...doc.data(), id: doc.id });
   });
   eleve.sort((a, b) => b.dateDajout - a.dateDajout);
+  veri = eleve
+  console.log(veri);
   const list = document.querySelector('#list');
   list.innerHTML = '';
 
@@ -211,6 +214,8 @@ onSnapshot(certiesRef2, (snapshot) => {
   const mens = document.getElementById('mens');
   mens.innerHTML = ''
   certiesRef2.sort((a, b) => b.dateDajout - a.dateDajout);
+
+
 
   certiesRef2.forEach((utili) => {
     let trbody = document.createElement('tr');
