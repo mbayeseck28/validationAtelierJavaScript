@@ -40,20 +40,20 @@ export async function ajouterAssocier(formAssocie) {
 }
 
 export function recherche(rechercheInput, asso) {
-  rechercheInput.addEventListener("input", (e) => {
-    const nomSaisie = e.target.value;
-    document.getElementById("logo-entreprise").innerHTML = "";
-    const nomFilter = asso.filter(
-      (asso) => 
-      asso.nom === nomSaisie || asso.logo === nomSaisie
-    );
-    if (nomFilter.length) {
-      document.getElementById("resultAsso").innerHTML = "";
-      gestionAssocie(nomFilter);
-    } else {
-      document.getElementById("resultAsso").innerHTML = "<p>Aucun résultat</p>"; 
-    }
-  })
+  // rechercheInput.addEventListener("input", (e) => {
+  //   const nomSaisie = e.target.value;
+  //   document.getElementById("logo-entreprise").innerHTML = "";
+  //   const nomFilter = asso.filter(
+  //     (element) => 
+  //     element.nom.toLowerCase().includes(nomSaisie.toLowerCase())
+  //   );
+  //   if (nomFilter.length) {
+  //     document.getElementById("resultAsso").innerHTML = "";
+  //     gestionAssocie(nomFilter);
+  //   } else {
+  //     document.getElementById("resultAsso").innerHTML = "<p>Aucun résultat</p>"; 
+  //   }
+  // })
 }
 
 export function gestionAssocie() {
@@ -61,7 +61,8 @@ export function gestionAssocie() {
 
   // const entreprise = collection(db, "entreprise");
   const associe = collection(db, "associe");
-
+  const rechercheInput = document.getElementById("searchAssocie");
+  console.log(rechercheInput);
   // console.log(associe);
   onSnapshot(associe, (snapshot) => {
     let associe = [];
@@ -82,7 +83,32 @@ export function gestionAssocie() {
         `;
       logoEntreprise.appendChild(div);
     });
+    rechercheInput.addEventListener("input", (e) => {
+      const nomSaisie = e.target.value;
+      document.getElementById("logo-entreprise").innerHTML = "";
+      const nomFilter = associe.filter(
+        (element) => 
+        element.nom.toLowerCase().includes(nomSaisie.toLowerCase())
+      );
+      if (nomFilter.length) {
+        document.getElementById("resultAsso").innerHTML = "";
+        // gestionAssocie(nomFilter);
+        nomFilter.forEach((ins) => {
+          const div = document.createElement("div");
+          div.className = "col-6 col-lg-2 col-md- col-sm ";
+          div.innerHTML = `
+          <button class="btn k rounded-pill">
+            <img src="${ins.logo}" alt="Logo de l'associe" class="img ">                                                           
+          </button>
+              <p class="fw-bold text-capitalize">${ins.nom}</p>
+            `;
+          logoEntreprise.appendChild(div);
+        });
+      } else {
+        document.getElementById("resultAsso").innerHTML = "<p>Aucun résultat</p>"; 
+      }
+    })
   });
 }
 
-
+export { asso };
