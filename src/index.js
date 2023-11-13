@@ -52,4 +52,5 @@ if (pageName === 'inscription.html') {
 }else if (pageName === 'authentification.html') {
   import('./pagesJS/sidebar');
   import('./pagesJS/authentification.js');
+  // import('./pagesJS/loader.js');
 }
