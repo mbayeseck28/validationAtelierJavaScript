@@ -1,20 +1,20 @@
-import { onAuthStateChanged } from 'firebase/auth';
-import { getAuth } from 'firebase/auth';
+// import { onAuthStateChanged } from 'firebase/auth';
+// import { getAuth } from 'firebase/auth';
 
-function deconnexion() {
-  const btnGreen = document.querySelector('.btnGreen');
-  btnGreen.addEventListener('click', function () {
-    const auth = getAuth();
-    signOut(auth)
-      .then(() => {
-        console.log('Utilisateur déconnecté');
-      })
-      .catch((error) => {
-        window.location.href = '../../pages/auth/login/login.html';
-        console.error('Erreur lors de la déconnexion :', error);
-      });
-  });
-}
+// function deconnexion() {
+//   const btnGreen = document.querySelector('.btnGreen');
+//   btnGreen.addEventListener('click', function () {
+//     const auth = getAuth();
+//     signOut(auth)
+//       .then(() => {
+//         console.log('Utilisateur déconnecté');
+//       })
+//       .catch((error) => {
+//         window.location.href = '../../pages/auth/login/login.html';
+//         console.error('Erreur lors de la déconnexion :', error);
+//       });
+//   });
+// }
 
 // onAuthStateChanged(auth, (user) => {
 //     if (!user) {
