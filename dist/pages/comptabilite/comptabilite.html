@@ -36,10 +36,7 @@
         <script src="../../bundle.js" defer></script>
         <title>Comptabilité</title>
     </head>
-<body>
-    <div class="loader-container">
-        <div class="loader"></div>
-    </div>
+<body>  
     <div class="container-fluid">
         <div class="row nav p-2 mt-md-0 d-flex justify-content-between align-items-center">
             <div class="col-6 col-md-2 logo">
@@ -74,9 +71,6 @@
                 <div class="profil ms-3">
                     <img src="../../../src/assets/images/Group 800.png" alt="">
                 </div>
-                <!-- <a href="../../Acceuil/dist/profil.html" style="color: #000000;">
-                    <i class="fa-solid fa-angle-down ms-3 mt-1"></i>
-                </a> -->
                 <i class="fa-solid angle-down ms-3 mt-1 dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"></i>
             
             <ul class="dropdown-menu rounded-5 pt-0 pb-4">
@@ -100,11 +94,11 @@
             </div>
         </div>
     </div>    
-    <div class="container-fluid">
+    <div class="container-fluid">       
         <div class="row">
             <div class="col-12 col-md-2">
                 <div class="menu d-flex d-md-none">
-                       <i class="fa-solid fa-bars" id="menu"></i>
+                    <i class="fa-solid fa-bars" id="menu"></i>
                 </div>
                 <div class="sidebar">
                    <div class="logo-details" id="btn">
@@ -145,11 +139,11 @@
                            <span class="tooltip">Proffesseurs</span>
                        </li>
                        <li>
-                           <a href="">
+                           <a href="../Authentification/authentification.html">
                             <i class="fa-regular fa-address-card"></i>
-                                   <span class="links_name">Autentifications</span>
+                                   <span class="links_name">Authentifications</span>
                            </a>
-                           <span class="tooltip">Autentifications</span>
+                           <span class="tooltip">Authentifications</span>
                        </li>
                        <li>
                            <a href="../droit/droit.html">
@@ -254,6 +248,14 @@
                                       <tbody id="list" class="">
                                       </tbody>
                                     </table>
+                                    <div class="chargement-page">
+                                        <div class="loader-container">
+                                            <div class="loader"></div>
+                                            <div class="loader"></div>
+                                            <div class="loader"></div>
+                                        </div>
+                                        <span class="loading"><img src="../../../src/assets/images/Group 850.png" alt=""></span>
+                                    </div>
                                   </div>
                                 </div>
                               </div>
@@ -311,17 +313,9 @@
               </div>
               <hr>
               <!-- Section de Ladji -->
-
-            
-
-            
             <!-- Ladji Section 2 Mensualité -->
             <section class="myContDiv mb-5" id="mensualite">
-                <!-- <div class="inscriptions d-flex justify-content-between flex-wrap py-4 border-bottom">
-                    <a class="text-decoration-none text-black fw-semibold opacity-50" href="#inscSco">Inscription scolarité</a>
-                    <a class="text-decoration-none text-black fw-semibold opacity-50" href="#inscAct">Inscription autres activités</a>
-                    <a class="text-decoration-none text-black fw-semibold" href="#mensualite">Mensualité</a>
-                </div> -->
+                
                 <div class="">
                     <div class=" d-flex justify-content-center">
                         <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#idActiviter">
@@ -361,6 +355,14 @@
                                 <tbody id="list3" class="mytbodyIns">
                                 </tbody>
                             </table>
+                            <div class="chargement-page loader2">
+                                <div class="loader-container">
+                                    <div class="loader"></div>
+                                    <div class="loader"></div>
+                                    <div class="loader"></div>
+                                </div>
+                                <span class="loading"><img src="../../../src/assets/images/Group 850.png" alt=""></span>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -434,11 +436,18 @@
                               <tbody id="mens"></tbody>
                               <tfoot id="total"></tfoot>
                             </table>
+                            <div class="chargement-page loader3">
+                                <div class="loader-container">
+                                    <div class="loader"></div>
+                                    <div class="loader"></div>
+                                    <div class="loader"></div>
+                                </div>
+                                <span class="loading"><img src="../../../src/assets/images/Group 850.png" alt=""></span>
+                            </div>
                         
                     </div>
                 </div>
               </section>
-
             </div>
         </div>
     </div> 

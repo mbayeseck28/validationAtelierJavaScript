@@ -46,6 +46,9 @@ onSnapshot(eleve, (snapshot) => {
     tr.innerHTML = `
     <td class="text-start ps-2 py-2 border border-1">${utili.prenom}</td> <td class="text-start ps-2 py-2 border border-1">${utili.nom}</td> <td class="text-center py-2 border border-1">${utili.montantInsc} Fcfa</td>`;
     list.appendChild(tr);
+    let loaderContainer = document.querySelector(".chargement-page");
+    loaderContainer.style.display = "none";
+
   });
 });
 
@@ -132,6 +135,9 @@ onSnapshot(certiesRef2, (snapshot) => {
       'en-US'
     )} Fcfa</td>`;
     list.appendChild(tr);
+    let loaderContainer = document.querySelector(".loader2");
+    loaderContainer.style.display = "none";
+
   });
 });
 
@@ -192,6 +198,9 @@ onSnapshot(eleve, (snapshot) => {
         )} Fcfa</td>
         `;
     revenue.appendChild(trbody);
+    let loaderContainer = document.querySelector(".loader3");
+    loaderContainer.style.display = "none";
+
   });
 });
 onSnapshot(certiesRef2, (snapshot) => {
@@ -216,7 +225,7 @@ onSnapshot(certiesRef2, (snapshot) => {
         <td class="border border-1">${utili.montantpay}Fcfa</td>
         `;
     mens.appendChild(trbody);
-
+   
     // console.log(utili.type);
   });
 });
@@ -286,6 +295,7 @@ function CalculDeLaSommeTotale() {
     'en-US'
   )} <span class="fw-bold">FCFA</span>`;
   console.log('Total global:', totaleDuRevenu);
+
 }
 CalculDeLaSommeTotale()
 })
@@ -296,8 +306,3 @@ CalculDeLaSommeTotale()
 
  
 
-document.addEventListener("DOMContentLoaded", (event) => {
-  // Supprimer le loader une fois que le contenu principal est chargé
-  let loaderContainer = document.querySelector(".loader-container");
-  loaderContainer.style.display = "none";
-});
