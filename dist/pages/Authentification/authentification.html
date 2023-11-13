@@ -67,7 +67,7 @@
     </script>
     <!-- <link rel="stylesheet" href="proffesseur.css"> -->
     <!-- <link rel="stylesheet" href="personnel.css"> -->
-    <link rel="stylesheet" href="profil.css" />
+    <link rel="stylesheet" href="authentification.css" />
     <link rel="stylesheet" href="sidebare.css" />
     <!-- <script src="redirection.js" defer></script> -->
     <script src="../../bundle.js" defer></script>
@@ -193,11 +193,11 @@
                      <span class="tooltip">Proffesseurs</span>
                  </li>
                  <li>
-                     <a href="../Authentification/authentification.html">
+                     <a href="authentification.html">
                       <i class="fa-regular fa-address-card"></i>
-                             <span class="links_name">Authentifications</span>
+                             <span class="links_name">Autentifications</span>
                      </a>
-                     <span class="tooltip">Authentifications</span>
+                     <span class="tooltip">Autentifications</span>
                  </li>
                  <li>
                      <a href="../droit/droit.html">
@@ -212,29 +212,29 @@
       </div>
         <div class="col-12 col-md-10 mt-5 myContain pt-5">
 
-          <!-----------PARTIE PROFESSEURS----------->
-          <section id="Professeurs" class="mb-5">
+          <section id="utilisateurs" class="mb-5">
             <div class="myContDiv mb-5">
-              <h2 class="mt-5 fs-3 mt-lg-0 mb-3">Professeurs</h2>
+              <h2 class="mt-5 fs-3 mt-lg-0 mb-3">Utilisateurs</h2>
               <div class="card border-0 shadow rounded-5 my-3">
-                <div class="py-4 d-flex justify-content-between">
-                  <button
+                <div class="py-4 d-flex justify-content-center">
+                  <a class="" href="../admin/admin.html">
+                    <button
                     class="ajout rounded-circle mx-auto border-0 bg-dark text-white my-3"
                     data-bs-toggle="modal"
                     data-bs-target="#exampleModal"
                   >
                     <i class="fa-solid fa-plus fs-3"></i>
                   </button>
+                  </a>
                 </div>
-                <p id="erreurProf" class="text-danger text-center fs-6 fw-bold"></p>
                 <div class="card-body">
                   <div
                     class="col-12 d-flex flex-column flex-lg-row justify-content-between align-items-center"
                   >
                     <h1 class="text-center liste mb-3">
-                      Liste de tous les professeurs de l'établissement
+                      Liste des utilisateurs de l'application
                     </h1>
-                    <form action="" id="formProff" class="col-12 col-md-6 col-lg-4">
+                    <form action="" id="formUser" class="col-12 col-md-6 col-lg-4">
                       <div
                         class="shadow d-flex mb-lg-0 align-items-center p-1 rounded-3 ps-2"
                       >
@@ -242,7 +242,7 @@
                           type="search"
                           
                           class="w-100 elements bg-transparent border-0 border-outline-none"
-                          placeholder="Rechercher un professeur..."
+                          placeholder="Rechercher un utilisateur..." id='inputRecherche'
                         />
                         <span class="elements me-2"
                           ><i class="fa-solid fa-magnifying-glass"></i
@@ -262,21 +262,17 @@
                               Prénom</h5>
                             </th>
                             <th class="text-center d-none d-lg-block" scope="col">
-                                Matiéres
+                                Status
                             </th>
                             <th class="text-center" scope="col">
-                                coordonnées
+                                Secteur
                             </th>
                             <th class="text-center d-none d-lg-block" scope="col">
-                              classes
+                              Adresse
                           </th>
-                            <th class="text-center px-3 px-lg-4" scope="col">
-                              Actions
-                            </th>
                         </tr>
                     </thead>
-                      <tbody id="container" class=""> 
-                      
+                      <tbody id="container" class="">                      
 
                       </tbody>
                     </table>
@@ -284,10 +280,10 @@
                 </div>
               </div>
             </div>
-            <p id="erreurRefProff" class="text-center text-danger "></p>
+            <p id="erreurRefUser" class="text-center text-danger "></p>
           </section>
           
-         <!-- Modal professeurs -->
+         
          <div
          class="modal fade"
          id="exampleModal"
@@ -295,96 +291,9 @@
          aria-labelledby="exampleModalLabel"
          aria-hidden="true"
        >
-         <div class="modal-dialog">
-           <div class="modal-content">
-             <div class="modal-header">
-               <h1 class="modal-title fs-5" id="exampleModalLabel">
-                 Ajout d'un professeur
-               </h1>
-               <button
-                 type="button"
-                 class="btn-close"
-                 data-bs-dismiss="modal"
-                 aria-label="Close"
-               ></button>
-             </div>
-             <div class="modal-body">
-               <form class="addToFirebase">
-                 <div class="mb-3">
-                   <label for="nom" class="form-label">Nom</label>
-                   <input
-                     type="text"
-                     class="form-control shadow-sm"
-                     required
-                     id="nom"
-                   />
-                 </div>
-                 <div class="mb-3">
-                   <label for="prenom" class="form-label">Prénom</label>
-                   <input
-                     type="text"
-                     class="form-control shadow-sm"
-                     required
-                     id="prenom"
-                   />
-                 </div>
-                 <div class="mb-3">
-                   <label for="matiere" class="form-label">matieres</label>
-                   <input
-                     type="text"
-                     class="form-control shadow-sm"
-                     required
-                     id="matiere"
-                   />
-                 </div>
-                 <div class="mb-3">
-                   <label for="classe" class="form-label">classes</label>
-                   <input
-                     type="text"
-                     class="form-control shadow-sm"
-                     required
-                     id="classe"
-                   />
-                 </div>
-                 <div class="mb-3">
-                   <label for="coordonnee" class="form-label"
-                     >coordonnees</label
-                   >
-                   <input
-                     type="number"
-                     class="form-control shadow-sm"
-                     required
-                     id="coordonnee"
-                   />
-                 </div>
-                 <div id="liveAlertPlaceholder"></div>
-                 <button
-                   class="btn bg-green"
-                   id="ajouter"
-                   data-bs-dismiss="modal"
-                   aria-label="Close"
-                 >
-                   Enregistrer
-                 </button>
-                 <button
-                   class="btn bg-green"
-                   id="modifier"
-                   data-bs-dismiss="modal"
-                   aria-label="Close"
-                 >
-                   Modifier
-                 </button>
-               </form>
-             </div>
-           </div>
          </div>
-         </div>
-
       </div>
     </div>
   </div>
-
-    
-    <!-- <script src="sidebar.js"></script> -->
   </body>
 </html>
