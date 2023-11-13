@@ -40,7 +40,7 @@ onSnapshot(eleve, (snapshot) => {
     eleves.push({ ...doc.data(), id: doc.id });
   });
   eleves.sort((a, b) => b.dateDajout - a.dateDajout);
-console.log(eleves);
+  console.log(eleves);
   let effectifClass6 = [];
   let effectifClass5 = [];
   let effectifClass4 = [];
@@ -61,12 +61,9 @@ console.log(eleves);
     }
     if (utili.classe === 'troisieme') {
       effectifClass3.push(utili.classe);
-<<<<<<< HEAD
-      effectif3.innerHTML = effectifClass3.length + ' élèves';
-=======
+
       console.log(effectifClass3);
-      effectif3.innerHTML = effectifClass3.length + " élèves";
->>>>>>> cecfc485938a844f2b7b96504b8a25f65b3abbb5
+      effectif3.innerHTML = effectifClass3.length + ' élèves';
     }
   });
 });
@@ -79,18 +76,11 @@ onSnapshot(certiesRef2, (snapshot) => {
     certiesRef2.push({ ...doc.data(), id: doc.id });
   });
   certiesRef2.sort((a, b) => b.dateDajout - a.dateDajout);
-<<<<<<< HEAD
   const paiement6 = document.getElementById('paiement6');
   const paiement5 = document.getElementById('paiement5');
   const paiement4 = document.getElementById('paiement4');
   const paiement3 = document.getElementById('paiement3');
-=======
-  const paiement6 = document.getElementById("paiement6");
-  const paiement5 = document.getElementById("paiement5");
-  const paiement4 = document.getElementById("paiement4");
-  const paiement3 = document.getElementById("paiement3");
-  
->>>>>>> cecfc485938a844f2b7b96504b8a25f65b3abbb5
+
   let PaiementsEffec6 = [];
   let PaiementsEffec5 = [];
   let PaiementsEffec4 = [];
@@ -98,7 +88,6 @@ onSnapshot(certiesRef2, (snapshot) => {
 
   console.log(certiesRef2);
   certiesRef2.forEach((utili) => {
-<<<<<<< HEAD
     if (utili.classe === 'sizieme') {
       PaiementsEffec6.push(utili.montantpay);
 
@@ -131,7 +120,6 @@ onSnapshot(certiesRef2, (snapshot) => {
           (PaiementsEffec3.length / parseInt(effectif3.innerHTML)) * 100
         ) + '%';
     }
-=======
     // if (utili.classe === "sizieme") {
     //   PaiementsEffec6.push(utili.montantpay);
 
@@ -152,7 +140,7 @@ onSnapshot(certiesRef2, (snapshot) => {
     //   if (utili.classe === "quatrieme") {
     //     PaiementsEffec4.push(utili.montantpay);
     //     console.log(paiement4);
-    //     paiement4.innerHTML = 
+    //     paiement4.innerHTML =
     //       Math.round(
     //         (PaiementsEffec4.length / parseInt(effectif4.innerHTML)) * 100
     //       ) + "%";
@@ -160,13 +148,10 @@ onSnapshot(certiesRef2, (snapshot) => {
     //   if (utili.classe === "troisieme") {
     //     PaiementsEffec3.push(utili.montantpay);
     //     console.log(paiement3);
-    //     paiement3.innerHTML = 
+    //     paiement3.innerHTML =
     //       Math.round(
     //         (PaiementsEffec3.length / parseInt(effectif3.innerHTML)) * 100
     //       ) + "%";
     //   }
->>>>>>> cecfc485938a844f2b7b96504b8a25f65b3abbb5
   });
 });
-
-
