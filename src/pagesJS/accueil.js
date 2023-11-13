@@ -65,12 +65,7 @@ onSnapshot(eleve, (snapshot) => {
       effectif3.innerHTML = effectifClass3.length + " élèves";
     }
 
-    const tr = document.createElement('tr')       
-        tr.innerHTML`
-        <td>${utili.dateDajout.toDate().toLocaleDateString()}</td>
-        `;
-        // revenue.appendChild(trbody);
-        myTbody.appendChild(tr)
+    
   });
 });
 
