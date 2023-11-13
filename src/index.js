@@ -30,6 +30,7 @@ if (pageName === 'inscription.html') {
   import('./pagesJS/login');
 } else if (pageName === 'acceuil.html') {
   import('./pagesJS/sidebar');
+  import('./pagesJS/accueil');
 } else if (pageName === 'profil.html') {
   import('./pagesJS/sidebar');
   import('./pagesJS/profil');
