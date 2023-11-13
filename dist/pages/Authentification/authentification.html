@@ -12,6 +12,12 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.0/css/bootstrap.min.css"
     />
     <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="images/logo.png"
+    />
+    <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css"
     />
@@ -59,17 +65,18 @@
         return new bootstrap.Tooltip(tooltipTriggerEl);
       });
     </script>
-    <link rel="stylesheet" href="../admin/sidebar.css" />
-    <link rel="stylesheet" href="profil.css" />
+    <!-- <link rel="stylesheet" href="proffesseur.css"> -->
+    <!-- <link rel="stylesheet" href="personnel.css"> -->
+    <link rel="stylesheet" href="authentification.css" />
+    <link rel="stylesheet" href="sidebare.css" />
+    <!-- <script src="redirection.js" defer></script> -->
     <script src="../../bundle.js" defer></script>
-    <title>Profil Mixte Feewu</title>
+    <title>Personnels Mixte Feewu</title>
   </head>
   <body>
-    <div class="container-fluid"> 
-
+    <div class="container-fluid">
       <div
-        class="row nav p-2 mt-md-0 d-flex justify-content-between align-items-center"
-      >
+        class="row nav p-2 mt-md-0 d-flex justify-content-between align-items-center">
         <div class="col-6 col-md-2 logo">
           <img src="../../../src/assets/images/logo.png" alt="" />
         </div>
@@ -88,94 +95,59 @@
           />
         </div>
         <div class="col-6 col-md-3 d-flex flex-row compte">
-          <i
-            class="fa-regular fa-bell mt-1"
-            data-bs-toggle="offcanvas"
-            data-bs-target="#offcanvasRight"
-            aria-controls="offcanvasRight"
-          ></i>
+          <i class="fa-regular fa-bell d-none d-lg-block mt-1" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight"></i>
 
-          <div
-            class="offcanvas offcanvas-sm offcanvas-end"
-            tabindex="-1"
-            id="offcanvasRight"
-            aria-labelledby="offcanvasRightLabel"
-          >
+          <div class="offcanvas offcanvas-sm offcanvas-end " tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
             <div class="offcanvas-header">
               <h5 id="offcanvasRightLabel">Notifications</h5>
-              <i
-                class="fa-solid fa-gear"
-                data-bs-dismiss="offcanvas"
-                aria-label="Close"
-              ></i>
+              <i class="fa-solid fa-gear" data-bs-dismiss="offcanvas" aria-label="Close"></i>
             </div>
             <div class="offcanvas-body">
-              <div
-                class="container d-flex align-items-center justify-content-center h-100"
-              >
-                <div
-                  class="row h-100 d-flex align-items-center justify-content-center"
-                >
-                  <div
-                    class="col-md-12 text-center d-flex align-items-center justify-content-center h-100"
-                  >
+              <div class="container d-flex align-items-center justify-content-center h-100">
+                <div class="row  h-100 d-flex align-items-center justify-content-center">
+                  <div class="col-md-12 text-center d-flex align-items-center justify-content-center h-100">
                     <p>Vous n'avez pas de notification</p>
                   </div>
                 </div>
               </div>
             </div>
           </div>
+
           <div class="profil ms-3">
             <img src="../../../src/assets/images/Group 800.png" alt="" />
           </div>
-          <!-- <a href="profil.html" style="color: #000000;">
-                    <i class="fa-solid fa-angle-down ms-3 mt-1"></i>
-                </a> -->
           <div class="btn-group">
-            <i
-              class="fa-solid angle-down ms-3 mt-1 dropdown-toggle"
-              data-bs-toggle="dropdown"
-              aria-expanded="false"
-            ></i>
-
+            <i class="fa-solid angle-down ms-3 mt-1 dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"></i>
+            
             <ul class="dropdown-menu rounded-5 pt-0 pb-4">
-              <div
-                class="d-flex flex-column py-4 mb-2 justify-content-center gy-5 align-items-center divProfile"
-              >
-                <div class="col-6 col-md-2 mx-auto my-2 mt-3 imageDivProfile">
+              <div class="d-flex flex-column py-4 mb-2 justify-content-center gy-5 align-items-center divProfile">
+                <div class="col-6 col-md-2  mx-auto my-2 mt-3 imageDivProfile">
                   <img src="../../../src/assets/images/Group 800.png" alt="" />
-                </div>
-                <h6 class="text-center mb-0 fst-italic">Moustapha Djigo</h6>
-                <p class="mt-0 pt-0 text-light">Proviseur</p>
-              </div>
+               </div>
+               <h6 class="text-center mb-0 fst-italic">Moustapha Djigo</h6>
+               <p class="mt-0 pt-0 text-light">Proviseur</p>
+              </div>              
               <li>
-                <a class="dropdown-item mt-3" href="#">
-                  <button
-                    class="btn btnGreen fw-bold btn-light shadow btn-sm w-100"
-                    type="button"
-                  >
-                    Voir le profil
-                  </button></a
-                >
+                <a class="dropdown-item   mt-3 " href="../profil/profil.html">
+                <button class="btn btnGreen fw-bold btn-light shadow btn-sm w-100" type="button">
+                 Voir le profil
+                </button>
+              </a>
               </li>
               <li>
-                <a
-                  class="dropdown-item"
-                  href="../../pages/auth/login/login.html"
-                >
-                  <button
-                    class="btn btnGreen fw-bold btn-light shadow btn-sm w-100"
-                    type="button"
-                  >
+                <a class="dropdown-item" href="../auth/login/login.html">
+
+                  <button class="btn btnGreen fw-bold btn-light shadow btn-sm w-100" type="button">
                     Deconnexion
-                  </button></a
-                >
+                  </button>
+                </a>
               </li>
             </ul>
           </div>
         </div>
       </div>
     </div>
+
     <div class="container-fluid">
       <div class="row">
         <div class="col-12 col-md-2">
@@ -221,11 +193,11 @@
                      <span class="tooltip">Proffesseurs</span>
                  </li>
                  <li>
-                     <a href="../Authentification/authentification.html">
+                     <a href="authentification.html">
                       <i class="fa-regular fa-address-card"></i>
-                             <span class="links_name">Authentifications</span>
+                             <span class="links_name">Autentifications</span>
                      </a>
-                     <span class="tooltip">Authentifications</span>
+                     <span class="tooltip">Autentifications</span>
                  </li>
                  <li>
                      <a href="../droit/droit.html">
@@ -238,62 +210,90 @@
 
           </div>
       </div>
-        <div class="col-12 col-md-9 myContain">
-          <h3>Profile</h3>
-          <div class="myProfil mb-2 d-flex justify-content-center">
-            <img src="../../../src/assets/images/Group 800.png" alt="" />
-          </div>
-            <form id="formProfil" class="infoProfil p-3 mb-5">
-              <h5>Informations Personnelles</h5>
-              <div class="row d-flex flex-wrap d-flex justify-content-between align-items-center mt-4">
-                <div class="col-12 col-md-4 mb-4 d-md-flex">
-                  <label for="userPrenom">Prenom:</label>
-                  <input type="text" id="userPrenom">
+        <div class="col-12 col-md-10 mt-5 myContain pt-5">
+
+          <section id="utilisateurs" class="mb-5">
+            <div class="myContDiv mb-5">
+              <h2 class="mt-5 fs-3 mt-lg-0 mb-3">Utilisateurs</h2>
+              <div class="card border-0 shadow rounded-5 my-3">
+                <div class="py-4 d-flex justify-content-center">
+                  <a class="" href="../admin/admin.html">
+                    <button
+                    class="ajout rounded-circle mx-auto border-0 bg-dark text-white my-3"
+                    data-bs-toggle="modal"
+                    data-bs-target="#exampleModal"
+                  >
+                    <i class="fa-solid fa-plus fs-3"></i>
+                  </button>
+                  </a>
                 </div>
-                <div class="col-12 col-md-4 mb-4 d-md-flex">
-                  <label for="userNom">Nom:</label>
-                  <input type="text" id="userNom">
-                </div>
-                <div class="col-12 col-md-4 mb-4 d-md-flex">
-                  <label for="userStatus">Statut:</label>
-                  <input type="text" id="userStatus" class="bouton">
-                </div>
-                <div class="col-12 col-md-4 mb-4 d-md-flex">
-                  <label for="userAdress">Adresse:</label>
-                  <input type="text" id="userAdress">
-                </div>
-                <div class="col-12 col-md-4 mb-4 d-md-flex">
-                  <label for="userEmail">Email:</label>
-                  <input type="email" id="userEmail">
-                </div>
-                <div class="col-12 col-md-4 mb-5 d-md-flex">
-                  <label for="userTel">Téléphone:</label>
-                  <input type="text" id="userTel">
-                </div>
-                <h5>Informations Générales</h5>
-                <div class="col-12 col-md-4 mb-4 d-md-flex">
-                  <label for="nomEcole">Nom de l'école:</label>
-                  <input type="text" id="nomEcole">
-                </div>
-                <div class="col-12 col-md-4 mb-4 d-md-flex">
-                  <label for="adresseEcole">Adresse:</label>
-                  <input type="text" id="adresseEcole">
-                </div>
-                <div class="col-12 col-md-4 mb-4 d-md-flex">
-                  <label for="emailEcole">Email:</label>
-                  <input type="text" id="emailEcole">
-                </div>
-                <div class="col-12 col-md-4 mb-4 d-md-flex">
-                  <label for="secteurEcole">Secteur:</label>
-                  <input type="text" id="secteurEcole" class="bouton">
+                <div class="card-body">
+                  <div
+                    class="col-12 d-flex flex-column flex-lg-row justify-content-between align-items-center"
+                  >
+                    <h1 class="text-center liste mb-3">
+                      Liste des utilisateurs de l'application
+                    </h1>
+                    <form action="" id="formUser" class="col-12 col-md-6 col-lg-4">
+                      <div
+                        class="shadow d-flex mb-lg-0 align-items-center p-1 rounded-3 ps-2"
+                      >
+                        <input
+                          type="search"
+                          
+                          class="w-100 elements bg-transparent border-0 border-outline-none"
+                          placeholder="Rechercher un utilisateur..." id='inputRecherche'
+                        />
+                        <span class="elements me-2"
+                          ><i class="fa-solid fa-magnifying-glass"></i
+                        ></span>
+                      </div>
+                    </form>
+                  </div>
+
+                  <div class="col-12 mt-5">
+                    <table class="w-100 px-3 m-0 table  table-bordered">
+                      <thead>
+                        <tr>
+                            <th class="text-center d-none d-lg-block" scope="col">
+                              Nom
+                            </th>
+                            <th class="text-center " scope="col">
+                              Prénom</h5>
+                            </th>
+                            <th class="text-center d-none d-lg-block" scope="col">
+                                Status
+                            </th>
+                            <th class="text-center" scope="col">
+                                Secteur
+                            </th>
+                            <th class="text-center d-none d-lg-block" scope="col">
+                              Adresse
+                          </th>
+                        </tr>
+                    </thead>
+                      <tbody id="container" class="">                      
+
+                      </tbody>
+                    </table>
+                  </div>
                 </div>
               </div>
-              <div class="d-flex justify-content-end">
-                <button id="btnEnregistrerInfo">Enregistrer</button>
-              </div>
-            </form>
-        </div>
+            </div>
+            <p id="erreurRefUser" class="text-center text-danger "></p>
+          </section>
+          
+         
+         <div
+         class="modal fade"
+         id="exampleModal"
+         tabindex="-1"
+         aria-labelledby="exampleModalLabel"
+         aria-hidden="true"
+       >
+         </div>
       </div>
     </div>
+  </div>
   </body>
 </html>
