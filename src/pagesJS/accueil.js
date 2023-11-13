@@ -91,39 +91,39 @@ onSnapshot(certiesRef2, (snapshot) => {
 
   console.log(certiesRef2);
   certiesRef2.forEach((utili) => {
-    // if (utili.classe === "sizieme") {
-    //   PaiementsEffec6.push(utili.montantpay);
+    if (utili.classe === "sizieme") {
+      PaiementsEffec6.push(utili.montantpay);
 
-    //   paiement6.innerHTML =
-    //     Math.round(
-    //       (PaiementsEffec6.length / parseInt(effectif6.innerHTML)) * 100
-    //     ) + "%";
-    // }
-    // if (utili.classe === "cinquieme") {
-    //     PaiementsEffec5.push(utili.montantpay);
-    //   console.log(PaiementsEffec5.length);
-    //   console.log(parseInt(effectif5.innerHTML));
-    //     paiement5.innerHTML =
-    //       Math.round(
-    //         (PaiementsEffec5.length / parseInt(effectif5.innerHTML)) * 100
-    //       ) + "%";
-    //   }
-    //   if (utili.classe === "quatrieme") {
-    //     PaiementsEffec4.push(utili.montantpay);
-    //     console.log(paiement4);
-    //     paiement4.innerHTML = 
-    //       Math.round(
-    //         (PaiementsEffec4.length / parseInt(effectif4.innerHTML)) * 100
-    //       ) + "%";
-    //   }
-    //   if (utili.classe === "troisieme") {
-    //     PaiementsEffec3.push(utili.montantpay);
-    //     console.log(paiement3);
-    //     paiement3.innerHTML = 
-    //       Math.round(
-    //         (PaiementsEffec3.length / parseInt(effectif3.innerHTML)) * 100
-    //       ) + "%";
-    //   }
+      paiement6.innerHTML =
+        Math.round(
+          (PaiementsEffec6.length / parseInt(effectif6.innerHTML)) * 100
+        ) + "%";
+    }
+    if (utili.classe === "cinquieme") {
+        PaiementsEffec5.push(utili.montantpay);
+      console.log(PaiementsEffec5.length);
+      console.log(parseInt(effectif5.innerHTML));
+        paiement5.innerHTML =
+          Math.round(
+            (PaiementsEffec5.length / parseInt(effectif5.innerHTML)) * 100
+          ) + "%";
+      }
+      if (utili.classe === "quatrieme") {
+        PaiementsEffec4.push(utili.montantpay);
+        console.log(paiement4);
+        paiement4.innerHTML = 
+          Math.round(
+            (PaiementsEffec4.length / parseInt(effectif4.innerHTML)) * 100
+          ) + "%";
+      }
+      if (utili.classe === "troisieme") {
+        PaiementsEffec3.push(utili.montantpay);
+        console.log(paiement3);
+        paiement3.innerHTML = 
+          Math.round(
+            (PaiementsEffec3.length / parseInt(effectif3.innerHTML)) * 100
+          ) + "%";
+      }
   });
 });
 
