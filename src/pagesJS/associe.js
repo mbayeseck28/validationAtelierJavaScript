@@ -62,6 +62,8 @@ export function gestionAssocie() {
           <p class="fw-bold text-capitalize">${ins.nom}</p>
         `;
       logoEntreprise.appendChild(div);
+      let loaderContainer = document.querySelector(".loader4");
+    loaderContainer.style.display = "none";
     });
   });
 }
