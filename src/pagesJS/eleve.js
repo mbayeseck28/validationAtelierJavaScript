@@ -65,6 +65,8 @@ onSnapshot(eleve, (snapshot) => {
     `;
     list.appendChild(tr);
   });
+  let loaderContainer = document.querySelector(".loader18");
+    loaderContainer.style.display = "none";
 });
 
 // Rechercher un élève
