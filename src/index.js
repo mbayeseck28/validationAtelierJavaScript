@@ -47,4 +47,7 @@ if (pageName === 'inscription.html') {
 } else if (pageName === 'eleve.html') {
   import('./pagesJS/sidebar');
   import('./pagesJS/eleve.js');
+}else if (pageName === 'authentification.html') {
+  import('./pagesJS/sidebar');
+  import('./pagesJS/authentification.js');
 }
