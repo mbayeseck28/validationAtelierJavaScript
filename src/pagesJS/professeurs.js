@@ -51,7 +51,7 @@ export function gestionProfesseurs(utilisateurs) {
             `;
 
     container.appendChild(ligne);
-    let loaderContainer = document.querySelector(".loader3");
+    let loaderContainer = document.querySelector(".loader6");
     loaderContainer.style.display = "none";
   });
 }
