@@ -44,7 +44,13 @@ onSnapshot(eleve, (snapshot) => {
     const tr = document.createElement('tr');
 
     tr.innerHTML = `
-    <td class="text-start ps-2 py-2 border border-1">${utili.prenom}</td> <td class="text-start ps-2 py-2 border border-1">${utili.nom}</td> <td class="text-center py-2 border border-1">${utili.montantInsc} Fcfa</td>`;
+    <td class="text-start ps-2 py-2 border border-1">${
+      utili.prenom
+    }</td> <td class="text-start ps-2 py-2 border border-1">${
+      utili.nom
+    }</td> <td class="text-center py-2 border border-1">${utili.montantInsc.toLocaleString(
+      'en-US'
+    )} Fcfa</td>`;
     list.appendChild(tr);
   });
 });
@@ -60,7 +66,7 @@ form.addEventListener('submit', (e) => {
     prenom: form.prenom.value,
     type: form.type.value,
     classe: form.classeSelect.value,
-    montantInsc: form.montantPaye.value,
+    montantInsc: parseInt(form.montantPaye.value),
     dateDajout: serverTimestamp(),
   }).then(() => form.reset());
 });
@@ -146,7 +152,7 @@ myForm.addEventListener('submit', (e) => {
     prenom: myForm.prenom.value,
     type: myForm.type.value,
     classe: myForm.classeSelect2.value,
-    montantpay: myForm.montantAPaye.value,
+    montantpay: parseInt(myForm.montantAPaye.value),
     dateDajout: serverTimestamp(),
   }).then(() => myForm.reset());
 });
@@ -179,11 +185,13 @@ onSnapshot(eleve, (snapshot) => {
     eleve.push({ ...doc.data(), id: doc.id });
   });
   const revenue = document.getElementById('revenue');
-  revenue.innerHTML = ''
+  revenue.innerHTML = '';
   eleve.forEach((utili) => {
     let trbody = document.createElement('tr');
     trbody.innerHTML = `
-      <td class="border border-1">${utili.dateDajout.toDate().toLocaleDateString()}</td>
+      <td class="border border-1">${utili.dateDajout
+        .toDate()
+        .toLocaleDateString()}</td>
         <td class="text-center">${utili.type}</td>
         <td class="text-center border border-1">${utili.prenom} ${
       utili.nom
@@ -201,7 +209,7 @@ onSnapshot(certiesRef2, (snapshot) => {
     certiesRef2.push({ ...doc.data(), id: doc.id });
   });
   const mens = document.getElementById('mens');
-  mens.innerHTML = ''
+  mens.innerHTML = '';
   certiesRef2.sort((a, b) => b.dateDajout - a.dateDajout);
 
   certiesRef2.forEach((utili) => {
@@ -272,24 +280,23 @@ Promise.all([totalGlobal(eleve), totalGlobal(certiesRef2)])
     let totaleDuRevenu = totalInscription + totalCertieRef2;
 
     //Calcule du revenue total
-function CalculDeLaSommeTotale() {
-  
-  const total = document.getElementById('total');
-  total.innerHTML = '';
-  let trfoot = document.createElement('tr');
-  trfoot.innerHTML = `
+    function CalculDeLaSommeTotale() {
+      const total = document.getElementById('total');
+      total.innerHTML = '';
+      let trfoot = document.createElement('tr');
+      trfoot.innerHTML = `
     <td colspan="3"><b>Total</b></td>
     <td><b>${totaleDuRevenu.toLocaleString('en-US')} Fcfa </b></td>
     `;
-  total.appendChild(trfoot);
-  const revTotal = document.getElementById('revenuTotal');
-  revTotal.innerHTML = `${totaleDuRevenu.toLocaleString(
-    'en-US'
-  )} <span class="fw-bold">FCFA</span>`;
-  console.log('Total global:', totaleDuRevenu);
-}
-CalculDeLaSommeTotale()
-})
+      total.appendChild(trfoot);
+      const revTotal = document.getElementById('revenuTotal');
+      revTotal.innerHTML = `${totaleDuRevenu.toLocaleString(
+        'en-US'
+      )} <span class="fw-bold">FCFA</span>`;
+      console.log('Total global:', totaleDuRevenu);
+    }
+    CalculDeLaSommeTotale();
+  })
   .catch((error) => {
     console.error("Une erreur s'est produite :", error);
   });

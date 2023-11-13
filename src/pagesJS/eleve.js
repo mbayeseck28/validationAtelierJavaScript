@@ -3,9 +3,12 @@ import { initializeApp } from 'firebase/app';
 // Importation des  services
 import {
   addDoc,
+  doc,
   collection,
   documentId,
   getDocs,
+  deleteDoc,
+  updateDoc,
   getFirestore,
   onSnapshot,
   serverTimestamp,
@@ -30,14 +33,7 @@ const db = getFirestore(app);
 const eleve = collection(db, 'inscScolarite');
 let eleves = [];
 // Realtime Update
-let prixInsc = [
-  {
-    sizieme: 25000,
-    cinquieme: 25000,
-    quatrieme: 30000,
-    troisieme: 35000,
-  },
-];
+
 onSnapshot(eleve, (snapshot) => {
   snapshot.docs.forEach((doc) => {
     eleves.push({ ...doc.data(), id: doc.id });
@@ -45,7 +41,6 @@ onSnapshot(eleve, (snapshot) => {
   eleves.sort((a, b) => b.dateDajout - a.dateDajout);
   const list = document.querySelector('#list');
   list.innerHTML = '';
-
   eleves.forEach((utili) => {
     const tr = document.createElement('tr');
 
@@ -58,7 +53,7 @@ onSnapshot(eleve, (snapshot) => {
             <i class="fa-solid fa-trash-can supprimer" data-id=${utili.id}></i>
         </button>
         <button data-bs-toggle="modal" data-bs-target="#exampleModal" 
-            class="btn bouton modifier me-1 my-1 rounded-circle text-white bg-dark" data-id=${utili.id}>
+            class="btn bouton modifier me-1 my-1 rounded-circle fs-6 text-white bg-dark" data-id=${utili.id}>
             <i class="fa-solid fa-pencil modifier" data-id=${utili.id}></i>
         </button>
     </td>
@@ -93,7 +88,7 @@ rechercheInput.addEventListener('input', (e) => {
           <button class="btn bouton me-1 my-1 supprimer text-white rounded-circle bg-dark " data-id=${utili.id}>
               <i class="fa-solid fa-trash-can supprimer" data-id=${utili.id}></i>
           </button>
-          <button data-bs-toggle="modal" data-bs-target="#exampleModal" 
+          <button data-bs-toggle="modal" data-bs-target="#exampleModal"
               class="btn bouton modifier me-1 my-1 rounded-circle text-white bg-dark" data-id=${utili.id}>
               <i class="fa-solid fa-pencil modifier" data-id=${utili.id}></i>
           </button>
@@ -109,3 +104,76 @@ rechercheInput.addEventListener('input', (e) => {
 
 // Modification
 const btnModifier = document.getElementById('modifier');
+const nom = document.getElementById('nom');
+const prenom = document.getElementById('prenom');
+const type = document.getElementById('type');
+const classe = document.getElementById('classeSelect');
+const montantInsc = document.getElementById('montantInsc');
+let id;
+const container = document.getElementById('list');
+
+btnModifier.addEventListener('click', (e) => {
+  e.preventDefault();
+  console.log(container);
+
+  const nouveauEleve = {
+    nom: nom.value,
+    prenom: prenom.value,
+    type: type.value,
+    classe: classe.value,
+    montantInsc: parseInt(montantInsc.value),
+  };
+
+  console.log(nouveauEleve);
+  container.innerHTML = '';
+  const docRef = doc(eleve, id);
+  const form = document.querySelector('.addToFirebase');
+  console.log(container);
+  updateDoc(docRef, nouveauEleve).then(() => {
+    form.reset();
+    console.log('Document modifié avec succès !');
+    console.log(eleves);
+  });
+  container.innerHTML = '';
+});
+document.addEventListener('click', function (e) {
+  //   e.preventDefault();
+  if (e.target.classList.contains('modifier')) {
+    id = e.target.getAttribute('data-id');
+    const EleveModifier = eleves.find((u) => u.id === id);
+
+    nom.value = EleveModifier.nom;
+    prenom.value = EleveModifier.prenom;
+    type.value = EleveModifier.type;
+    classe.value = EleveModifier.classe;
+    montantInsc.value = EleveModifier.montantInsc;
+  } else if (e.target.classList.contains('supprimer')) {
+    const id = e.target.getAttribute('data-id');
+    const docRef = doc(eleve, id);
+
+    deleteDoc(docRef).then(() => {
+      console.log('Document supprimé avec succès !');
+    });
+  }
+});
+
+// Montant à inscrire
+let selectElement = document.getElementById('classeSelect');
+selectElement.addEventListener('change', function () {
+  let selectedOption = selectElement.options[selectElement.selectedIndex];
+  let selectedValue = selectedOption.value;
+  console.log(selectedValue);
+
+  document.getElementById('montantInsc').value = montant(selectedValue);
+});
+
+function montant(classe) {
+  const montantMapping = {
+    sizieme: 10000,
+    cinquieme: 15000,
+    quatrieme: 20000,
+    troisieme: 25000,
+  };
+
+  return montantMapping[classe] || 0;
+}

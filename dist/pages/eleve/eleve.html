@@ -214,7 +214,7 @@
             </div>
         </div>
     </div> 
-    <!-- Modal professeurs -->
+    <!-- Modal -->
     <div
     class="modal fade"
     id="exampleModal"
@@ -248,22 +248,35 @@
             <div class="mb-3 d-none">
               <label for="type" class="form-label">Type</label>
               <select class="form-select" id="type">
-                <option class="" selected>Inscription Scolarité</option>
+                <option class="" selected>Inscription</option>
               </select>
             </div>
             <div class="mb-3">
               <label for="classe" class="form-label">Classe</label>
-              <select class="form-select" id="classe">
-                <option selected>Classe</option>
-                <option class="dis" disabled selected>Classe</option>
-                    <option value="sizieme">6ème</option>
-                    <option value="cinquieme">5ème</option>
-                    <option value="quatrieme">4ème</option>
-                    <option value="troisieme">3ème</option>
+              <select class="form-select" id="classeSelect">
+                <option class="" disabled selected>Classe</option>
+                    <option value="sizieme" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">6ème</option>
+                    <option value="cinquieme" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">5ème</option>
+                    <option value="quatrieme" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">4ème</option>
+                    <option value="troisieme" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">3ème</option>
               </select>
+
+              <div class="mb-3 collapse" id="collapseExample">
+                <div class="card card-body">
+                    <label for="prenom" class="form-label">Montant de l'inscription pour cette classe</label>
+                    <input type="text" value="500" class="form-control shadow-sm prixInsc" required disabled id="montantInsc">
+                </div>
+              </div>
             </div>
             <div id="liveAlertPlaceholder"></div>
-            <button type="submit" class="btn myBtn" id="liveAlertBtn">Enregistrer</button>
+            <button
+                   class="btn myBtn liveAlertBtn text-white"
+                   id="modifier"
+                   data-bs-dismiss="modal"
+                   aria-label="Close"
+                 >
+                   Modifier
+                 </button>
           </form>
         </div>
       </div>
