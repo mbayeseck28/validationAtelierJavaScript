@@ -233,7 +233,7 @@
             </div>
         </div>
     </div> 
-    <!-- Modal professeurs -->
+    <!-- Modal -->
     <div
     class="modal fade"
     id="exampleModal"
@@ -267,11 +267,12 @@
             <div class="mb-3 d-none">
               <label for="type" class="form-label">Type</label>
               <select class="form-select" id="type">
-                <option class="" selected>Inscription Scolarité</option>
+                <option class="" selected>Inscription</option>
               </select>
             </div>
             <div class="mb-3">
               <label for="classe" class="form-label">Classe</label>
+
               <select class="form-select" id="classe">
                 <!-- <option selected>Classe</option> -->
                 <option class="dis" disabled selected>Classe</option>
@@ -280,8 +281,16 @@
                 <option value="4ème">4ème</option>
                 <option value="3ème">3ème</option>
               </select>
+
+              <div class="mb-3 collapse" id="collapseExample">
+                <div class="card card-body">
+                    <label for="prenom" class="form-label">Montant de l'inscription pour cette classe</label>
+                    <input type="text" value="500" class="form-control shadow-sm prixInsc" required disabled id="montantInsc">
+                </div>
+              </div>
             </div>
             <div id="liveAlertPlaceholder"></div>
+
             <button type="submit" class="btn myBtn" id="modifier" data-bs-dismiss="modal"
             aria-label="Close">Modifier</button>
           </form>
