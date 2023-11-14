@@ -7,13 +7,13 @@ import {
   updateDoc,
   deleteDoc,
   serverTimestamp,
-} from "firebase/firestore";
+} from 'firebase/firestore';
 
 let proff;
 
 export function getProfesseurs(personnel) {
   const db = getFirestore();
-  const collectionProff = collection(db, "professeurs");
+  const collectionProff = collection(db, 'professeurs');
 
   onSnapshot(collectionProff, (snapshot) => {
     let professeurs = [];
@@ -28,11 +28,11 @@ export function getProfesseurs(personnel) {
 }
 
 export function gestionProfesseurs(utilisateurs) {
-  const container = document.getElementById("container");
-  container.innerHTML = "";
+  const container = document.getElementById('container');
+  container.innerHTML = '';
 
   utilisateurs.forEach((utilisateur) => {
-    let ligne = document.createElement("tr");
+    let ligne = document.createElement('tr');
     ligne.innerHTML = `
                 <td class="mx-auto text-center d-none d-lg-block m-0">${utilisateur.nom}</td>
                 <td class="mx-auto text-center m-0">${utilisateur.prenom}</td>
@@ -58,14 +58,14 @@ export function gestionProfesseurs(utilisateurs) {
 
 export function ajouterProfesseur(form) {
   const db = getFirestore();
-  const professeurs = collection(db, "professeurs");
-  const erreurProf = document.getElementById("erreurProf");
+  const professeurs = collection(db, 'professeurs');
+  const erreurProf = document.getElementById('erreurProf');
   if (
     form.nom.value &&
     form.prenom.value &&
     form.matiere.value &&
     form.classe.value &&
-    form.coordonnee.value 
+    form.coordonnee.value
   ) {
     addDoc(professeurs, {
       nom: form.nom.value,
@@ -76,20 +76,20 @@ export function ajouterProfesseur(form) {
       dateDajout: serverTimestamp(),
     }).then(() => {
       form.reset();
-      erreurProf.style.display = "none";
+      erreurProf.style.display = 'none';
     });
   } else {
-    erreurProf.style.display = "block";
-    erreurProf.innerHTML = "Merci de remplir les champs ";
-    alert("Merci de remplir le champs");
-    console.log("Merci de remplir le champs");
+    erreurProf.style.display = 'block';
+    erreurProf.innerHTML = 'Merci de remplir les champs ';
+    alert('Merci de remplir le champs');
+    console.log('Merci de remplir le champs');
   }
 }
 
 export function rechercheProff(rechercheInput, emplo) {
-  rechercheInput.addEventListener("input", (e) => {
+  rechercheInput.addEventListener('input', (e) => {
     const elementSaisie = e.target.value;
-    document.getElementById("container").innerHTML = "";
+    document.getElementById('container').innerHTML = '';
     const collectionFilter = emplo.filter(
       (element) =>
         element.nom.toLowerCase().includes(elementSaisie.toLowerCase()) ||
@@ -97,33 +97,33 @@ export function rechercheProff(rechercheInput, emplo) {
     );
 
     if (collectionFilter.length) {
-      document.getElementById("erreurRefProff").innerHTML = "";
+      document.getElementById('erreurRefProff').innerHTML = '';
       gestionProfesseurs(collectionFilter);
     } else {
-      document.getElementById("erreurRefProff").innerHTML =
-        "Aucun resultat trouver";
+      document.getElementById('erreurRefProff').innerHTML =
+        'Aucun resultat trouver';
     }
   });
 }
 
 export function modifierProfesseur(id, nouveauProfesseur) {
   const db = getFirestore();
-  const professeurs = collection(db, "professeurs");
+  const professeurs = collection(db, 'professeurs');
   const docRef = doc(professeurs, id);
-  const form = document.querySelector(".addToFirebase");
+  const form = document.querySelector('.addToFirebase');
   updateDoc(docRef, nouveauProfesseur).then(() => {
     form.reset();
-    console.log("Document modifié avec succès !");
+    console.log('Document modifié avec succès !');
   });
 }
 
 export function supprimerProfesseur(id) {
   const db = getFirestore();
-  const professeurs = collection(db, "professeurs");
+  const professeurs = collection(db, 'professeurs');
   const docRef = doc(professeurs, id);
 
   deleteDoc(docRef).then(() => {
-    console.log("Document supprimé avec succès !");
+    console.log('Document supprimé avec succès !');
   });
 }
 

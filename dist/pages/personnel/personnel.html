@@ -512,6 +512,7 @@
                   <form
                   action=""
                   class="col-10 col-md-6 col-lg-4 "
+                  id="searchAssocie"
                 >
                   <div
                     class="shadow d-flex mb-lg-0 align-items-center p-1 rounded-3  ps-2"
@@ -520,7 +521,7 @@
                       type="search"
                       id="input"
                       class="w-100 elements bg-transparent border-0 border-outline-none"
-                      placeholder="Rechercher un professeur..."
+                      placeholder="Rechercher un nom d'entreprise..."
                     />
                     <span class="elements me-2"
                       ><i class="fa-solid fa-magnifying-glass"></i
@@ -530,6 +531,7 @@
                   
                 </div>
                 <div class="row d-flex justify-content- mt-5 mb-0 mb-lg-5 text-center" id="logo-entreprise">
+
                   <!-- <div class="col-lg-2 align-items-center">
                       <button type="button" class="btn btn-dark color-text">logo</button>                                                            
                     <p class="" style="font-size: 13px;">Nom de l'entreprise <br> associé</p>
@@ -555,7 +557,9 @@
                       <div class="loader"></div>
                   </div>
                   <span class="loading"><img src="../../../src/assets/images/Group 850.png" alt=""></span>
+
               </div>
+              <p class="resultAsso text-danger text-center" id="resultAsso"></p>
               </div>
               
             </div>
@@ -720,7 +724,7 @@
               </div>
             </div>
           </div>
-          <p id="erreurRefEmpl" class="text-center text-danger "></p>
+          <p id="erreurRefEmpl" class="text-center text-danger "></p> 
         </section>
 
         <!-- Modal employer-->
