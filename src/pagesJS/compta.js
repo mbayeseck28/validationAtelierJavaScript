@@ -27,18 +27,18 @@ const db = getFirestore(app);
 
 // Récupérer la collection
 const eleve = collection(db, 'inscScolarite');
-const certiesRef = collection(db, 'inscrireActivite');
 const certiesRef2 = collection(db, 'mensualites');
-let veri 
+let tabInsc = [];
+let tabMens = [];
 
 onSnapshot(eleve, (snapshot) => {
   let eleve = [];
   snapshot.docs.forEach((doc) => {
     eleve.push({ ...doc.data(), id: doc.id });
+    tabInsc.push({ ...doc.data(), id: doc.id });
   });
   eleve.sort((a, b) => b.dateDajout - a.dateDajout);
-  veri = eleve
-  console.log(veri);
+
   const list = document.querySelector('#list');
   list.innerHTML = '';
 
@@ -47,8 +47,14 @@ onSnapshot(eleve, (snapshot) => {
     const tr = document.createElement('tr');
 
     tr.innerHTML = `
-    <td class="text-start ps-2 py-2 border border-1">${utili.prenom}</td> <td class="text-start ps-2 py-2 border border-1">${utili.nom}</td> <td class="text-center py-2 border border-1">${utili.montantInsc} Fcfa</td>`;
+    <td class="text-start ps-2 py-2 border border-1">${utili.prenom}</td>
+    <td class="text-start ps-2 py-2 border border-1">${utili.nom}</td>
+    <td class="text-center py-2 border border-1">${utili.montantInsc.toLocaleString(
+      'en-US'
+    )} Fcfa</td>`;
     list.appendChild(tr);
+    let loaderContainer = document.querySelector('.chargement-page');
+    loaderContainer.style.display = 'none';
   });
 });
 
@@ -63,7 +69,7 @@ form.addEventListener('submit', (e) => {
     prenom: form.prenom.value,
     type: form.type.value,
     classe: form.classeSelect.value,
-    montantInsc: form.montantPaye.value,
+    montantInsc: parseInt(form.montantPaye.value),
     dateDajout: serverTimestamp(),
   }).then(() => form.reset());
 });
@@ -112,11 +118,11 @@ if (alertTrigger) {
 // Parti Ladji Timéra
 
 // Mensualite
-
 onSnapshot(certiesRef2, (snapshot) => {
   let certiesRef2 = [];
   snapshot.docs.forEach((doc) => {
     certiesRef2.push({ ...doc.data(), id: doc.id });
+    tabMens.push({ ...doc.data(), id: doc.id });
   });
   certiesRef2.sort((a, b) => b.dateDajout - a.dateDajout);
   const list = document.querySelector('.mytbodyIns');
@@ -130,28 +136,54 @@ onSnapshot(certiesRef2, (snapshot) => {
     tr.innerHTML = `
     <td class="text-start ps-2 py-2 border border-1">${
       utili.prenom
-    }</td> <td class="text-start ps-2 py-2 border border-1">${
-      utili.nom
-    }</td> <td class="text-center py-2 border border-1">${utili.montantpay.toLocaleString(
+    }</td> <td class="text-start ps-2 py-2 border border-1">${utili.nom}
+    </td> <td class="text-start ps-2 py-2 d-none d-sm-block border border-1">${
+      utili.mois
+    }
+    </td> <td class="text-center py-2 border border-1">${utili.montantpay.toLocaleString(
       'en-US'
     )} Fcfa</td>`;
     list.appendChild(tr);
+    let loaderContainer = document.querySelector('.loader2');
+    loaderContainer.style.display = 'none';
   });
 });
 
+// ajout d'une mensualite
 const myForm = document.querySelector('.myForm');
+const alertMens = document.querySelector('.alertMens');
+let listNom = [];
+getDocs(eleve).then((snapshot) => {
+  let myTabeleve = [];
+  snapshot.docs.forEach((doc) => {
+    myTabeleve.push({ ...doc.data(), id: doc.id });
+  });
 
+  myTabeleve.forEach((utili) => {
+    listNom.push(utili.nom, utili.prenom);
+  });
+  console.log(listNom);
+});
 myForm.addEventListener('submit', (e) => {
   e.preventDefault();
   //Ajouter un nouveau document avec un id généré
-  addDoc(certiesRef2, {
-    nom: myForm.nom.value,
-    prenom: myForm.prenom.value,
-    type: myForm.type.value,
-    classe: myForm.classeSelect2.value,
-    montantpay: myForm.montantAPaye.value,
-    dateDajout: serverTimestamp(),
-  }).then(() => myForm.reset());
+  if (
+    listNom.includes(myForm.nom.value) &&
+    listNom.includes(myForm.prenom.value)
+  ) {
+    addDoc(certiesRef2, {
+      nom: myForm.nom.value,
+      prenom: myForm.prenom.value,
+      type: myForm.type.value,
+      classe: myForm.classeSelect2.value,
+      mois: myForm.mois.value,
+      montantpay: parseInt(myForm.montantAPaye.value),
+      dateDajout: serverTimestamp(),
+    }).then(() => myForm.reset());
+  } else {
+    alertMens.classList.remove('d-none');
+    alertMens.innerHTML = 'Le nom ne figure pas dans la liste des inscrits...';
+  }
 });
 // Montant à inscrire
 let selectElement2 = document.getElementById('classeSelect2');
@@ -172,6 +204,103 @@ function montant2(classe) {
 
   return montantMapping[classe] || 0;
 }
+// Recherche
+const rechercheInput = document.querySelector('#chercheInsc');
+const rechercheInput2 = document.querySelector('#chercheMens');
+const valeurInscInput1 = document.getElementById('classe');
+const valeurInscInput2 = document.getElementById('nomPren');
+const valeurMensInput1 = document.getElementById('classe2');
+const valeurMensInput2 = document.getElementById('nomPren2');
+// // Fonction Rechercher
+
+// Pour inscription
+rechercheInput.addEventListener('input', (e) => {
+  let valeurInput1 = '';
+  let valeurInput2 = '';
+  let collectionFilter;
+  if (e.target === valeurInscInput1) {
+    valeurInput1 = e.target.value;
+    // console.log('Input 1:', valeurInput1);
+    collectionFilter = tabInsc.filter((element) =>
+      element.classe.toLowerCase().includes(valeurInput1.toLowerCase())
+    );
+  } else if (e.target === valeurInscInput2) {
+    valeurInput2 = e.target.value;
+    // console.log('Input 2:', valeurInput2);
+    collectionFilter = tabInsc.filter(
+      (element) =>
+        element.nom.toLowerCase().includes(valeurInput2.toLowerCase()) ||
+        element.prenom.toLowerCase().includes(valeurInput2.toLowerCase())
+    );
+  }
+
+  const list = document.querySelector('#list');
+  list.innerHTML = '';
+  if (collectionFilter.length) {
+    document.getElementById('erreurRefProff').innerHTML = '';
+    collectionFilter.forEach((utili) => {
+      const tr = document.createElement('tr');
+
+      tr.innerHTML = `
+    <td class="text-start ps-2 py-2 border border-1">${utili.prenom}</td>
+    <td class="text-start ps-2 py-2 border border-1">${utili.nom}</td>
+    <td class="text-center py-2 border border-1">${utili.montantInsc.toLocaleString(
+      'en-US'
+    )} Fcfa</td>`;
+      list.appendChild(tr);
+      let loaderContainer = document.querySelector('.chargement-page');
+      loaderContainer.style.display = 'none';
+    });
+  } else {
+    document.getElementById('erreurRefProff').innerHTML =
+      'Aucun resultat trouver';
+  }
+});
+rechercheInput2.addEventListener('input', (e) => {
+  let valeurInput1 = '';
+  let valeurInput2 = '';
+  let collectionFilter;
+  if (e.target === valeurMensInput1) {
+    valeurInput1 = e.target.value;
+    // console.log('Input 1:', valeurInput1);
+    collectionFilter = tabMens.filter((element) =>
+      element.classe.toLowerCase().includes(valeurInput1.toLowerCase())
+    );
+  } else if (e.target === valeurMensInput2) {
+    valeurInput2 = e.target.value;
+    // console.log('Input 2:', valeurInput2);
+    collectionFilter = tabMens.filter(
+      (element) =>
+        element.nom.toLowerCase().includes(valeurInput2.toLowerCase()) ||
+        element.prenom.toLowerCase().includes(valeurInput2.toLowerCase())
+    );
+  }
+
+  const list = document.querySelector('#list3');
+  list.innerHTML = '';
+  if (collectionFilter.length) {
+    document.getElementById('erreurRefProff2').innerHTML = '';
+    collectionFilter.forEach((utili) => {
+      const tr = document.createElement('tr');
+      tr.innerHTML = `
+      <td class="text-start ps-2 py-2 border border-1">${
+        utili.prenom
+      }</td> <td class="text-start ps-2 py-2 border border-1">${utili.nom}
+      </td> <td class="text-start ps-2 py-2 d-none d-sm-block border border-1">${
+        utili.mois
+      }
+      </td> <td class="text-center py-2 border border-1">${utili.montantpay.toLocaleString(
+        'en-US'
+      )} Fcfa</td>`;
+      list.appendChild(tr);
+      let loaderContainer = document.querySelector('.chargement-page');
+      loaderContainer.style.display = 'none';
+    });
+  } else {
+    document.getElementById('erreurRefProff2').innerHTML =
+      'Aucun resultat trouver';
+  }
+});
 
 //___________________________________________________
 // //partie pape cheikh
@@ -182,11 +311,13 @@ onSnapshot(eleve, (snapshot) => {
     eleve.push({ ...doc.data(), id: doc.id });
   });
   const revenue = document.getElementById('revenue');
-  revenue.innerHTML = ''
+  revenue.innerHTML = '';
   eleve.forEach((utili) => {
     let trbody = document.createElement('tr');
     trbody.innerHTML = `
-      <td class="border border-1">${utili.dateDajout.toDate().toLocaleDateString()}</td>
+      <td class="border border-1">${utili.dateDajout
+        .toDate()
+        .toLocaleDateString()}</td>
         <td class="text-center">${utili.type}</td>
         <td class="text-center border border-1">${utili.prenom} ${
       utili.nom
@@ -196,6 +327,8 @@ onSnapshot(eleve, (snapshot) => {
         )} Fcfa</td>
         `;
     revenue.appendChild(trbody);
+    let loaderContainer = document.querySelector('.loader3');
+    loaderContainer.style.display = 'none';
   });
 });
 onSnapshot(certiesRef2, (snapshot) => {
@@ -204,10 +337,8 @@ onSnapshot(certiesRef2, (snapshot) => {
     certiesRef2.push({ ...doc.data(), id: doc.id });
   });
   const mens = document.getElementById('mens');
-  mens.innerHTML = ''
+  mens.innerHTML = '';
   certiesRef2.sort((a, b) => b.dateDajout - a.dateDajout);
-
-
 
   certiesRef2.forEach((utili) => {
     let trbody = document.createElement('tr');
@@ -277,24 +408,23 @@ Promise.all([totalGlobal(eleve), totalGlobal(certiesRef2)])
     let totaleDuRevenu = totalInscription + totalCertieRef2;
 
     //Calcule du revenue total
-function CalculDeLaSommeTotale() {
-  
-  const total = document.getElementById('total');
-  total.innerHTML = '';
-  let trfoot = document.createElement('tr');
-  trfoot.innerHTML = `
+    function CalculDeLaSommeTotale() {
+      const total = document.getElementById('total');
+      total.innerHTML = '';
+      let trfoot = document.createElement('tr');
+      trfoot.innerHTML = `
     <td colspan="3"><b>Total</b></td>
     <td><b>${totaleDuRevenu.toLocaleString('en-US')} Fcfa </b></td>
     `;
-  total.appendChild(trfoot);
-  const revTotal = document.getElementById('revenuTotal');
-  revTotal.innerHTML = `${totaleDuRevenu.toLocaleString(
-    'en-US'
-  )} <span class="fw-bold">FCFA</span>`;
-  console.log('Total global:', totaleDuRevenu);
-}
-CalculDeLaSommeTotale()
-})
+      total.appendChild(trfoot);
+      const revTotal = document.getElementById('revenuTotal');
+      revTotal.innerHTML = `${totaleDuRevenu.toLocaleString(
+        'en-US'
+      )} <span class="fw-bold">FCFA</span>`;
+      console.log('Total global:', totaleDuRevenu);
+    }
+    CalculDeLaSommeTotale();
+  })
   .catch((error) => {
     console.error("Une erreur s'est produite :", error);
   });

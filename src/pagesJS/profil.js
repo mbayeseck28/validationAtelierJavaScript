@@ -34,6 +34,10 @@ const auth = getAuth(app);
 const db = getFirestore(app); 
 const database = getDatabase();
 
+
+const formProfil = document.getElementById('formProfil')
+formProfil.style.display = 'none'
+
 onAuthStateChanged(auth, (user) => {
     if (user) {
         console.log("Utilisateur connecté");
@@ -62,6 +66,10 @@ onAuthStateChanged(auth, (user) => {
                 const secteur = document.getElementById("secteurEcole");
                 const nomecole = document.getElementById("nomEcole");
                 const imgProfil = document.getElementById('imgProfil');
+                const ProfilNav = document.querySelector('.ProfilNav');
+                const profilVoir = document.querySelector('.profilVoir');
+                const nomUser = document.querySelector('.nomUser');
+                const statusUser = document.querySelector('.statusUser')
 
                 prenom.value = utilisateur.prenom
                 nom.value = utilisateur.nom
@@ -74,6 +82,14 @@ onAuthStateChanged(auth, (user) => {
                 emailecole.value = utilisateur.emailecole
                 secteur.value = utilisateur.secteur
                 imgProfil.src = utilisateur.url
+                ProfilNav.src = utilisateur.url;
+                profilVoir.src = utilisateur.url;
+                nomUser.innerText = prenom.value + ' ' + nom.value;
+                statusUser.innerText = status.value;
+                
+              let loaderContainer = document.querySelector(".chargement-page");
+              loaderContainer.style.display = "none";
+              formProfil.style.display = 'block'
 
                 formProfil.addEventListener("submit", modifProfil);
                 // Nous avons un élément input de type file avec l'id 'profilePicture'
@@ -120,7 +136,9 @@ onAuthStateChanged(auth, (user) => {
                   }).catch((error) => {
                     console.error("Error updating document: ", error);
                   });
-
+                  
+                  nomUser.innerText = utilisateur.prenom + ' ' + utilisateur.nom;
+                  statusUser.innerText = utilisateur.status;
                   alert('modification effectuer avec succés')
                 }  
                 
@@ -142,7 +160,9 @@ onAuthStateChanged(auth, (user) => {
                       }).then(() => {
                         // Met à jour la source de l'image de profil dans le DOM
                         imgProfil.src = url;
-                        
+                        ProfilNav.src = url;
+                        profilVoir.src = url;
+
                       // Mettez à jour la valeur du champs url de l'utilisateur dans firebase
                         utilisateur.url = url;
                         // Mettez à jour le document dans Firestore
@@ -161,6 +181,7 @@ onAuthStateChanged(auth, (user) => {
                     console.error('Erreur lors du téléchargement du fichier:', error);
                   });
                 }  
+                
             }
           }))
         });

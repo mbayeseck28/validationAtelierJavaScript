@@ -9,12 +9,12 @@ export function nombreProfesseur() {
     });
     let nombreProfesseur = professeurs.length;
     const countProfeseeur = document.querySelector('.num1')
- let interval = 5000;  
-  console.log(countProfeseeur);
+ let interval = 1000;  
+  // console.log(countProfeseeur);
    let startValue = 0;
    countProfeseeur.setAttribute("data-val", `${nombreProfesseur}`);
    let endValue = parseFloat(countProfeseeur.getAttribute("data-val"))
-   console.log(endValue);
+  //  console.log(endValue);
    let duration = Math.floor(interval / endValue);
    let counter = setInterval(function () {
      startValue += 1;
@@ -38,13 +38,13 @@ export function nombreEmployer() {
     });
      let nombreEmployer = employer.length;
      const countEmployers = document.querySelector('.num2')
-  let interval = 5000;  
+  let interval = 1000;  
   //  countElement.forEach((countElement) => {
-     console.log(countEmployers);
+    //  console.log(countEmployers);
     let startValue = 0;
     countEmployers.setAttribute("data-val", `${nombreEmployer}`);
     let endValue = parseFloat(countEmployers.getAttribute("data-val"))
-    console.log(endValue);
+    // console.log(endValue);
     let duration = Math.floor(interval / endValue);
     let counter = setInterval(function () {
       startValue += 1;
@@ -70,16 +70,16 @@ export function nombreAssocie() {
     });
     
     let nombreAssocie = associe.length
-    console.log(nombreAssocie);
+    // console.log(nombreAssocie);
     const countElement = document.querySelector('.num3');
-    console.log(countElement);
+    // console.log(countElement);
     
-     let interval = 5000;
-      console.log(countElement);
+     let interval = 1000;
+      // console.log(countElement);
       let startValue = 0;
        countElement.setAttribute("data-val", `${nombreAssocie}`);
       let endValue = parseFloat(countElement.getAttribute("data-val"))
-      console.log(endValue);
+      // console.log(endValue);
       let duration = Math.floor(interval / endValue);
       let counter = setInterval(function () {
         startValue += 1;
