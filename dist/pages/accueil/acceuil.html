@@ -96,8 +96,7 @@
             class="fa-regular fa-bell mt-1"
             data-bs-toggle="offcanvas"
             data-bs-target="#offcanvasRight"
-            aria-controls="offcanvasRight"
-          ></i>
+            aria-controls="offcanvasRight"></i>
 
           <div
             class="offcanvas offcanvas-sm offcanvas-end"
@@ -130,11 +129,8 @@
             </div>
           </div>
           <div class="profil ms-3">
-            <img src="../../../src/assets/images/Group 800.png" alt="" />
+            <img src="../../../src/assets/images/profil.jpeg" class="ProfilNav" alt="" />
           </div>
-          <!-- <a href="profil.html" style="color: #000000;">
-                    <i class="fa-solid fa-angle-down ms-3 mt-1"></i>
-                </a> -->
 
           <div class="btn-group">
             <i
@@ -147,11 +143,11 @@
               <div
                 class="d-flex flex-column py-4 mb-2 justify-content-center gy-5 align-items-center divProfile"
               >
-                <div class="col-6 col-md-2 mx-auto my-2 mt-3 imageDivProfile">
-                  <img src="../../../src/assets/images/Group 800.png" alt="" />
-                </div>
-                <h6 class="text-center mb-0 fst-italic">Moustapha Djigo</h6>
-                <p class="mt-0 pt-0 text-light">Proviseur</p>
+              <div class="col-6 col-md-2 mx-auto my-2 mt-3 imageDivProfile">
+                <img src="../../../src/assets/images/profil.jpeg" class="profilVoir" alt="" />
+              </div>
+                <h6 class="text-center mb-0 fst-italic">Nom Complet</h6>
+                <p class="mt-0 pt-0 text-light">Status</p>
               </div>
               <li>
                 <a
@@ -220,9 +216,9 @@
               <li>
                 <a href="../professeur/professeur.html">
                   <i class="fa-solid fa-chalkboard-user"></i>
-                  <span class="links_name">Proffesseurs</span>
+                  <span class="links_name">Professeurs</span>
                 </a>
-                <span class="tooltip">Proffesseurs</span>
+                <span class="tooltip">Professeurs</span>
               </li>
               <li>
                 <a href="../Authentification/authentification.html">
@@ -385,17 +381,26 @@
               <div class="row">
                 <div class="col-md-6">
                   <table
-                    class="table bg-white rounded-3 shadow-sm table-striped table-hover"
-                  >
-                    <thead>
+                    class="table bg-white rounded-3 shadow-sm table-striped table-hover">
+                    <thead class="opacity-50">
                       <tr>
                         <th scope="col">Revenus</th>
-                        <th scope="col">Types</th>
-                        <th scope="col">Dates</th>
-                        <th scope="col">Montant</th>
+                        <th scope="col">Date du jour</th>
+                        <th scope="col">Total</th>
                       </tr>
                     </thead>
-                    <tbody></tbody>
+                    <tbody class="myTbody">
+                      <tr>
+                        <td>Inscription</td>
+                        <td class="myTd1"></td>
+                        <td class="totalIns"></td>
+                      </tr>
+                      <tr>
+                        <td>Mensualiter</td>
+                        <td class="myTd2"></td>
+                        <td class="totalMens"></td>
+                      </tr>
+                    </tbody>
                   </table>
                 </div>
                 <div class="container-bar col-md-5 bg-white rounded-3">
