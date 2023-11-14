@@ -344,17 +344,36 @@ body{
 }
   /******CSS CARDS CLASSES*******/
   .cardClass {
-    max-width: 230px;
+    /* max-width: 230px; */
     overflow: hidden;
     box-shadow: 0px 4px 30px 0px #0000001A;
 }
 .pClass {
-    margin: 5px 0;
+    /* margin: 5px 0; */
+}
+
+.titleAccueil{
+    margin: 50px 50px 50px 40px;
 }
 
 @media screen and (max-width: 867px){
+
+    .titleAccueil{
+        margin: 50px 0 50px 100px;
+    }
+
+    .div-tableau-hist{
+        /* margin-inline: auto; */
+        font-size: 16px;
+        width: 80%;
+    }
+
+    /* .accContain{
+        margin-left: 40px;
+    } */
     .card {
+
         max-width: 1000px;
-        width: 100%;
+        width: 80%;
     }
 }
