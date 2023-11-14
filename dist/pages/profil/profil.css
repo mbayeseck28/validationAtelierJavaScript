@@ -7,6 +7,10 @@
     height: 125px;
     border-radius: 50%;
 }
+
+.edit{
+    cursor: pointer;
+}
 .infoProfil{
     background-color: #ffffff;
     border-radius: 10px;

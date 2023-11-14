@@ -241,8 +241,29 @@
         <div class="col-12 col-md-9 myContain">
           <h3>Profile</h3>
           <div class="myProfil mb-2 d-flex justify-content-center">
-            <img src="../../../src/assets/images/Group 800.png" alt="" />
+            <img src="../../../src/assets/images/profil.jpeg" alt="" id="imgProfil"/>
+            <i class="fa-solid fa-pen mt-5 edit" data-bs-toggle="modal" data-bs-target="#exampleModal"></i>
           </div>
+          <!-- Modal -->
+          <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Modifier Photo Profil</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">                  
+                  <div class="updateFile me-5 mt-5">
+                    <input type="file" name="" id="profilePicture">
+                  </div>
+                </div>
+                <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary save" data-bs-dismiss="modal">Save</button>
+                </div>
+            </div>
+            </div>
+        </div>
             <form id="formProfil" class="infoProfil p-3 mb-5">
               <h5>Informations Personnelles</h5>
               <div class="row d-flex flex-wrap d-flex justify-content-between align-items-center mt-4">
