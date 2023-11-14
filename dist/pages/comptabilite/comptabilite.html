@@ -221,10 +221,10 @@
                                         <label for="classe" class="form-label mt-2 me-2">Classe: </label>
                                         <select class="form-select form-select-lg mb-3 fs-6 p-1 shadow" id="classe" aria-label="Large select example">
                                             <option class="" disabled selected>Classe</option>
-                                            <option value="sizieme">6ème</option>
-                                            <option value="cinquieme">5ème</option>
-                                            <option value="quatrieme">4ème</option>
-                                            <option value="troisieme">3ème</option>
+                                            <option value="6ème">6ème</option>
+                                            <option value="5ème">5ème</option>
+                                            <option value="4ème">4ème</option>
+                                            <option value="3ème">3ème</option>
                                           </select>
                                     </div>
                                     <!-- <div class="mb-2 myInput">
@@ -292,16 +292,16 @@
                               <label for="classe" class="form-label">Classe</label>
                               <select class="form-select" id="classeSelect">
                                 <option class="" disabled selected>Classe</option>
-                                    <option value="sizieme" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">6ème</option>
-                                    <option value="cinquieme" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">5ème</option>
-                                    <option value="quatrieme" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">4ème</option>
-                                    <option value="troisieme" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">3ème</option>
+                                    <option value="6ème" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">6ème</option>
+                                    <option value="5ème" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">5ème</option>
+                                    <option value="4ème" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">4ème</option>
+                                    <option value="3ème" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">3ème</option>
                               </select>
 
                               <div class="mb-3 collapse" id="collapseExample">
                                 <div class="card card-body">
                                     <label for="prenom" class="form-label">Montant de l'inscription pour cette classe</label>
-                                    <input type="text" value="500" class="form-control shadow-sm prixInsc" required disabled id="montantPaye">
+                                    <input type="text" value="0" class="form-control shadow-sm prixInsc" required disabled id="montantPaye">
                                 </div>
                               </div>
                             </div>
@@ -333,10 +333,10 @@
                                 <select class="form-select form-select-lg mb-3 fs-6 p-1 shadow" id="classe2"
                                     aria-label="Large select example">
                                     <option class="dis" disabled selected>Classe</option>
-                                    <option value="sizieme">6ème</option>
-                                    <option value="cinquieme">5ème</option>
-                                    <option value="quatrieme">4ème</option>
-                                    <option value="troisieme">3ème</option>
+                                    <option value="6ème">6ème</option>
+                                    <option value="5ème">5ème</option>
+                                    <option value="4ème">4ème</option>
+                                    <option value="3ème">3ème</option>
                                 </select>
                             </div>
                             <div class="mb-2 myInput">
@@ -350,6 +350,7 @@
                                     <tr class="border border-2">
                                         <th class="fw-bold text-start py-2 ps-2">Prenom</th>
                                         <th class="fw-bold text-start py-2 ps-2">Nom</th>
+                                        <th class="fw-bold text-start d-none d-sm-block py-2 ps-2">Mois</th>
                                         <th class="fw-bold text-center py-2 ps-2">Montant de la mensualité</th>
                                     </tr>
                                 </thead>
@@ -367,6 +368,7 @@
                         </div>
                     </div>
                 </div>
+                <p id="erreurRefProff2" class="text-center text-danger "></p>
             </section><hr>
             <!-- Modal -->
             <div class="modal fade" id="idActiviter" tabindex="-1" aria-labelledby="exampleModalLabel"
@@ -397,22 +399,40 @@
                                   <label for="classe" class="form-label">Classe</label>
                                   <select class="form-select" id="classeSelect2">
                                     <option class="" disabled selected>Classe</option>
-                                        <option value="sizieme" data-bs-toggle="collapse" href="#collapseExample2" role="button" aria-expanded="false" aria-controls="collapseExample2">6ème</option>
-                                        <option value="cinquieme" data-bs-toggle="collapse" href="#collapseExample2" role="button" aria-expanded="false" aria-controls="collapseExample2">5ème</option>
-                                        <option value="quatrieme" data-bs-toggle="collapse" href="#collapseExample2" role="button" aria-expanded="false" aria-controls="collapseExample2">4ème</option>
-                                        <option value="troisieme" data-bs-toggle="collapse" href="#collapseExample2" role="button" aria-expanded="false" aria-controls="collapseExample2">3ème</option>
+                                        <option value="6ème" data-bs-toggle="collapse" href="#collapseExample2" role="button" aria-expanded="false" aria-controls="collapseExample2">6ème</option>
+                                        <option value="5ème" data-bs-toggle="collapse" href="#collapseExample2" role="button" aria-expanded="false" aria-controls="collapseExample2">5ème</option>
+                                        <option value="4ème" data-bs-toggle="collapse" href="#collapseExample2" role="button" aria-expanded="false" aria-controls="collapseExample2">4ème</option>
+                                        <option value="3ème" data-bs-toggle="collapse" href="#collapseExample2" role="button" aria-expanded="false" aria-controls="collapseExample2">3ème</option>
                                   </select>
     
                                   <div class="mb-3 collapse" id="collapseExample2">
                                     <div class="card card-body">
                                         <label for="prenom" class="form-label">Montant à payer</label>
-                                        <input type="text" value="500" class="form-control shadow-sm prixInsc" required disabled id="montantAPaye">
+                                        <input type="text" value="0" class="form-control shadow-sm prixInsc" required disabled id="montantAPaye">
                                     </div>
                                   </div>
                                 </div>
+                                <div class="mb-3">
+                                  <label for="mois" class="form-label">Mois</label>
+                                  <select class="form-select" id="mois">
+                                    <option class="" disabled selected>Choisir un mois</option>
+                                    <option value='janvier'>Janvier</option>
+                                    <option value='fevrier'>Fevrier</option>
+                                    <option value='mars'>Mars</option>
+                                    <option value='avril'>April</option>
+                                    <option value='mai'>Mai</option>
+                                    <option value='J$juin'>Juin</option>
+                                    <option value='juillet'>Juillet</option>
+                                    <option value='aout'>Aout</option>
+                                    <option value='septembre'>Septembre</option>
+                                    <option value='octobre'>Octobre</option>
+                                    <option value='novembre'>Novembre</option>
+                                    <option value='decembre'>Décembre</option>
+                                  </select>
+                                </div>
                                 <div id="liveAlertPlaceholder"></div>
                                 <div class="d-none text-danger mb-3 alertMens mx-auto"></div>
-                                <button type="submit" class="btn myBtn" id="liveAlertBtn">Enregistrer</button>
+                                <button type="submit" class="btn myBtn">Enregistrer</button>
                               </form>
                         </div>
                     </div>
