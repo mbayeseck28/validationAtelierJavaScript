@@ -96,8 +96,7 @@
             class="fa-regular fa-bell mt-1"
             data-bs-toggle="offcanvas"
             data-bs-target="#offcanvasRight"
-            aria-controls="offcanvasRight"
-          ></i>
+            aria-controls="offcanvasRight"></i>
 
           <div
             class="offcanvas offcanvas-sm offcanvas-end"
@@ -382,17 +381,26 @@
               <div class="row">
                 <div class="col-md-6">
                   <table
-                    class="table bg-white rounded-3 shadow-sm table-striped table-hover"
-                  >
-                    <thead>
+                    class="table bg-white rounded-3 shadow-sm table-striped table-hover">
+                    <thead class="opacity-50">
                       <tr>
                         <th scope="col">Revenus</th>
-                        <th scope="col">Types</th>
-                        <th scope="col">Dates</th>
-                        <th scope="col">Montant</th>
+                        <th scope="col">Date du jour</th>
+                        <th scope="col">Total</th>
                       </tr>
                     </thead>
-                    <tbody></tbody>
+                    <tbody class="myTbody">
+                      <tr>
+                        <td>Inscription</td>
+                        <td class="myTd1"></td>
+                        <td class="totalIns"></td>
+                      </tr>
+                      <tr>
+                        <td>Mensualiter</td>
+                        <td class="myTd2"></td>
+                        <td class="totalMens"></td>
+                      </tr>
+                    </tbody>
                   </table>
                 </div>
                 <div class="container-bar col-md-5 bg-white rounded-3">
