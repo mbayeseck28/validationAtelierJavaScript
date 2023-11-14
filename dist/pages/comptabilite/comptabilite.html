@@ -32,10 +32,11 @@
         </script>
         <link rel="stylesheet" href="sidebar.css">
         <link rel="stylesheet" href="profil.css">
+        <link rel="stylesheet" href="loader.css">
         <script src="../../bundle.js" defer></script>
         <title>Comptabilité</title>
     </head>
-<body>
+<body>  
     <div class="container-fluid">
         <div class="row nav p-2 mt-md-0 d-flex justify-content-between align-items-center">
             <div class="col-6 col-md-2 logo">
@@ -70,9 +71,6 @@
                 <div class="profil ms-3">
                     <img src="../../../src/assets/images/Group 800.png" alt="">
                 </div>
-                <!-- <a href="../../Acceuil/dist/profil.html" style="color: #000000;">
-                    <i class="fa-solid fa-angle-down ms-3 mt-1"></i>
-                </a> -->
                 <i class="fa-solid angle-down ms-3 mt-1 dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"></i>
             
             <ul class="dropdown-menu rounded-5 pt-0 pb-4">
@@ -96,11 +94,11 @@
             </div>
         </div>
     </div>    
-    <div class="container-fluid">
+    <div class="container-fluid">       
         <div class="row">
             <div class="col-12 col-md-2">
                 <div class="menu d-flex d-md-none">
-                       <i class="fa-solid fa-bars" id="menu"></i>
+                    <i class="fa-solid fa-bars" id="menu"></i>
                 </div>
                 <div class="sidebar">
                    <div class="logo-details" id="btn">
@@ -233,15 +231,15 @@
                         <div class="card border-0 shadow rounded-3 my-3">
                             <div class="card-body">
                                 <h5 class="my-3 pb-3 px-2">Inscription scolarité</h5>
-                                <form class="d-flex justify-content-between flex-wrap">
+                                <form class="d-flex justify-content-between flex-wrap" id="chercheInsc">
                                     <div class="mb-2 d-flex h-75 justify-content-between myInput2">
                                         <label for="classe" class="form-label mt-2 me-2">Classe: </label>
                                         <select class="form-select form-select-lg mb-3 fs-6 p-1 shadow" id="classe" aria-label="Large select example">
                                             <option class="" disabled selected>Classe</option>
-                                            <option value="sizieme">6ème</option>
-                                            <option value="cinquieme">5ème</option>
-                                            <option value="quatrieme">4ème</option>
-                                            <option value="troisieme">3ème</option>
+                                            <option value="6ème">6ème</option>
+                                            <option value="5ème">5ème</option>
+                                            <option value="4ème">4ème</option>
+                                            <option value="3ème">3ème</option>
                                           </select>
                                     </div>
                                     <!-- <div class="mb-2 myInput">
@@ -249,7 +247,7 @@
                                     </div> -->
                                     <div class="shadow d-flex mb-lg-0 align-items-center p-0 rounded-3 ps-2 myInput h-75">
                                       <input
-                                        type="search" class="w-100 bg-transparent border-0 border-outline-none  myInput" placeholder="Rechercher..." />
+                                        type="search" class="w-100 bg-transparent border-0 border-outline-none  myInput" placeholder="Rechercher..." id="nomPren" />
                                       <span class=" me-2"><i class="fa-solid fa-magnifying-glass"></i></span>
                                     </div>
                                   </form>
@@ -265,10 +263,19 @@
                                       <tbody id="list" class="">
                                       </tbody>
                                     </table>
+                                    <div class="chargement-page">
+                                        <div class="loader-container">
+                                            <div class="loader"></div>
+                                            <div class="loader"></div>
+                                            <div class="loader"></div>
+                                        </div>
+                                        <span class="loading"><img src="../../../src/assets/images/Group 850.png" alt=""></span>
+                                    </div>
                                   </div>
                                 </div>
                               </div>
                             </div>
+                            <p id="erreurRefProff" class="text-center text-danger "></p>
                 </section>
             
             
@@ -277,7 +284,7 @@
                 <div class="modal-dialog">
                   <div class="modal-content">
                     <div class="modal-header">
-                      <h1 class="modal-title fs-5" id="exampleModalLabel">Inscription scolarité</h1>
+                      <h1 class="modal-title fs-5" id="exampleModalLabel">Inscrire un nouveau élève</h1>
                       <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
@@ -300,16 +307,16 @@
                               <label for="classe" class="form-label">Classe</label>
                               <select class="form-select" id="classeSelect">
                                 <option class="" disabled selected>Classe</option>
-                                    <option value="sizieme" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">6ème</option>
-                                    <option value="cinquieme" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">5ème</option>
-                                    <option value="quatrieme" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">4ème</option>
-                                    <option value="troisieme" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">3ème</option>
+                                    <option value="6ème" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">6ème</option>
+                                    <option value="5ème" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">5ème</option>
+                                    <option value="4ème" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">4ème</option>
+                                    <option value="3ème" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">3ème</option>
                               </select>
 
                               <div class="mb-3 collapse" id="collapseExample">
                                 <div class="card card-body">
                                     <label for="prenom" class="form-label">Montant de l'inscription pour cette classe</label>
-                                    <input type="text" value="500" class="form-control shadow-sm prixInsc" required disabled id="montantPaye">
+                                    <input type="text" value="0" class="form-control shadow-sm prixInsc" required disabled id="montantPaye">
                                 </div>
                               </div>
                             </div>
@@ -322,17 +329,9 @@
               </div>
               <hr>
               <!-- Section de Ladji -->
-
-            
-
-            
             <!-- Ladji Section 2 Mensualité -->
             <section class="myContDiv mb-5" id="mensualite">
-                <!-- <div class="inscriptions d-flex justify-content-between flex-wrap py-4 border-bottom">
-                    <a class="text-decoration-none text-black fw-semibold opacity-50" href="#inscSco">Inscription scolarité</a>
-                    <a class="text-decoration-none text-black fw-semibold opacity-50" href="#inscAct">Inscription autres activités</a>
-                    <a class="text-decoration-none text-black fw-semibold" href="#mensualite">Mensualité</a>
-                </div> -->
+                
                 <div class="">
                     <div class=" d-flex justify-content-center">
                         <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#idActiviter">
@@ -343,21 +342,21 @@
                 <div class="card border-0 shadow rounded-3 my-3">
                     <div class="card-body">
                         <h5 class="my-3 pb-3 px-2">Mensualité</h5>
-                        <form class="d-flex justify-content-between flex-wrap">
+                        <form class="d-flex justify-content-between flex-wrap" id="chercheMens">
                             <div class="mb-2 d-flex justify-content-between myInput2">
                                 <label for="classe" class="form-label mt-2 me-2">Classe: </label>
-                                <select class="form-select form-select-lg mb-3 fs-6 p-1 shadow" id="classe"
+                                <select class="form-select form-select-lg mb-3 fs-6 p-1 shadow" id="classe2"
                                     aria-label="Large select example">
                                     <option class="dis" disabled selected>Classe</option>
-                                    <option value="sizieme">6ème</option>
-                                    <option value="cinquieme">5ème</option>
-                                    <option value="quatrieme">4ème</option>
-                                    <option value="troisieme">3ème</option>
+                                    <option value="6ème">6ème</option>
+                                    <option value="5ème">5ème</option>
+                                    <option value="4ème">4ème</option>
+                                    <option value="3ème">3ème</option>
                                 </select>
                             </div>
                             <div class="mb-2 myInput">
                                 <input class="form-control shadow w-100 myInput" type="search"
-                                    placeholder="Rechercher" id="country-search" aria-label="Search">
+                                    placeholder="Rechercher" id="nomPren2" aria-label="Search">
                             </div>
                         </form>
                         <div class="">
@@ -366,15 +365,25 @@
                                     <tr class="border border-2">
                                         <th class="fw-bold text-start py-2 ps-2">Prenom</th>
                                         <th class="fw-bold text-start py-2 ps-2">Nom</th>
+                                        <th class="fw-bold text-start d-none d-sm-block py-2 ps-2">Mois</th>
                                         <th class="fw-bold text-center py-2 ps-2">Montant de la mensualité</th>
                                     </tr>
                                 </thead>
                                 <tbody id="list3" class="mytbodyIns">
                                 </tbody>
                             </table>
+                            <div class="chargement-page loader2">
+                                <div class="loader-container">
+                                    <div class="loader"></div>
+                                    <div class="loader"></div>
+                                    <div class="loader"></div>
+                                </div>
+                                <span class="loading"><img src="../../../src/assets/images/Group 850.png" alt=""></span>
+                            </div>
                         </div>
                     </div>
                 </div>
+                <p id="erreurRefProff2" class="text-center text-danger "></p>
             </section><hr>
             <!-- Modal -->
             <div class="modal fade" id="idActiviter" tabindex="-1" aria-labelledby="exampleModalLabel"
@@ -405,21 +414,40 @@
                                   <label for="classe" class="form-label">Classe</label>
                                   <select class="form-select" id="classeSelect2">
                                     <option class="" disabled selected>Classe</option>
-                                        <option value="sizieme" data-bs-toggle="collapse" href="#collapseExample2" role="button" aria-expanded="false" aria-controls="collapseExample2">6ème</option>
-                                        <option value="cinquieme" data-bs-toggle="collapse" href="#collapseExample2" role="button" aria-expanded="false" aria-controls="collapseExample2">5ème</option>
-                                        <option value="quatrieme" data-bs-toggle="collapse" href="#collapseExample2" role="button" aria-expanded="false" aria-controls="collapseExample2">4ème</option>
-                                        <option value="troisieme" data-bs-toggle="collapse" href="#collapseExample2" role="button" aria-expanded="false" aria-controls="collapseExample2">3ème</option>
+                                        <option value="6ème" data-bs-toggle="collapse" href="#collapseExample2" role="button" aria-expanded="false" aria-controls="collapseExample2">6ème</option>
+                                        <option value="5ème" data-bs-toggle="collapse" href="#collapseExample2" role="button" aria-expanded="false" aria-controls="collapseExample2">5ème</option>
+                                        <option value="4ème" data-bs-toggle="collapse" href="#collapseExample2" role="button" aria-expanded="false" aria-controls="collapseExample2">4ème</option>
+                                        <option value="3ème" data-bs-toggle="collapse" href="#collapseExample2" role="button" aria-expanded="false" aria-controls="collapseExample2">3ème</option>
                                   </select>
     
                                   <div class="mb-3 collapse" id="collapseExample2">
                                     <div class="card card-body">
                                         <label for="prenom" class="form-label">Montant à payer</label>
-                                        <input type="text" value="500" class="form-control shadow-sm prixInsc" required disabled id="montantAPaye">
+                                        <input type="text" value="0" class="form-control shadow-sm prixInsc" required disabled id="montantAPaye">
                                     </div>
                                   </div>
                                 </div>
+                                <div class="mb-3">
+                                  <label for="mois" class="form-label">Mois</label>
+                                  <select class="form-select" id="mois">
+                                    <option class="" disabled selected>Choisir un mois</option>
+                                    <option value='janvier'>Janvier</option>
+                                    <option value='fevrier'>Fevrier</option>
+                                    <option value='mars'>Mars</option>
+                                    <option value='avril'>April</option>
+                                    <option value='mai'>Mai</option>
+                                    <option value='J$juin'>Juin</option>
+                                    <option value='juillet'>Juillet</option>
+                                    <option value='aout'>Aout</option>
+                                    <option value='septembre'>Septembre</option>
+                                    <option value='octobre'>Octobre</option>
+                                    <option value='novembre'>Novembre</option>
+                                    <option value='decembre'>Décembre</option>
+                                  </select>
+                                </div>
                                 <div id="liveAlertPlaceholder"></div>
-                                <button type="submit" class="btn myBtn" id="liveAlertBtn">Enregistrer</button>
+                                <div class="d-none text-danger mb-3 alertMens mx-auto"></div>
+                                <button type="submit" class="btn myBtn">Enregistrer</button>
                               </form>
                         </div>
                     </div>
@@ -445,11 +473,18 @@
                               <tbody id="mens"></tbody>
                               <tfoot id="total"></tfoot>
                             </table>
+                            <div class="chargement-page loader3">
+                                <div class="loader-container">
+                                    <div class="loader"></div>
+                                    <div class="loader"></div>
+                                    <div class="loader"></div>
+                                </div>
+                                <span class="loading"><img src="../../../src/assets/images/Group 850.png" alt=""></span>
+                            </div>
                         
                     </div>
                 </div>
               </section>
-
             </div>
         </div>
     </div> 
