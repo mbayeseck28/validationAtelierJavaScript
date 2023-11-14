@@ -30,7 +30,12 @@
       crossorigin="anonymous"
     ></script>
     <!-- Font Awesome6 -->
-    <link rel="icon" type="image/png" sizes="32x32" href="../src/images/logo.png" />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="../src/images/logo.png"
+    />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/fontawesome.min.css"
@@ -66,7 +71,6 @@
   </head>
   <body>
     <div class="container-fluid">
-
       <div
         class="row nav p-2 mt-md-0 d-flex justify-content-between align-items-center"
       >
@@ -92,9 +96,7 @@
             class="fa-regular fa-bell mt-1"
             data-bs-toggle="offcanvas"
             data-bs-target="#offcanvasRight"
-            aria-controls="offcanvasRight"
-          ></i>
-
+            aria-controls="offcanvasRight"></i>
 
           <div
             class="offcanvas offcanvas-sm offcanvas-end"
@@ -127,25 +129,25 @@
             </div>
           </div>
           <div class="profil ms-3">
-            <img src="../../../src/assets/images/Group 800.png" alt="" />
+            <img src="../../../src/assets/images/profil.jpeg" class="ProfilNav" alt="" />
           </div>
-          <!-- <a href="profil.html" style="color: #000000;">
-                    <i class="fa-solid fa-angle-down ms-3 mt-1"></i>
-                </a> -->
 
           <div class="btn-group">
             <i
-              class="fa-solid angle-down ms-3 mt-1 dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" ></i>
+              class="fa-solid angle-down ms-3 mt-1 dropdown-toggle"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            ></i>
 
             <ul class="dropdown-menu rounded-5 pt-0 pb-4">
               <div
                 class="d-flex flex-column py-4 mb-2 justify-content-center gy-5 align-items-center divProfile"
               >
-                <div class="col-6 col-md-2 mx-auto my-2 mt-3 imageDivProfile">
-                  <img src="../../../src/assets/images/Group 800.png" alt="" />
-                </div>
-                <h6 class="text-center mb-0 fst-italic">Moustapha Djigo</h6>
-                <p class="mt-0 pt-0 text-light">Proviseur</p>
+              <div class="col-6 col-md-2 mx-auto my-2 mt-3 imageDivProfile">
+                <img src="../../../src/assets/images/profil.jpeg" class="profilVoir" alt="" />
+              </div>
+                <h6 class="text-center mb-0 fst-italic">Nom Complet</h6>
+                <p class="mt-0 pt-0 text-light">Status</p>
               </div>
               <li>
                 <a
@@ -161,9 +163,12 @@
                 >
               </li>
               <li>
-                  <button class="btn btnGreen fw-bold btn-light shadow btn-sm w-100" type="button">
-                    Deconnexion
-                  </button>
+                <button
+                  class="btn btnGreen fw-bold btn-light shadow btn-sm w-100"
+                  type="button"
+                >
+                  Deconnexion
+                </button>
               </li>
             </ul>
           </div>
@@ -174,225 +179,235 @@
       <div class="row">
         <div class="col-12 col-md-2">
           <div class="menu d-flex d-md-none">
-                 <i class="fa-solid fa-bars" id="menu"></i>
+            <i class="fa-solid fa-bars" id="menu"></i>
           </div>
           <div class="sidebar">
-             <div class="logo-details" id="btn">
-             </div>
-             <ul class="nav-list">
-                 <li>
-                     <a href="../accueil/acceuil.html">
-                         <i class="fa-solid fa-table-columns"></i>
-                         <span class="links_name">Accueil</span>
-                     </a>
-                     <span class="tooltip">Accueil</span>
-                 </li>
-                 <li>
-                     <a href="../personnel/personnel.html"><i class="fa-regular fa-user"></i>
-                         <span class="links_name">Personnel</span>
-                     </a>
-                     <span class="tooltip">Personnel</span>
-                 </li>
-                 <li>
-                     <a href="../comptabilite/comptabilite.html">
-                         <i class="fa-solid fa-chart-pie"></i>
-                         <span class="links_name">Comptablité</span>
-                     </a>
-                     <span class="tooltip">Comptablité</span>
-                 </li>
-                 <li>
-                     <a href="../eleve/eleve.html">
-                         <i class="fa-solid fa-graduation-cap"></i>
-                         <span class="links_name">Eléves</span>
-                     </a>
-                     <span class="tooltip">Eléves</span>
-                 </li>
-                 <li>
-                     <a href="../professeur/professeur.html">
-                         <i class="fa-solid fa-chalkboard-user"></i>
-                         <span class="links_name">Proffesseurs</span>
-                     </a>
-                     <span class="tooltip">Proffesseurs</span>
-                 </li>
-                 <li>
-                     <a href="#">
-                      <i class="fa-regular fa-address-card"></i>
-                             <span class="links_name">Autentifications</span>
-                     </a>
-                     <span class="tooltip">Autentifications</span>
-                 </li>
-                 <li>
-                     <a href="../droit/droit.html">
-                      <i class="fa-solid fa-people-arrows"></i>
-                         <span class="links_name">Droits</span>
-                     </a>
-                     <span class="tooltip">Droits</span>
-                 </li>
-             </ul>
 
+            <div class="logo-details" id="btn"></div>
+            <ul class="nav-list">
+              <li>
+                <a href="../accueil/acceuil.html">
+                  <i class="fa-solid fa-table-columns"></i>
+                  <span class="links_name">Accueil</span>
+                </a>
+                <span class="tooltip">Accueil</span>
+              </li>
+              <li>
+                <a href="../personnel/personnel.html"
+                  ><i class="fa-regular fa-user"></i>
+                  <span class="links_name">Personnel</span>
+                </a>
+                <span class="tooltip">Personnel</span>
+              </li>
+              <li>
+                <a href="../comptabilite/comptabilite.html">
+                  <i class="fa-solid fa-chart-pie"></i>
+                  <span class="links_name">Comptablité</span>
+                </a>
+                <span class="tooltip">Comptablité</span>
+              </li>
+              <li>
+                <a href="../eleve/eleve.html">
+                  <i class="fa-solid fa-graduation-cap"></i>
+                  <span class="links_name">Eléves</span>
+                </a>
+                <span class="tooltip">Eléves</span>
+              </li>
+              <li>
+                <a href="../professeur/professeur.html">
+                  <i class="fa-solid fa-chalkboard-user"></i>
+                  <span class="links_name">Professeurs</span>
+                </a>
+                <span class="tooltip">Professeurs</span>
+              </li>
+              <li>
+                <a href="../Authentification/authentification.html">
+                  <i class="fa-regular fa-address-card"></i>
+                  <span class="links_name">Authentifications</span>
+                </a>
+                <span class="tooltip">Authentifications</span>
+              </li>
+              <li>
+                <a href="../droit/droit.html">
+                  <i class="fa-solid fa-people-arrows"></i>
+                  <span class="links_name">Droits</span>
+                </a>
+                <span class="tooltip">Droits</span>
+              </li>
+            </ul>
           </div>
-      </div>        
+        </div>
         <div class="col-12 col-md-10 mt-5 pt-5 myContain">
           <section class="accueil-body">
-            <h4 class="fw-bold ms-5">Accueil</h4>
+            <h4 class="fw-bold ms-5 ms-lg-4 mt-5 mt-lg-2">Accueil</h4>
+
 
             <!-- CARTES DES DIFFERENTES CLASSES -->
             <div class="container-fluid">
-              <div class="row">
+         <div class="card mb-3">
+              <div class="row gy-3 mb-4 justify-content-center">
+                <div class="col-lg-3 col-md-6 col-sm-12">
+                  <div class="card cardClass shadow mx-auto mb-3">
+
+                    <div class="card-header m-0 mt-2 mx-3 p-1 border-0 fw-light  bg-transparent text-center d-flex justify-content-between align-items-center">
+
+                      <span class="text-">Classe :</span>
+                      <button
+                        style="
+                          color: #00de00;
+                          background-color: #00de00;
+                          cursor: pointer;
+                        "
+                        class="text-light p- border-0 rounded-3 px-1"
+                      >
+                        6ème
+                      </button>
+
+             
+                    </div>
+                    <div class="card-body">
+                      <p class="pClass text-center fw-bold fs-3" id="paiement6">
+                        <span class="fw-normal"></span>0%
+                      </p>
+                      <p class="pClass text-center fw-bold">
+                        <span class="fw-light">Paiements effectués</span>
+                      </p>
+                    </div>
+                    <div
+                      class="card-footer d-flex justify-content-between"
+                      style="background-color: #eef0f2"
+                    >
+                      <span class="fw-light">Effectif : </span>
+                      <span style="color: #00de00" id="effectif6">0</span>
+                    </div>
+                  </div>
+                </div>
+
 
                 <div class="col-lg-3 col-md-6 col-sm-12">
-                  <div class="card border-secondary mb-3">
-                    <div class="card-header bg-transparent fw-bold text-center">Classe :</div>
-                    <div class="card-body">
-                      <h1 class="card-title text-center">6iem</h1>
+
+                  <div class="card shadow cardClass mx-auto mb-3">
+                    <div class="card-header m-0 mt-2 mx-3 p-1 border-0 fw-light  bg-transparent text-center d-flex justify-content-between align-items-center">
+
+                      <span class="text-">Classe :</span>
+
+                      <button style="color: #00de00; background-color: #000000; cursor: pointer;" class="text- p- border-0 rounded-3 px-1 ">5ème</button> 
                     </div>
-                    <div class="card-footer bg-transparent border-secondary"><span class="fw-bold">Effectif : </span> 75 élèves</div>
+                    <div class="card-body">
+                      <p class="pClass text-center fw-bold fs-3" id="paiement5"><span class="fw-normal" ></span>0%</p>
+                      <p class="pClass text-center fw-bold"><span class="fw-light">Paiements effectués</span></p>
+                    </div>
+                    <div class="card-footer d-flex justify-content-between" style=" background-color: #000000;">
+                      <span class="fw-light text-light">Effectif : </span> 
+                      <span style="color: #00de00;" id="effectif5">0</span>
+                    </div>
+                  </div>
+                </div>
+                 
+                <div class="col-lg-3 col-md-6 col-sm-12">
+
+                  <div class="card shadow cardClass mx-auto mb-3">
+                    <div class="card-header m-0 mt-2 mx-3 p-1 border-0 fw-light  bg-transparent text-center d-flex justify-content-between align-items-center">
+
+                      <span class="text-">Classe :</span>
+                      <button
+                        style="
+                          color: #00de00;
+                          background-color: #00de00;
+                          cursor: pointer;
+                        "
+                        class="text-white p- border-0 rounded-3 px-1"
+                      >
+                        4ème
+                      </button>
+                    </div>
+                    <div class="card-body">
+                      <p class="pClass text-center fw-bold fs-3" id="paiement4">
+                        <span class="fw-normal"></span>0%
+                      </p>
+                      <p class="pClass text-center fw-bold">
+                        <span class="fw-light">Paiements effectués</span>
+                      </p>
+                    </div>
+                    <div
+                      class="card-footer d-flex justify-content-between"
+                      style="background-color: #00de00"
+                    >
+                      <span class="fw-light">Effectif : </span>
+                      <span style="color: #fff" class="" id="effectif4">0</span>
+                    </div>
                   </div>
                 </div>
 
                 <div class="col-lg-3 col-md-6 col-sm-12">
-                  <div class="card border-secondary mb-3">
-                    <div class="card-header bg-transparent fw-bold text-center">Classe :</div>
-                    <div class="card-body">
-                      <h1 class="card-title text-center">5iem</h1>
-                    </div>
-                    <div class="card-footer bg-transparent border-secondary"><span class="fw-bold">Effectif : </span> 65 élèves</div>
-                  </div>
-                </div>
 
-                <div class="col-lg-3 col-md-6 col-sm-12">
-                  <div class="card border-secondary mb-3">
-                    <div class="card-header bg-transparent fw-bold text-center">Classe :</div>
-                    <div class="card-body">
-                      <h1 class="card-title text-center">4iem</h1> 
-                    </div>
-                    <div class="card-footer bg-transparent border-secondary"><span class="fw-bold">Effectif : </span> 80 élèves</div>
-                  </div>
-                </div>
+                  <div class="card shadow cardClass mx-auto mb-3">
+                    <div class="card-header m-0 mt-2 mx-3 p-1 border-0 fw-light  bg-transparent text-center d-flex justify-content-between align-items-center">
 
-                <div class="col-lg-3 col-md-6 col-sm-12">
-                  <div class="card border-secondary mb-3">
-                    <div class="card-header bg-transparent fw-bold text-center">Classe :</div>
-                    <div class="card-body">
-                      <h1 class="card-title text-center">3iem</h1>
+                      <span class="text-">Classe :</span>
+                      <button
+                        style="
+                          color: #00de00;
+                          background-color: #00de00;
+                          cursor: pointer;
+                        "
+                        class="text-dark p- border-0 rounded-3 px-1"
+                      >
+                        3ème
+                      </button>
                     </div>
-                    <div class="card-footer bg-transparent border-secondary"><span class="fw-bold">Effectif : </span> 55 élèves</div>
+                    <div class="card-body">
+                      <p class="pClass text-center fw-bold fs-3" id="paiement3">
+                        <span class="fw-normal"></span>0%
+                      </p>
+                      <p class="pClass text-center fw-bold">
+                        <span class="fw-light">Paiements effectués</span>
+                      </p>
+                    </div>
+
+                    <div class="card-footer d-flex justify-content-between" style=" background-color: #eef0f2;">
+                      <span class="fw-light">Effectif : </span> 
+                      <span style="color: #00de00;" id="effectif3">0</span>
+                    </div>
                   </div>
                 </div>
 
               </div>
+
             </div>
 
-
-            <div class="container-fluid">
-              <div class="row d-flex flex-wrap gap-4 gy-3">
-                <div
-                  class="col bg-white card-white me-3 d-flex flex-wrap justify-content-between px-3"
-                >
-                  <div
-                    class="bg-black my-auto py-2 text-white col-md-6 col-12 d-flex justify-content-around rounded-3"
-                  >
-                    <div class="d-flex flex-column mt-4">
-                      <h5>Revenus</h5>
-                      <h6>75.000 FCFA</h6>
-                    </div>
-                    <div class="d-flex flex-column">
-                      <span
-                        ><img
-                          class="w-75"
-                          src="../../../src/assets/images/icone revenu.png"
-                          alt=""
-                          srcset=""
-                      /></span>
-                      <span class="fw-light">13/01/21</span>
-                    </div>
-                  </div>
-                  <div class="pt-1 col-md-6 col-12 text-md-end text-start pt-4">
-                    <h5>Dépenses mensuels</h5>
-                    <h6 class="ms-5 text-black-50 fw-semibold">
-                      440.000 <span class="fw-bold">FCFA</span>
-                    </h6>
-                    <h6 class="ms-5 mt-4 mb-0 text-black-50 fw-semibold">
-                      375.000 <span class="fw-bold">FCFA</span>
-                    </h6>
-                    <span class="fw-light ms-5 ps-3">Inscription</span>
-                    <h6 class="ms-5 mt-2 mb-0 text-black-50 fw-semibold">
-                      375.000 <span class="fw-bold">FCFA</span>
-                    </h6>
-                    <span class="fw-light ms-5 ps-3">Mensualité</span>
-                  </div>
-                </div>
-                <div
-                  class="col bg-white card-white pb-4 pt-4 rounded-4 d-flex flex-wrap justify-content-between px-3"
-                >
-                  <div
-                    class="bg-black my-auto py-2 text-white col-md-6 col-12 d-flex justify-content-around rounded-3"
-                  >
-                    <div class="d-flex flex-column mt-4">
-                      <h5>Dépenses</h5>
-                      <h6>75.000 FCFA</h6>
-                    </div>
-                    <div class="d-flex flex-column">
-                      <span
-                        ><img
-                          class="w-75"
-                          src="../../../src/assets/images/icone depense.png"
-                          alt=""
-                          srcset=""
-                      /></span>
-                      <span class="fw-light">13/01/21</span>
-                    </div>
-                  </div>
-                  <div class="pt-1 mt-md-0 mt-3">
-                    <h5>Revenus mensuel</h5>
-                    <h6 class="ms-5 text-black-50 fw-semibold">
-                      440.000 <span class="fw-bold">FCFA</span>
-                    </h6>
-                    <h6 class="ms-5 mt-2 mb-0 text-black-50 fw-semibold">
-                      375.000 <span class="fw-bold">FCFA</span>
-                    </h6>
-                    <span class="fw-light ms-5 ps-3">Salaire</span>
-                    <h6 class="ms-5 mt-2 mb-0 text-black-50 fw-semibold">
-                      375.000 <span class="fw-bold">FCFA</span>
-                    </h6>
-                    <span class="fw-light ms-5 ps-3">Factures</span>
-                    <h6 class="ms-5 mt-2 mb-0 text-black-50 fw-semibold">
-                      375.000 <span class="fw-bold">FCFA</span>
-                    </h6>
-                    <span class="fw-light ms-5 ps-3">Autres</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="container-fluid mt-5">
-              <h5 class="fw-bold ms-5">Historiques</h5>
+            <div class="container-fluid mt-">
+              <h5 class="fw-bold ms-">Historiques</h5>
               <div class="row">
                 <div class="col-md-6">
                   <table
-                    class="table bg-white rounded-3 shadow-sm table-striped table-hover"
-                  >
-                    <thead>
+                    class="table bg-white rounded-3 shadow-sm table-striped table-hover">
+                    <thead class="opacity-50">
                       <tr>
                         <th scope="col">Revenus</th>
-                        <th scope="col">Types</th>
-                        <th scope="col">Dates</th>
-                        <th scope="col">Montant</th>
+                        <th scope="col">Date du jour</th>
+                        <th scope="col">Total</th>
                       </tr>
                     </thead>
-                    <tbody></tbody>
+                    <tbody class="myTbody">
+                      <tr>
+                        <td>Inscription</td>
+                        <td class="myTd1"></td>
+                        <td class="totalIns"></td>
+                      </tr>
+                      <tr>
+                        <td>Mensualiter</td>
+                        <td class="myTd2"></td>
+                        <td class="totalMens"></td>
+                      </tr>
+                    </tbody>
                   </table>
                 </div>
-                <div class="col-md-5 bg-white rounded-3">
-                  <h5 class="fw-bold pt-3">Statistiques</h5>
-                  <h6 class="ms-3 text-black-50">Revenus</h6>
-                  <div
-                    class="animated-progress progress-green rounded-4 shadow"
-                  >
-                    <span class="rounded-4" data-progress="75"></span>
-                  </div>
-                  <h6 class="ms-3 text-black-50">Dépenses</h6>
-                  <div class="animated-progress progress-dark rounded-4 shadow">
-                    <span class="rounded-4" data-progress="75"></span>
+                <div class="container-bar col-md-5 bg-white rounded-3">
+                  <span class="text"> Revenus</span>
+                  <div class="circular-progress">
+                    <span class="circular-bar"></span>
+                    <span class="progress-value">0%</span>
                   </div>
                 </div>
               </div>
@@ -401,6 +416,8 @@
         </div>
       </div>
     </div>
+
+    <script src="/src/pagesJS/progressbar.js"></script>
 
   </body>
 </html>

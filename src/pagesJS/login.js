@@ -12,6 +12,7 @@ import {
   doc,
   getDoc,
   onSnapshot,
+  fromTo
 } from "firebase/firestore";
 
 const firebaseConfig = {
@@ -28,9 +29,7 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app); 
 const handleLogin = async (event) => {
-    console.log('before prevent')
     event.preventDefault();
-    console.log('after prevent')
   
     const email = document.getElementById("email").value;
     const password = document.getElementById("password").value;
@@ -47,10 +46,37 @@ const handleLogin = async (event) => {
     } catch (error) {
       const errorCode = error.code;
       const errorMessage = error.message;
-      console.error("Erreur lors de la connexion :", errorCode, errorMessage);
+      alert(`Erreur lors de la connexion :
+identifiants incorrects`);
     }
   };
   
   const loginForm = document.getElementById("signup");
   console.log("page connexion");
   loginForm.addEventListener("submit", handleLogin);
+
+/*******************************CHARGEMENT DE LA PAGE ***********************/ 
+gsap.fromTo(
+  ".loading-page",
+  { opacity: 1 },
+  {
+      opacity: 0,
+      display: "none",
+      duration: 1.5,
+      delay: 3.5,
+  }
+);
+
+gsap.fromTo(
+  ".logo-name",
+  {
+      y: 50,
+      opacity: 0,
+  },
+  {
+      y: 0,
+      opacity: 1,
+      duration: 2,
+      delay: 1.5,
+  }
+);

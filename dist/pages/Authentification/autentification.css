@@ -1,4 +1,3 @@
-
 .myProfil img{
     width: 125px;
     height: 125px;
@@ -167,8 +166,8 @@ color: #00E100;
         font-size: 10px;
     }
     .myContDiv{
-        margin-left: 0%; 
-        margin-right: 0%; 
+        margin-left: 5%; 
+        margin-right: 5%; 
         /* margin: auto; */
    }
 }

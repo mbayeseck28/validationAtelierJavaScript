@@ -34,7 +34,7 @@ export function gestionEmployer(utilisateurs) {
   utilisateurs.forEach((utilisateur) => {
     let ligne = document.createElement("tr");
     ligne.innerHTML = `
-                <td class="mx-auto text-center d-none d-lg-block m-0">${utilisateur.nom}</td>
+                <td class="mx-auto text-center m-0 d-none d-lg-block ">${utilisateur.nom}</td>
                 <td class="mx-auto text-center m-0">${utilisateur.prenom}</td>
                 <td class="mx-auto text-center m-0 d-none d-lg-block">${utilisateur.domaine}</td>
                 <td class="mx-auto text-center m-0">${utilisateur.coordonnee}</td>
@@ -51,6 +51,8 @@ export function gestionEmployer(utilisateurs) {
             `;
 
     container.appendChild(ligne);
+    let loaderContainer = document.querySelector(".loader5");
+            loaderContainer.style.display = "none";
   });
 }
 
