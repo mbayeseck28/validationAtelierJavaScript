@@ -1,3 +1,6 @@
+
+
+
 // Import the functions you need from the SDKs you need
 import { initializeApp } from 'firebase/app';
 // Importation des  services
@@ -34,6 +37,9 @@ const effectif5 = document.getElementById('effectif5');
 const effectif4 = document.getElementById('effectif4');
 const effectif3 = document.getElementById('effectif3');
 
+
+
+
 onSnapshot(eleve, (snapshot) => {
   let eleves = [];
   snapshot.docs.forEach((doc) => {
@@ -45,6 +51,7 @@ console.log(eleves);
   let effectifClass5 = [];
   let effectifClass4 = [];
   let effectifClass3 = [];
+
 
   eleves.forEach((utili) => {
     if (utili.classe === '6ème') {
@@ -65,6 +72,8 @@ console.log(eleves);
       effectif3.innerHTML = effectifClass3.length + ' élèves';
 
     }
+
+    
   });
 });
 
@@ -92,6 +101,7 @@ onSnapshot(certiesRef2, (snapshot) => {
   certiesRef2.forEach((utili) => {
 
     if (utili.classe === '6ème') {
+      
       PaiementsEffec6.push(utili.montantpay);
 
       paiement6.innerHTML =
@@ -130,8 +140,82 @@ onSnapshot(certiesRef2, (snapshot) => {
           (PaiementsEffec3.length / parseInt(effectif3.innerHTML)) * 100
         ) + '%';
     }
-
   });
 });
 
 
+
+
+let circularProgress = document.querySelector('.circular-progress');
+let progressValue = document.querySelector('.progress-value');
+
+let progressStartValue = 0;
+let progressEndValue = 90;
+let speed = 70;
+
+let progress = setInterval(() => {
+  progressStartValue++;
+
+  progressValue.textContent = `${progressStartValue}%`;
+  circularProgress.style.background = `conic-gradient(rgb(32, 215, 32) ${
+    progressStartValue * 3.6
+  }deg, #ededed 0deg)`;
+
+  if (progressStartValue == progressEndValue) {
+    clearInterval(progress);
+  }
+  //   console.log(progressStartValue);
+}, speed);
+
+
+
+
+// partie ladji 
+let date = new Date();
+let year = date.getFullYear()
+let month = date.getMonth() + 1;
+let day = date.getDate();
+// onSnapshot(eleve, (snapshot) => {
+//   let eleves = [];
+//   snapshot.docs.forEach((doc) => {
+//     eleves.push({ ...doc.data(), id: doc.id });
+//   });
+//   eleves.forEach((utili) => { 
+
+    
+//   });
+// })
+
+const myTbody1 = document.querySelector('.myTd1');
+const myTbody2 = document.querySelector('.myTd2');
+const totalIns = document.querySelector('.totalIns');
+const totalMens = document.querySelector('.totalMens');
+
+myTbody1.innerHTML = `<span>${day}</span><span>/${month}<sapn>/${year}</span>`
+myTbody2.innerHTML = `<span>${day}</span><span>/${month}<sapn>/${year}</span>`
+
+getDocs(eleve).then((snapshot) => {
+  let eleve = [];
+  snapshot.docs.forEach((doc) => {
+    eleve.push({ ...doc.data(), id: doc.id });
+  });
+  let totalInscription = 0;
+  eleve.forEach((utili) => {
+    totalInscription += parseInt(utili.montantInsc);
+  });
+  
+  totalIns.innerHTML = `<b>${totalInscription}</b>`
+});
+
+getDocs(certiesRef2).then((snapshot) => {
+  let certiesRef2 = [];
+  snapshot.docs.forEach((doc) => {
+    certiesRef2.push({ ...doc.data(), id: doc.id });
+  });
+  let totalMensualiter = 0;
+  certiesRef2.forEach((utili) => {
+    totalMensualiter += parseInt(utili.montantpay);
+  });
+  console.log(certiesRef2);
+  totalMens.innerHTML = `<b>${totalMensualiter}</b>`
+});
