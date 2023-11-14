@@ -27,7 +27,6 @@ const db = getFirestore(app);
 
 // Récupérer la collection
 const eleve = collection(db, 'inscScolarite');
-const certiesRef = collection(db, 'inscrireActivite');
 const certiesRef2 = collection(db, 'mensualites');
 let tabInsc = [];
 let tabMens = [];
@@ -280,7 +279,7 @@ rechercheInput2.addEventListener('input', (e) => {
   const list = document.querySelector('#list3');
   list.innerHTML = '';
   if (collectionFilter.length) {
-    document.getElementById('erreurRefProff').innerHTML = '';
+    document.getElementById('erreurRefProff2').innerHTML = '';
     collectionFilter.forEach((utili) => {
       const tr = document.createElement('tr');
       tr.innerHTML = `
