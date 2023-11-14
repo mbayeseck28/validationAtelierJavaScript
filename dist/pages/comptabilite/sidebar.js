@@ -91,7 +91,6 @@ prevNextIcon.forEach(icon => { // getting prev and next icons
 /* Graphique */
 dateJour = new Date().toLocaleDateString();
 document.getElementById("dateJour").innerHTML = dateJour;
-//document.getElementById("dateJour2").innerHTML = dateJour;
 
 const barCanvas = document.getElementById('barCanvas');
 
@@ -113,16 +112,6 @@ const barChart = new Chart(barCanvas, {
       'Sep',
     ],
     datasets: [
-      // {
-      //   data: [
-      //     200000, 120000, 140000, 300000, 400000, 300000, 190000, 200000,
-      //     310000, 150000, 400000, 300000,
-      //   ],
-      //   label: ['Dépense'],
-      //   backgroundColor: ['black'],
-      //   borderColor: ['black'],
-      //   borderWidth: 1,
-      // },
       {
         data: [
           475000, 300000, 400000, 391000, 450000, 375000, 330000, 280000,
