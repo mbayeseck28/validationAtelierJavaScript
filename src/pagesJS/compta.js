@@ -151,6 +151,7 @@ onSnapshot(certiesRef2, (snapshot) => {
 });
 
 // ajout d'une mensualite
+
 const myForm = document.querySelector('.myForm');
 const alertMens = document.querySelector('.alertMens');
 getDocs(eleve).then((snapshot) => {
@@ -158,17 +159,20 @@ getDocs(eleve).then((snapshot) => {
   snapshot.docs.forEach((doc) => {
     myTabeleve.push({ ...doc.data(), id: doc.id });
   });
-  let conditionSatisfaite = false;
-  myTabeleve.forEach((utili) => {
-    myForm.addEventListener('submit', (e) => {
-      e.preventDefault();
-      //Ajouter un nouveau document avec un id généré
+
+  myForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    let conditionRempli = false;
+
+    for (const utili of myTabeleve) {
+      // Ajouter un nouveau document avec un id généré
       if (
         utili.nom.includes(myForm.nom.value) &&
         utili.prenom.includes(myForm.prenom.value) &&
         utili.classe.includes(myForm.classeSelect2.value)
       ) {
-        addDoc(certiesRef2, {
+        await addDoc(certiesRef2, {
           nom: myForm.nom.value,
           prenom: myForm.prenom.value,
           type: myForm.type.value,
@@ -176,20 +180,22 @@ getDocs(eleve).then((snapshot) => {
           mois: myForm.mois.value,
           montantpay: parseInt(myForm.montantAPaye.value),
           dateDajout: serverTimestamp(),
-        }).then(() => myForm.reset());
-        conditionSatisfaite = true; // Utilisation de la variable de contrôle
-      } else {
-        alertMens.classList.remove('d-none');
-        alertMens.innerHTML =
-          'Le nom ne figure pas dans la liste des inscrits...';
+        });
+
+        myForm.reset();
+        conditionRempli = true;
+        break;
       }
-    });
+    }
+
+    if (conditionRempli) {
+      return;
+    } else {
+      alertMens.classList.remove('d-none');
+      alertMens.innerHTML =
+        'Elève inexiste ou ne fait pas parti de cette classe...';
+    }
   });
-  if (conditionSatisfaite) {
-    alertMens.classList.remove('d-none');
-    alertMens.classList.remove('text-danger');
-    alertMens.innerHTML = 'Paiement effectué avec succès...';
-  }
 });
 
 // Montant à inscrire
