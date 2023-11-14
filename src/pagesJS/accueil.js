@@ -1,5 +1,5 @@
 // Import the functions you need from the SDKs you need
-import { initializeApp } from "firebase/app";
+import { initializeApp } from 'firebase/app';
 // Importation des  services
 import {
   addDoc,
@@ -9,16 +9,16 @@ import {
   getFirestore,
   onSnapshot,
   serverTimestamp,
-} from "firebase/firestore";
+} from 'firebase/firestore';
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyCSRo2EZwo5LQIO75FevIBvEKbDD61HNuY",
-  authDomain: "validation-atelier-js.firebaseapp.com",
-  projectId: "validation-atelier-js",
-  storageBucket: "validation-atelier-js.appspot.com",
-  messagingSenderId: "466332062090",
-  appId: "1:466332062090:web:ffbe45ef4a7371a7b5b873",
+  apiKey: 'AIzaSyCSRo2EZwo5LQIO75FevIBvEKbDD61HNuY',
+  authDomain: 'validation-atelier-js.firebaseapp.com',
+  projectId: 'validation-atelier-js',
+  storageBucket: 'validation-atelier-js.appspot.com',
+  messagingSenderId: '466332062090',
+  appId: '1:466332062090:web:ffbe45ef4a7371a7b5b873',
 };
 
 // Initialize Firebase
@@ -27,12 +27,12 @@ const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
 // Récupérer la collection
-const eleve = collection(db, "inscScolarite");
-const certiesRef2 = collection(db, "mensualites");
-const effectif6 = document.getElementById("effectif6");
-const effectif5 = document.getElementById("effectif5");
-const effectif4 = document.getElementById("effectif4");
-const effectif3 = document.getElementById("effectif3");
+const eleve = collection(db, 'inscScolarite');
+const certiesRef2 = collection(db, 'mensualites');
+const effectif6 = document.getElementById('effectif6');
+const effectif5 = document.getElementById('effectif5');
+const effectif4 = document.getElementById('effectif4');
+const effectif3 = document.getElementById('effectif3');
 
 onSnapshot(eleve, (snapshot) => {
   let eleves = [];
@@ -47,22 +47,23 @@ console.log(eleves);
   let effectifClass3 = [];
 
   eleves.forEach((utili) => {
-    if (utili.classe === "sizieme") {
+    if (utili.classe === '6ème') {
       effectifClass6.push(utili.classe);
-      effectif6.innerHTML = effectifClass6.length + "  élèves";
+      effectif6.innerHTML = effectifClass6.length + '  élèves';
     }
-    if (utili.classe === "cinquieme") {
+    if (utili.classe === '5ème') {
       effectifClass5.push(utili.classe);
-      effectif5.innerHTML = effectifClass5.length + "  élèves";
+      effectif5.innerHTML = effectifClass5.length + '  élèves';
     }
-    if (utili.classe === "quatrieme") {
+    if (utili.classe === '4ème') {
       effectifClass4.push(utili.classe);
-      effectif4.innerHTML = effectifClass4.length + " élèves";
+      effectif4.innerHTML = effectifClass4.length + ' élèves';
     }
-    if (utili.classe === "troisieme") {
+    if (utili.classe === '3ème') {
       effectifClass3.push(utili.classe);
-      console.log(effectifClass3);
-      effectif3.innerHTML = effectifClass3.length + " élèves";
+
+      effectif3.innerHTML = effectifClass3.length + ' élèves';
+
     }
   });
 });
@@ -75,11 +76,13 @@ onSnapshot(certiesRef2, (snapshot) => {
     certiesRef2.push({ ...doc.data(), id: doc.id });
   });
   certiesRef2.sort((a, b) => b.dateDajout - a.dateDajout);
-  const paiement6 = document.getElementById("paiement6");
-  const paiement5 = document.getElementById("paiement5");
-  const paiement4 = document.getElementById("paiement4");
-  const paiement3 = document.getElementById("paiement3");
-  
+
+  const paiement6 = document.getElementById('paiement6');
+  const paiement5 = document.getElementById('paiement5');
+  const paiement4 = document.getElementById('paiement4');
+  const paiement3 = document.getElementById('paiement3');
+
+
   let PaiementsEffec6 = [];
   let PaiementsEffec5 = [];
   let PaiementsEffec4 = [];
@@ -87,39 +90,47 @@ onSnapshot(certiesRef2, (snapshot) => {
 
   console.log(certiesRef2);
   certiesRef2.forEach((utili) => {
-    // if (utili.classe === "sizieme") {
-    //   PaiementsEffec6.push(utili.montantpay);
 
-    //   paiement6.innerHTML =
-    //     Math.round(
-    //       (PaiementsEffec6.length / parseInt(effectif6.innerHTML)) * 100
-    //     ) + "%";
-    // }
-    // if (utili.classe === "cinquieme") {
-    //     PaiementsEffec5.push(utili.montantpay);
-    //   console.log(PaiementsEffec5.length);
-    //   console.log(parseInt(effectif5.innerHTML));
-    //     paiement5.innerHTML =
-    //       Math.round(
-    //         (PaiementsEffec5.length / parseInt(effectif5.innerHTML)) * 100
-    //       ) + "%";
-    //   }
-    //   if (utili.classe === "quatrieme") {
-    //     PaiementsEffec4.push(utili.montantpay);
-    //     console.log(paiement4);
-    //     paiement4.innerHTML = 
-    //       Math.round(
-    //         (PaiementsEffec4.length / parseInt(effectif4.innerHTML)) * 100
-    //       ) + "%";
-    //   }
-    //   if (utili.classe === "troisieme") {
-    //     PaiementsEffec3.push(utili.montantpay);
-    //     console.log(paiement3);
-    //     paiement3.innerHTML = 
-    //       Math.round(
-    //         (PaiementsEffec3.length / parseInt(effectif3.innerHTML)) * 100
-    //       ) + "%";
-    //   }
+    if (utili.classe === '6ème') {
+      PaiementsEffec6.push(utili.montantpay);
+
+      paiement6.innerHTML =
+        Math.round(
+          (PaiementsEffec6.length / parseInt(effectif6.innerHTML)) * 100
+        ) + '%';
+    }
+    if (utili.classe === '5ème') {
+      PaiementsEffec5.push(utili.montantpay);
+
+      paiement5.innerHTML =
+        Math.round(
+          (PaiementsEffec5.length / parseInt(effectif5.innerHTML)) * 100
+        ) + '%';
+    }
+    if (utili.classe === '4ème') {
+      PaiementsEffec4.push(utili.montantpay);
+      console.log(paiement4);
+      let sum = (PaiementsEffec4.length / parseInt(effectif4.innerHTML)) * 100
+
+      if (PaiementsEffec4.length === "0") {
+        paiement4.innerHTML = "0%"
+      } else {
+        paiement4.innerHTML =
+        Math.round(
+          sum
+        ) + '%';
+      }
+      
+    }
+    if (utili.classe === '3ème') {
+      PaiementsEffec3.push(utili.montantpay);
+      console.log(paiement3);
+      paiement3.innerHTML =
+        Math.round(
+          (PaiementsEffec3.length / parseInt(effectif3.innerHTML)) * 100
+        ) + '%';
+    }
+
   });
 });
 
