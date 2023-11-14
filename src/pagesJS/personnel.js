@@ -53,9 +53,9 @@ nombreAssocie();
 let id;
 
 getProfesseurs(function (professeurs) {
-  console.log(professeurs);
+  // console.log(professeurs);
   const rechercheInput = document.getElementById("formProff");
-  console.log(rechercheInput);
+  // console.log(rechercheInput);
   rechercheProff(rechercheInput, professeurs);
 });
 
@@ -150,9 +150,9 @@ const adresse = document.getElementById("adresse");
 const domaine = document.getElementById("domaine");
 
 getEmployer(function (employer) {
-  console.log(employer);
+  // console.log(employer);
   const rechercheInput = document.getElementById("rechercheEmployer");
-  console.log(rechercheInput);
+  // console.log(rechercheInput);
   recherche(rechercheInput, employer);
 });
 
