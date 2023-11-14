@@ -176,12 +176,27 @@
                         <div class="col-md-6">
                             <div class="card cage">
                                 <div class="card-body">
-                                    <h6 class="text-center pb-3">Dépenses</h6>
-                                    <div class="milieu d-flex justify-content-between">
-                                        <p>20.000.000 <span class="fw-bold">FCFA</span></p>
-                                        <img src="../../../src/assets/images/Group.png" alt="">
+                                    <div class="wrapper">
+                                        <header>
+                                          <p class="current-date"></p>
+                                          <div class="icons">
+                                            <span id="prev" class="material-symbols-rounded"> < </span>
+                                            <span id="next" class="material-symbols-rounded"> > </span>
+                                          </div>
+                                        </header>
+                                        <div class="calendar">
+                                          <ul class="weeks">
+                                            <li>Dim</li>
+                                            <li>Lun</li>
+                                            <li>Mar</li>
+                                            <li>Mer</li>
+                                            <li>Jeu</li>
+                                            <li>Ven</li>
+                                            <li>Sam</li>
+                                          </ul>
+                                          <ul class="days"></ul>
+                                        </div>
                                     </div>
-                                <p id="dateJour2"></p>
                                 </div>
                             </div>
                         </div>
@@ -474,6 +489,8 @@
         </div>
     </div> 
 
+    
      <script src="https://cdn.jsdelivr.net/npm/chart.js@3.5.1/dist/chart.min.js"></script>
+     <script src="sidebar.js"></script>
 </body>
 </html>
