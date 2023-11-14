@@ -27,7 +27,6 @@ const db = getFirestore(app);
 
 // Récupérer la collection
 const eleve = collection(db, 'inscScolarite');
-const certiesRef = collection(db, 'inscrireActivite');
 const certiesRef2 = collection(db, 'mensualites');
 let veri 
 
@@ -307,7 +306,3 @@ CalculDeLaSommeTotale()
   .catch((error) => {
     console.error("Une erreur s'est produite :", error);
   });
-
-
- 
-
