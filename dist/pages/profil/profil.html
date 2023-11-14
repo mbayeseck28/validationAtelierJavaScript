@@ -180,121 +180,118 @@
       <div class="row">
         <div class="col-12 col-md-2">
           <div class="menu d-flex d-md-none">
-            <i class="fa-solid fa-bars" id="menu"></i>
+                 <i class="fa-solid fa-bars" id="menu"></i>
           </div>
           <div class="sidebar">
-            <div class="logo-details" id="btn"></div>
-            <ul class="nav-list">
-              <li>
-                <a href="../accueil/acceuil.html">
-                  <i class="fa-solid fa-table-columns"></i>
-                  <span class="links_name">Accueil</span>
-                </a>
-                <span class="tooltip">Accueil</span>
-              </li>
-              <li>
-                <a href="#"
-                  ><i class="fa-regular fa-user"></i>
-                  <span class="links_name">Personnel</span>
-                </a>
-                <span class="tooltip">Personnel</span>
-              </li>
-              <li>
-                <a href="#">
-                  <i class="fa-solid fa-chart-pie"></i>
-                  <span class="links_name">Comptablité</span>
-                </a>
-                <span class="tooltip">Comptablité</span>
-              </li>
-              <li>
-                <a href="#">
-                  <i class="fa-solid fa-graduation-cap"></i>
-                  <span class="links_name">Eléves</span>
-                </a>
-                <span class="tooltip">Eléves</span>
-              </li>
-              <li>
-                <a href="../professeur/professeur.html">
-                  <i class="fa-solid fa-chalkboard-user"></i>
-                  <span class="links_name">Proffesseurs</span>
-                </a>
-                <span class="tooltip">Proffesseurs</span>
-              </li>
-              <li>
-                <a href="#">
-                  <i class="fa-regular fa-address-card"></i>
-                  <span class="links_name">Autentifications</span>
-                </a>
-                <span class="tooltip">Autentifications</span>
-              </li>
-              <li>
-                <a href="#">
-                  <i class="fa-solid fa-people-arrows"></i>
-                  <span class="links_name">Droits</span>
-                </a>
-                <span class="tooltip">Droits</span>
-              </li>
-            </ul>
+             <div class="logo-details" id="btn">
+             </div>
+             <ul class="nav-list">
+                 <li>
+                     <a href="../accueil/acceuil.html">
+                         <i class="fa-solid fa-table-columns"></i>
+                         <span class="links_name">Accueil</span>
+                     </a>
+                     <span class="tooltip">Accueil</span>
+                 </li>
+                 <li>
+                     <a href="../personnel/personnel.html"><i class="fa-regular fa-user"></i>
+                         <span class="links_name">Personnel</span>
+                     </a>
+                     <span class="tooltip">Personnel</span>
+                 </li>
+                 <li>
+                     <a href="../comptabilite/comptabilite.html">
+                         <i class="fa-solid fa-chart-pie"></i>
+                         <span class="links_name">Comptablité</span>
+                     </a>
+                     <span class="tooltip">Comptablité</span>
+                 </li>
+                 <li>
+                     <a href="../eleve/eleve.html">
+                         <i class="fa-solid fa-graduation-cap"></i>
+                         <span class="links_name">Eléves</span>
+                     </a>
+                     <span class="tooltip">Eléves</span>
+                 </li>
+                 <li>
+                     <a href="../professeur/professeur.html">
+                         <i class="fa-solid fa-chalkboard-user"></i>
+                         <span class="links_name">Proffesseurs</span>
+                     </a>
+                     <span class="tooltip">Proffesseurs</span>
+                 </li>
+                 <li>
+                     <a href="../Authentification/authentification.html">
+                      <i class="fa-regular fa-address-card"></i>
+                             <span class="links_name">Authentifications</span>
+                     </a>
+                     <span class="tooltip">Authentifications</span>
+                 </li>
+                 <li>
+                     <a href="../droit/droit.html">
+                      <i class="fa-solid fa-people-arrows"></i>
+                         <span class="links_name">Droits</span>
+                     </a>
+                     <span class="tooltip">Droits</span>
+                 </li>
+             </ul>
+
           </div>
-        </div>
-        <div class="col-12 col-md-8 offset-md-1 profilGeneral">
+      </div>
+        <div class="col-12 col-md-9 myContain">
           <h3>Profile</h3>
           <div class="myProfil mb-2 d-flex justify-content-center">
             <img src="../../../src/assets/images/Group 800.png" alt="" />
           </div>
-          <div class="infoProfil p-3 mb-5">
-            <h5>Informations Personnelles</h5>
-            <div
-              class="row d-flex d-flex justify-content-between align-items-center mt-4"
-            >
-              <div class="col-12 col-md-4 mb-4 d-md-flex">
-                <p>Prenom:</p>
-                <div class="info"><p id="userPrenom"></p></div>
+            <form id="formProfil" class="infoProfil p-3 mb-5">
+              <h5>Informations Personnelles</h5>
+              <div class="row d-flex flex-wrap d-flex justify-content-between align-items-center mt-4">
+                <div class="col-12 col-md-4 mb-4 d-md-flex">
+                  <label for="userPrenom">Prenom:</label>
+                  <input type="text" id="userPrenom">
+                </div>
+                <div class="col-12 col-md-4 mb-4 d-md-flex">
+                  <label for="userNom">Nom:</label>
+                  <input type="text" id="userNom">
+                </div>
+                <div class="col-12 col-md-4 mb-4 d-md-flex">
+                  <label for="userStatus">Statut:</label>
+                  <input type="text" id="userStatus" class="bouton">
+                </div>
+                <div class="col-12 col-md-4 mb-4 d-md-flex">
+                  <label for="userAdress">Adresse:</label>
+                  <input type="text" id="userAdress">
+                </div>
+                <div class="col-12 col-md-4 mb-4 d-md-flex">
+                  <label for="userEmail">Email:</label>
+                  <input type="email" id="userEmail">
+                </div>
+                <div class="col-12 col-md-4 mb-5 d-md-flex">
+                  <label for="userTel">Téléphone:</label>
+                  <input type="text" id="userTel">
+                </div>
+                <h5>Informations Générales</h5>
+                <div class="col-12 col-md-4 mb-4 d-md-flex">
+                  <label for="nomEcole">Nom de l'école:</label>
+                  <input type="text" id="nomEcole">
+                </div>
+                <div class="col-12 col-md-4 mb-4 d-md-flex">
+                  <label for="adresseEcole">Adresse:</label>
+                  <input type="text" id="adresseEcole">
+                </div>
+                <div class="col-12 col-md-4 mb-4 d-md-flex">
+                  <label for="emailEcole">Email:</label>
+                  <input type="text" id="emailEcole">
+                </div>
+                <div class="col-12 col-md-4 mb-4 d-md-flex">
+                  <label for="secteurEcole">Secteur:</label>
+                  <input type="text" id="secteurEcole" class="bouton">
+                </div>
               </div>
-              <div class="col-12 col-md-4 mb-4 d-md-flex">
-                <p>Nom:</p>
-                <div class="info"><p id="userNom"></p></div>
+              <div class="d-flex justify-content-end">
+                <button id="btnEnregistrerInfo">Enregistrer</button>
               </div>
-              <div class="col-12 col-md-4 mb-4 d-flex flex-row">
-                <p>Statut:</p>
-                <button class="btn btn-dark px-4" id="userStatus"></button>
-              </div>
-              <div class="col-12 col-md-4 mb-4 d-md-flex">
-                <p>Adresse:</p>
-                <div class="info"><p id="userAdress"></p></div>
-              </div>
-              <div class="col-12 col-md-4 mb-4 d-md-flex">
-                <p>Email:</p>
-                <div class="info"><p id="userEmail"></p></div>
-              </div>
-              <div class="col-12 col-md-4 mb-4 d-md-flex">
-                <p>Téléphone:</p>
-                <div class="info"><p id="userTel"></p></div>
-              </div>
-            </div>
-            <h5>Informations Générales</h5>
-            <div
-              class="infoGeneral row d-flex justify-content-between align-items-center mt-4"
-            >
-              <div class="col-12 col-md-6 mb-4 d-md-flex">
-                <p>Nom de l'école:</p>
-                <div class="info"><p id="nomEcole"></p></div>
-              </div>
-              <div class="col-12 col-md-6 mb-4 d-md-flex">
-                <p>Adresse:</p>
-                <div class="info"><p id="adresseEcole"></p></div>
-              </div>
-              <div class="col-12 col-md-6 mb-4 d-md-flex">
-                <p>Email:</p>
-                <div class="info"><p id="emailEcole"></p></div>
-              </div>
-              <div class="col-12 col-md-6 mb-4 d-md-flex"></div>
-              <div class="col-12 col-md-6 d-flex flex-row">
-                <p>Secteur:</p>
-                <button class="btn btn-dark px-4" id="secteurEcole"></button>
-              </div>
-            </div>
-          </div>
+            </form>
         </div>
       </div>
     </div>

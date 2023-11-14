@@ -51,6 +51,8 @@ export function gestionProfesseurs(utilisateurs) {
             `;
 
     container.appendChild(ligne);
+    let loaderContainer = document.querySelector(".loader6");
+    loaderContainer.style.display = "none";
   });
 }
 
@@ -63,7 +65,7 @@ export function ajouterProfesseur(form) {
     form.prenom.value &&
     form.matiere.value &&
     form.classe.value &&
-    form.coordonnee.value
+    form.coordonnee.value 
   ) {
     addDoc(professeurs, {
       nom: form.nom.value,

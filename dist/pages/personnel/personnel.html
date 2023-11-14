@@ -69,6 +69,7 @@
     <!-- <link rel="stylesheet" href="personnel.css"> -->
     <link rel="stylesheet" href="profil.css" />
     <link rel="stylesheet" href="sidebare.css" />
+    <link rel="stylesheet" href="../comptabilite/loader.css">
     <!-- <script src="redirection.js" defer></script> -->
     <script src="../../bundle.js" defer></script>
     <title>Personnels Mixte Feewu</title>
@@ -179,7 +180,7 @@
                      <span class="tooltip">Comptablité</span>
                  </li>
                  <li>
-                     <a href="#">
+                     <a href="../eleve/eleve.html">
                          <i class="fa-solid fa-graduation-cap"></i>
                          <span class="links_name">Eléves</span>
                      </a>
@@ -193,11 +194,11 @@
                      <span class="tooltip">Proffesseurs</span>
                  </li>
                  <li>
-                     <a href="#">
+                     <a href="../Authentification/authentification.html">
                       <i class="fa-regular fa-address-card"></i>
-                             <span class="links_name">Autentifications</span>
+                             <span class="links_name">Authentifications</span>
                      </a>
-                     <span class="tooltip">Autentifications</span>
+                     <span class="tooltip">Authentifications</span>
                  </li>
                  <li>
                      <a href="../droit/droit.html">
@@ -254,9 +255,9 @@
                               alt=""
                               class="img-fluid"
                             />
-                            <p class="fw-bold fs-3 my-auto color-text" id="proff">0</p>
+                            <p class="fw-bold fs-3 my-auto color-text num1" id="proff"  class="">0</p>
                           </div>
-                          <p class="text-center num m-0 py-2">
+                          <p class="text-center m-0 py-2">
                             <a 
                               href="#Professeurs" class="nav-link text-dark" style="font-size: 14px;">
                               Nombres de Professeurs
@@ -276,9 +277,9 @@
                               alt=""
                               class="img-fluid"
                             />
-                            <p class="fw-bold fs-3 my-auto color-text" id="empl">0</p>
+                            <p class="fw-bold fs-3 my-auto color-text num2" id="empl"  class="" >0</p>
                           </div>
-                          <p class="text-center num m-0 py-2">
+                          <p class="text-center  m-0 py-2">
                             <a href="#Associer" class="nav-link text-dark" style="font-size: 14px;">Nombres d'employés</a>
                           </p>
                         </div>
@@ -295,10 +296,10 @@
                               alt=""
                               class="img-fluid"
                             />
-                            <p class="fw-bold fs-3 my-auto color-text" id="associe">0</p>
+                            <p class="fw-bold fs-3 my-auto color-text num3" id="associe"  class="">0</p>
                           </div>
-                          <p class="text-center num m-0 py-2">
-                            <a href="#Employer" class="nav-link text-dark" style="font-size: 14px;">Nombres d'associés</a>
+                          <p class="text-center  m-0 py-2">
+                            <a href="#Employer" class="nav-link text-dark" style="font-size: 14px;" >Nombres d'associés</a>
                           </p>
                         </div>
                       </div>
@@ -379,6 +380,14 @@
 
                       </tbody>
                     </table>
+                    <div class="chargement-page loader6">
+                      <div class="loader-container">
+                          <div class="loader"></div>
+                          <div class="loader"></div>
+                          <div class="loader"></div>
+                      </div>
+                      <span class="loading"><img src="../../../src/assets/images/Group 850.png" alt=""></span>
+                  </div>
                   </div>
                 </div>
               </div>
@@ -503,6 +512,7 @@
                   <form
                   action=""
                   class="col-10 col-md-6 col-lg-4 "
+                  id="searchAssocie"
                 >
                   <div
                     class="shadow d-flex mb-lg-0 align-items-center p-1 rounded-3  ps-2"
@@ -511,7 +521,7 @@
                       type="search"
                       id="input"
                       class="w-100 elements bg-transparent border-0 border-outline-none"
-                      placeholder="Rechercher un professeur..."
+                      placeholder="Rechercher un nom d'entreprise..."
                     />
                     <span class="elements me-2"
                       ><i class="fa-solid fa-magnifying-glass"></i
@@ -521,7 +531,8 @@
                   
                 </div>
                 <div class="row d-flex justify-content- mt-5 mb-0 mb-lg-5 text-center" id="logo-entreprise">
-                  <div class="col-lg-2 align-items-center">
+
+                  <!-- <div class="col-lg-2 align-items-center">
                       <button type="button" class="btn btn-dark color-text">logo</button>                                                            
                     <p class="" style="font-size: 13px;">Nom de l'entreprise <br> associé</p>
                   </div>
@@ -536,12 +547,22 @@
                   <div class="col-lg-2">
                       <button type="button" class="btn btn-white shadow text-dark">logo</button>
                     <p style="font-size: 13px;">Nom de l'entreprise <br> associé</p>
-                  </div>
+                  </div> -->
                 
                 </div>
-              </div>
-            </div>
+                <div class="chargement-page loader4">
+                  <div class="loader-container">
+                      <div class="loader"></div>
+                      <div class="loader"></div>
+                      <div class="loader"></div>
+                  </div>
+                  <span class="loading"><img src="../../../src/assets/images/Group 850.png" alt=""></span>
 
+              </div>
+              <p class="resultAsso text-danger text-center" id="resultAsso"></p>
+              </div>
+              
+            </div>
           </div>
          </section>
 
@@ -691,11 +712,19 @@
                     <tbody id="contenu" class=""></tbody>
                     
                   </table>
+                  <div class="chargement-page loader5">
+                    <div class="loader-container">
+                        <div class="loader"></div>
+                        <div class="loader"></div>
+                        <div class="loader"></div>
+                    </div>
+                    <span class="loading"><img src="../../../src/assets/images/Group 850.png" alt=""></span>
+                </div>
                 </div>
               </div>
             </div>
           </div>
-          <p id="erreurRefEmpl" class="text-center text-danger "></p>
+          <p id="erreurRefEmpl" class="text-center text-danger "></p> 
         </section>
 
         <!-- Modal employer-->
@@ -790,14 +819,8 @@
           </div>
         </div>
         </div>
-
-        <!-- <section id="Associer" class=""></section> -->
-
       </div>
     </div>
   </div>
-
-    
-    <script src="sidebar.js"></script>
   </body>
 </html>

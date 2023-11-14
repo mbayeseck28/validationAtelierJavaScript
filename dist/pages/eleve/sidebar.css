@@ -53,11 +53,13 @@ input{
     display: block;
     position: fixed;
     left: 0;
+    /* top: -100; */
     height: 100%;
     background-color: #000000;
     padding: 6px 14px;
     z-index: 0;
     transition: all 0.5s ease;
+    /* width: 200px; */
     margin-top: 5%;
 }
 
@@ -191,18 +193,8 @@ input{
     transform: translateY((-50%));
 }
 
-.divProfile{
-    background: url(../src/images/Group\ 803.png) no-repeat center center/cover;
-    width: 100%;
-    height: 130px;
-}
-.imageDivProfile img{
-    width: 40px;
-    height: 40px;
-}
-.btnGreen{
-    color: #00E100;
-}
+
+
 
 
 @media screen and (max-width: 941px){
@@ -225,109 +217,5 @@ input{
     .compte{
         display: flex;
         margin-left: 0;
-    }
-}
-
-
-body{
-    background-color: #EFF2F6;
-}
-.animated-progress {
-    width: 300px;
-    height: 20px;
-    border-radius: 5px;
-    margin: 20px 10px;
-    margin-top: 5px;
-    /* border: 1px solid rgb(189, 113, 113); */
-    overflow: hidden;
-    position: relative;
-    border-radius: 25px;
-  }
-  
-  .animated-progress span {
-    height: 100%;
-    display: block;
-    width: 75%;
-    color: rgb(255, 251, 251);
-    line-height: 30px;
-    position: absolute;
-    /* text-align: end; */
-    padding-right: 5px;
-    border-radius: 25px;
-
-  }
-  
-  .progress-dark span {
-    background-color: #504F4F;
-  }
-  .progress-green span {
-    background-color: #00E100;
-  }
-  
-  .card-white{
-    border-radius: 10px;
-  }
-
-/* Barr de progression */
-
-.container-bar{
-    display: flex;
-    width: 500px;
-    padding: 50px 0;
-    border-radius: 5px;
-    background-color: white;
-    flex-direction: column;
-    align-items: center;
-    row-gap: 30px;
-}
-
-.circular-progress{
-    position: relative;
-    height: 300px;
-    width: 300px;
-    border-radius: 50%;
-    background: conic-gradient(rgb(32, 215, 32) 3.6deg, #ededed 0deg);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-
-}
-
-/* .circular-progress::before{
-    content: "";
-    position: absolute;
-    height: 260px;
-    width: 260px;
-    border-radius: 50%;
-    background-color: white;
-    
-} */
-.progress-value{
-    position: absolute;
-    font-size: 30px;
-    font-weight: 400;
-    color: rgb(139, 134, 134);
-
-}
-.text{
-    font-size: 30px;
-    font-weight: 500px;
-    color: #606060;
-}
-  /******CSS CARDS CLASSES*******/
-  .cardClass {
-    max-width: 230px;
-    overflow: hidden;
-    box-shadow: 0px 4px 30px 0px #0000001A;
-}
-.pClass {
-    margin: 5px 0;
-}
-
-@media screen and (max-width: 867px){
-    .card {
-        max-width: 1000px;
-        width: 100%;
     }
 }

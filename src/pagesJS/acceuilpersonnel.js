@@ -1,5 +1,4 @@
 import { collection, onSnapshot, getFirestore } from "firebase/firestore";
-
 export function nombreProfesseur() {
   const db = getFirestore();
   const professeurs = collection(db, "professeurs");
@@ -8,11 +7,25 @@ export function nombreProfesseur() {
     snapshot.docs.forEach((doc) => {
       professeurs.push({ ...doc.data(), id: doc.id });
     });
-    const nombreProfesseur = document.getElementById("proff");
-    nombreProfesseur.innerHTML = professeurs.length;
-  });
+    let nombreProfesseur = professeurs.length;
+    const countProfeseeur = document.querySelector('.num1')
+ let interval = 1000;  
+  // console.log(countProfeseeur);
+   let startValue = 0;
+   countProfeseeur.setAttribute("data-val", `${nombreProfesseur}`);
+   let endValue = parseFloat(countProfeseeur.getAttribute("data-val"))
+  //  console.log(endValue);
+   let duration = Math.floor(interval / endValue);
+   let counter = setInterval(function () {
+     startValue += 1;
+     countProfeseeur.textContent = startValue;
+     if (startValue == endValue) {
+       clearInterval(counter);
+       
+     }
+   }, duration)
+  })
 }
-
 /*******************NOMBREEMPLOYER***************************** */
 export function nombreEmployer() {
   const db = getFirestore();
@@ -23,11 +36,25 @@ export function nombreEmployer() {
     snapshot.docs.forEach((doc) => {
       employer.push({ ...doc.data(), id: doc.id });
     });
-    //  console.log({employer});
-    const nombreEmployer = document.getElementById("empl");
-    //  console.log(nombreEmployer);
-    nombreEmployer.innerHTML = employer.length;
-  });
+     let nombreEmployer = employer.length;
+     const countEmployers = document.querySelector('.num2')
+  let interval = 1000;  
+  //  countElement.forEach((countElement) => {
+    //  console.log(countEmployers);
+    let startValue = 0;
+    countEmployers.setAttribute("data-val", `${nombreEmployer}`);
+    let endValue = parseFloat(countEmployers.getAttribute("data-val"))
+    // console.log(endValue);
+    let duration = Math.floor(interval / endValue);
+    let counter = setInterval(function () {
+      startValue += 1;
+      countEmployers.textContent = startValue;
+      if (startValue == endValue) {
+        clearInterval(counter);
+        
+      }
+    }, duration)
+   })
 }
 
 /***********************NOMBREASSOCIE********************************* */
@@ -35,13 +62,34 @@ export function nombreEmployer() {
 export function nombreAssocie() {
   const db = getFirestore();
   const associe = collection(db, "associe");
-  const nombreAssocie = document.getElementById("associe");
+
   onSnapshot(associe, (snapshot) => {
     let associe = [];
     snapshot.docs.forEach((doc) => {
       associe.push({ ...doc.data(), id: doc.id });
     });
-    // console.log(associe);
-    nombreAssocie.innerHTML = associe.length;
-  });
+    
+    let nombreAssocie = associe.length
+    // console.log(nombreAssocie);
+    const countElement = document.querySelector('.num3');
+    // console.log(countElement);
+    
+     let interval = 1000;
+      // console.log(countElement);
+      let startValue = 0;
+       countElement.setAttribute("data-val", `${nombreAssocie}`);
+      let endValue = parseFloat(countElement.getAttribute("data-val"))
+      // console.log(endValue);
+      let duration = Math.floor(interval / endValue);
+      let counter = setInterval(function () {
+        startValue += 1;
+        countElement.textContent = startValue;
+        if (startValue == endValue) {
+          clearInterval(counter);
+          
+        }
+      }, duration)
+     })
+    
+  // });
 }
