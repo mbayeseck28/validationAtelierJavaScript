@@ -32,6 +32,7 @@
         </script>
         <link rel="stylesheet" href="sidebar.css">
         <link rel="stylesheet" href="profil.css">
+        <link rel="stylesheet" href="../comptabilite/loader.css">
         <script src="../../bundle.js" defer></script>
         <title>Eleve</title>
     </head>
@@ -171,19 +172,29 @@
                                 <div
                                   class="col-12 d-flex flex-column flex-lg-row justify-content-between align-items-center"
                                 >
-                                  <form action="" id="formEleve" class="col-12 col-md-6 col-lg-4">
+                                  <form action="" id="formEleve" class="col-12 col-md- col-lg-12 d-flex flex-column-reverse flex-md-row flex-lg-row justify-content-between">
+                                    <div class="col-4  col-md-4 col-lg-2">
+                                      <select class="form-select col" id="classe">
+                                        <!-- <option selected>Classe</option> -->
+                                        <option class="dis" disabled selected>Classe</option>
+                                            <option value="6ème">6ème</option>
+                                            <option value="5ème">5ème</option>
+                                            <option value="4ème">4ème</option>
+                                            <option value="3ème">3ème</option>
+                                      </select>
+                                    </div>
                                     <div
-                                      class="shadow d-flex mb-lg-0 align-items-center p-1 rounded-3 ps-2"
+                                      class="shadow d-flex mb-lg-0 align-items-center p-1 rounded-3 ps-2 col-12 col-md-6 col-lg-4 mb-4 mb-md-0 mb-lg-0"
                                     >
                                       <input
-                                        type="search" class="w-100 elements bg-transparent border-0 border-outline-none" placeholder="Rechercher un élève..." />
+                                        type="search" class="w-100 elements me-3 bg-transparent border-0 border-outline-none" placeholder="Rechercher un élève..." />
                                       <span class="elements me-2"><i class="fa-solid fa-magnifying-glass"></i></span>
                                     </div>
                                   </form>
                                 </div>
               
-                                <div class="col-12 mt-5">
-                                  <table class="w-100 px-3 m-0 table  table-bordered  table-hover">
+                                <div class="col-12 mt-4">
+                                  <table class="w-100 px-3 m-0 table  table-bordered  table-">
                                     <thead>
                                       <tr>
                                           <th class="text-center" scope="col">
@@ -204,6 +215,14 @@
                                     
                                     </tbody>
                                   </table>
+                                  <div class="chargement-page loader18">
+                                    <div class="loader-container">
+                                        <div class="loader"></div>
+                                        <div class="loader"></div>
+                                        <div class="loader"></div>
+                                    </div>
+                                    <span class="loading"><img src="../../../src/assets/images/Group 850.png" alt=""></span>
+                                </div>
                                 </div>
                               </div>
                             </div>
@@ -214,7 +233,7 @@
             </div>
         </div>
     </div> 
-    <!-- Modal professeurs -->
+    <!-- Modal -->
     <div
     class="modal fade"
     id="exampleModal"
@@ -248,22 +267,32 @@
             <div class="mb-3 d-none">
               <label for="type" class="form-label">Type</label>
               <select class="form-select" id="type">
-                <option class="" selected>Inscription Scolarité</option>
+                <option class="" selected>Inscription</option>
               </select>
             </div>
             <div class="mb-3">
               <label for="classe" class="form-label">Classe</label>
+
               <select class="form-select" id="classe">
-                <option selected>Classe</option>
+                <!-- <option selected>Classe</option> -->
                 <option class="dis" disabled selected>Classe</option>
-                    <option value="sizieme">6ème</option>
-                    <option value="cinquieme">5ème</option>
-                    <option value="quatrieme">4ème</option>
-                    <option value="troisieme">3ème</option>
+                <option value="6ème">6ème</option>
+                <option value="5ème">5ème</option>
+                <option value="4ème">4ème</option>
+                <option value="3ème">3ème</option>
               </select>
+
+              <div class="mb-3 collapse" id="collapseExample">
+                <div class="card card-body">
+                    <label for="prenom" class="form-label">Montant de l'inscription pour cette classe</label>
+                    <input type="text" value="500" class="form-control shadow-sm prixInsc" required disabled id="montantInsc">
+                </div>
+              </div>
             </div>
             <div id="liveAlertPlaceholder"></div>
-            <button type="submit" class="btn myBtn" id="liveAlertBtn">Enregistrer</button>
+
+            <button type="submit" class="btn myBtn" id="modifier" data-bs-dismiss="modal"
+            aria-label="Close">Modifier</button>
           </form>
         </div>
       </div>
