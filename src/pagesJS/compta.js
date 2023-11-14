@@ -49,6 +49,9 @@ onSnapshot(eleve, (snapshot) => {
     tr.innerHTML = `
     <td class="text-start ps-2 py-2 border border-1">${utili.prenom}</td> <td class="text-start ps-2 py-2 border border-1">${utili.nom}</td> <td class="text-center py-2 border border-1">${utili.montantInsc} Fcfa</td>`;
     list.appendChild(tr);
+    let loaderContainer = document.querySelector(".chargement-page");
+    loaderContainer.style.display = "none";
+
   });
 });
 
@@ -112,7 +115,6 @@ if (alertTrigger) {
 // Parti Ladji Timéra
 
 // Mensualite
-
 onSnapshot(certiesRef2, (snapshot) => {
   let certiesRef2 = [];
   snapshot.docs.forEach((doc) => {
@@ -136,6 +138,9 @@ onSnapshot(certiesRef2, (snapshot) => {
       'en-US'
     )} Fcfa</td>`;
     list.appendChild(tr);
+    let loaderContainer = document.querySelector(".loader2");
+    loaderContainer.style.display = "none";
+
   });
 });
 
@@ -196,6 +201,9 @@ onSnapshot(eleve, (snapshot) => {
         )} Fcfa</td>
         `;
     revenue.appendChild(trbody);
+    let loaderContainer = document.querySelector(".loader3");
+    loaderContainer.style.display = "none";
+
   });
 });
 onSnapshot(certiesRef2, (snapshot) => {
@@ -222,7 +230,7 @@ onSnapshot(certiesRef2, (snapshot) => {
         <td class="border border-1">${utili.montantpay}Fcfa</td>
         `;
     mens.appendChild(trbody);
-
+   
     // console.log(utili.type);
   });
 });
@@ -292,9 +300,14 @@ function CalculDeLaSommeTotale() {
     'en-US'
   )} <span class="fw-bold">FCFA</span>`;
   console.log('Total global:', totaleDuRevenu);
+
 }
 CalculDeLaSommeTotale()
 })
   .catch((error) => {
     console.error("Une erreur s'est produite :", error);
   });
+
+
+ 
+
