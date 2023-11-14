@@ -12,6 +12,7 @@ import {
   doc,
   getDoc,
   onSnapshot,
+  fromTo
 } from "firebase/firestore";
 
 const firebaseConfig = {
@@ -53,3 +54,29 @@ identifiants incorrects`);
   const loginForm = document.getElementById("signup");
   console.log("page connexion");
   loginForm.addEventListener("submit", handleLogin);
+
+/*******************************CHARGEMENT DE LA PAGE ***********************/ 
+gsap.fromTo(
+  ".loading-page",
+  { opacity: 1 },
+  {
+      opacity: 0,
+      display: "none",
+      duration: 1.5,
+      delay: 3.5,
+  }
+);
+
+gsap.fromTo(
+  ".logo-name",
+  {
+      y: 50,
+      opacity: 0,
+  },
+  {
+      y: 0,
+      opacity: 1,
+      duration: 2,
+      delay: 1.5,
+  }
+);
