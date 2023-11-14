@@ -28,6 +28,8 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app); 
 
+
+
 const handleRegistration = async (event) => {
   event.preventDefault();
   
@@ -54,6 +56,7 @@ const handleRegistration = async (event) => {
     const emailecole = emailecoleInput.value;
     const secteur = secteurInput.value;
     const nomecole = nomInput.value;
+    const srcProfil = "../../../src/assets/images/profil.jpeg";
     
     try {
       const userCredential = await createUserWithEmailAndPassword(
@@ -75,9 +78,11 @@ const handleRegistration = async (event) => {
           nomecole: nomecole,
           email: email,
           password: password,
+          url: srcProfil,
       };
       
       const userRef = collection(db, "utilisateurs");
+      console.log(userRef);
       await addDoc(userRef, userData);
       
       alert("Utilisateur enregistré avec succès");
