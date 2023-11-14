@@ -8,6 +8,10 @@
     border-radius: 50%;
 }
 
+.myProfil i {
+    margin-top: 50px;
+}
+
 .edit{
     cursor: pointer;
 }
