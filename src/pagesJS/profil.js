@@ -1,9 +1,12 @@
 import { initializeApp } from "firebase/app";
+import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import { getDatabase, ref as refDatabase, set, get } from "firebase/database";
 import {
   getAuth,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   onAuthStateChanged,
+  updateProfile ,
 } from "firebase/auth";
 import {
   getFirestore,
@@ -14,6 +17,7 @@ import {
   getDoc,
   onSnapshot,
 } from "firebase/firestore";
+
 
 const firebaseConfig = {
   apiKey: "AIzaSyCSRo2EZwo5LQIO75FevIBvEKbDD61HNuY",
@@ -28,7 +32,11 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app); 
+const database = getDatabase();
 
+
+const formProfil = document.getElementById('formProfil')
+formProfil.style.display = 'none'
 
 onAuthStateChanged(auth, (user) => {
     if (user) {
@@ -41,6 +49,9 @@ onAuthStateChanged(auth, (user) => {
             userRef.push({...doc.data(), id: doc.id })
           })
           userRef.forEach((utilisateur => {
+            // Créez une référence au document de l'utilisateur dans Firestore
+            const userDocRef = doc(db, "utilisateurs", utilisateur.id);
+            
             if (utilisateur.email == userEmail) {    
                 const btnEnregistrerInfo = document.getElementById('btnEnregistrerInfo')            
                 const email = document.getElementById("userEmail");
@@ -54,6 +65,11 @@ onAuthStateChanged(auth, (user) => {
                 const emailecole = document.getElementById("emailEcole");
                 const secteur = document.getElementById("secteurEcole");
                 const nomecole = document.getElementById("nomEcole");
+                const imgProfil = document.getElementById('imgProfil');
+                const ProfilNav = document.querySelector('.ProfilNav');
+                const profilVoir = document.querySelector('.profilVoir');
+                const nomUser = document.querySelector('.nomUser');
+                const statusUser = document.querySelector('.statusUser')
 
                 prenom.value = utilisateur.prenom
                 nom.value = utilisateur.nom
@@ -65,13 +81,34 @@ onAuthStateChanged(auth, (user) => {
                 adresseecole.value = utilisateur.adresseecole
                 emailecole.value = utilisateur.emailecole
                 secteur.value = utilisateur.secteur
+                imgProfil.src = utilisateur.url
+                ProfilNav.src = utilisateur.url;
+                profilVoir.src = utilisateur.url;
+                nomUser.innerText = prenom.value + ' ' + nom.value;
+                statusUser.innerText = status.value;
+                
+              let loaderContainer = document.querySelector(".chargement-page");
+              loaderContainer.style.display = "none";
+              formProfil.style.display = 'block'
+
+                formProfil.addEventListener("submit", modifProfil);
+                // Nous avons un élément input de type file avec l'id 'profilePicture'
+                const fileInput = document.getElementById('profilePicture');
+
+                // Lorsque l'utilisateur sélectionne un fichier, nous l'obtenons
+                fileInput.addEventListener('change', function(e) {
+                  var file = e.target.files[0];
+                  if (!file.type.match('image.*')) {
+                   alert('Veuillez sélectionner un fichier image');
+                   return;
+                  }
+                  modifPhoto(file);
+                });
 
                 
-                formProfil.addEventListener("submit", modifProfi);
-
-                function modifProfi(e) {
+                //  fonction modifier information profil
+                function modifProfil(e) {
                   e.preventDefault();
-
                   // Mettez à jour les valeurs des champs de l'utilisateur
                   utilisateur.prenom = prenom.value
                   utilisateur.nom = nom.value
@@ -83,9 +120,6 @@ onAuthStateChanged(auth, (user) => {
                   utilisateur.adresseecole = adresseecole.value
                   utilisateur.emailecole = emailecole.value
                   utilisateur.secteur = secteur.value
-
-                  // Créez une référence au document de l'utilisateur dans Firestore
-                  const userDocRef = doc(db, "utilisateurs", utilisateur.id);
 
                   // Mettez à jour le document dans Firestore
                   updateDoc(userDocRef, {
@@ -102,10 +136,52 @@ onAuthStateChanged(auth, (user) => {
                   }).catch((error) => {
                     console.error("Error updating document: ", error);
                   });
-
+                  
+                  nomUser.innerText = utilisateur.prenom + ' ' + utilisateur.nom;
+                  statusUser.innerText = utilisateur.status;
                   alert('modification effectuer avec succés')
-                }
+                }  
+                
+                
+                //  fonction modifier photo profil
+                function modifPhoto(file){
+                  // Crée une référence à Firebase Storage
+                  const storage = getStorage();
+                  // Crée une référence au chemin où le fichier sera stocké
+                  const storageRef = ref(storage, utilisateur.nom + '/profilePicture/' + file.name);
+                  // Télécharge le fichier à Firebase Storage
+                  uploadBytes(storageRef, file).then((snapshot) => {
+                    console.log('Un fichier ou un blob a été téléchargé!');
+                    // Obtient l'URL de téléchargement du fichier
+                    getDownloadURL(storageRef).then((url) => {
+                      // Met à jour l'URL de l'image de profil de l'utilisateur dans Firebase Auth
+                      updateProfile(user, {
+                        photoURL: url
+                      }).then(() => {
+                        // Met à jour la source de l'image de profil dans le DOM
+                        imgProfil.src = url;
+                        ProfilNav.src = url;
+                        profilVoir.src = url;
 
+                      // Mettez à jour la valeur du champs url de l'utilisateur dans firebase
+                        utilisateur.url = url;
+                        // Mettez à jour le document dans Firestore
+                        updateDoc(userDocRef, {
+                          url: url,
+                        }).catch((error) => {
+                          console.error("Error updating document: ", error);
+                        });
+                      }).catch((error) => {
+                        // Affiche une erreur si la mise à jour du profil échoue
+                        console.error('Erreur lors de la mise à jour du profil:', error);
+                      });
+                    });
+                  }).catch((error) => {
+                    // Affiche une erreur si le téléchargement du fichier échoue
+                    console.error('Erreur lors du téléchargement du fichier:', error);
+                  });
+                }  
+                
             }
           }))
         });
@@ -113,6 +189,7 @@ onAuthStateChanged(auth, (user) => {
         console.log("Aucun utilisateur connecté");
     }
 });
+
 
 
 console.log("page profil");
