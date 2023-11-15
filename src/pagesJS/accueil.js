@@ -1,8 +1,5 @@
-
-
-
 // Import the functions you need from the SDKs you need
-import { initializeApp } from 'firebase/app';
+import { initializeApp } from "firebase/app";
 // Importation des  services
 import {
   addDoc,
@@ -12,16 +9,16 @@ import {
   getFirestore,
   onSnapshot,
   serverTimestamp,
-} from 'firebase/firestore';
+} from "firebase/firestore";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: 'AIzaSyCSRo2EZwo5LQIO75FevIBvEKbDD61HNuY',
-  authDomain: 'validation-atelier-js.firebaseapp.com',
-  projectId: 'validation-atelier-js',
-  storageBucket: 'validation-atelier-js.appspot.com',
-  messagingSenderId: '466332062090',
-  appId: '1:466332062090:web:ffbe45ef4a7371a7b5b873',
+  apiKey: "AIzaSyCSRo2EZwo5LQIO75FevIBvEKbDD61HNuY",
+  authDomain: "validation-atelier-js.firebaseapp.com",
+  projectId: "validation-atelier-js",
+  storageBucket: "validation-atelier-js.appspot.com",
+  messagingSenderId: "466332062090",
+  appId: "1:466332062090:web:ffbe45ef4a7371a7b5b873",
 };
 
 // Initialize Firebase
@@ -30,15 +27,18 @@ const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
 // Récupérer la collection
-const eleve = collection(db, 'inscScolarite');
-const certiesRef2 = collection(db, 'mensualites');
-const effectif6 = document.getElementById('effectif6');
-const effectif5 = document.getElementById('effectif5');
-const effectif4 = document.getElementById('effectif4');
-const effectif3 = document.getElementById('effectif3');
+const eleve = collection(db, "inscScolarite");
+const certiesRef2 = collection(db, "mensualites");
 
+let effectifClass6;
+let effectifClass5;
+let effectifClass4;
+let effectifClass3;
 
-
+const effectif6 = document.getElementById("effectif6");
+const effectif5 = document.getElementById("effectif5");
+const effectif4 = document.getElementById("effectif4");
+const effectif3 = document.getElementById("effectif3");
 
 onSnapshot(eleve, (snapshot) => {
   let eleves = [];
@@ -46,38 +46,55 @@ onSnapshot(eleve, (snapshot) => {
     eleves.push({ ...doc.data(), id: doc.id });
   });
   eleves.sort((a, b) => b.dateDajout - a.dateDajout);
-console.log(eleves);
-  let effectifClass6 = [];
-  let effectifClass5 = [];
-  let effectifClass4 = [];
-  let effectifClass3 = [];
+  console.log(eleves);
+  effectifClass6 = eleves.filter((utili) => utili.classe === "6ème").length;
+  effectifClass5 = eleves.filter((utili) => utili.classe === "5ème").length;
+  effectifClass4 = eleves.filter((utili) => utili.classe === "4ème").length;
+  effectifClass3 = eleves.filter((utili) => utili.classe === "3ème").length;
+
+  effectif6.innerHTML = effectifClass6 + " élèves";
+  effectif5.innerHTML = effectifClass5 + " élèves";
+  effectif4.innerHTML = effectifClass4 + " élèves";
+  effectif3.innerHTML = effectifClass3 + " élèves";
+});
 
 
-  eleves.forEach((utili) => {
-    if (utili.classe === '6ème') {
-      effectifClass6.push(utili.classe);
-      effectif6.innerHTML = effectifClass6.length + '  élèves';
-    }
-    if (utili.classe === '5ème') {
-      effectifClass5.push(utili.classe);
-      effectif5.innerHTML = effectifClass5.length + '  élèves';
-    }
-    if (utili.classe === '4ème') {
-      effectifClass4.push(utili.classe);
-      effectif4.innerHTML = effectifClass4.length + ' élèves';
-    }
-    if (utili.classe === '3ème') {
-      effectifClass3.push(utili.classe);
+const btnAfficherPaiements = document.getElementById('btnAfficherPaiements');
+const selectMois = document.getElementById('selectMois');
 
-      effectif3.innerHTML = effectifClass3.length + ' élèves';
+// const dateDuJour = new Date();
+// const moisActuel = dateDuJour.getMonth() + 1; 
 
-    }
+// console.log(dateDuJour, moisActuel);
+// selectMois.value = moisActuel.toString();
 
-    
+selectMois.addEventListener('click', (e) => {
+  const moisSelectionne = selectMois.value;
+  const mois = e.target.value
+  // console.log(mois);
+  onSnapshot(certiesRef2, (snapshot) => {
+    let certiesRef2 = [];
+    snapshot.docs.forEach((doc) => {
+      certiesRef2.push({ ...doc.data(), id: doc.id });
+    });
+    certiesRef2.sort((a, b) => b.dateDajout - a.dateDajout);
+
+    let PaiementsEffec6 = certiesRef2.filter((utili) => utili.classe === '6ème' && utili.mois === mois);
+    let PaiementsEffec5 = certiesRef2.filter((utili) => utili.classe === '5ème' && utili.mois === mois);
+    let PaiementsEffec4 = certiesRef2.filter((utili) => utili.classe === '4ème' && utili.mois === mois);
+    let PaiementsEffec3 = certiesRef2.filter((utili) => utili.classe === '3ème' && utili.mois === mois);
+
+    paiement6.innerHTML =
+    Math.round((PaiementsEffec6.length / effectifClass6) * 100) + "%";
+  paiement5.innerHTML =
+    Math.round((PaiementsEffec5.length / effectifClass5) * 100) + "%";
+  paiement4.innerHTML =
+    Math.round((PaiementsEffec4.length / effectifClass4) * 100) + "%";
+  paiement3.innerHTML =
+    Math.round((PaiementsEffec3.length / effectifClass3) * 100) + "%";
   });
 });
 
-// recuperation Paiements effectués
 
 onSnapshot(certiesRef2, (snapshot) => {
   let certiesRef2 = [];
@@ -85,69 +102,33 @@ onSnapshot(certiesRef2, (snapshot) => {
     certiesRef2.push({ ...doc.data(), id: doc.id });
   });
   certiesRef2.sort((a, b) => b.dateDajout - a.dateDajout);
-
-  const paiement6 = document.getElementById('paiement6');
-  const paiement5 = document.getElementById('paiement5');
-  const paiement4 = document.getElementById('paiement4');
-  const paiement3 = document.getElementById('paiement3');
-
-
-  let PaiementsEffec6 = [];
-  let PaiementsEffec5 = [];
-  let PaiementsEffec4 = [];
-  let PaiementsEffec3 = [];
-
   console.log(certiesRef2);
-  certiesRef2.forEach((utili) => {
+  let PaiementsEffec6 = certiesRef2.filter(
+    (utili) => utili.classe === "6ème" && utili.mois === "novembre"
+  );
+  let PaiementsEffec5 = certiesRef2.filter(
+    (utili) => utili.classe === "5ème" && utili.mois === "novembre"
+  );
+  let PaiementsEffec4 = certiesRef2.filter(
+    (utili) => utili.classe === "4ème" && utili.mois === "novembre"
+  );
+  let PaiementsEffec3 = certiesRef2.filter(
+    (utili) => utili.classe === "3ème" && utili.mois === "novembre"
+  );
 
-    if (utili.classe === '6ème') {
-      
-      PaiementsEffec6.push(utili.montantpay);
-
-      paiement6.innerHTML =
-        Math.round(
-          (PaiementsEffec6.length / parseInt(effectif6.innerHTML)) * 100
-        ) + '%';
-    }
-    if (utili.classe === '5ème') {
-      PaiementsEffec5.push(utili.montantpay);
-
-      paiement5.innerHTML =
-        Math.round(
-          (PaiementsEffec5.length / parseInt(effectif5.innerHTML)) * 100
-        ) + '%';
-    }
-    if (utili.classe === '4ème') {
-      PaiementsEffec4.push(utili.montantpay);
-      console.log(paiement4);
-      let sum = (PaiementsEffec4.length / parseInt(effectif4.innerHTML)) * 100
-
-      if (PaiementsEffec4.length === "0") {
-        paiement4.innerHTML = "0%"
-      } else {
-        paiement4.innerHTML =
-        Math.round(
-          sum
-        ) + '%';
-      }
-      
-    }
-    if (utili.classe === '3ème') {
-      PaiementsEffec3.push(utili.montantpay);
-      console.log(paiement3);
-      paiement3.innerHTML =
-        Math.round(
-          (PaiementsEffec3.length / parseInt(effectif3.innerHTML)) * 100
-        ) + '%';
-    }
-  });
+  paiement6.innerHTML =
+    Math.round((PaiementsEffec6.length / effectifClass6) * 100) + "%";
+  paiement5.innerHTML =
+    Math.round((PaiementsEffec5.length / effectifClass5) * 100) + "%";
+  paiement4.innerHTML =
+    Math.round((PaiementsEffec4.length / effectifClass4) * 100) + "%";
+  paiement3.innerHTML =
+    Math.round((PaiementsEffec3.length / effectifClass3) * 100) + "%";
 });
 
-
-
-
-let circularProgress = document.querySelector('.circular-progress');
-let progressValue = document.querySelector('.progress-value');
+/*****PARTIE PROGRESS BAR****/
+let circularProgress = document.querySelector(".circular-progress");
+let progressValue = document.querySelector(".progress-value");
 
 let progressStartValue = 0;
 let progressEndValue = 90;
@@ -167,12 +148,9 @@ let progress = setInterval(() => {
   //   console.log(progressStartValue);
 }, speed);
 
-
-
-
-// partie ladji 
+// partie ladji HISTORIQUE
 let date = new Date();
-let year = date.getFullYear()
+let year = date.getFullYear();
 let month = date.getMonth() + 1;
 let day = date.getDate();
 // onSnapshot(eleve, (snapshot) => {
@@ -180,19 +158,18 @@ let day = date.getDate();
 //   snapshot.docs.forEach((doc) => {
 //     eleves.push({ ...doc.data(), id: doc.id });
 //   });
-//   eleves.forEach((utili) => { 
+//   eleves.forEach((utili) => {
 
-    
 //   });
 // })
 
-const myTbody1 = document.querySelector('.myTd1');
-const myTbody2 = document.querySelector('.myTd2');
-const totalIns = document.querySelector('.totalIns');
-const totalMens = document.querySelector('.totalMens');
+const myTbody1 = document.querySelector(".myTd1");
+const myTbody2 = document.querySelector(".myTd2");
+const totalIns = document.querySelector(".totalIns");
+const totalMens = document.querySelector(".totalMens");
 
-myTbody1.innerHTML = `<span>${day}</span><span>/${month}<sapn>/${year}</span>`
-myTbody2.innerHTML = `<span>${day}</span><span>/${month}<sapn>/${year}</span>`
+myTbody1.innerHTML = `<span>${day}</span><span>/${month}<sapn>/${year}</span>`;
+myTbody2.innerHTML = `<span>${day}</span><span>/${month}<sapn>/${year}</span>`;
 
 getDocs(eleve).then((snapshot) => {
   let eleve = [];
@@ -203,8 +180,8 @@ getDocs(eleve).then((snapshot) => {
   eleve.forEach((utili) => {
     totalInscription += parseInt(utili.montantInsc);
   });
-  
-  totalIns.innerHTML = `<b>${totalInscription}</b>`
+
+  totalIns.innerHTML = `<b>${totalInscription}</b>`;
 });
 
 getDocs(certiesRef2).then((snapshot) => {
@@ -216,6 +193,6 @@ getDocs(certiesRef2).then((snapshot) => {
   certiesRef2.forEach((utili) => {
     totalMensualiter += parseInt(utili.montantpay);
   });
-  console.log(certiesRef2);
-  totalMens.innerHTML = `<b>${totalMensualiter}</b>`
+  // console.log(certiesRef2);
+  totalMens.innerHTML = `<b>${totalMensualiter}</b>`;
 });
