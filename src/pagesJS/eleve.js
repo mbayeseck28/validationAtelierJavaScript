@@ -2,13 +2,12 @@
 import { initializeApp } from 'firebase/app';
 // Importation des  services
 import {
-  addDoc,
   collection,
-  documentId,
-  getDocs,
+  doc,
+  updateDoc,
+  deleteDoc,
   getFirestore,
   onSnapshot,
-  serverTimestamp,
 } from 'firebase/firestore';
 
 // Your web app's Firebase configuration
@@ -28,7 +27,8 @@ const db = getFirestore(app);
 
 // Récupérer la collection
 const eleve = collection(db, 'inscScolarite');
-let eleves = [];
+let eleves;
+let id;
 // Realtime Update
 let prixInsc = [
   {
@@ -38,15 +38,18 @@ let prixInsc = [
     troisieme: 35000,
   },
 ];
+
 onSnapshot(eleve, (snapshot) => {
+  let eleve = [];
   snapshot.docs.forEach((doc) => {
-    eleves.push({ ...doc.data(), id: doc.id });
+    eleve.push({ ...doc.data(), id: doc.id });
   });
-  eleves.sort((a, b) => b.dateDajout - a.dateDajout);
+  eleve.sort((a, b) => b.dateDajout - a.dateDajout);
   const list = document.querySelector('#list');
   list.innerHTML = '';
-
-  eleves.forEach((utili) => {
+  eleves = eleve;
+  console.log(eleve);
+  eleve.forEach((utili) => {
     const tr = document.createElement('tr');
 
     tr.innerHTML = `
@@ -65,8 +68,8 @@ onSnapshot(eleve, (snapshot) => {
     `;
     list.appendChild(tr);
   });
-  let loaderContainer = document.querySelector(".loader18");
-    loaderContainer.style.display = "none";
+  let loaderContainer = document.querySelector('.loader18');
+  loaderContainer.style.display = 'none';
 });
 
 // Rechercher un élève
@@ -74,6 +77,7 @@ const rechercheInput = document.querySelector('#formEleve');
 rechercheInput.addEventListener('input', (e) => {
   const elementSaisie = e.target.value;
   document.getElementById('list').innerHTML = '';
+  console.log(eleve);
   const collectionFilter = eleves.filter(
     (element) =>
       element.nom.toLowerCase().includes(elementSaisie.toLowerCase()) ||
@@ -90,7 +94,7 @@ rechercheInput.addEventListener('input', (e) => {
       tr.innerHTML = `
       <td class="mx-auto text-center d-none d-lg-block m-0">${utili.nom}</td>
       <td class="mx-auto text-center m-0">${utili.prenom}</td>
-      <td class="mx-auto text-center m-0 d-none d-lg-block">${utili.classe}</td>
+      <td class="mx-auto text-center  d-none d-lg-block">${utili.classe}</td>
       <td class="mx-auto text-center m-0 py-auto ">
           <button class="btn bouton me-1 my-1 supprimer text-white rounded-circle bg-dark " data-id=${utili.id}>
               <i class="fa-solid fa-trash-can supprimer" data-id=${utili.id}></i>
@@ -111,3 +115,40 @@ rechercheInput.addEventListener('input', (e) => {
 
 // Modification
 const btnModifier = document.getElementById('modifier');
+const list = document.querySelector('#list');
+list.innerHTML = '';
+
+btnModifier.addEventListener('click', (e) => {
+  e.preventDefault();
+
+  const nouveauEleves = {
+    nom: nom.value,
+    prenom: prenom.value,
+    classe: classe.value,
+  };
+  console.log(nouveauEleves);
+  const docRef = doc(eleve, id);
+  const form = document.querySelector('.addToFirebase');
+  updateDoc(docRef, nouveauEleves).then(() => {
+    form.reset();
+    console.log('Document modifié avec succès !');
+  });
+});
+
+document.addEventListener('click', function (e) {
+  if (e.target.classList.contains('modifier')) {
+    id = e.target.getAttribute('data-id');
+    const elevesModifier = eleves.find((u) => u.id === id);
+    console.log(elevesModifier);
+
+    nom.value = elevesModifier.nom;
+    prenom.value = elevesModifier.prenom;
+    classe.value = elevesModifier.classe;
+  } else if (e.target.classList.contains('supprimer')) {
+    id = e.target.getAttribute('data-id');
+    const docRef = doc(eleve, id);
+    deleteDoc(docRef).then(() => {
+      console.log('Document supprimé avec succès !');
+    });
+  }
+});
