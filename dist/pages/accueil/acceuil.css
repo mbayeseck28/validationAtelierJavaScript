@@ -251,6 +251,7 @@ input {
         display: flex;
         margin-left: 0;
     }
+    
 }
 
 
@@ -432,4 +433,36 @@ select:hover{
         max-width: 1000px;
         width: 100%;
     }
+    
 }
+/*debut job ablaye mediaquery progresse barr */
+@media screen and (max-width: 410px){
+    .container-bar{
+        width: 100%;
+        font-size: 15px;
+    }
+    .circular-progress{
+        width: 100px;
+        font-size: 15px;
+    }
+    .circular-bar{
+        width: 110px;
+        font-size: 15px;
+    }
+    .progress-value{
+        width: 50px;
+        font-size: 22px;
+
+    }
+    .text{
+        font-size: 20px;
+    }
+}
+@media screen and (min-width: 530px ) and (max-width:766px){
+    .container-bar{
+        width: 100%;
+        background: red;
+    }
+}
+
+/* fin job ablaye */
