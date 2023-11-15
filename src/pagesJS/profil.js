@@ -147,7 +147,7 @@ onAuthStateChanged(auth, (user) => {
                   // Crée une référence à Firebase Storage
                   const storage = getStorage();
                   // Crée une référence au chemin où le fichier sera stocké
-                  const storageRef = ref(storage, utilisateur.nom + '/profilePicture/' + file.name);
+                  const storageRef = ref(storage, utilisateur.prenom + '/profilePicture/' + file.name);
                   // Télécharge le fichier à Firebase Storage
                   uploadBytes(storageRef, file).then((snapshot) => {
                     console.log('Un fichier ou un blob a été téléchargé!');
