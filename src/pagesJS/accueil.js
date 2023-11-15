@@ -62,9 +62,16 @@ onSnapshot(eleve, (snapshot) => {
 const btnAfficherPaiements = document.getElementById('btnAfficherPaiements');
 const selectMois = document.getElementById('selectMois');
 
-btnAfficherPaiements.addEventListener('click', () => {
-  const moisSelectionne = selectMois.value;
+// const dateDuJour = new Date();
+// const moisActuel = dateDuJour.getMonth() + 1; 
 
+// console.log(dateDuJour, moisActuel);
+// selectMois.value = moisActuel.toString();
+
+selectMois.addEventListener('click', (e) => {
+  const moisSelectionne = selectMois.value;
+  const mois = e.target.value
+  // console.log(mois);
   onSnapshot(certiesRef2, (snapshot) => {
     let certiesRef2 = [];
     snapshot.docs.forEach((doc) => {
@@ -72,10 +79,10 @@ btnAfficherPaiements.addEventListener('click', () => {
     });
     certiesRef2.sort((a, b) => b.dateDajout - a.dateDajout);
 
-    let PaiementsEffec6 = certiesRef2.filter((utili) => utili.classe === '6ème' && utili.mois === moisSelectionne);
-    let PaiementsEffec5 = certiesRef2.filter((utili) => utili.classe === '5ème' && utili.mois === moisSelectionne);
-    let PaiementsEffec4 = certiesRef2.filter((utili) => utili.classe === '4ème' && utili.mois === moisSelectionne);
-    let PaiementsEffec3 = certiesRef2.filter((utili) => utili.classe === '3ème' && utili.mois === moisSelectionne);
+    let PaiementsEffec6 = certiesRef2.filter((utili) => utili.classe === '6ème' && utili.mois === mois);
+    let PaiementsEffec5 = certiesRef2.filter((utili) => utili.classe === '5ème' && utili.mois === mois);
+    let PaiementsEffec4 = certiesRef2.filter((utili) => utili.classe === '4ème' && utili.mois === mois);
+    let PaiementsEffec3 = certiesRef2.filter((utili) => utili.classe === '3ème' && utili.mois === mois);
 
     paiement6.innerHTML =
     Math.round((PaiementsEffec6.length / effectifClass6) * 100) + "%";

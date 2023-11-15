@@ -1,11 +1,13 @@
-*{
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
-body{
+
+body {
     background-color: #EFF2F6;
 }
+
 .nav {
     position: fixed;
     font-size: 18px;
@@ -14,41 +16,52 @@ body{
     background-color: #ffffff;
     width: 100%;
 }
-.nav span{
+
+.nav span {
     font-weight: bold;
 }
-.calendrier{
+
+.calendrier {
     display: flex;
     flex-direction: row;
 }
-.calendrier i{
+
+.calendrier i {
     display: flex;
     flex-direction: row;
     color: #00E100;
 }
-.logo img{
+
+.logo img {
     width: 50px;
     height: 50px;
 }
-input{
+
+input {
     height: 30px;
 }
-.profil img{
+
+.profil img {
     width: 25px;
     height: 25px;
 }
-.compte{
+
+.compte {
     display: flex;
     justify-content: end;
     cursor: pointer;
 }
-.compte .profil:hover{
+
+.compte .profil:hover {
     transform: scale(1.2);
 }
-.compte .angle-down:hover, .fa-bell:hover{
+
+.compte .angle-down:hover,
+.fa-bell:hover {
     color: #00E100;
     transform: scale(1.2);
 }
+
 .sidebar {
     display: block;
     position: fixed;
@@ -61,7 +74,7 @@ input{
     margin-top: 5%;
 }
 
-.menu{
+.menu {
     position: fixed;
     left: 0;
     top: 0;
@@ -73,14 +86,16 @@ input{
     height: 50px;
     font-size: 20px;
 }
-.displayBlock{
+
+.displayBlock {
     display: block;
 }
-.sidebar.open{
+
+.sidebar.open {
     width: 78px;
 }
 
-.sidebar .logo-details{
+.sidebar .logo-details {
     height: 60px;
     display: flex;
     align-items: center;
@@ -89,6 +104,7 @@ input{
     top: 25%;
     right: -33px;
 }
+
 .sidebar .logo-details {
     position: absolute;
     top: 35%;
@@ -115,6 +131,7 @@ input{
     transition: all 0.4s ease;
     background: #000000;
 }
+
 .sidebar li a .links_name {
     color: #ffffff7e;
     font-size: 18px;
@@ -124,20 +141,23 @@ input{
     pointer-events: none;
     transition: 0.4s;
 }
-.sidebar.open li a .links_name{
+
+.sidebar.open li a .links_name {
     opacity: 0;
     pointer-events: auto;
 }
-.sidebar li a:hover .links_name, 
-.sidebar li a:hover i, 
-.sidebar li a:active i, 
+
+.sidebar li a:hover .links_name,
+.sidebar li a:hover i,
+.sidebar li a:active i,
 .sidebar li a:focus i,
 .sidebar li a:active .links_name,
 .sidebar li a:focus .links_name {
     transition: all 0.5s ease;
     color: #00E100;
 }
-.sidebar li i{
+
+.sidebar li i {
     height: 50px;
     line-height: 50px;
     font-size: 18px;
@@ -182,8 +202,7 @@ input{
     color: #00E100;
 }
 
-.sidebar.open li:hover .tooltip
-{
+.sidebar.open li:hover .tooltip {
     opacity: 1;
     pointer-events: auto;
     transition: all 0.4s ease;
@@ -191,47 +210,54 @@ input{
     transform: translateY((-50%));
 }
 
-.divProfile{
-    background: url(../src/images/Group\ 803.png) no-repeat center center/cover;
+.divProfile {
+    background: url(../../../src/assets/images/Group\ 803.png) no-repeat center center/cover;
     width: 100%;
     height: 130px;
 }
-.imageDivProfile img{
+
+.imageDivProfile img {
     width: 40px;
     height: 40px;
 }
-.btnGreen{
+
+.btnGreen {
     color: #00E100;
 }
 
 
-@media screen and (max-width: 941px){
-    .calendrier{
+@media screen and (max-width: 941px) {
+    .calendrier {
         display: none;
     }
 }
-@media screen and (max-width: 767px){
-    .nav{
+
+@media screen and (max-width: 767px) {
+    .nav {
         margin-top: 55px;
     }
-    .search{
+
+    .search {
         display: none;
     }
-    .sidebar{
+
+    .sidebar {
         display: none;
         top: 0;
         z-index: 2;
     }
-    .compte{
+
+    .compte {
         display: flex;
         margin-left: 0;
     }
 }
 
 
-body{
+body {
     background-color: #EFF2F6;
 }
+
 .animated-progress {
     width: 300px;
     height: 20px;
@@ -242,9 +268,9 @@ body{
     overflow: hidden;
     position: relative;
     border-radius: 25px;
-  }
-  
-  .animated-progress span {
+}
+
+.animated-progress span {
     height: 100%;
     display: block;
     width: 75%;
@@ -255,31 +281,51 @@ body{
     padding-right: 5px;
     border-radius: 25px;
 
-  }
-  
-  .progress-dark span {
+}
+
+.progress-dark span {
     background-color: #504F4F;
-  }
-  .progress-green span {
+}
+
+.progress-green span {
     background-color: #00E100;
-  }
-  
-  .card-white{
+}
+
+.card-white {
     border-radius: 10px;
-  }
+}
 
 
-  /******CSS CARDS CLASSES*******/
-  .cardClass {
+/******CSS CARDS CLASSES*******/
+.cardClass {
     max-width: 230px;
     overflow: hidden;
     box-shadow: 0px 4px 30px 0px #0000001A;
 }
+
 .pClass {
     margin: 5px 0;
 }
+.activeBg:active{
+    background-color: transparent;
+    border: none;
+}
+.btnGreen:active, .btnGreen:hover{
+    background-color: #000000;
+    color: #00de00;
+}
 
-@media screen and (max-width: 867px){
+select {
+    cursor: pointer;
+}
+
+select:hover{
+    background-color: #000000; 
+    color: #00de00;
+   
+}
+
+@media screen and (max-width: 867px) {
     .card {
         max-width: 1093px;
         width: 90%;
@@ -290,8 +336,8 @@ body{
 
 /* Barr de progression */
 
-.container-bar{
-    width: 500px;
+.container-bar {
+    width: 470px;
     padding: 50px 0;
     border-radius: 5px;
     background-color: rgb(220, 217, 217);
@@ -301,34 +347,34 @@ body{
     row-gap: 30px;
 }
 
-.circular-progress{
+.circular-progress {
     position: relative;
     height: 250px;
     width: 250px;
     border-radius: 50%;
-    transform:translate(-5%,5%) rotate(15deg) skewY(-15deg) perspective(300px);
+    transform: translate(-5%, 5%) rotate(15deg) skewY(-15deg) perspective(300px);
     display: flex;
     justify-content: center;
     align-items: center;
     background: rgb(244, 243, 243);
     box-shadow:
-    30px 30px 0px hwb(0 9% 91% / 0.187),
-    100px 100px 100px #938f8f11
-
-
+        30px 30px 0px hwb(0 9% 91% / 0.187),
+        100px 100px 100px #938f8f11
 }
-.circular-bar{
+
+.circular-bar {
     position: absolute;
     top: 0px;
     left: 0px;
     bottom: 0px;
     right: 0px;
     border: 40px solid transparent;
-    border-right: 40px solid rgb(21, 185, 21);
+    /* border-right: 40px solid rgb(21, 185, 21); */
     border-radius: 50%;
     animation: spin linear 5.4s;
 }
-.progress-value{
+
+.progress-value {
     position: absolute;
     top: 40px;
     left: 40px;
@@ -337,42 +383,46 @@ body{
     background: rgb(255, 250, 250);
     border-radius: 50%;
     box-shadow:
-    inset 30px 30px 0px hwb(0 9% 91% / 0.187),
-    inset 100px 100px 100px #938f8f11;
+        inset 30px 30px 0px hwb(0 9% 91% / 0.187),
+        inset 100px 100px 100px #938f8f11;
     display: flex;
     justify-content: center;
     align-items: center;
     font-family: sans-serif;
     font-size: 3.5rem;
     font-weight: 700;
-    
+
 
 }
-.text{
+
+.text {
     font-size: 30px;
     font-weight: 500;
     color: #606060;
 }
 
-@keyframes spin{
-    from{
+@keyframes spin {
+    from {
         transform: rotate(0deg);
     }
-    to{
+
+    to {
         transform: rotate(360deg);
     }
 }
-  /******CSS CARDS CLASSES*******/
-  .cardClass {
+
+/******CSS CARDS CLASSES*******/
+.cardClass {
     max-width: 230px;
     overflow: hidden;
     box-shadow: 0px 4px 30px 0px #0000001A;
 }
+
 .pClass {
     margin: 5px 0;
 }
 
-@media screen and (max-width: 867px){
+@media screen and (max-width: 867px) {
     .card {
         max-width: 1000px;
         width: 100%;

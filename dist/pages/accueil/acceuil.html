@@ -79,18 +79,9 @@
         </div>
         <div class="col-12 col-md-5 mt-3 text-center calendrier">
           <p>Année scolaire: <span>2022-2023</span></p>
-          <i class="fa-solid fa-angle-left ms-5 me-5"></i>
-          <i class="fa-solid fa-angle-right ms-5"></i>
+          
         </div>
-        <div class="col-12 col-md-2 search">
-          <input
-            type="text"
-            name=""
-            id=""
-            placeholder="Rechercher"
-            class="p-3"
-          />
-        </div>
+       
         <div class="col-6 col-md-3 d-flex flex-row compte">
           <i
             class="fa-regular fa-bell mt-1"
@@ -144,31 +135,30 @@
                 class="d-flex flex-column py-4 mb-2 justify-content-center gy-5 align-items-center divProfile"
               >
               <div class="col-6 col-md-2 mx-auto my-2 mt-3 imageDivProfile">
-                <img src="../../../src/assets/images/profil.jpeg" class="profilVoir" alt="" />
+                <img src="../../../src/assets/images/profil.jpeg" class="profilVoir rounded-circle" alt="" />
               </div>
                 <h6 class="text-center mb-0 fst-italic">Nom Complet</h6>
                 <p class="mt-0 pt-0 text-light">Status</p>
               </div>
-              <li>
+              <li class="d-flex flex-column py-2">
                 <a
-                  class="dropdown-item mt-3"
+                  class="dropdown-item mt-3 activeBg"
                   href="../../pages/profil/profil.html"
                 >
                   <button
-                    class="btn btnGreen fw-bold btn-light shadow btn-sm w-100"
+                    class="btn btnGreen d-block fw-bold btn-light shadow btn-sm mb-2 w-100"
                     type="button"
                   >
                     Voir le profil
-                  </button></a
-                >
-              </li>
-              <li>
-                <button
-                  class="btn btnGreen fw-bold btn-light shadow btn-sm w-100"
+                  </button>
+                  <button
+                  class="btn btnGreen d-block fw-bold btn-light shadow btn-sm w-100"
                   type="button"
                 >
                   Deconnexion
                 </button>
+                  </a
+                >
               </li>
             </ul>
           </div>
@@ -246,27 +236,19 @@
             <div class="container-fluid">
             <div class="card  p-3 pb-3 mb-3 border-0">
               <div class="row mb-4">
-              <div class="col-lg-12 d-flex justify-content-between">
-                <select id="selectMois" class="px-3 rounded-3" style="
-                color: #00de00;
-                background-color: #000000;
-                cursor: pointer;
-              ">
-                  <option value="octobre">Octobre</option>
-                  <option value="novembre" selected>Novembre</option>
-                  <option value="decembre">Décembre</option>
-                  <option value="janvier">Janvier</option>
-                  <option value="fevrier">Février</option>
-                  <option value="mars">mars</option>
-                  <option value="avril">Avril</option>
-                  <option value="mai">Mai</option>
-                  <option value="juin">Juin</option>
+              <div class="col-lg-12 d-flex justify-content-end">
+                <select id="selectMois" class="rounded-3 px-3 py-2 shadow">
+                  <option value="octobre" >Octobre</option>
+                  <option value="novembre" selected >Novembre</option>
+                  <option value="decembre" >Décembre</option>
+                  <option value="janvier" >Janvier</option>
+                  <option value="fevrier" >Février</option>
+                  <option value="mars" >mars</option>
+                  <option value="avril" >Avril</option>
+                  <option value="mai" >Mai</option>
+                  <option value="juin" >Juin</option>
                 </select>
-                <button id="btnAfficherPaiements" class="btn btn-dark btn-sm "  style="
-                color: #00de00;
-                background-color: #000000;
-                cursor: pointer;
-              ">Afficher les paiements</button>
+               
               </div>
 
               </div>
