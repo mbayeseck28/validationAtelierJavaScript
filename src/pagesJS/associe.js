@@ -34,42 +34,23 @@ export async function ajouterAssocier(formAssocie) {
     alert("Associe ajouté avec succès !", imageURL);
     formAssocie.reset();
   } catch (error) {
-    console.error("Erreur lors de l'ajout de l'associe :", error);
     alert("Erreur lors de l'ajout de l'associe :", error)
   }
-}
-
-export function recherche(rechercheInput, asso) {
-  // rechercheInput.addEventListener("input", (e) => {
-  //   const nomSaisie = e.target.value;
-  //   document.getElementById("logo-entreprise").innerHTML = "";
-  //   const nomFilter = asso.filter(
-  //     (element) => 
-  //     element.nom.toLowerCase().includes(nomSaisie.toLowerCase())
-  //   );
-  //   if (nomFilter.length) {
-  //     document.getElementById("resultAsso").innerHTML = "";
-  //     gestionAssocie(nomFilter);
-  //   } else {
-  //     document.getElementById("resultAsso").innerHTML = "<p>Aucun résultat</p>"; 
-  //   }
-  // })
 }
 
 export function gestionAssocie() {
   const db = getFirestore();
 
-  // const entreprise = collection(db, "entreprise");
   const associe = collection(db, "associe");
   const rechercheInput = document.getElementById("searchAssocie");
-  console.log(rechercheInput);
-  // console.log(associe);
+  
+  
   onSnapshot(associe, (snapshot) => {
     let associe = [];
     snapshot.docs.forEach((doc) => {
       associe.push({ ...doc.data(), id: doc.id });
     });
-    // console.log(associe);
+    
     const logoEntreprise = document.querySelector("#logo-entreprise");
     logoEntreprise.innerHTML = "";
     associe.forEach((ins) => {
@@ -94,7 +75,6 @@ export function gestionAssocie() {
       );
       if (nomFilter.length) {
         document.getElementById("resultAsso").innerHTML = "";
-        // gestionAssocie(nomFilter);
         nomFilter.forEach((ins) => {
           const div = document.createElement("div");
           div.className = "col-6 col-lg-2 col-md- col-sm ";
