@@ -34,7 +34,7 @@ const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
 // Référence Firestore
-const contenuRef = doc(db, 'droit', 'sZDG74DM390mi6mkW5Zg');
+const contenuRef = doc(db, 'droit', 'HnVUd5sHwFWRB0gmidmo');
 
 function enregistrerModifications() {
   // Récupérer le contenu de la div
