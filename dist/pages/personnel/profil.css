@@ -56,6 +56,15 @@ input {
     border-radius: 150px 75px;
     padding: 0;
 }
+select {
+    cursor: pointer;
+}
+
+select:hover{
+    background-color: #000000; 
+    color: #00de00;
+   
+}
 
 .imageUploaded{
     margin-top: 10px;
@@ -167,8 +176,8 @@ color: #00E100;
         font-size: 10px;
     }
     .myContDiv{
-        margin-left: 5%; 
-        margin-right: 5%; 
+        margin-left: 0%; 
+        margin-right: 0%; 
         /* margin: auto; */
    }
 }
