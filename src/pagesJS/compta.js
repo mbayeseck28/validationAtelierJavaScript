@@ -81,14 +81,15 @@ selectElement.addEventListener('change', function () {
   console.log(selectedValue);
 
   document.getElementById('montantPaye').value = montant(selectedValue);
+  console.log(document.getElementById('montantPaye').value);
 });
 
 function montant(classe) {
   const montantMapping = {
-    sizieme: 25000,
-    cinquieme: 25000,
-    quatrieme: 30000,
-    troisieme: 35000,
+    '6ème': 25000,
+    '5ème': 25000,
+    '4ème': 30000,
+    '3ème': 35000,
   };
 
   return montantMapping[classe] || 0;
@@ -115,7 +116,7 @@ if (alertTrigger) {
   });
 }
 // _________________________
-// Parti Ladji Timéra
+// Parti Mensualité
 
 // Mensualite
 onSnapshot(certiesRef2, (snapshot) => {
@@ -150,41 +151,53 @@ onSnapshot(certiesRef2, (snapshot) => {
 });
 
 // ajout d'une mensualite
+
 const myForm = document.querySelector('.myForm');
 const alertMens = document.querySelector('.alertMens');
-let listNom = [];
 getDocs(eleve).then((snapshot) => {
   let myTabeleve = [];
   snapshot.docs.forEach((doc) => {
     myTabeleve.push({ ...doc.data(), id: doc.id });
   });
 
-  myTabeleve.forEach((utili) => {
-    listNom.push(utili.nom, utili.prenom);
+  myForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    let conditionRempli = false;
+
+    for (const utili of myTabeleve) {
+      // Ajouter un nouveau document avec un id généré
+      if (
+        utili.nom.includes(myForm.nom.value) &&
+        utili.prenom.includes(myForm.prenom.value) &&
+        utili.classe.includes(myForm.classeSelect2.value)
+      ) {
+        await addDoc(certiesRef2, {
+          nom: myForm.nom.value,
+          prenom: myForm.prenom.value,
+          type: myForm.type.value,
+          classe: myForm.classeSelect2.value,
+          mois: myForm.mois.value,
+          montantpay: parseInt(myForm.montantAPaye.value),
+          dateDajout: serverTimestamp(),
+        });
+
+        myForm.reset();
+        conditionRempli = true;
+        break;
+      }
+    }
+
+    if (conditionRempli) {
+      return;
+    } else {
+      alertMens.classList.remove('d-none');
+      alertMens.innerHTML =
+        'Elève inexiste ou ne fait pas parti de cette classe...';
+    }
   });
-  console.log(listNom);
 });
-myForm.addEventListener('submit', (e) => {
-  e.preventDefault();
-  //Ajouter un nouveau document avec un id généré
-  if (
-    listNom.includes(myForm.nom.value) &&
-    listNom.includes(myForm.prenom.value)
-  ) {
-    addDoc(certiesRef2, {
-      nom: myForm.nom.value,
-      prenom: myForm.prenom.value,
-      type: myForm.type.value,
-      classe: myForm.classeSelect2.value,
-      mois: myForm.mois.value,
-      montantpay: parseInt(myForm.montantAPaye.value),
-      dateDajout: serverTimestamp(),
-    }).then(() => myForm.reset());
-  } else {
-    alertMens.classList.remove('d-none');
-    alertMens.innerHTML = 'Le nom ne figure pas dans la liste des inscrits...';
-  }
-});
+
 // Montant à inscrire
 let selectElement2 = document.getElementById('classeSelect2');
 selectElement2.addEventListener('change', function () {
@@ -196,10 +209,10 @@ selectElement2.addEventListener('change', function () {
 
 function montant2(classe) {
   const montantMapping = {
-    sizieme: 10000,
-    cinquieme: 15000,
-    quatrieme: 20000,
-    troisieme: 25000,
+    '6ème': 10000,
+    '5ème': 15000,
+    '4ème': 20000,
+    '3ème': 25000,
   };
 
   return montantMapping[classe] || 0;
