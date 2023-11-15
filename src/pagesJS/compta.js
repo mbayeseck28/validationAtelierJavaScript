@@ -2,6 +2,7 @@
 import { initializeApp, onLog } from 'firebase/app';
 // Importation des  services
 import {
+  doc,
   addDoc,
   collection,
   getDocs,
@@ -9,6 +10,14 @@ import {
   onSnapshot,
   serverTimestamp,
 } from 'firebase/firestore';
+
+import {
+  getAuth,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  onAuthStateChanged,
+  updateProfile,
+} from 'firebase/auth';
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -24,6 +33,39 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 
 const db = getFirestore(app);
+const auth = getAuth(app);
+
+/******************  affiche photo profil Nav bar  **********************/
+onAuthStateChanged(auth, (user) => {
+  if (user) {
+    console.log('Utilisateur connecté');
+    var userEmail = user.email;
+    const userRef = collection(db, 'utilisateurs');
+    onSnapshot(userRef, (snapshot) => {
+      let userRef = [];
+      snapshot.docs.forEach((doc) => {
+        userRef.push({ ...doc.data(), id: doc.id });
+      });
+      userRef.forEach((utilisateur) => {
+        // Créez une référence au document de l'utilisateur dans Firestore
+        const userDocRef = doc(db, 'utilisateurs', utilisateur.id);
+
+        if (utilisateur.email == userEmail) {
+          const ProfilNav = document.querySelector('.ProfilNav');
+          const profilVoir = document.querySelector('.profilVoir');
+          const nomUser = document.querySelector('.nomUser');
+          const statusUser = document.querySelector('.statusUser');
+          ProfilNav.src = utilisateur.url;
+          profilVoir.src = utilisateur.url;
+          nomUser.innerText = utilisateur.prenom + ' ' + utilisateur.nom;
+          statusUser.innerText = utilisateur.status;
+        }
+      });
+    });
+  } else {
+    console.log('Aucun utilisateur connecté');
+  }
+});
 
 // Récupérer la collection
 const eleve = collection(db, 'inscScolarite');
