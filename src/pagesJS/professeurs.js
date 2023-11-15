@@ -34,7 +34,7 @@ export function gestionProfesseurs(utilisateurs) {
   utilisateurs.forEach((utilisateur) => {
     let ligne = document.createElement('tr');
     ligne.innerHTML = `
-                <td class="mx-auto text-center d-none d-lg-block m-0">${utilisateur.nom}</td>
+                <td class="mx-auto text-center m-0  d-none d-lg-block m-0">${utilisateur.nom}</td>
                 <td class="mx-auto text-center m-0">${utilisateur.prenom}</td>
                 <td class="mx-auto text-center m-0 d-none d-lg-block">${utilisateur.matiere}</td>
                 <td class="mx-auto text-center m-0">${utilisateur.coordonnee}</td>

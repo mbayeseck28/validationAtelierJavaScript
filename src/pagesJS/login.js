@@ -12,16 +12,16 @@ import {
   doc,
   getDoc,
   onSnapshot,
+  fromTo
 } from "firebase/firestore";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyCSRo2EZwo5LQIO75FevIBvEKbDD61HNuY",
-  authDomain: "validation-atelier-js.firebaseapp.com",
-  databaseURL: "https://validation-atelier-js-default-rtdb.firebaseio.com",
-  projectId: "validation-atelier-js",
-  storageBucket: "validation-atelier-js.appspot.com",
-  messagingSenderId: "466332062090",
-  appId: "1:466332062090:web:ffbe45ef4a7371a7b5b873",
+  apiKey: "AIzaSyBQ3SrfEimEPtzCFyxR0vWBK8BJ_K4Ma48",
+  authDomain: "mixte-feewi.firebaseapp.com",
+  projectId: "mixte-feewi",
+  storageBucket: "mixte-feewi.appspot.com",
+  messagingSenderId: "1083213454329",
+  appId: "1:1083213454329:web:df3deafe22a82ad34e3b28"
 };
 
 const app = initializeApp(firebaseConfig);
@@ -53,3 +53,29 @@ identifiants incorrects`);
   const loginForm = document.getElementById("signup");
   console.log("page connexion");
   loginForm.addEventListener("submit", handleLogin);
+
+/*******************************CHARGEMENT DE LA PAGE ***********************/ 
+gsap.fromTo(
+  ".loading-page",
+  { opacity: 1 },
+  {
+      opacity: 0,
+      display: "none",
+      duration: 1.5,
+      delay: 3.5,
+  }
+);
+
+gsap.fromTo(
+  ".logo-name",
+  {
+      y: 50,
+      opacity: 0,
+  },
+  {
+      y: 0,
+      opacity: 1,
+      duration: 2,
+      delay: 1.5,
+  }
+);
