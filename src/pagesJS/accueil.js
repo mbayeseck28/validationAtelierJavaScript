@@ -172,7 +172,7 @@ getDocs(eleve).then((snapshot) => {
     totalInscription += parseInt(utili.montantInsc);
   });
 
-  totalIns.innerHTML = `<b>${totalInscription}</b>`;
+  totalIns.innerHTML = `<b>${totalInscription.toLocaleString('en-US')} Fcfa</b>`;
 });
 
 getDocs(certiesRef2).then((snapshot) => {
@@ -185,5 +185,5 @@ getDocs(certiesRef2).then((snapshot) => {
     totalMensualiter += parseInt(utili.montantpay);
   });
   // console.log(certiesRef2);
-  totalMens.innerHTML = `<b>${totalMensualiter}</b>`;
+  totalMens.innerHTML = `<b>${totalMensualiter.toLocaleString('en-US')} Fcfa</b>`;
 });
