@@ -13,12 +13,12 @@ import {
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyCSRo2EZwo5LQIO75FevIBvEKbDD61HNuY",
-  authDomain: "validation-atelier-js.firebaseapp.com",
-  projectId: "validation-atelier-js",
-  storageBucket: "validation-atelier-js.appspot.com",
-  messagingSenderId: "466332062090",
-  appId: "1:466332062090:web:ffbe45ef4a7371a7b5b873",
+  apiKey: "AIzaSyBQ3SrfEimEPtzCFyxR0vWBK8BJ_K4Ma48",
+  authDomain: "mixte-feewi.firebaseapp.com",
+  projectId: "mixte-feewi",
+  storageBucket: "mixte-feewi.appspot.com",
+  messagingSenderId: "1083213454329",
+  appId: "1:1083213454329:web:df3deafe22a82ad34e3b28"
 };
 
 // Initialize Firebase
@@ -153,15 +153,6 @@ let date = new Date();
 let year = date.getFullYear();
 let month = date.getMonth() + 1;
 let day = date.getDate();
-// onSnapshot(eleve, (snapshot) => {
-//   let eleves = [];
-//   snapshot.docs.forEach((doc) => {
-//     eleves.push({ ...doc.data(), id: doc.id });
-//   });
-//   eleves.forEach((utili) => {
-
-//   });
-// })
 
 const myTbody1 = document.querySelector(".myTd1");
 const myTbody2 = document.querySelector(".myTd2");
