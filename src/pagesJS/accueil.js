@@ -1,10 +1,19 @@
-
-
-
 // Import the functions you need from the SDKs you need
 import { initializeApp } from 'firebase/app';
 // Importation des  services
+import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import { getDatabase, ref as refDatabase, set, get } from "firebase/database";
 import {
+  getAuth,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  onAuthStateChanged,
+  updateProfile ,
+} from "firebase/auth";
+
+import {
+  doc,
+  updateDoc,
   addDoc,
   collection,
   documentId,
@@ -26,8 +35,43 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-
+const auth = getAuth(app); 
 const db = getFirestore(app);
+
+
+onAuthStateChanged(auth, (user) => {
+  if (user) {
+      console.log("Utilisateur connecté");
+      var userEmail = user.email;
+      const userRef = collection(db, "utilisateurs");
+      onSnapshot(userRef, (snapshot) => {
+        let userRef = [];
+        snapshot.docs.forEach((doc) => {
+          userRef.push({...doc.data(), id: doc.id })
+        })
+        userRef.forEach((utilisateur => {
+          // Créez une référence au document de l'utilisateur dans Firestore
+          const userDocRef = doc(db, "utilisateurs", utilisateur.id);
+          
+          if (utilisateur.email == userEmail) {   
+              const ProfilNav = document.querySelector('.ProfilNav');
+              const profilVoir = document.querySelector('.profilVoir');
+              const nomUser = document.querySelector('.nomUser');
+              const statusUser = document.querySelector('.statusUser') 
+              ProfilNav.src = utilisateur.url;
+              profilVoir.src = utilisateur.url;
+              nomUser.innerText = utilisateur.prenom + ' ' + utilisateur.nom;
+              statusUser.innerText = utilisateur.status;
+            
+          }
+        }))
+      });
+
+
+  } else {
+      console.log("Aucun utilisateur connecté");
+  }
+});
 
 // Récupérer la collection
 const eleve = collection(db, 'inscScolarite');
@@ -40,13 +84,14 @@ const effectif3 = document.getElementById('effectif3');
 
 
 
+
+
 onSnapshot(eleve, (snapshot) => {
   let eleves = [];
   snapshot.docs.forEach((doc) => {
     eleves.push({ ...doc.data(), id: doc.id });
   });
   eleves.sort((a, b) => b.dateDajout - a.dateDajout);
-console.log(eleves);
   let effectifClass6 = [];
   let effectifClass5 = [];
   let effectifClass4 = [];
@@ -97,7 +142,6 @@ onSnapshot(certiesRef2, (snapshot) => {
   let PaiementsEffec4 = [];
   let PaiementsEffec3 = [];
 
-  console.log(certiesRef2);
   certiesRef2.forEach((utili) => {
 
     if (utili.classe === '6ème') {
@@ -119,7 +163,6 @@ onSnapshot(certiesRef2, (snapshot) => {
     }
     if (utili.classe === '4ème') {
       PaiementsEffec4.push(utili.montantpay);
-      console.log(paiement4);
       let sum = (PaiementsEffec4.length / parseInt(effectif4.innerHTML)) * 100
 
       if (PaiementsEffec4.length === "0") {
@@ -134,7 +177,6 @@ onSnapshot(certiesRef2, (snapshot) => {
     }
     if (utili.classe === '3ème') {
       PaiementsEffec3.push(utili.montantpay);
-      console.log(paiement3);
       paiement3.innerHTML =
         Math.round(
           (PaiementsEffec3.length / parseInt(effectif3.innerHTML)) * 100
@@ -216,6 +258,5 @@ getDocs(certiesRef2).then((snapshot) => {
   certiesRef2.forEach((utili) => {
     totalMensualiter += parseInt(utili.montantpay);
   });
-  console.log(certiesRef2);
   totalMens.innerHTML = `<b>${totalMensualiter}</b>`
 });

@@ -31,6 +31,15 @@ import {
   recherche,
 } from "./employer.js";
 
+import {
+  getAuth,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  onAuthStateChanged,
+  updateProfile ,
+} from "firebase/auth";
+
+
 const firebaseConfig = {
   apiKey: "AIzaSyCSRo2EZwo5LQIO75FevIBvEKbDD61HNuY",
   authDomain: "validation-atelier-js.firebaseapp.com",
@@ -43,11 +52,49 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
 
 /******* PARTIE ACCUEIL **********/
 nombreProfesseur();
 nombreEmployer();
 nombreAssocie();
+
+
+/******* PARTIE Porfil nav bar  **********/
+
+onAuthStateChanged(auth, (user) => {
+  if (user) {
+      console.log("Utilisateur connecté");
+      var userEmail = user.email;
+      const userRef = collection(db, "utilisateurs");
+      onSnapshot(userRef, (snapshot) => {
+        let userRef = [];
+        snapshot.docs.forEach((doc) => {
+          userRef.push({...doc.data(), id: doc.id })
+        })
+        userRef.forEach((utilisateur => {
+          // Créez une référence au document de l'utilisateur dans Firestore
+          const userDocRef = doc(db, "utilisateurs", utilisateur.id);
+          
+          if (utilisateur.email == userEmail) { 
+              const ProfilNav = document.querySelector('.ProfilNav');
+              const profilVoir = document.querySelector('.profilVoir');
+              const nomUser = document.querySelector('.nomUser');
+              const statusUser = document.querySelector('.statusUser') 
+              ProfilNav.src = utilisateur.url;
+              profilVoir.src = utilisateur.url;
+              nomUser.innerText = utilisateur.prenom + ' ' + utilisateur.nom;
+              statusUser.innerText = utilisateur.status;
+            
+          }
+        }))
+      });
+
+
+  } else {
+      console.log("Aucun utilisateur connecté");
+  }
+});
 
 /*******PARTIE PROFESSEURS ET EMPLOYER******/
 let id;

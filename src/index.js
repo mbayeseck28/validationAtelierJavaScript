@@ -22,6 +22,7 @@
 //     }
 // });
 
+
 var pageName = window.location.pathname.split('/').pop();
 
 if (pageName === 'inscription.html') {
