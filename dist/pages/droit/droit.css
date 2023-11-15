@@ -4,9 +4,7 @@
     box-sizing: border-box;
 }
 
-.one{
-display: block;
-}
+
 
 .la{
     text-align: right;
@@ -75,16 +73,13 @@ body{
 
 .center img {
     position: absolute;
-    top: 60%; /* Ajustez cette valeur en fonction de vos besoins */
+    top: 60%; 
     left: 50%;
     transform: translate(-50%, -50%);
 }
 
 .i1{
     color: #00E100;
-    position : relative;
-    left: 960px;
-    bottom: 150px;
     font-size: 30px;
 }
 .ba p{
@@ -99,9 +94,7 @@ body{
     .center h1{
         font-size: 20px;
     }
-    .i1{
-        left: 800px;
-    }
+    
     .center {
         width: 80%;
         
@@ -112,6 +105,8 @@ body{
         font-size: 10px;
         white-space: wrap;
     }
+
+    
 
     .center2{
         width: 100%;
@@ -142,12 +137,10 @@ body{
         margin-left: 80px;
     }
     .center h1{
-        font-size: 10px;
+        font-size: 20px;
     }
-    .i1{
-        left: 375px;
-    }
-}
+    
+ }    
 @media screen and (min-width : 1500px) {
     .center h1{
         font-size: 25px;
@@ -184,7 +177,7 @@ body{
 
     .center img {
         position: relative;
-        top: 60%; /* Ajustez cette valeur en fonction de vos besoins */
+        top: 63%; 
         left: 50%;
         transform: translate(-50%, -50%);
     }
@@ -195,9 +188,7 @@ body{
     .ba p{
         margin-left: 0;
     }
-    .i1{
-        left: 200px;
-    }
+    
     .content{
         width: 100%;
     }
