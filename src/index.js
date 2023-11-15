@@ -46,7 +46,7 @@ if (pageName === 'inscription.html') {
   import('./pagesJS/proff.js');
 }else if (pageName === 'droit.html') {
   import('./pagesJS/sidebar');
-  import('./pagesJS/droit.js');
+  import('../dist/pages/droit/droit.js');
 } else if (pageName === 'eleve.html') {
   import('./pagesJS/sidebar');
   import('./pagesJS/eleve.js');
