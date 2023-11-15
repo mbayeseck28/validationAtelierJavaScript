@@ -22,6 +22,7 @@
 //     }
 // });
 
+
 var pageName = window.location.pathname.split('/').pop();
 
 if (pageName === 'inscription.html') {
@@ -45,7 +46,6 @@ if (pageName === 'inscription.html') {
   import('./pagesJS/proff.js');
 }else if (pageName === 'droit.html') {
   import('./pagesJS/sidebar');
-  import('./pagesJS/droit.js');
   import('./pagesJS/droit.js');
 } else if (pageName === 'eleve.html') {
   import('./pagesJS/sidebar');
