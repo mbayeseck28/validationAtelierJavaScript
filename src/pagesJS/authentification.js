@@ -50,20 +50,7 @@ const userRef = collection(db, "utilisateurs");
             
             tableBody.appendChild(ligne);
         }))
-    });
-
-    // tableBody.addEventListener("load", () => {
-    //     // Supprimer le loader une fois que le contenu principal est chargé
-        // let loaderContainer = document.querySelector(".chargement-page");
-        // loaderContainer.style.display = "none";
-    //   });
-
-    // firebase.firestore().collection('userRef').onSnapshot((snapshot) => {
-    //     // handle the data
-    //     let loaderContainer = document.querySelector(".chargement-page");
-    //     loaderContainer.style.display = "none";
-    //    });
-       
+    });       
   
 let rechercheUser = document.getElementById('inputRecherche')
 function myFunction() {
