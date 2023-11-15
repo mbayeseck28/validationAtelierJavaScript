@@ -5,4 +5,4 @@ setInterval(() => {
   count > 90
     ? clearInterval(this)
     : (document.querySelector('.progress-value').innerText = `${count}%`);
-}, 47);
+}, 60);

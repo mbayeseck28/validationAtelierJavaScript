@@ -56,6 +56,15 @@ input {
     border-radius: 150px 75px;
     padding: 0;
 }
+select {
+    cursor: pointer;
+}
+
+select:hover{
+    background-color: #000000; 
+    color: #00de00;
+   
+}
 
 .imageUploaded{
     margin-top: 10px;
