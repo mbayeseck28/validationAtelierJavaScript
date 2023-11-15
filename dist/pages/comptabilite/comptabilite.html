@@ -68,18 +68,19 @@
               </div>
             </div>
           </div>
-                <div class="profil ms-3">
-                    <img src="../../../src/assets/images/Group 800.png" alt="">
-                </div>
+                
+          <div class="profil ms-3">
+            <img src="../../../src/assets/images/profil.jpeg" class="ProfilNav" alt="" />
+          </div>
                 <i class="fa-solid angle-down ms-3 mt-1 dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"></i>
             
             <ul class="dropdown-menu rounded-5 pt-0 pb-4">
               <div class="d-flex flex-column py-4 mb-2 justify-content-center gy-5 align-items-center divProfile">
-                <div class="col-6 col-md-2  mx-auto my-2 mt-3 imageDivProfile">
-                  <img src="../../../src/assets/images/Group 800.png" alt="" />
-               </div>
-               <h6 class="text-center mb-0 fst-italic">Moustapha Djigo</h6>
-               <p class="mt-0 pt-0 text-light">Proviseur</p>
+                <div class="col-6 col-md-2 mx-auto my-2 mt-3 imageDivProfile">
+                    <img src="../../../src/assets/images/profil.jpeg" class="profilVoir" alt="" />
+                </div>
+               <h6 class="text-center mb-0 fst-italic">Nom Complet</h6>
+               <p class="mt-0 pt-0 text-light">Status</p>
               </div>              
               <li><a class="dropdown-item   mt-3 " href="../profil/profil.html">
                 <button class="btn btnGreen fw-bold btn-light shadow btn-sm w-100" type="button">
@@ -134,9 +135,9 @@
                        <li>
                            <a href="../professeur/professeur.html">
                                <i class="fa-solid fa-chalkboard-user"></i>
-                               <span class="links_name">Proffesseurs</span>
+                               <span class="links_name">Professeurs</span>
                            </a>
-                           <span class="tooltip">Proffesseurs</span>
+                           <span class="tooltip">Professeurs</span>
                        </li>
                        <li>
                            <a href="../Authentification/authentification.html">
@@ -159,7 +160,7 @@
                 <!-- __________________________ -->
                   <!-- SECTION DE MOUSSA -->
                   <section class="moussa myContDiv">
-                    <h2 class="mt-5 mb-4">Comptabilité</h2>
+                    <h2 class="mt-5 fs-3 mt-lg-0 mb-3">Comptabilité</h2>
                     <div class="row gy-3">
                         <div class="col-md-6">
                             <div class="card cage">
@@ -175,14 +176,29 @@
                         </div>
                         <div class="col-md-6">
                             <div class="card cage">
-                                <div class="card-body">
-                                    <h6 class="text-center pb-3">Dépenses</h6>
-                                    <div class="milieu d-flex justify-content-between">
-                                        <p>20.000.000 <span class="fw-bold">FCFA</span></p>
-                                        <img src="../../../src/assets/images/Group.png" alt="">
+                                <!-- <div class="card-body"> -->
+                                    <div class="wrapper">
+                                        <header>
+                                          <p class="current-date"></p>
+                                          <div class="icons">
+                                            <span id="prev" class="material-symbols-rounded"> < </span>
+                                            <span id="next" class="material-symbols-rounded"> > </span>
+                                          </div>
+                                        </header>
+                                        <div class="calendar">
+                                          <ul class="weeks">
+                                            <li>Dim</li>
+                                            <li>Lun</li>
+                                            <li>Mar</li>
+                                            <li>Mer</li>
+                                            <li>Jeu</li>
+                                            <li>Ven</li>
+                                            <li>Sam</li>
+                                          </ul>
+                                          <ul class="days"></ul>
+                                        </div>
                                     </div>
-                                <p id="dateJour2"></p>
-                                </div>
+                                <!-- </div> -->
                             </div>
                         </div>
                     </div>
@@ -208,15 +224,15 @@
                             <a class="text-decoration-none text-black fw-semibold opacity-50" href="#inscAct">Inscription autres activités</a>
                             <a class="text-decoration-none text-black fw-semibold opacity-50" href="#mensualite">Mensualité</a>
                         </div> -->
-                        <div class=" d-flex justify-content-center">
-                            <button type="button" class="btn " data-bs-toggle="modal" data-bs-target="#modalInscSco">
-                                <i class="fa-solid text-dark fa-circle-plus fs-1"></i>
-                            </button>
-                        </div>
                         <div class="card border-0 shadow rounded-3 my-3">
+                            <div class="mt-4 d-flex justify-content-center">
+                                <button type="button" class="btn " data-bs-toggle="modal" data-bs-target="#modalInscSco">
+                                    <i class="fa-solid text-dark fa-circle-plus fs-1"></i>
+                                </button>
+                            </div>
                             <div class="card-body">
                                 <h5 class="my-3 pb-3 px-2">Inscription scolarité</h5>
-                                <form class="d-flex justify-content-between flex-wrap">
+                                <form class="d-flex justify-content-between flex-wrap" id="chercheInsc">
                                     <div class="mb-2 d-flex h-75 justify-content-between myInput2">
                                         <label for="classe" class="form-label mt-2 me-2">Classe: </label>
                                         <select class="form-select form-select-lg mb-3 fs-6 p-1 shadow" id="classe" aria-label="Large select example">
@@ -232,7 +248,7 @@
                                     </div> -->
                                     <div class="shadow d-flex mb-lg-0 align-items-center p-0 rounded-3 ps-2 myInput h-75">
                                       <input
-                                        type="search" class="w-100 bg-transparent border-0 border-outline-none  myInput" placeholder="Rechercher..." />
+                                        type="search" class="w-100 bg-transparent border-0 border-outline-none  myInput" placeholder="Rechercher..." id="nomPren" />
                                       <span class=" me-2"><i class="fa-solid fa-magnifying-glass"></i></span>
                                     </div>
                                   </form>
@@ -260,6 +276,7 @@
                                 </div>
                               </div>
                             </div>
+                            <p id="erreurRefProff" class="text-center text-danger "></p>
                 </section>
             
             
@@ -268,7 +285,7 @@
                 <div class="modal-dialog">
                   <div class="modal-content">
                     <div class="modal-header">
-                      <h1 class="modal-title fs-5" id="exampleModalLabel">Inscription scolarité</h1>
+                      <h1 class="modal-title fs-5" id="exampleModalLabel">Inscrire un nouveau élève</h1>
                       <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
@@ -300,7 +317,7 @@
                               <div class="mb-3 collapse" id="collapseExample">
                                 <div class="card card-body">
                                     <label for="prenom" class="form-label">Montant de l'inscription pour cette classe</label>
-                                    <input type="text" value="500" class="form-control shadow-sm prixInsc" required disabled id="montantPaye">
+                                    <input type="text" value="0" class="form-control shadow-sm prixInsc" required disabled id="montantPaye">
                                 </div>
                               </div>
                             </div>
@@ -311,25 +328,22 @@
                   </div>
                 </div>
               </div>
-              <hr>
               <!-- Section de Ladji -->
             <!-- Ladji Section 2 Mensualité -->
             <section class="myContDiv mb-5" id="mensualite">
                 
-                <div class="">
-                    <div class=" d-flex justify-content-center">
+                <div class="card border-0 shadow rounded-3 my-3">
+                    <div class="mt-4 d-flex justify-content-center">
                         <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#idActiviter">
                             <i class="fa-solid fa-circle-plus text-dark fs-1"></i>
                         </button>
                     </div>
-                </div>
-                <div class="card border-0 shadow rounded-3 my-3">
                     <div class="card-body">
                         <h5 class="my-3 pb-3 px-2">Mensualité</h5>
-                        <form class="d-flex justify-content-between flex-wrap">
+                        <form class="d-flex justify-content-between flex-wrap" id="chercheMens">
                             <div class="mb-2 d-flex justify-content-between myInput2">
                                 <label for="classe" class="form-label mt-2 me-2">Classe: </label>
-                                <select class="form-select form-select-lg mb-3 fs-6 p-1 shadow" id="classe"
+                                <select class="form-select form-select-lg mb-3 fs-6 p-1 shadow" id="classe2"
                                     aria-label="Large select example">
                                     <option class="dis" disabled selected>Classe</option>
                                     <option value="6ème">6ème</option>
@@ -340,7 +354,7 @@
                             </div>
                             <div class="mb-2 myInput">
                                 <input class="form-control shadow w-100 myInput" type="search"
-                                    placeholder="Rechercher" id="country-search" aria-label="Search">
+                                    placeholder="Rechercher" id="nomPren2" aria-label="Search">
                             </div>
                         </form>
                         <div class="">
@@ -349,6 +363,7 @@
                                     <tr class="border border-2">
                                         <th class="fw-bold text-start py-2 ps-2">Prenom</th>
                                         <th class="fw-bold text-start py-2 ps-2">Nom</th>
+                                        <th class="fw-bold text-start d-none d-sm-block py-2 ps-2">Mois</th>
                                         <th class="fw-bold text-center py-2 ps-2">Montant de la mensualité</th>
                                     </tr>
                                 </thead>
@@ -366,7 +381,8 @@
                         </div>
                     </div>
                 </div>
-            </section><hr>
+                <p id="erreurRefProff2" class="text-center text-danger "></p>
+            </section>
             <!-- Modal -->
             <div class="modal fade" id="idActiviter" tabindex="-1" aria-labelledby="exampleModalLabel"
                 aria-hidden="true">
@@ -405,12 +421,31 @@
                                   <div class="mb-3 collapse" id="collapseExample2">
                                     <div class="card card-body">
                                         <label for="prenom" class="form-label">Montant à payer</label>
-                                        <input type="text" value="500" class="form-control shadow-sm prixInsc" required disabled id="montantAPaye">
+                                        <input type="text" value="0" class="form-control shadow-sm prixInsc" required disabled id="montantAPaye">
                                     </div>
                                   </div>
                                 </div>
+                                <div class="mb-3">
+                                  <label for="mois" class="form-label">Mois</label>
+                                  <select class="form-select" id="mois">
+                                    <option class="" disabled selected>Choisir un mois</option>
+                                    <option value='janvier'>Janvier</option>
+                                    <option value='fevrier'>Fevrier</option>
+                                    <option value='mars'>Mars</option>
+                                    <option value='avril'>April</option>
+                                    <option value='mai'>Mai</option>
+                                    <option value='J$juin'>Juin</option>
+                                    <option value='juillet'>Juillet</option>
+                                    <option value='aout'>Aout</option>
+                                    <option value='septembre'>Septembre</option>
+                                    <option value='octobre'>Octobre</option>
+                                    <option value='novembre'>Novembre</option>
+                                    <option value='decembre'>Décembre</option>
+                                  </select>
+                                </div>
                                 <div id="liveAlertPlaceholder"></div>
-                                <button type="submit" class="btn myBtn" id="liveAlertBtn">Enregistrer</button>
+                                <div class="d-none text-danger mb-3 alertMens mx-auto"></div>
+                                <button type="submit" class="btn myBtn">Enregistrer</button>
                               </form>
                         </div>
                     </div>
@@ -419,7 +454,7 @@
               <!-- Parti Ladji Fin -->
 
               <!-- SECTION PAPE CHEIKH -->
-              <section class="pape myContDiv bg-white rounded shadow">
+              <section class="pape myContDiv pb-3 mb-3 bg-white rounded shadow">
                 <div class="revenu mx-2">
                     <h5 class="my-5 pt-4 px-2">Revenue</h5>
                     <div class="contenue px-2">
@@ -452,6 +487,8 @@
         </div>
     </div> 
 
+    
      <script src="https://cdn.jsdelivr.net/npm/chart.js@3.5.1/dist/chart.min.js"></script>
+     <script src="sidebar.js"></script>
 </body>
 </html>

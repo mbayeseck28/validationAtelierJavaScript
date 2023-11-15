@@ -69,20 +69,17 @@
             </div>
           </div>
                 <div class="profil ms-3">
-                    <img src="../../../src/assets/images/Group 800.png" alt="">
+                  <img src="../../../src/assets/images/profil.jpeg" class="ProfilNav" alt="" />
                 </div>
-                <!-- <a href="../../Acceuil/dist/profil.html" style="color: #000000;">
-                    <i class="fa-solid fa-angle-down ms-3 mt-1"></i>
-                </a> -->
                 <i class="fa-solid angle-down ms-3 mt-1 dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"></i>
             
             <ul class="dropdown-menu rounded-5 pt-0 pb-4">
               <div class="d-flex flex-column py-4 mb-2 justify-content-center gy-5 align-items-center divProfile">
-                <div class="col-6 col-md-2  mx-auto my-2 mt-3 imageDivProfile">
-                  <img src="../../../src/assets/images/Group 800.png" alt="" />
-               </div>
-               <h6 class="text-center mb-0 fst-italic">Moustapha Djigo</h6>
-               <p class="mt-0 pt-0 text-light">Proviseur</p>
+                <div class="col-6 col-md-2 mx-auto my-2 mt-3 imageDivProfile">
+                  <img src="../../../src/assets/images/profil.jpeg" class="profilVoir" alt="" />
+                </div>
+               <h6 class="text-center mb-0 fst-italic">Nom Complet</h6>
+               <p class="mt-0 pt-0 text-light">Status</p>
               </div>              
               <li><a class="dropdown-item   mt-3 " href="../profil/profil.html">
                 <button class="btn btnGreen fw-bold btn-light shadow btn-sm w-100" type="button">
@@ -137,9 +134,9 @@
                        <li>
                            <a href="../professeur/professeur.html">
                                <i class="fa-solid fa-chalkboard-user"></i>
-                               <span class="links_name">Proffesseurs</span>
+                               <span class="links_name">Professeurs</span>
                            </a>
-                           <span class="tooltip">Proffesseurs</span>
+                           <span class="tooltip">Professeurs</span>
                        </li>
                        <li>
                            <a href="../Authentification/authentification.html">
@@ -233,7 +230,7 @@
             </div>
         </div>
     </div> 
-    <!-- Modal professeurs -->
+    <!-- Modal -->
     <div
     class="modal fade"
     id="exampleModal"
@@ -267,11 +264,12 @@
             <div class="mb-3 d-none">
               <label for="type" class="form-label">Type</label>
               <select class="form-select" id="type">
-                <option class="" selected>Inscription Scolarité</option>
+                <option class="" selected>Inscription</option>
               </select>
             </div>
             <div class="mb-3">
               <label for="classe" class="form-label">Classe</label>
+
               <select class="form-select" id="classe">
                 <!-- <option selected>Classe</option> -->
                 <option class="dis" disabled selected>Classe</option>
@@ -280,8 +278,16 @@
                 <option value="4ème">4ème</option>
                 <option value="3ème">3ème</option>
               </select>
+
+              <div class="mb-3 collapse" id="collapseExample">
+                <div class="card card-body">
+                    <label for="prenom" class="form-label">Montant de l'inscription pour cette classe</label>
+                    <input type="text" value="500" class="form-control shadow-sm prixInsc" required disabled id="montantInsc">
+                </div>
+              </div>
             </div>
             <div id="liveAlertPlaceholder"></div>
+
             <button type="submit" class="btn myBtn" id="modifier" data-bs-dismiss="modal"
             aria-label="Close">Modifier</button>
           </form>

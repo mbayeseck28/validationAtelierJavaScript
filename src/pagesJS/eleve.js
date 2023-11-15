@@ -1,6 +1,9 @@
 // Import the functions you need from the SDKs you need
-import { initializeApp } from "firebase/app";
 // Importation des  services
+// Your web app's Firebase configuration
+// Import the functions you need from the SDKs you need
+import { initializeApp } from "firebase/app";
+
 import {
   collection,
   doc,
@@ -8,16 +11,15 @@ import {
   deleteDoc,
   getFirestore,
   onSnapshot,
-} from "firebase/firestore";
+} from 'firebase/firestore';
 
-// Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyCSRo2EZwo5LQIO75FevIBvEKbDD61HNuY",
-  authDomain: "validation-atelier-js.firebaseapp.com",
-  projectId: "validation-atelier-js",
-  storageBucket: "validation-atelier-js.appspot.com",
-  messagingSenderId: "466332062090",
-  appId: "1:466332062090:web:ffbe45ef4a7371a7b5b873",
+  apiKey: "AIzaSyBQ3SrfEimEPtzCFyxR0vWBK8BJ_K4Ma48",
+  authDomain: "mixte-feewi.firebaseapp.com",
+  projectId: "mixte-feewi",
+  storageBucket: "mixte-feewi.appspot.com",
+  messagingSenderId: "1083213454329",
+  appId: "1:1083213454329:web:df3deafe22a82ad34e3b28"
 };
 
 // Initialize Firebase
@@ -26,7 +28,7 @@ const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
 // Récupérer la collection
-const eleve = collection(db, "inscScolarite");
+const eleve = collection(db, 'inscScolarite');
 let eleves;
 let id;
 // Realtime Update
@@ -45,12 +47,12 @@ onSnapshot(eleve, (snapshot) => {
     eleve.push({ ...doc.data(), id: doc.id });
   });
   eleve.sort((a, b) => b.dateDajout - a.dateDajout);
-  const list = document.querySelector("#list");
-  list.innerHTML = "";
+  const list = document.querySelector('#list');
+  list.innerHTML = '';
   eleves = eleve;
   console.log(eleve);
   eleve.forEach((utili) => {
-    const tr = document.createElement("tr");
+    const tr = document.createElement('tr');
 
     tr.innerHTML = `
     <td class="mx-auto text-center m-0">${utili.nom}</td>
@@ -68,15 +70,15 @@ onSnapshot(eleve, (snapshot) => {
     `;
     list.appendChild(tr);
   });
-  let loaderContainer = document.querySelector(".loader18");
-  loaderContainer.style.display = "none";
+  let loaderContainer = document.querySelector('.loader18');
+  loaderContainer.style.display = 'none';
 });
 
 // Rechercher un élève
-const rechercheInput = document.querySelector("#formEleve");
-rechercheInput.addEventListener("input", (e) => {
+const rechercheInput = document.querySelector('#formEleve');
+rechercheInput.addEventListener('input', (e) => {
   const elementSaisie = e.target.value;
-  document.getElementById("list").innerHTML = "";
+  document.getElementById('list').innerHTML = '';
   console.log(eleve);
   const collectionFilter = eleves.filter(
     (element) =>
@@ -85,11 +87,11 @@ rechercheInput.addEventListener("input", (e) => {
   );
 
   if (collectionFilter.length) {
-    document.getElementById("erreurRefProff").innerHTML = "";
-    const list = document.querySelector("#list");
-    list.innerHTML = "";
+    document.getElementById('erreurRefProff').innerHTML = '';
+    const list = document.querySelector('#list');
+    list.innerHTML = '';
     collectionFilter.forEach((utili) => {
-      const tr = document.createElement("tr");
+      const tr = document.createElement('tr');
 
       tr.innerHTML = `
       <td class="mx-auto text-center d-none d-lg-block m-0">${utili.nom}</td>
@@ -108,17 +110,17 @@ rechercheInput.addEventListener("input", (e) => {
       list.appendChild(tr);
     });
   } else {
-    document.getElementById("erreurRefProff").innerHTML =
-      "Aucun resultat trouver";
+    document.getElementById('erreurRefProff').innerHTML =
+      'Aucun resultat trouver';
   }
 });
 
 // Modification
-const btnModifier = document.getElementById("modifier");
-const list = document.querySelector("#list");
-list.innerHTML = "";
+const btnModifier = document.getElementById('modifier');
+const list = document.querySelector('#list');
+list.innerHTML = '';
 
-btnModifier.addEventListener("click", (e) => {
+btnModifier.addEventListener('click', (e) => {
   e.preventDefault();
 
   const nouveauEleves = {
@@ -128,27 +130,27 @@ btnModifier.addEventListener("click", (e) => {
   };
   console.log(nouveauEleves);
   const docRef = doc(eleve, id);
-  const form = document.querySelector(".addToFirebase");
+  const form = document.querySelector('.addToFirebase');
   updateDoc(docRef, nouveauEleves).then(() => {
     form.reset();
-    console.log("Document modifié avec succès !");
+    console.log('Document modifié avec succès !');
   });
 });
 
-document.addEventListener("click", function (e) {
-  if (e.target.classList.contains("modifier")) {
-    id = e.target.getAttribute("data-id");
+document.addEventListener('click', function (e) {
+  if (e.target.classList.contains('modifier')) {
+    id = e.target.getAttribute('data-id');
     const elevesModifier = eleves.find((u) => u.id === id);
     console.log(elevesModifier);
 
     nom.value = elevesModifier.nom;
     prenom.value = elevesModifier.prenom;
     classe.value = elevesModifier.classe;
-  } else if (e.target.classList.contains("supprimer")) {
-    id = e.target.getAttribute("data-id");
+  } else if (e.target.classList.contains('supprimer')) {
+    id = e.target.getAttribute('data-id');
     const docRef = doc(eleve, id);
     deleteDoc(docRef).then(() => {
-      console.log("Document supprimé avec succès !");
+      console.log('Document supprimé avec succès !');
     });
   }
 });

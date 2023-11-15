@@ -79,25 +79,15 @@
         </div>
         <div class="col-12 col-md-5 mt-3 text-center calendrier">
           <p>Année scolaire: <span>2022-2023</span></p>
-          <i class="fa-solid fa-angle-left ms-5 me-5"></i>
-          <i class="fa-solid fa-angle-right ms-5"></i>
+          
         </div>
-        <div class="col-12 col-md-2 search">
-          <input
-            type="text"
-            name=""
-            id=""
-            placeholder="Rechercher"
-            class="p-3"
-          />
-        </div>
+       
         <div class="col-6 col-md-3 d-flex flex-row compte">
           <i
             class="fa-regular fa-bell mt-1"
             data-bs-toggle="offcanvas"
             data-bs-target="#offcanvasRight"
-            aria-controls="offcanvasRight"
-          ></i>
+            aria-controls="offcanvasRight"></i>
 
           <div
             class="offcanvas offcanvas-sm offcanvas-end"
@@ -130,11 +120,8 @@
             </div>
           </div>
           <div class="profil ms-3">
-            <img src="../../../src/assets/images/Group 800.png" alt="" />
+            <img src="../../../src/assets/images/profil.jpeg" class="ProfilNav" alt="" />
           </div>
-          <!-- <a href="profil.html" style="color: #000000;">
-                    <i class="fa-solid fa-angle-down ms-3 mt-1"></i>
-                </a> -->
 
           <div class="btn-group">
             <i
@@ -147,32 +134,31 @@
               <div
                 class="d-flex flex-column py-4 mb-2 justify-content-center gy-5 align-items-center divProfile"
               >
-                <div class="col-6 col-md-2 mx-auto my-2 mt-3 imageDivProfile">
-                  <img src="../../../src/assets/images/Group 800.png" alt="" />
-                </div>
-                <h6 class="text-center mb-0 fst-italic">Moustapha Djigo</h6>
-                <p class="mt-0 pt-0 text-light">Proviseur</p>
+              <div class="col-6 col-md-2 mx-auto my-2 mt-3 imageDivProfile">
+                <img src="../../../src/assets/images/profil.jpeg" class="profilVoir rounded-circle" alt="" />
               </div>
-              <li>
+                <h6 class="text-center mb-0 fst-italic">Nom Complet</h6>
+                <p class="mt-0 pt-0 text-light">Status</p>
+              </div>
+              <li class="d-flex flex-column py-2">
                 <a
-                  class="dropdown-item mt-3"
+                  class="dropdown-item mt-3 activeBg"
                   href="../../pages/profil/profil.html"
                 >
                   <button
-                    class="btn btnGreen fw-bold btn-light shadow btn-sm w-100"
+                    class="btn btnGreen d-block fw-bold btn-light shadow btn-sm mb-2 w-100"
                     type="button"
                   >
                     Voir le profil
-                  </button></a
-                >
-              </li>
-              <li>
-                <button
-                  class="btn btnGreen fw-bold btn-light shadow btn-sm w-100"
+                  </button>
+                  <button
+                  class="btn btnGreen d-block fw-bold btn-light shadow btn-sm w-100"
                   type="button"
                 >
                   Deconnexion
                 </button>
+                  </a
+                >
               </li>
             </ul>
           </div>
@@ -220,9 +206,9 @@
               <li>
                 <a href="../professeur/professeur.html">
                   <i class="fa-solid fa-chalkboard-user"></i>
-                  <span class="links_name">Proffesseurs</span>
+                  <span class="links_name">Professeurs</span>
                 </a>
-                <span class="tooltip">Proffesseurs</span>
+                <span class="tooltip">Professeurs</span>
               </li>
               <li>
                 <a href="../Authentification/authentification.html">
@@ -243,17 +229,35 @@
         </div>
         <div class="col-12 col-md-10 mt-5 pt-5 myContain">
           <section class="accueil-body">
-            <h4 class="fw-bold ms-5 ms-lg-4 mt-5 mt-lg-2">Accueil</h4>
-
-
+            
+            
             <!-- CARTES DES DIFFERENTES CLASSES -->
             <div class="container-fluid">
+              <div class="card bg-transparent p-3 pb-3 mb-3 border-0">
+                <div class="row mb-4">
+                  <div class="col-lg-12 d-flex justify-content-between align-items-center">
+                <h4 class="fw-bold ms-5 ms-lg-4 mt-5 mt-lg-2">Accueil</h4>
+                <select id="selectMois" class="rounded-3 px-3 py-2 shadow">
+                  <option value="octobre" >Octobre</option>
+                  <option value="novembre" selected >Novembre</option>
+                  <option value="decembre" >Décembre</option>
+                  <option value="janvier" >Janvier</option>
+                  <option value="fevrier" >Février</option>
+                  <option value="mars" >mars</option>
+                  <option value="avril" >Avril</option>
+                  <option value="mai" >Mai</option>
+                  <option value="juin" >Juin</option>
+                </select>
+               
+              </div>
+
+              </div>
               <div class="row gy-3 mb-4 justify-content-center">
                 <div class="col-lg-3 col-md-6 col-sm-12">
                   <div class="card cardClass shadow mx-auto mb-3">
-                    <div
-                      class="card-header m-0 mt-2 mx-3 p-1 border-0 fw-light bg-transparent text-center d-flex justify-content-between align-items-center"
-                    >
+
+                    <div class="card-header m-0 mt-2 mx-3 p-1 border-0 fw-light  bg-transparent text-center d-flex justify-content-between align-items-center">
+
                       <span class="text-">Classe :</span>
                       <button
                         style="
@@ -280,18 +284,17 @@
                       class="card-footer d-flex justify-content-between"
                       style="background-color: #eef0f2"
                     >
-                      <span class="fw-light">Effectif : </span>
+                      <span class="fw-dark text-dark">Effectif : </span>
                       <span style="color: #00de00" id="effectif6">0</span>
                     </div>
                   </div>
                 </div>
 
-                <div class="col-lg-3 col-md-6 col-sm-12 ">
-                  <div class="card cardClass shadow mx-auto mb-3">
 
-                    <div
-                      class="card-header m-0 mt-2 mx-3 p-1 border-0 fw-light bg-transparent text-center d-flex justify-content-between align-items-center"
-                    >
+                <div class="col-lg-3 col-md-6 col-sm-12">
+
+                  <div class="card shadow cardClass mx-auto mb-3">
+                    <div class="card-header m-0 mt-2 mx-3 p-1 border-0 fw-light  bg-transparent text-center d-flex justify-content-between align-items-center">
 
                       <span class="text-">Classe :</span>
 
@@ -307,14 +310,11 @@
                     </div>
                   </div>
                 </div>
-
-
-
+                 
                 <div class="col-lg-3 col-md-6 col-sm-12">
+
                   <div class="card shadow cardClass mx-auto mb-3">
-                    <div
-                      class="card-header m-0 mt-2 mx-3 p-1 border-0 fw-light bg-transparent text-center d-flex justify-content-between align-items-center"
-                    >
+                    <div class="card-header m-0 mt-2 mx-3 p-1 border-0 fw-light  bg-transparent text-center d-flex justify-content-between align-items-center">
 
                       <span class="text-">Classe :</span>
                       <button
@@ -340,18 +340,16 @@
                       class="card-footer d-flex justify-content-between"
                       style="background-color: #00de00"
                     >
-                      <span class="fw-light">Effectif : </span>
+                      <span class="fw- text-light">Effectif : </span>
                       <span style="color: #fff" class="" id="effectif4">0</span>
                     </div>
                   </div>
                 </div>
 
                 <div class="col-lg-3 col-md-6 col-sm-12">
-                  <div class="card shadow cardClass mx-auto mb-3">
 
-                    <div
-                      class="card-header m-0 mt-2 mx-3 p-1 border-0 fw-light bg-transparent text-center d-flex justify-content-between align-items-center"
-                    >
+                  <div class="card shadow cardClass mx-auto mb-3">
+                    <div class="card-header m-0 mt-2 mx-3 p-1 border-0 fw-light  bg-transparent text-center d-flex justify-content-between align-items-center">
 
                       <span class="text-">Classe :</span>
                       <button
@@ -375,7 +373,7 @@
                     </div>
 
                     <div class="card-footer d-flex justify-content-between" style=" background-color: #eef0f2;">
-                      <span class="fw-light">Effectif : </span> 
+                      <span class="fw- text-dark">Effectif : </span> 
                       <span style="color: #00de00;" id="effectif3">0</span>
                     </div>
                   </div>
@@ -383,70 +381,39 @@
 
               </div>
 
-
             </div>
-
-            <!-- <div class="container-fluid">
-              <div class="row d-flex flex-wrap gap-4 gy-3">
-                <div class="col bg-white card-white me-3 d-flex flex-wrap justify-content-between px-3">
-                  <div class="bg-black my-auto py-2 text-white col-md-6 col-12 d-flex justify-content-around rounded-3">
-                    <div class="d-flex flex-column mt-4">
-                      <h5>Revenus</h5>
-                      <h6>75.000 FCFA</h6>
-                    </div>
-                    <div class="d-flex flex-column">
-                      <span
-                        ><img
-                          class="w-75"
-                          src="../../../src/assets/images/icone revenu.png"
-                          alt=""
-                          srcset=""
-                      /></span>
-                      <span class="fw-light">13/01/21</span>
-                    </div>
-                  </div>
-                  <div class="pt-1 col-md-6 col-12 text-md-end text-start pt-4">
-                    <h5>Dépenses mensuels</h5>
-                    <h6 class="ms-5 text-black-50 fw-semibold">
-                      440.000 <span class="fw-bold">FCFA</span>
-                    </h6>
-                    <h6 class="ms-5 mt-4 mb-0 text-black-50 fw-semibold">
-                      375.000 <span class="fw-bold">FCFA</span>
-                    </h6>
-                    <span class="fw-light ms-5 ps-3">Inscription</span>
-                    <h6 class="ms-5 mt-2 mb-0 text-black-50 fw-semibold">
-                      375.000 <span class="fw-bold">FCFA</span>
-                    </h6>
-                    <span class="fw-light ms-5 ps-3">Mensualité</span>
-                  </div>
-                </div>
-                <div class="col bg-white card-white pb-4 pt-4 rounded-4 d-flex flex-wrap justify-content-between px-3">
-                  
-                </div>
-              </div>
-            </div> -->
 
             <div class="container-fluid mt-">
               <h5 class="fw-bold ms-">Historiques</h5>
               <div class="row">
                 <div class="col-md-6">
                   <table
-                    class="table bg-white rounded-3 shadow-sm table-striped table-hover"
-                  >
-                    <thead>
+                    class="table bg-white rounded-3 shadow-sm table-striped table-hover">
+                    <thead class="opacity-50">
                       <tr>
                         <th scope="col">Revenus</th>
-                        <th scope="col">Types</th>
-                        <th scope="col">Dates</th>
-                        <th scope="col">Montant</th>
+                        <th scope="col">Date du jour</th>
+                        <th scope="col">Total</th>
                       </tr>
                     </thead>
-                    <tbody></tbody>
+                    <tbody class="myTbody">
+                      <tr>
+                        <td>Inscription</td>
+                        <td class="myTd1"></td>
+                        <td class="totalIns"></td>
+                      </tr>
+                      <tr>
+                        <td>Mensualiter</td>
+                        <td class="myTd2"></td>
+                        <td class="totalMens"></td>
+                      </tr>
+                    </tbody>
                   </table>
                 </div>
-                <div class="container-bar col-md-5 bg-white rounded-3">
-                  <span class="text"> Revenu</span>
+                <div class="container-bar col-md-6 bg-white rounded-3">
+                  <span class="text"> Revenus</span>
                   <div class="circular-progress">
+                    <span class="circular-bar"></span>
                     <span class="progress-value">0%</span>
                   </div>
                 </div>
