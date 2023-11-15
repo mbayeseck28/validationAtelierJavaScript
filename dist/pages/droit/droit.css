@@ -83,7 +83,7 @@ body{
 .i1{
     color: #00E100;
     position : relative;
-    left: 1100px;
+    left: 960px;
     bottom: 150px;
     font-size: 30px;
 }
@@ -112,6 +112,21 @@ body{
         font-size: 10px;
         white-space: wrap;
     }
+
+    .center2{
+        width: 100%;
+    }
+
+    #editor-container {
+        width: 100%;
+    }
+    .content {
+        width: 100%;
+    }
+
+    .ba{
+        width: 100%;
+    }
 }
 @media screen and (max-width : 1024px) {
     
@@ -130,10 +145,10 @@ body{
         font-size: 10px;
     }
     .i1{
-        left: 400px;
+        left: 375px;
     }
 }
-@media screen and (max-width : 1500px) {
+@media screen and (min-width : 1500px) {
     .center h1{
         font-size: 25px;
         
@@ -152,6 +167,18 @@ body{
     }
 
     .center2{
+        width: 100%;
+    }
+
+    #editor-container {
+        width: 100%;
+    }
+
+    .content {
+        width: 100%;
+    }
+
+    .ba{
         width: 100%;
     }
 
@@ -198,10 +225,12 @@ body{
 }
 
 #modif{
-    background-color: #00E100;
+background-color: #000;
+color: #00E100;
 }
 
 .download{
-    background-color: #00E100;
+background-color: #000;
+color: #00E100;
 }
 

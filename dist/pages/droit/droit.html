@@ -181,12 +181,15 @@
                       
           
                       <div class="center2 container bg-light rounded-4 mt-5 p-5">
-                        <div class="col-md-12 la mb-3">
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-end mb-4">
+                          <button class="btn btn-primary" id="modif" onclick="enregistrerModifications()">
+                            Enregistrer les Modifications
+                          </button>
                           <button class="btn btn-primary download" onclick="telechargerPDF()">
                             Telecharger le PDF
                           </button>
-                          
                         </div>
+                        
                             <div id="editor-container" class="content" contenteditable="true">
                               
                               <h2 class="border border-3 border-black text-center" id="titre1" contenteditable>Hygiéne</h2>
@@ -244,9 +247,7 @@
                                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam voluptatem, natus beatae illo ullam facilis. Tempora, provident odit recusandae in non a impedit fugit unde reprehenderit libero? Rem, quas quis.
                               </p>
                             </div>
-                            <button class="btn btn-primary mt-4" id="modif" onclick="enregistrerModifications()">
-                              Enregistrer les Modifications
-                          </button>
+                            
                           <script>
                                 var quill = new Quill('#editor-container', {
                                     theme: 'snow'
