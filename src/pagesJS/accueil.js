@@ -18,7 +18,7 @@ const firebaseConfig = {
   projectId: "mixte-feewi",
   storageBucket: "mixte-feewi.appspot.com",
   messagingSenderId: "1083213454329",
-  appId: "1:1083213454329:web:df3deafe22a82ad34e3b28"
+  appId: "1:1083213454329:web:df3deafe22a82ad34e3b28",
 };
 
 // Initialize Firebase
@@ -29,6 +29,7 @@ const db = getFirestore(app);
 // Récupérer la collection
 const eleve = collection(db, "inscScolarite");
 const certiesRef2 = collection(db, "mensualites");
+let sum;
 
 let effectifClass6;
 let effectifClass5;
@@ -58,19 +59,18 @@ onSnapshot(eleve, (snapshot) => {
   effectif3.innerHTML = effectifClass3 + " élèves";
 });
 
-
-const btnAfficherPaiements = document.getElementById('btnAfficherPaiements');
-const selectMois = document.getElementById('selectMois');
+const btnAfficherPaiements = document.getElementById("btnAfficherPaiements");
+const selectMois = document.getElementById("selectMois");
 
 // const dateDuJour = new Date();
-// const moisActuel = dateDuJour.getMonth() + 1; 
+// const moisActuel = dateDuJour.getMonth() + 1;
 
 // console.log(dateDuJour, moisActuel);
 // selectMois.value = moisActuel.toString();
 
-selectMois.addEventListener('click', (e) => {
+selectMois.addEventListener("click", (e) => {
   const moisSelectionne = selectMois.value;
-  const mois = e.target.value
+  const mois = e.target.value;
   // console.log(mois);
   onSnapshot(certiesRef2, (snapshot) => {
     let certiesRef2 = [];
@@ -79,22 +79,29 @@ selectMois.addEventListener('click', (e) => {
     });
     certiesRef2.sort((a, b) => b.dateDajout - a.dateDajout);
 
-    let PaiementsEffec6 = certiesRef2.filter((utili) => utili.classe === '6ème' && utili.mois === mois);
-    let PaiementsEffec5 = certiesRef2.filter((utili) => utili.classe === '5ème' && utili.mois === mois);
-    let PaiementsEffec4 = certiesRef2.filter((utili) => utili.classe === '4ème' && utili.mois === mois);
-    let PaiementsEffec3 = certiesRef2.filter((utili) => utili.classe === '3ème' && utili.mois === mois);
+    let PaiementsEffec6 = certiesRef2.filter(
+      (utili) => utili.classe === "6ème" && utili.mois === mois
+    );
+    let PaiementsEffec5 = certiesRef2.filter(
+      (utili) => utili.classe === "5ème" && utili.mois === mois
+    );
+    let PaiementsEffec4 = certiesRef2.filter(
+      (utili) => utili.classe === "4ème" && utili.mois === mois
+    );
+    let PaiementsEffec3 = certiesRef2.filter(
+      (utili) => utili.classe === "3ème" && utili.mois === mois
+    );
 
     paiement6.innerHTML =
-    Math.round((PaiementsEffec6.length / effectifClass6) * 100) + "%";
-  paiement5.innerHTML =
-    Math.round((PaiementsEffec5.length / effectifClass5) * 100) + "%";
-  paiement4.innerHTML =
-    Math.round((PaiementsEffec4.length / effectifClass4) * 100) + "%";
-  paiement3.innerHTML =
-    Math.round((PaiementsEffec3.length / effectifClass3) * 100) + "%";
+      Math.round((PaiementsEffec6.length / effectifClass6) * 100) + "%";
+    paiement5.innerHTML =
+      Math.round((PaiementsEffec5.length / effectifClass5) * 100) + "%";
+    paiement4.innerHTML =
+      Math.round((PaiementsEffec4.length / effectifClass4) * 100) + "%";
+    paiement3.innerHTML =
+      Math.round((PaiementsEffec3.length / effectifClass3) * 100) + "%";
   });
 });
-
 
 onSnapshot(certiesRef2, (snapshot) => {
   let certiesRef2 = [];
@@ -124,29 +131,40 @@ onSnapshot(certiesRef2, (snapshot) => {
     Math.round((PaiementsEffec4.length / effectifClass4) * 100) + "%";
   paiement3.innerHTML =
     Math.round((PaiementsEffec3.length / effectifClass3) * 100) + "%";
+  console.log(paiement3.innerHTML);
+  sum =
+    parseInt(paiement6.innerHTML) +
+    parseInt(paiement5.innerHTML) +
+    parseInt(paiement4.innerHTML) +
+    parseInt(paiement3.innerHTML);
+
+  sum = sum / 4;
+  sum = Math.round(sum)
+  // console.log(sum);
+
+  
+  /*****PARTIE PROGRESS BAR****/
+  let circularProgress = document.querySelector(".circular-progress");
+  let progressValue = document.querySelector(".progress-value");
+
+  let progressStartValue = 0;
+  let progressEndValue = sum;
+  let speed = 70;
+
+  let progress = setInterval(() => {
+    progressStartValue++;
+
+    progressValue.textContent = `${progressStartValue}%`;
+    circularProgress.style.background = `conic-gradient(rgb(32, 215, 32) ${
+      progressStartValue * 3.6
+    }deg, #ededed 0deg)`;
+
+    if (progressStartValue == progressEndValue) {
+      clearInterval(progress);
+    }
+  }, speed);
 });
 
-/*****PARTIE PROGRESS BAR****/
-let circularProgress = document.querySelector(".circular-progress");
-let progressValue = document.querySelector(".progress-value");
-
-let progressStartValue = 0;
-let progressEndValue = 90;
-let speed = 70;
-
-let progress = setInterval(() => {
-  progressStartValue++;
-
-  progressValue.textContent = `${progressStartValue}%`;
-  circularProgress.style.background = `conic-gradient(rgb(32, 215, 32) ${
-    progressStartValue * 3.6
-  }deg, #ededed 0deg)`;
-
-  if (progressStartValue == progressEndValue) {
-    clearInterval(progress);
-  }
-  //   console.log(progressStartValue);
-}, speed);
 
 // partie ladji HISTORIQUE
 let date = new Date();
