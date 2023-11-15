@@ -96,10 +96,18 @@ onSnapshot(eleve, (snapshot) => {
   });
   eleves.sort((a, b) => b.dateDajout - a.dateDajout);
 
-  let effectifClass6 = [];
-  let effectifClass5 = [];
-  let effectifClass4 = [];
-  let effectifClass3 = [];
+  console.log(eleves);
+  effectifClass6 = eleves.filter((utili) => utili.classe === "6ème").length;
+  effectifClass5 = eleves.filter((utili) => utili.classe === "5ème").length;
+  effectifClass4 = eleves.filter((utili) => utili.classe === "4ème").length;
+  effectifClass3 = eleves.filter((utili) => utili.classe === "3ème").length;
+
+  effectif6.innerHTML = effectifClass6 + " élèves";
+  effectif5.innerHTML = effectifClass5 + " élèves";
+  effectif4.innerHTML = effectifClass4 + " élèves";
+  effectif3.innerHTML = effectifClass3 + " élèves";
+});
+
 
 const btnAfficherPaiements = document.getElementById('btnAfficherPaiements');
 const selectMois = document.getElementById('selectMois');

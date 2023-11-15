@@ -1,6 +1,18 @@
 import { initializeApp } from "firebase/app";
 
 import {
+  doc,
+  updateDoc,
+  addDoc,
+  collection,
+  documentId,
+  getDocs,
+  getFirestore,
+  onSnapshot,
+  serverTimestamp,
+} from "firebase/firestore";
+
+import {
   nombreProfesseur,
   nombreEmployer,
   nombreAssocie,
@@ -51,6 +63,7 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
+const db = getFirestore(app); 
 const auth = getAuth(app);
 
 /******* PARTIE ACCUEIL **********/
