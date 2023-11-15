@@ -13,12 +13,12 @@ import {
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyCSRo2EZwo5LQIO75FevIBvEKbDD61HNuY",
-  authDomain: "validation-atelier-js.firebaseapp.com",
-  projectId: "validation-atelier-js",
-  storageBucket: "validation-atelier-js.appspot.com",
-  messagingSenderId: "466332062090",
-  appId: "1:466332062090:web:ffbe45ef4a7371a7b5b873",
+  apiKey: "AIzaSyBQ3SrfEimEPtzCFyxR0vWBK8BJ_K4Ma48",
+  authDomain: "mixte-feewi.firebaseapp.com",
+  projectId: "mixte-feewi",
+  storageBucket: "mixte-feewi.appspot.com",
+  messagingSenderId: "1083213454329",
+  appId: "1:1083213454329:web:df3deafe22a82ad34e3b28"
 };
 
 // Initialize Firebase
@@ -62,9 +62,16 @@ onSnapshot(eleve, (snapshot) => {
 const btnAfficherPaiements = document.getElementById('btnAfficherPaiements');
 const selectMois = document.getElementById('selectMois');
 
-btnAfficherPaiements.addEventListener('click', () => {
-  const moisSelectionne = selectMois.value;
+// const dateDuJour = new Date();
+// const moisActuel = dateDuJour.getMonth() + 1; 
 
+// console.log(dateDuJour, moisActuel);
+// selectMois.value = moisActuel.toString();
+
+selectMois.addEventListener('click', (e) => {
+  const moisSelectionne = selectMois.value;
+  const mois = e.target.value
+  // console.log(mois);
   onSnapshot(certiesRef2, (snapshot) => {
     let certiesRef2 = [];
     snapshot.docs.forEach((doc) => {
@@ -72,10 +79,10 @@ btnAfficherPaiements.addEventListener('click', () => {
     });
     certiesRef2.sort((a, b) => b.dateDajout - a.dateDajout);
 
-    let PaiementsEffec6 = certiesRef2.filter((utili) => utili.classe === '6ème' && utili.mois === moisSelectionne);
-    let PaiementsEffec5 = certiesRef2.filter((utili) => utili.classe === '5ème' && utili.mois === moisSelectionne);
-    let PaiementsEffec4 = certiesRef2.filter((utili) => utili.classe === '4ème' && utili.mois === moisSelectionne);
-    let PaiementsEffec3 = certiesRef2.filter((utili) => utili.classe === '3ème' && utili.mois === moisSelectionne);
+    let PaiementsEffec6 = certiesRef2.filter((utili) => utili.classe === '6ème' && utili.mois === mois);
+    let PaiementsEffec5 = certiesRef2.filter((utili) => utili.classe === '5ème' && utili.mois === mois);
+    let PaiementsEffec4 = certiesRef2.filter((utili) => utili.classe === '4ème' && utili.mois === mois);
+    let PaiementsEffec3 = certiesRef2.filter((utili) => utili.classe === '3ème' && utili.mois === mois);
 
     paiement6.innerHTML =
     Math.round((PaiementsEffec6.length / effectifClass6) * 100) + "%";
@@ -146,15 +153,6 @@ let date = new Date();
 let year = date.getFullYear();
 let month = date.getMonth() + 1;
 let day = date.getDate();
-// onSnapshot(eleve, (snapshot) => {
-//   let eleves = [];
-//   snapshot.docs.forEach((doc) => {
-//     eleves.push({ ...doc.data(), id: doc.id });
-//   });
-//   eleves.forEach((utili) => {
-
-//   });
-// })
 
 const myTbody1 = document.querySelector(".myTd1");
 const myTbody2 = document.querySelector(".myTd2");
