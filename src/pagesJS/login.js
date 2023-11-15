@@ -76,6 +76,6 @@ gsap.fromTo(
       y: 0,
       opacity: 1,
       duration: 2,
-      delay: 1.5,
+      delay: 1,
   }
 );

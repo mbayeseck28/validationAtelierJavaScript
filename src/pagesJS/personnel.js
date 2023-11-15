@@ -191,12 +191,6 @@ ajoutAsso.addEventListener("click", function (e) {
   ajouterAssocier(formAssocie);
 });
 
-// gestionAssocie(function (associe) {
-//   console.log(associe);
-//   const rechercheInput = document.getElementById("formAssocie");
-//   console.log(rechercheInput);
-//   rechercheAssocie(rechercheInput, associe);
-// })
 
 /*******************PARTIE EMPLOYER***************************** */
 const formEmployer = document.querySelector(".formEmployer");
