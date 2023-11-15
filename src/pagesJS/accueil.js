@@ -69,6 +69,23 @@ onAuthStateChanged(auth, (user) => {
   }
 });
 
+function deconnexion() {
+  console.log('function deconnexion');
+  const btnGreen = document.querySelector('.btnGreen');
+  btnGreen.addEventListener('click', function () {
+    const auth = getAuth();
+    signOut(auth)
+      .then(() => {
+        console.log('Utilisateur déconnecté');
+        window.location.href = '../../pages/auth/login/login.html';
+      })
+      .catch((error) => {
+        console.error('Erreur lors de la déconnexion :', error);
+      });
+  });
+}
+deconnexion()
+
 // Récupérer la collection
 const eleve = collection(db, "inscScolarite");
 const certiesRef2 = collection(db, "mensualites");
