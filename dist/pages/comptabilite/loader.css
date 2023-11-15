@@ -44,6 +44,15 @@
     border-color: black;
     animation: rotate1 2s linear infinite;
 }
+/* select {
+    cursor: pointer;
+}
+
+select:hover{
+    background-color: #000000; 
+    color: #00de00;
+   
+} */
 
 @keyframes rotate1{
     from{
