@@ -389,7 +389,7 @@ onSnapshot(eleve, (snapshot) => {
   const revenue = document.getElementById("revenue");
   revenue.innerHTML = "";
   let bodyIns = document.createElement("tr");
-  bodyIns.innerHTML = `<td  colspan = '3'><h5 colspan='3' class='d-flex justify-content-center py-2' >Inscriptions</h5></td>`;
+  bodyIns.innerHTML = `<td  colspan = '3'><h5 colspan='3' class='d-flex justify-content-center py-2 maMens me-5' >Inscriptions</h5></td>`;
   revenue.appendChild(bodyIns);
   eleve.forEach((utili) => {
     let trbody = document.createElement("tr");
@@ -420,7 +420,7 @@ onSnapshot(certiesRef2, (snapshot) => {
   certiesRef2.sort((a, b) => b.dateDajout - a.dateDajout);
 
   let bodymens = document.createElement("tr");
-  bodymens.innerHTML = `<td  colspan = '3'><h5 colspan='3' class='d-flex justify-content-center py-2' >Mensualités</h5></td>`;
+  bodymens.innerHTML = `<td  colspan = '3'><h5 colspan='3' class='d-flex justify-content-center py-2 maMens me-5' >Mensualités</h5></td>`;
   mens.appendChild(bodymens);
 
   certiesRef2.forEach((utili) => {
