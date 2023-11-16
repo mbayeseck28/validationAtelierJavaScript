@@ -25,14 +25,14 @@ import {
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyBQ3SrfEimEPtzCFyxR0vWBK8BJ_K4Ma48",
-  authDomain: "mixte-feewi.firebaseapp.com",
-  projectId: "mixte-feewi",
-  storageBucket: "mixte-feewi.appspot.com",
-  messagingSenderId: "1083213454329",
-  appId: "1:1083213454329:web:df3deafe22a82ad34e3b28",
+  apiKey: "AIzaSyCSRo2EZwo5LQIO75FevIBvEKbDD61HNuY",
+  authDomain: "validation-atelier-js.firebaseapp.com",
+  databaseURL: "https://validation-atelier-js-default-rtdb.firebaseio.com",
+  projectId: "validation-atelier-js",
+  storageBucket: "validation-atelier-js.appspot.com",
+  messagingSenderId: "466332062090",
+  appId: "1:466332062090:web:ffbe45ef4a7371a7b5b873"
 };
-
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
@@ -70,21 +70,21 @@ onAuthStateChanged(auth, (user) => {
 });
 
 function deconnexion() {
-  console.log('function deconnexion');
-  const btnGreen = document.querySelector('.btnGreen');
-  btnGreen.addEventListener('click', function () {
+  console.log("function deconnexion");
+  const btnGreen = document.querySelector(".btnGreen");
+  btnGreen.addEventListener("click", function () {
     const auth = getAuth();
     signOut(auth)
       .then(() => {
-        console.log('Utilisateur déconnecté');
-        window.location.href = '../../pages/auth/login/login.html';
+        console.log("Utilisateur déconnecté");
+        window.location.href = "../../pages/auth/login/login.html";
       })
       .catch((error) => {
-        console.error('Erreur lors de la déconnexion :', error);
+        console.error("Erreur lors de la déconnexion :", error);
       });
   });
 }
-deconnexion()
+deconnexion();
 
 // Récupérer la collection
 const eleve = collection(db, "inscScolarite");
@@ -156,33 +156,48 @@ onSnapshot(certiesRef2, (snapshot) => {
     parseFloat(paiement4.innerHTML) +
     parseFloat(paiement3.innerHTML);
 
-  sum = sum / 4;
-  sum = toFixed(sum);
-  // console.log(sum);
-
-  /*****PARTIE PROGRESS BAR****/
-  let circularProgress = document.querySelector(".circular-progress");
-  let progressValue = document.querySelector(".progress-value");
-
-  let progressStartValue = 0;
-  let progressEndValue = sum;
-  let speed = 70;
-
-  let progress = setInterval(() => {
-    progressStartValue++;
-
-    progressValue.textContent = `${progressStartValue}%`;
-    circularProgress.style.background = `conic-gradient(rgb(32, 215, 32) ${
-      progressStartValue * 3.6
-    }deg, #ededed 0deg)`;
-
-    if (progressStartValue == progressEndValue) {
-      clearInterval(progress);
+    sum = sum / 4;
+    sum = sum.toFixed(0);
+    
+    // console.log(sum);
+    // console.log(Number.isNaN(sum));
+  
+    /*****PARTIE PROGRESS BAR****/
+  
+    let circularProgress = document.querySelector(".circular-progress");
+    let progressValue = document.querySelector(".progress-value");
+  
+    let progressStartValue = 0;
+    let progressEndValue = typeof sum !== "undefined" ? sum : 0;
+    let speed = 70;
+  
+    if (isNaN(sum)) {
+      
+    } else if (sum === "0") {
+      progressStartValue = 0;
+      progressValue.textContent = `${progressStartValue}%`;
+      circularProgress.style.background = `conic-gradient(rgb(32, 215, 32) ${
+        progressStartValue * 3.6
+      }deg, #ededed 0deg)`;
+    } else if (!isNaN(sum) && sum !== "0") {
+      let progress = setInterval(() => {
+        progressStartValue++;
+  
+        progressValue.textContent = `${progressStartValue}%`;
+        circularProgress.style.background = `conic-gradient(rgb(32, 215, 32) ${
+          progressStartValue * 3.6
+        }deg, #ededed 0deg)`;
+  
+        if (progressStartValue == progressEndValue) {
+          clearInterval(progress);
+        }
+      }, speed);
+      sum = ""
+      console.log(sum);
     }
-  }, speed);
+
 });
 
-const btnAfficherPaiements = document.getElementById("btnAfficherPaiements");
 const selectMois = document.getElementById("selectMois");
 
 // const dateDuJour = new Date();
@@ -191,10 +206,11 @@ const selectMois = document.getElementById("selectMois");
 // console.log(dateDuJour, moisActuel);
 // selectMois.value = moisActuel.toString();
 
-selectMois.addEventListener("click", (e) => {
+selectMois.addEventListener("change", (e) => {
   const moisSelectionne = selectMois.value;
-  const mois = e.target.value;
-  // console.log(mois);
+  // const mois = e.target.value;
+  console.log(moisSelectionne);
+  sum = "0"
   onSnapshot(certiesRef2, (snapshot) => {
     let certiesRef2 = [];
     snapshot.docs.forEach((doc) => {
@@ -203,16 +219,16 @@ selectMois.addEventListener("click", (e) => {
     certiesRef2.sort((a, b) => b.dateDajout - a.dateDajout);
 
     let PaiementsEffec6 = certiesRef2.filter(
-      (utili) => utili.classe === "6ème" && utili.mois === mois
+      (utili) => utili.classe === "6ème" && utili.mois === moisSelectionne
     );
     let PaiementsEffec5 = certiesRef2.filter(
-      (utili) => utili.classe === "5ème" && utili.mois === mois
+      (utili) => utili.classe === "5ème" && utili.mois === moisSelectionne
     );
     let PaiementsEffec4 = certiesRef2.filter(
-      (utili) => utili.classe === "4ème" && utili.mois === mois
+      (utili) => utili.classe === "4ème" && utili.mois === moisSelectionne
     );
     let PaiementsEffec3 = certiesRef2.filter(
-      (utili) => utili.classe === "3ème" && utili.mois === mois
+      (utili) => utili.classe === "3ème" && utili.mois === moisSelectionne
     );
 
     paiement6.innerHTML =
@@ -224,6 +240,7 @@ selectMois.addEventListener("click", (e) => {
     paiement3.innerHTML =
       Math.round((PaiementsEffec3.length / effectifClass3) * 100) + "%";
   });
+  sum = ""
   sum =
     parseFloat(paiement6.innerHTML) +
     parseFloat(paiement5.innerHTML) +
@@ -231,29 +248,61 @@ selectMois.addEventListener("click", (e) => {
     parseFloat(paiement3.innerHTML);
 
   sum = sum / 4;
-  sum = toFixed(sum);
+  sum = sum.toFixed(0);
+  
   // console.log(sum);
+  // console.log(Number.isNaN(sum));
 
-   /*****PARTIE PROGRESS BAR****/
-   let circularProgress = document.querySelector(".circular-progress");
-   let progressValue = document.querySelector(".progress-value");
- 
-   let progressStartValue = 0;
-   let progressEndValue = sum;
-   let speed = 70;
- 
-   let progress = setInterval(() => {
-     progressStartValue++;
- 
-     progressValue.textContent = `${progressStartValue}%`;
-     circularProgress.style.background = `conic-gradient(rgb(32, 215, 32) ${
-       progressStartValue * 3.6
-     }deg, #ededed 0deg)`;
- 
-     if (progressStartValue == progressEndValue) {
-       clearInterval(progress);
-     }
-   }, speed);
+  /*****PARTIE PROGRESS BAR****/
+
+  let circularProgress = document.querySelector(".circular-progress");
+  let progressValue = document.querySelector(".progress-value");
+
+  let progressStartValue = 0;
+  let progressEndValue = typeof sum !== "undefined" ? sum : 0;
+  let speed = 70;
+
+  if (isNaN(sum)) {
+    
+  } else if (sum === "0") {
+    progressStartValue = 0;
+    progressValue.textContent = `${progressStartValue}%`;
+    circularProgress.style.background = `conic-gradient(rgb(32, 215, 32) ${
+      progressStartValue * 3.6
+    }deg, #ededed 0deg)`;
+  } else if (!isNaN(sum) && sum !== "0") {
+    let progress = setInterval(() => {
+      progressStartValue++;
+
+      progressValue.textContent = `${progressStartValue}%`;
+      circularProgress.style.background = `conic-gradient(rgb(32, 215, 32) ${
+        progressStartValue * 3.6
+      }deg, #ededed 0deg)`;
+
+      if (progressStartValue == progressEndValue) {
+        clearInterval(progress);
+      }
+    }, speed);
+    sum = ""
+    console.log(sum);
+  }
+
+  //  }
+
+  // }
+
+  // let progress = setInterval(() => {
+  //         progressStartValue++;
+
+  //         progressValue.textContent = `${progressStartValue}%`;
+  //         circularProgress.style.background = `conic-gradient(rgb(32, 215, 32) ${
+  //           progressStartValue * 3.6
+  //         }deg, #ededed 0deg)`;
+
+  //         if (progressStartValue == progressEndValue) {
+  //           clearInterval(progress);
+  //         }
+  //       }, speed);
 });
 
 // partie ladji HISTORIQUE
