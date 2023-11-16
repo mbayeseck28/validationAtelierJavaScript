@@ -1,5 +1,5 @@
 
-import { initializeApp } from "firebase/app";
+// import { initializeApp } from "firebase/app";
 
 import {
   collection,
@@ -12,64 +12,64 @@ import {
   serverTimestamp,
 } from 'firebase/firestore';
 
-import {
-  getAuth,
-  signOut,
-  createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
-  onAuthStateChanged,
-  updateProfile ,
-} from "firebase/auth";
+
+// import {
+//   getAuth,
+//   createUserWithEmailAndPassword,
+//   signInWithEmailAndPassword,
+//   onAuthStateChanged,
+//   updateProfile ,
+// } from "firebase/auth";
 
 
-const firebaseConfig = {
-  apiKey: "AIzaSyBQ3SrfEimEPtzCFyxR0vWBK8BJ_K4Ma48",
-  authDomain: "mixte-feewi.firebaseapp.com",
-  projectId: "mixte-feewi",
-  storageBucket: "mixte-feewi.appspot.com",
-  messagingSenderId: "1083213454329",
-  appId: "1:1083213454329:web:df3deafe22a82ad34e3b28"
-};
+// const firebaseConfig = {
+//   apiKey: "AIzaSyBQ3SrfEimEPtzCFyxR0vWBK8BJ_K4Ma48",
+//   authDomain: "mixte-feewi.firebaseapp.com",
+//   projectId: "mixte-feewi",
+//   storageBucket: "mixte-feewi.appspot.com",
+//   messagingSenderId: "1083213454329",
+//   appId: "1:1083213454329:web:df3deafe22a82ad34e3b28"
+// };
 // Initialize Firebase
-const app = initializeApp(firebaseConfig);
+// const app = initializeApp(firebaseConfig);
 
-const db = getFirestore(app);
-const auth = getAuth(app); 
+// const db = getFirestore(app);
+// const auth = getAuth(app); 
 
 /******************  affiche photo profil Nav bar  **********************/ 
-onAuthStateChanged(auth, (user) => {
-  if (user) {
-      console.log("Utilisateur connecté");
-      var userEmail = user.email;
-      const userRef = collection(db, "utilisateurs");
-      onSnapshot(userRef, (snapshot) => {
-        let userRef = [];
-        snapshot.docs.forEach((doc) => {
-          userRef.push({...doc.data(), id: doc.id })
-        })
-        userRef.forEach((utilisateur => {
-          // Créez une référence au document de l'utilisateur dans Firestore
-          const userDocRef = doc(db, "utilisateurs", utilisateur.id);
+// onAuthStateChanged(auth, (user) => {
+//   if (user) {
+//       console.log("Utilisateur connecté");
+//       var userEmail = user.email;
+//       const userRef = collection(db, "utilisateurs");
+//       onSnapshot(userRef, (snapshot) => {
+//         let userRef = [];
+//         snapshot.docs.forEach((doc) => {
+//           userRef.push({...doc.data(), id: doc.id })
+//         })
+//         userRef.forEach((utilisateur => {
+//           // Créez une référence au document de l'utilisateur dans Firestore
+//           const userDocRef = doc(db, "utilisateurs", utilisateur.id);
           
-          if (utilisateur.email == userEmail) {   
-              const ProfilNav = document.querySelector('.ProfilNav');
-              const profilVoir = document.querySelector('.profilVoir');
-              const nomUser = document.querySelector('.nomUser');
-              const statusUser = document.querySelector('.statusUser') 
-              ProfilNav.src = utilisateur.url;
-              profilVoir.src = utilisateur.url;
-              nomUser.innerText = utilisateur.prenom + ' ' + utilisateur.nom;
-              statusUser.innerText = utilisateur.status;
+//           if (utilisateur.email == userEmail) {   
+//               const ProfilNav = document.querySelector('.ProfilNav');
+//               const profilVoir = document.querySelector('.profilVoir');
+//               const nomUser = document.querySelector('.nomUser');
+//               const statusUser = document.querySelector('.statusUser') 
+//               ProfilNav.src = utilisateur.url;
+//               profilVoir.src = utilisateur.url;
+//               nomUser.innerText = utilisateur.prenom + ' ' + utilisateur.nom;
+//               statusUser.innerText = utilisateur.status;
             
-          }
-        }))
-      });
+//           }
+//         }))
+//       });
 
 
-  } else {
-      console.log("Aucun utilisateur connecté");
-  }
-});
+//   } else {
+//       console.log("Aucun utilisateur connecté");
+//   }
+// });
 
 
 /************     DECONNEXION       ***********/ 

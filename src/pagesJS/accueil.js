@@ -9,7 +9,7 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   onAuthStateChanged,
-  updateProfile ,
+  updateProfile,
 } from "firebase/auth";
 
 import {
@@ -26,17 +26,17 @@ import {
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyBQ3SrfEimEPtzCFyxR0vWBK8BJ_K4Ma48",
-  authDomain: "mixte-feewi.firebaseapp.com",
-  projectId: "mixte-feewi",
-  storageBucket: "mixte-feewi.appspot.com",
-  messagingSenderId: "1083213454329",
-  appId: "1:1083213454329:web:df3deafe22a82ad34e3b28",
+  apiKey: "AIzaSyCSRo2EZwo5LQIO75FevIBvEKbDD61HNuY",
+  authDomain: "validation-atelier-js.firebaseapp.com",
+  databaseURL: "https://validation-atelier-js-default-rtdb.firebaseio.com",
+  projectId: "validation-atelier-js",
+  storageBucket: "validation-atelier-js.appspot.com",
+  messagingSenderId: "466332062090",
+  appId: "1:466332062090:web:ffbe45ef4a7371a7b5b873"
 };
-
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-const auth = getAuth(app); 
+const auth = getAuth(app);
 const db = getFirestore(app);
 
 
@@ -44,33 +44,30 @@ const db = getFirestore(app);
 /************     Profil Navbar       ***********/ 
 onAuthStateChanged(auth, (user) => {
   if (user) {
-      console.log("Utilisateur connecté");
-      var userEmail = user.email;
-      const userRef = collection(db, "utilisateurs");
-      onSnapshot(userRef, (snapshot) => {
-        let userRef = [];
-        snapshot.docs.forEach((doc) => {
-          userRef.push({...doc.data(), id: doc.id })
-        })
-        userRef.forEach((utilisateur => {
-          // Créez une référence au document de l'utilisateur dans Firestore
-          const userDocRef = doc(db, "utilisateurs", utilisateur.id);
-          
-          if (utilisateur.email == userEmail) {   
-              const ProfilNav = document.querySelector('.ProfilNav');
-              const profilVoir = document.querySelector('.profilVoir');
-              const nomUser = document.querySelector('.nomUser');
-              const statusUser = document.querySelector('.statusUser') 
-              ProfilNav.src = utilisateur.url;
-              profilVoir.src = utilisateur.url;
-              nomUser.innerText = utilisateur.prenom + ' ' + utilisateur.nom;
-              statusUser.innerText = utilisateur.status;
-            
-          }
-        }))
+    // console.log("Utilisateur connecté");
+    var userEmail = user.email;
+    const userRef = collection(db, "utilisateurs");
+    onSnapshot(userRef, (snapshot) => {
+      let userRef = [];
+      snapshot.docs.forEach((doc) => {
+        userRef.push({ ...doc.data(), id: doc.id });
       });
+      userRef.forEach((utilisateur) => {
+        // Créez une référence au document de l'utilisateur dans Firestore
+        const userDocRef = doc(db, "utilisateurs", utilisateur.id);
 
-
+        if (utilisateur.email == userEmail) {
+          const ProfilNav = document.querySelector(".ProfilNav");
+          const profilVoir = document.querySelector(".profilVoir");
+          const nomUser = document.querySelector(".nomUser");
+          const statusUser = document.querySelector(".statusUser");
+          ProfilNav.src = utilisateur.url;
+          profilVoir.src = utilisateur.url;
+          nomUser.innerText = utilisateur.prenom + " " + utilisateur.nom;
+          statusUser.innerText = utilisateur.status;
+        }
+      });
+    });
   } else {
     
       console.log("Aucun utilisateur connecté");
@@ -97,7 +94,7 @@ btnDeconnexion.addEventListener("click", signOutButtonPressed);
 // Récupérer la collection
 const eleve = collection(db, "inscScolarite");
 const certiesRef2 = collection(db, "mensualites");
-let sum;
+let sum = 0;
 
 let effectifClass6;
 let effectifClass5;
@@ -108,8 +105,6 @@ const effectif6 = document.getElementById("effectif6");
 const effectif5 = document.getElementById("effectif5");
 const effectif4 = document.getElementById("effectif4");
 const effectif3 = document.getElementById("effectif3");
-
-
 
 onSnapshot(eleve, (snapshot) => {
   let eleves = [];
@@ -127,50 +122,6 @@ onSnapshot(eleve, (snapshot) => {
   effectif5.innerHTML = effectifClass5 + " élèves";
   effectif4.innerHTML = effectifClass4 + " élèves";
   effectif3.innerHTML = effectifClass3 + " élèves";
-});
-
-const btnAfficherPaiements = document.getElementById("btnAfficherPaiements");
-const selectMois = document.getElementById("selectMois");
-
-// const dateDuJour = new Date();
-// const moisActuel = dateDuJour.getMonth() + 1;
-
-// console.log(dateDuJour, moisActuel);
-// selectMois.value = moisActuel.toString();
-
-selectMois.addEventListener("click", (e) => {
-  const moisSelectionne = selectMois.value;
-  const mois = e.target.value;
-  // console.log(mois);
-  onSnapshot(certiesRef2, (snapshot) => {
-    let certiesRef2 = [];
-    snapshot.docs.forEach((doc) => {
-      certiesRef2.push({ ...doc.data(), id: doc.id });
-    });
-    certiesRef2.sort((a, b) => b.dateDajout - a.dateDajout);
-
-    let PaiementsEffec6 = certiesRef2.filter(
-      (utili) => utili.classe === "6ème" && utili.mois === mois
-    );
-    let PaiementsEffec5 = certiesRef2.filter(
-      (utili) => utili.classe === "5ème" && utili.mois === mois
-    );
-    let PaiementsEffec4 = certiesRef2.filter(
-      (utili) => utili.classe === "4ème" && utili.mois === mois
-    );
-    let PaiementsEffec3 = certiesRef2.filter(
-      (utili) => utili.classe === "3ème" && utili.mois === mois
-    );
-
-    paiement6.innerHTML =
-      Math.round((PaiementsEffec6.length / effectifClass6) * 100) + "%";
-    paiement5.innerHTML =
-      Math.round((PaiementsEffec5.length / effectifClass5) * 100) + "%";
-    paiement4.innerHTML =
-      Math.round((PaiementsEffec4.length / effectifClass4) * 100) + "%";
-    paiement3.innerHTML =
-      Math.round((PaiementsEffec3.length / effectifClass3) * 100) + "%";
-  });
 });
 
 onSnapshot(certiesRef2, (snapshot) => {
@@ -201,40 +152,161 @@ onSnapshot(certiesRef2, (snapshot) => {
     Math.round((PaiementsEffec4.length / effectifClass4) * 100) + "%";
   paiement3.innerHTML =
     Math.round((PaiementsEffec3.length / effectifClass3) * 100) + "%";
-  console.log(paiement3.innerHTML);
+  // console.log(paiement3.innerHTML);
   sum =
-    parseInt(paiement6.innerHTML) +
-    parseInt(paiement5.innerHTML) +
-    parseInt(paiement4.innerHTML) +
-    parseInt(paiement3.innerHTML);
+    parseFloat(paiement6.innerHTML) +
+    parseFloat(paiement5.innerHTML) +
+    parseFloat(paiement4.innerHTML) +
+    parseFloat(paiement3.innerHTML);
+
+    sum = sum / 4;
+    sum = sum.toFixed(0);
+    
+    // console.log(sum);
+    // console.log(Number.isNaN(sum));
+  
+    /*****PARTIE PROGRESS BAR****/
+  
+    let circularProgress = document.querySelector(".circular-progress");
+    let progressValue = document.querySelector(".progress-value");
+  
+    let progressStartValue = 0;
+    let progressEndValue = typeof sum !== "undefined" ? sum : 0;
+    let speed = 70;
+  
+    if (isNaN(sum)) {
+      
+    } else if (sum === "0") {
+      progressStartValue = 0;
+      progressValue.textContent = `${progressStartValue}%`;
+      circularProgress.style.background = `conic-gradient(rgb(32, 215, 32) ${
+        progressStartValue * 3.6
+      }deg, #ededed 0deg)`;
+    } else if (!isNaN(sum) && sum !== "0") {
+      let progress = setInterval(() => {
+        progressStartValue++;
+  
+        progressValue.textContent = `${progressStartValue}%`;
+        circularProgress.style.background = `conic-gradient(rgb(32, 215, 32) ${
+          progressStartValue * 3.6
+        }deg, #ededed 0deg)`;
+  
+        if (progressStartValue == progressEndValue) {
+          clearInterval(progress);
+        }
+      }, speed);
+      sum = ""
+      console.log(sum);
+    }
+
+});
+
+const selectMois = document.getElementById("selectMois");
+
+// const dateDuJour = new Date();
+// const moisActuel = dateDuJour.getMonth() + 1;
+
+// console.log(dateDuJour, moisActuel);
+// selectMois.value = moisActuel.toString();
+
+selectMois.addEventListener("change", (e) => {
+  const moisSelectionne = selectMois.value;
+  // const mois = e.target.value;
+  console.log(moisSelectionne);
+  sum = "0"
+  onSnapshot(certiesRef2, (snapshot) => {
+    let certiesRef2 = [];
+    snapshot.docs.forEach((doc) => {
+      certiesRef2.push({ ...doc.data(), id: doc.id });
+    });
+    certiesRef2.sort((a, b) => b.dateDajout - a.dateDajout);
+
+    let PaiementsEffec6 = certiesRef2.filter(
+      (utili) => utili.classe === "6ème" && utili.mois === moisSelectionne
+    );
+    let PaiementsEffec5 = certiesRef2.filter(
+      (utili) => utili.classe === "5ème" && utili.mois === moisSelectionne
+    );
+    let PaiementsEffec4 = certiesRef2.filter(
+      (utili) => utili.classe === "4ème" && utili.mois === moisSelectionne
+    );
+    let PaiementsEffec3 = certiesRef2.filter(
+      (utili) => utili.classe === "3ème" && utili.mois === moisSelectionne
+    );
+
+    paiement6.innerHTML =
+      Math.round((PaiementsEffec6.length / effectifClass6) * 100) + "%";
+    paiement5.innerHTML =
+      Math.round((PaiementsEffec5.length / effectifClass5) * 100) + "%";
+    paiement4.innerHTML =
+      Math.round((PaiementsEffec4.length / effectifClass4) * 100) + "%";
+    paiement3.innerHTML =
+      Math.round((PaiementsEffec3.length / effectifClass3) * 100) + "%";
+  });
+  sum = ""
+  sum =
+    parseFloat(paiement6.innerHTML) +
+    parseFloat(paiement5.innerHTML) +
+    parseFloat(paiement4.innerHTML) +
+    parseFloat(paiement3.innerHTML);
 
   sum = sum / 4;
-  sum = Math.round(sum)
-  // console.log(sum);
-
+  sum = sum.toFixed(0);
   
+  // console.log(sum);
+  // console.log(Number.isNaN(sum));
+
   /*****PARTIE PROGRESS BAR****/
+
   let circularProgress = document.querySelector(".circular-progress");
   let progressValue = document.querySelector(".progress-value");
 
   let progressStartValue = 0;
-  let progressEndValue = sum;
+  let progressEndValue = typeof sum !== "undefined" ? sum : 0;
   let speed = 70;
 
-  let progress = setInterval(() => {
-    progressStartValue++;
-
+  if (isNaN(sum)) {
+    
+  } else if (sum === "0") {
+    progressStartValue = 0;
     progressValue.textContent = `${progressStartValue}%`;
     circularProgress.style.background = `conic-gradient(rgb(32, 215, 32) ${
       progressStartValue * 3.6
     }deg, #ededed 0deg)`;
+  } else if (!isNaN(sum) && sum !== "0") {
+    let progress = setInterval(() => {
+      progressStartValue++;
 
-    if (progressStartValue == progressEndValue) {
-      clearInterval(progress);
-    }
-  }, speed);
+      progressValue.textContent = `${progressStartValue}%`;
+      circularProgress.style.background = `conic-gradient(rgb(32, 215, 32) ${
+        progressStartValue * 3.6
+      }deg, #ededed 0deg)`;
+
+      if (progressStartValue == progressEndValue) {
+        clearInterval(progress);
+      }
+    }, speed);
+    sum = ""
+    console.log(sum);
+  }
+
+  //  }
+
+  // }
+
+  // let progress = setInterval(() => {
+  //         progressStartValue++;
+
+  //         progressValue.textContent = `${progressStartValue}%`;
+  //         circularProgress.style.background = `conic-gradient(rgb(32, 215, 32) ${
+  //           progressStartValue * 3.6
+  //         }deg, #ededed 0deg)`;
+
+  //         if (progressStartValue == progressEndValue) {
+  //           clearInterval(progress);
+  //         }
+  //       }, speed);
 });
-
 
 // partie ladji HISTORIQUE
 let date = new Date();
@@ -260,7 +332,7 @@ getDocs(eleve).then((snapshot) => {
     totalInscription += parseInt(utili.montantInsc);
   });
 
-  totalIns.innerHTML = `<b>${totalInscription}</b>`;
+  totalIns.innerHTML = `<b>${totalInscription.toLocaleString('en-US')} Fcfa</b>`;
 });
 
 getDocs(certiesRef2).then((snapshot) => {
@@ -274,6 +346,6 @@ getDocs(certiesRef2).then((snapshot) => {
   });
 
   // console.log(certiesRef2);
-  totalMens.innerHTML = `<b>${totalMensualiter}</b>`;
+  totalMens.innerHTML = `<b>${totalMensualiter.toLocaleString('en-US')} Fcfa</b>`;
 });
 
