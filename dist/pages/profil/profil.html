@@ -77,13 +77,19 @@
         <div class="col-12 col-md-5 mt-3 text-center calendrier">
           <p>Année scolaire: <span>2022-2023</span></p>
         </div>
-        <div class="col-6 col-md-3 d-flex flex-row compte me-md-5">
-          <i
-            class="fa-regular fa-bell mt-1"
-            data-bs-toggle="offcanvas"
-            data-bs-target="#offcanvasRight"
-            aria-controls="offcanvasRight"
-          ></i>
+        <div class="col-12 col-md-2 search">
+          <input
+            type="text"
+            name=""
+            id=""
+            placeholder="Rechercher"
+            class="p-3"
+          />
+        </div>
+        <div class="col-6 col-md-3 d-flex flex-row compte">
+          <i class="fa-regular fa-bell mt-1" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight"
+            aria-controls="offcanvasRight"></i>
+
 
           <div
             class="offcanvas offcanvas-sm offcanvas-end"
@@ -165,7 +171,7 @@
     </div>
     <div class="container-fluid">
       <div class="row">
-      <div class="col-12 col-md-2">
+      <div class="col-lg-2 col-md-2">
           <div class="menu d-flex d-md-none">
                  <i class="fa-solid fa-bars" id="menu"></i>
           </div>
@@ -225,8 +231,8 @@
 
           </div>
       </div>
-        <div class="col-12 col-md-9 myContain">
-          <h3>Profile</h3>
+        <div class="col-lg-9 col-md-9 myContain">
+          <h3>Profil</h3>
           <div class="myProfil mb-2 d-flex justify-content-center">
             <img src="../../../src/assets/images/profil.jpeg" alt="" id="imgProfil"/>
             <i class="fa-solid fa-camera edit" data-bs-toggle="modal" data-bs-target="#exampleModal"></i>
@@ -252,7 +258,7 @@
             </div>
           </div>
             
-          <div class="chargement-page" id="loaderProfil">
+          <div class="chargement-page col-7 col align-self-end" id="loaderProfil">
             <div class="loader-container">
                 <div class="loader"></div>
                 <div class="loader"></div>
@@ -260,12 +266,11 @@
             </div>
             <span class="loading"><img src="../../../src/assets/images/Group 850.png" alt=""></span>
           </div>
-
-            <form id="formProfil" class="infoProfil p-5 mb-5">
+            <form id="formProfil" class="infoProfil p-3 mb-5 col-lg-9 col-md-7 col align-self-end container">
               <h5>Informations Personnelles</h5>
               
                 <div class="row ligne1 mt-4 d-flex flex-wrap d-flex justify-content-between align-items-center">
-                  <div class="col-12 col-md-4 mb-4 d-md-flex">
+                  <div class="col-lg-12 col-md-4 mb-4 d-md-flex">
                     <div class="row">
                       <label class="col-4" for="userPrenom">Prenom:</label>
                       <input class="col-8" type="text" id="userPrenom">
@@ -285,7 +290,7 @@
                   </div>
                 </div>
                 
-                <div class="row ligne2 d-flex flex-wrap d-flex justify-content-between align-items-center">
+                <div class="row ligne2 d-flex flex-wrap  justify-content-between align-items-center">
                   <div class="col-12 col-md-4 mb-4 d-md-flex">
                     <div class="row">
                       <label class="col-4" for="userAdress">Adresse:</label>
@@ -306,7 +311,7 @@
                   </div>
                 </div>
 
-                <h5>Informations Générales</h5>
+                <h5 class="col-md-center">Informations Générales</h5>
 
                 <div class="row ligne3 d-flex flex-wrap d-flex justify-content-between align-items-center">
                   <div class="col-12 col-md-4 mb-4 d-md-flex">

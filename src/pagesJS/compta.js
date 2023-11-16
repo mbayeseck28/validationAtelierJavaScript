@@ -1,5 +1,6 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from 'firebase/app';
+
 // Importation des  services
 import {
   doc,
@@ -83,7 +84,8 @@ onSnapshot(eleve, (snapshot) => {
 
   const list = document.querySelector('#list');
   list.innerHTML = '';
-  // console.log(eleve);
+  console.log(eleve);
+
   eleve.forEach((utili) => {
     const list = document.querySelector('#list');
     const tr = document.createElement('tr');
@@ -189,6 +191,7 @@ onSnapshot(certiesRef2, (snapshot) => {
 });
 
 // ajout d'une mensualite
+
 // Récupération de la liste des inscrits
 const formMensuel = document.getElementById('formMensuel');
 const nomMens = document.getElementById('nomMens');
@@ -383,13 +386,15 @@ onSnapshot(eleve, (snapshot) => {
   });
   const revenue = document.getElementById('revenue');
   revenue.innerHTML = '';
+  let bodyIns = document.createElement('tr');
+  bodyIns.innerHTML = `<td  colspan = '3'><h5 colspan='3' class='d-flex justify-content-center py-2 maMens me-5' >Inscriptions</h5></td>`;
+  revenue.appendChild(bodyIns);
   eleve.forEach((utili) => {
     let trbody = document.createElement('tr');
     trbody.innerHTML = `
       <td class="border border-1">${utili.dateDajout
         .toDate()
         .toLocaleDateString()}</td>
-        <td class="text-center">${utili.type}</td>
         <td class="text-center border border-1">${utili.prenom} ${
       utili.nom
     }</td>
@@ -402,6 +407,7 @@ onSnapshot(eleve, (snapshot) => {
     loaderContainer.style.display = 'none';
   });
 });
+
 onSnapshot(certiesRef2, (snapshot) => {
   let certiesRef2 = [];
   snapshot.docs.forEach((doc) => {
@@ -411,21 +417,24 @@ onSnapshot(certiesRef2, (snapshot) => {
   mens.innerHTML = '';
   certiesRef2.sort((a, b) => b.dateDajout - a.dateDajout);
 
+  let bodymens = document.createElement('tr');
+  bodymens.innerHTML = `<td  colspan = '3'><h5 colspan='3' class='d-flex justify-content-center py-2 maMens me-5' >Mensualités</h5></td>`;
+  mens.appendChild(bodymens);
+
   certiesRef2.forEach((utili) => {
     let trbody = document.createElement('tr');
+
     trbody.innerHTML = `
       <td class="border border-1">${utili.dateDajout
         .toDate()
         .toLocaleDateString()}</td>
-        <td class="text-center">${utili.type}</td>
         <td class="text-center border border-1">${utili.prenom} ${
       utili.nom
     }</td>
         <td class="border border-1">${utili.montantpay}Fcfa</td>
         `;
-    mens.appendChild(trbody);
 
-    // console.log(utili.type);
+    mens.appendChild(trbody);
   });
 });
 
@@ -481,12 +490,13 @@ Promise.all([totalGlobal(eleve), totalGlobal(certiesRef2)])
     //Calcule du revenue total
     function CalculDeLaSommeTotale() {
       const total = document.getElementById('total');
-      total.innerHTML = '';
       let trfoot = document.createElement('tr');
       trfoot.innerHTML = `
-    <td colspan="3"><b>Total</b></td>
+    <td colspan="2"><b>Total</b></td>
     <td><b>${totaleDuRevenu.toLocaleString('en-US')} Fcfa </b></td>
     `;
+      // total.innerHTML = '';
+
       total.appendChild(trfoot);
       const revTotal = document.getElementById('revenuTotal');
       revTotal.innerHTML = `${totaleDuRevenu.toLocaleString(
