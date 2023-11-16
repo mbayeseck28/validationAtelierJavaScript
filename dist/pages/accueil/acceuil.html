@@ -230,7 +230,6 @@
         </div>
         <div class="col-12 col-md-10 mt-5 pt-5 myContain">
           <section class="accueil-body">
-            <h4 class="fw-bold titleAccueil ">Accueil</h4>
 
             <!-- CARTES DES DIFFERENTES CLASSES -->
 
@@ -241,7 +240,7 @@
                   <div class="col-lg-12 mt-5 mt-lg-0 d-flex justify-content-end align-items-center">
                 <select id="selectMois" class="rounded-3 px-3 py-2 shadow">
                   <option value="octobre" >Octobre</option>
-                  <option value="novembre" selected >Novembre</option>
+                  <option value="novembre"  >Novembre</option>
                   <option value="decembre" >Décembre</option>
                   <option value="janvier" >Janvier</option>
                   <option value="fevrier" >Février</option>
@@ -250,7 +249,7 @@
                   <option value="mai" >Mai</option>
                   <option value="juin" >Juin</option>
                 </select>
-               
+               <!-- <button id="affiche">affiche</button> -->
               </div>
 
               </div>
@@ -268,7 +267,7 @@
                           cursor: pointer;
                         "
                         class="text-light p- border-0 rounded-3 px-1"
-                        data-bs-toggle="modal" data-bs-target="#exampleModal"
+                        
                       >
                       
                         6ème
@@ -288,8 +287,10 @@
                       class="card-footer d-flex justify-content-between"
                       style="background-color: #eef0f2"
                     >
-                      <span class="fw-dark text-dark">Effectif : </span>
-                      <span style="color: #00de00" id="effectif6">0</span>
+                      <!-- <span class="fw-dark text-dark">Effectif : </span>
+                      <span style="color: #00de00" id="effectif6">0</span> -->
+                      <p class="fw-dark text-dark m-0" >Effectif : <span style="" id="effectif6">0</span></p> 
+                      <p class=" border-0 m-0 p-0 text-" style="color: #00de00; cursor: pointer;" data-bs-toggle="modal" data-bs-target="#exampleModal">Detail</p>
                     </div>
                   </div>
                 </div>
@@ -309,8 +310,8 @@
                       <p class="pClass text-center fw-bold"><span class="fw-light">Paiements effectués</span></p>
                     </div>
                     <div class="card-footer d-flex justify-content-between" style=" background-color: #000000;">
-                      <span class="fw-light text-light">Effectif : </span> 
-                      <span style="color: #00de00;" id="effectif5">0</span>
+                      <p class="fw-light text-light m-0" >Effectif : <span style="" id="effectif5">0</span></p> 
+                      <p class=" border-0 m-0 p-0 text-white" style="color: #00de00; cursor: pointer;" data-bs-toggle="modal" data-bs-target="#exampleModal1">Detail</p>
                     </div>
                   </div>
                 </div>
@@ -344,8 +345,10 @@
                       class="card-footer d-flex justify-content-between"
                       style="background-color: #00de00"
                     >
-                      <span class="fw- text-light">Effectif : </span>
-                      <span style="color: #fff" class="" id="effectif4">0</span>
+                      <!-- <span class="fw- text-light">Effectif : </span>
+                      <span style="color: #fff" class="" id="effectif4">0</span> -->
+                      <p class="fw- text-light m-0" >Effectif : <span style="color: #fff" id="effectif4">0</span></p> 
+                      <p class=" border-0 m-0 p-0 text-white" style="color: #00de00; cursor: pointer;" data-bs-toggle="modal" data-bs-target="#exampleModal2">Detail</p>
                     </div>
                   </div>
                 </div>
@@ -377,8 +380,10 @@
                     </div>
 
                     <div class="card-footer d-flex justify-content-between" style=" background-color: #eef0f2;">
-                      <span class="fw- text-dark">Effectif : </span> 
-                      <span style="color: #00de00;" id="effectif3">0</span>
+                      <!-- <span class="fw- text-dark">Effectif : </span> 
+                      <span style="color: #00de00;" id="effectif3">0</span> -->
+                      <p class="fw- text-dark m-0" >Effectif : <span style="color: #000000" id="effectif3">0</span></p> 
+                      <p class=" border-0 m-0 p-0 text-" style="color: #00de00; cursor: pointer;" data-bs-toggle="modal" data-bs-target="#exampleModal3">Detail</p>
                     </div>
                   </div>
                 </div>
@@ -395,17 +400,115 @@
 
             <!-- Modal -->
             <div class="modal fade border-0 col-4" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-              <div class="modal-dialog madal-sm">
+              <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                   <div class="modal-header border-0">
                     <h5 class="modal-title border-0" id="exampleModalLabel">Detail classe 6ème</h5>
                     <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
                   </div>
                   <div class="modal-body border-0">
-                    <!-- <p class="fw-bold">Effectif Total: 90%</p>
-                    <p class="fw-bold">Paiement Effectuè: 12 %</p>
-                    <p class="fw-bold">Paiement restant: 12 %</p>
-                    <p class="fw-bold">Paiement Annuel: 90%</p> -->
+                    
+                    <table class="w-100 table  table-bordered table-hover">
+                      <thead class="">
+                          <tr class="border border-2 " style="background-color: #00de00; cursor: pointer;">
+                              <th class="fw-bold text-start py-2 ps-2">Prenom</th>
+                              <th class="fw-bold text-start py-2 ps-2">Nom</th>
+                              <th class="fw-bold text-center py-2 ps-2">Etat payement</th>
+                          </tr>
+                      </thead>
+                      <tbody id="list" class="">
+                      </tbody>
+                    </table>
+                  </div>
+                  <div class="modal-footer border-0">
+                    <button type="button" class="btn btnPayer" data-bs-dismiss="modal">Retour</button>
+                    <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Modal1 -->
+            <div class="modal fade border-0 col-4" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                  <div class="modal-header border-0">
+                    <h5 class="modal-title border-0" id="exampleModalLabel">Detail classe 5ème</h5>
+                    <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
+                  </div>
+                  <div class="modal-body border-0">
+                    
+                    <table class="w-100 table  table-bordered table-hover">
+                      <thead class="">
+                          <tr class="border border-2 " style="background-color: #00de00; cursor: pointer;">
+                              <th class="fw-bold text-start py-2 ps-2">Prenom</th>
+                              <th class="fw-bold text-start py-2 ps-2">Nom</th>
+                              <th class="fw-bold text-center py-2 ps-2">Etat payement</th>
+                          </tr>
+                      </thead>
+                      <tbody id="list1" class="">
+                      </tbody>
+                    </table>
+                  </div>
+                  <div class="modal-footer border-0">
+                    <button type="button" class="btn btnPayer" data-bs-dismiss="modal">Retour</button>
+                    <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Modal2 -->
+            <div class="modal fade border-0 col-4" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                  <div class="modal-header border-0">
+                    <h5 class="modal-title border-0" id="exampleModalLabel">Detail classe 4ème</h5>
+                    <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
+                  </div>
+                  <div class="modal-body border-0">
+                    
+                    <table class="w-100 table  table-bordered table-hover">
+                      <thead class="">
+                          <tr class="border border-2 " style="background-color: #00de00; cursor: pointer;">
+                              <th class="fw-bold text-start py-2 ps-2">Prenom</th>
+                              <th class="fw-bold text-start py-2 ps-2">Nom</th>
+                              <th class="fw-bold text-center py-2 ps-2">Etat payement</th>
+                          </tr>
+                      </thead>
+                      <tbody id="list2" class="">
+                      </tbody>
+                    </table>
+                  </div>
+                  <div class="modal-footer border-0">
+                    <button type="button" class="btn btnPayer" data-bs-dismiss="modal">Retour</button>
+                    <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Modal3 -->
+            <div class="modal fade border-0 col-4" id="exampleModal3" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                  <div class="modal-header border-0">
+                    <h5 class="modal-title border-0" id="exampleModalLabel">Detail classe 3ème</h5>
+                    <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
+                  </div>
+                  <div class="modal-body border-0">
+                    
+                    <table class="w-100 table  table-bordered table-hover">
+                      <thead class="">
+                          <tr class="border border-2 " style="background-color: #00de00; cursor: pointer;">
+                              <th class="fw-bold text-start py-2 ps-2">Prenom</th>
+                              <th class="fw-bold text-start py-2 ps-2">Nom</th>
+                              <th class="fw-bold text-center py-2 ps-2">Etat payement</th>
+                          </tr>
+                      </thead>
+                      <tbody id="list3" class="">
+                      </tbody>
+                    </table>
                   </div>
                   <div class="modal-footer border-0">
                     <button type="button" class="btn btnPayer" data-bs-dismiss="modal">Retour</button>
