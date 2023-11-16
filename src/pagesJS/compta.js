@@ -111,19 +111,16 @@ form.addEventListener('submit', (e) => {
     prenom: form.prenom.value,
     type: form.type.value,
     classe: form.classeSelect.value,
-    montantInsc: parseInt(form.montantPaye.value),
+    montantInsc: parseInt(form.prixIns.value),
     dateDajout: serverTimestamp(),
   }).then(() => form.reset());
 });
-// Montant à inscrire
-let selectElement = document.getElementById('classeSelect');
-selectElement.addEventListener('change', function () {
-  let selectedOption = selectElement.options[selectElement.selectedIndex];
-  let selectedValue = selectedOption.value;
-  console.log(selectedValue);
-
-  document.getElementById('montantPaye').value = montant(selectedValue);
-  console.log(document.getElementById('montantPaye').value);
+form.addEventListener('input', (e) => {
+  const divPrixIns = document.getElementById('divPrixIns');
+  const prixIns = document.getElementById('prixIns');
+  divPrixIns.classList.remove('d-none');
+  prixIns.value = montant(`${classeSelect.value}`);
+  console.log(prixIns.value);
 });
 
 function montant(classe) {
