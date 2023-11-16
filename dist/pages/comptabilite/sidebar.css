@@ -138,9 +138,11 @@ input{
 .sidebar li a:hover i, 
 .sidebar li a:active i, 
 .sidebar li a:focus i,
-.sidebar li a:active .links_name,
 .sidebar li a:focus .links_name {
     transition: all 0.5s ease;
+    color: #00E100;
+}
+.sidebar li a span.active{
     color: #00E100;
 }
 .sidebar li i{
@@ -302,7 +304,7 @@ input{
     left: 0;
     width: 100%;
     height: 100%;
-    box-shadow: 0 0 8px 2px var(--primary-clr);
+    box-shadow: 0 0 5px 2px var(--primary-clr);
   }
   .calendar .days .today {
     font-size: 2rem;
@@ -408,7 +410,7 @@ input{
   .events {
     width: 100%;
     height: 100%;
-    max-height: 300px;
+    max-height: 350px;
     overflow-x: hidden;
     overflow-y: auto;
     display: flex;
@@ -425,8 +427,8 @@ input{
     gap: 5px;
     padding: 0 10px;
     padding-left: 10px;
-    color: gray;
-    background: linear-gradient(90deg, #00E100, transparent);
+    color: #fff;
+    background: var(--primary-clr);
     cursor: pointer;
   }
   /* even event */
@@ -458,13 +460,14 @@ input{
     font-size: 0.8rem;
     font-weight: 400;
     color: black;
+    font-weight: bold;
     margin-left: 15px;
     pointer-events: none;
   }
   .events .event:hover .event-time {
     color: #fff;
   }
-  /* add tick in event after */
+  /* ajout tick dans l'évévenment */
   .events .event::after {
     content: "✓";
     position: absolute;
@@ -512,12 +515,11 @@ input{
     align-items: center;
     justify-content: center;
     font-size: 0.7rem;
-    font-weight: 500;
     color: gray;
   }
   .add-event-wrapper {
     position: absolute;
-    bottom: 30px;
+    bottom: 20px;
     left: 50%;
     /* width: 90%; */
     width: 300px;
@@ -525,14 +527,14 @@ input{
     overflow: hidden;
     border-radius: 8px;
     background-color: #fff;
-    box-shadow: 0 0 8px 3px black;
+    box-shadow: 0 0 5px 3px gray;
+    /* border: 1px solid gray; */
     transform: translateX(-50%);
     transition: max-height 0.5s ease;
   }
   .add-event-wrapper.active {
     max-height: 350px;
     z-index: 1;
-    /* margin-bottom: 200px; */
   }
   .add-event-header {
     width: 100%;
@@ -627,6 +629,7 @@ input{
 @media screen and (max-width: 767px){
     .nav{
         margin-top: 55px;
+        z-index: 50;
     }
     .search{
         display: none;
@@ -634,7 +637,7 @@ input{
     .sidebar{
         display: none;
         top: 0;
-        z-index: 2;
+        z-index: 70;
     }
     .compte{
         display: flex;
