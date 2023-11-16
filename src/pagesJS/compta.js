@@ -16,58 +16,55 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   onAuthStateChanged,
-  updateProfile ,
-} from "firebase/auth";
-
+  updateProfile,
+} from 'firebase/auth';
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyBQ3SrfEimEPtzCFyxR0vWBK8BJ_K4Ma48",
-  authDomain: "mixte-feewi.firebaseapp.com",
-  projectId: "mixte-feewi",
-  storageBucket: "mixte-feewi.appspot.com",
-  messagingSenderId: "1083213454329",
-  appId: "1:1083213454329:web:df3deafe22a82ad34e3b28",
+
+  apiKey: 'AIzaSyBQ3SrfEimEPtzCFyxR0vWBK8BJ_K4Ma48',
+  authDomain: 'mixte-feewi.firebaseapp.com',
+  projectId: 'mixte-feewi',
+  storageBucket: 'mixte-feewi.appspot.com',
+  messagingSenderId: '1083213454329',
+  appId: '1:1083213454329:web:df3deafe22a82ad34e3b28',
 };
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 
 const db = getFirestore(app);
-const auth = getAuth(app); 
+const auth = getAuth(app);
 
-/******************  affiche photo profil Nav bar  **********************/ 
+/******************  affiche photo profil Nav bar  **********************/
 onAuthStateChanged(auth, (user) => {
   if (user) {
-      console.log("Utilisateur connecté");
-      var userEmail = user.email;
-      const userRef = collection(db, "utilisateurs");
-      onSnapshot(userRef, (snapshot) => {
-        let userRef = [];
-        snapshot.docs.forEach((doc) => {
-          userRef.push({...doc.data(), id: doc.id })
-        })
-        userRef.forEach((utilisateur => {
-          // Créez une référence au document de l'utilisateur dans Firestore
-          const userDocRef = doc(db, "utilisateurs", utilisateur.id);
-          
-          if (utilisateur.email == userEmail) {   
-              const ProfilNav = document.querySelector('.ProfilNav');
-              const profilVoir = document.querySelector('.profilVoir');
-              const nomUser = document.querySelector('.nomUser');
-              const statusUser = document.querySelector('.statusUser') 
-              ProfilNav.src = utilisateur.url;
-              profilVoir.src = utilisateur.url;
-              nomUser.innerText = utilisateur.prenom + ' ' + utilisateur.nom;
-              statusUser.innerText = utilisateur.status;
-            
-          }
-        }))
+    console.log('Utilisateur connecté');
+    var userEmail = user.email;
+    const userRef = collection(db, 'utilisateurs');
+    onSnapshot(userRef, (snapshot) => {
+      let userRef = [];
+      snapshot.docs.forEach((doc) => {
+        userRef.push({ ...doc.data(), id: doc.id });
       });
+      userRef.forEach((utilisateur) => {
+        // Créez une référence au document de l'utilisateur dans Firestore
+        const userDocRef = doc(db, 'utilisateurs', utilisateur.id);
 
-
+        if (utilisateur.email == userEmail) {
+          const ProfilNav = document.querySelector('.ProfilNav');
+          const profilVoir = document.querySelector('.profilVoir');
+          const nomUser = document.querySelector('.nomUser');
+          const statusUser = document.querySelector('.statusUser');
+          ProfilNav.src = utilisateur.url;
+          profilVoir.src = utilisateur.url;
+          nomUser.innerText = utilisateur.prenom + ' ' + utilisateur.nom;
+          statusUser.innerText = utilisateur.status;
+        }
+      });
+    });
   } else {
-      console.log("Aucun utilisateur connecté");
+    console.log('Aucun utilisateur connecté');
   }
 });
 
@@ -88,6 +85,7 @@ onSnapshot(eleve, (snapshot) => {
   const list = document.querySelector("#list");
   list.innerHTML = "";
   console.log(eleve);
+
   eleve.forEach((utili) => {
     const list = document.querySelector("#list");
     const tr = document.createElement("tr");
@@ -163,7 +161,6 @@ if (alertTrigger) {
 }
 // _________________________
 // Parti Mensualité
-
 // Mensualite
 onSnapshot(certiesRef2, (snapshot) => {
   let certiesRef2 = [];
@@ -198,59 +195,79 @@ onSnapshot(certiesRef2, (snapshot) => {
 
 // ajout d'une mensualite
 
-const myForm = document.querySelector(".myForm");
-const alertMens = document.querySelector(".alertMens");
-getDocs(eleve).then((snapshot) => {
+// Récupération de la liste des inscrits
+const formMensuel = document.getElementById('formMensuel');
+const nomMens = document.getElementById('nomMens');
+const prenomMens = document.getElementById('prenomMens');
+const prixMens = document.getElementById('prixMens');
+const divNom = document.getElementById('divNom');
+const divPrenom = document.getElementById('divPrenom');
+const divClasse = document.getElementById('divClasse');
+const divPrix = document.getElementById('divPrix');
+const classeMens = document.getElementById('classeMens');
+onSnapshot(eleve, (snapshot) => {
   let myTabeleve = [];
   snapshot.docs.forEach((doc) => {
     myTabeleve.push({ ...doc.data(), id: doc.id });
   });
-
-  myForm.addEventListener("submit", async (e) => {
-    e.preventDefault();
-
-    let conditionRempli = false;
-
-    for (const utili of myTabeleve) {
-      // Ajouter un nouveau document avec un id généré
-      if (
-        utili.nom.includes(myForm.nom.value) &&
-        utili.prenom.includes(myForm.prenom.value) &&
-        utili.classe.includes(myForm.classeSelect2.value)
-      ) {
-        await addDoc(certiesRef2, {
-          nom: myForm.nom.value,
-          prenom: myForm.prenom.value,
-          type: myForm.type.value,
-          classe: myForm.classeSelect2.value,
-          mois: myForm.mois.value,
-          montantpay: parseInt(myForm.montantAPaye.value),
-          dateDajout: serverTimestamp(),
-        });
-
-        myForm.reset();
-        conditionRempli = true;
-        break;
+  myTabeleve.sort((a, b) => b.dateDajout - a.dateDajout);
+  console.log(myTabeleve);
+  const mySelect = document.getElementById('listEleve');
+  // mySelect.innerHTML = '';
+  myTabeleve.forEach((eleve) => {
+    // console.log(eleve);
+    let newOption = document.createElement('option');
+    newOption.value = eleve.id;
+    newOption.innerHTML = `
+    ${eleve.prenom} ${eleve.nom} 
+    `;
+    mySelect.appendChild(newOption);
+  });
+  formMensuel.addEventListener('input', (e) => {
+    // console.log(e.target.value);
+    myTabeleve.forEach((afficheInput) => {
+      if (afficheInput.id == e.target.value) {
+        console.log(afficheInput);
+        divNom.classList.remove('d-none');
+        divPrenom.classList.remove('d-none');
+        divClasse.classList.remove('d-none');
+        divPrix.classList.remove('d-none');
+        nomMens.value = `${afficheInput.nom}`;
+        nomMens.setAttribute('disabled', '');
+        prenomMens.value = `${afficheInput.prenom}`;
+        prenomMens.setAttribute('disabled', '');
+        classeMens.value = `${afficheInput.classe}`;
+        classeMens.setAttribute('disabled', '');
+        prixMens.value = montant2(`${afficheInput.classe}`);
       }
-    }
-
-    if (conditionRempli) {
-      return;
-    } else {
-      alertMens.classList.remove("d-none");
-      alertMens.innerHTML =
-        "Elève inexiste ou ne fait pas parti de cette classe...";
-    }
+      const myMess = document.querySelector('.alertMens');
+      myMess.classList.add('d-none');
+    });
+  });
+  formMensuel.addEventListener('submit', (e) => {
+    e.preventDefault();
+    addDoc(certiesRef2, {
+      nom: nomMens.value,
+      prenom: prenomMens.value,
+      type: formMensuel.type.value,
+      classe: classeMens.value,
+      mois: formMensuel.mois.value,
+      montantpay: parseInt(prixMens.value),
+      dateDajout: serverTimestamp(),
+    }).then(() => formMensuel.reset());
+    const myMess = document.querySelector('.alertMens');
+    myMess.classList.remove('d-none');
+    myMess.innerHTML = 'Payement effectué avec succès...';
   });
 });
 
-// Montant à inscrire
-let selectElement2 = document.getElementById("classeSelect2");
-selectElement2.addEventListener("change", function () {
-  let selectedOption = selectElement2.options[selectElement2.selectedIndex];
-  let selectedValue = selectedOption.value;
+// Montant à payer
+
+classeMens.addEventListener('change', function () {
+  // let selectedOption = selectElement2.options[selectElement2.selectedIndex];
+  let selectedValue = classeMens.value;
   console.log(selectedValue);
-  document.getElementById("montantAPaye").value = montant2(selectedValue);
+  // document.getElementById('montantAPaye').value = montant2(selectedValue);
 });
 
 function montant2(classe) {

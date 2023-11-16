@@ -60,59 +60,6 @@ prevNextIcon.forEach(icon => { // getting prev and next icons
 
 /* Fin Calendrier Tableau De Bord */
 
-/* Graphique */
+/* Affichage date du jour dans le card de gauche */
 dateJour = new Date().toLocaleDateString();
 document.getElementById("dateJour").innerHTML = dateJour;
-
-const barCanvas = document.getElementById('barCanvas');
-
-const barChart = new Chart(barCanvas, {
-  type: 'line',
-  data: {
-    labels: [
-      'Oct',
-      'Nov',
-      'Dec',
-      'Jan',
-      'Fev',
-      'Mar',
-      'Avr',
-      'Mai',
-      'Jui',
-      'Jul',
-      'Aout',
-      'Sep',
-    ],
-    datasets: [
-      {
-        data: [
-          475000, 300000, 400000, 391000, 450000, 375000, 330000, 280000,
-          400000, 270000, 490000, 350000,
-        ],
-        label: ['Revenue'],
-        backgroundColor: ['black'],
-        borderColor: ['black'],
-        borderWidth: 1,
-      },
-    ],
-  },
-  options: {
-    scales: {
-      y: {
-        suggestedMax: 500000,
-        tricks: {
-          font: {
-            size: 20,
-          },
-        },
-      },
-      x: {
-        tricks: {
-          font: {
-            size: 20,
-          },
-        },
-      },
-    },
-  },
-});
