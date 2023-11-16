@@ -1,3 +1,4 @@
+
 * {
     margin: 0;
     padding: 0;
@@ -251,6 +252,7 @@ input {
         display: flex;
         margin-left: 0;
     }
+    
 }
 
 
@@ -314,7 +316,6 @@ body {
     background-color: #000000;
     color: #00de00;
 }
-
 .btnPayer{
     background-color: #000000;
     color: #00de00;
@@ -339,33 +340,24 @@ option:hover{
     color: #00de00;
 }
 
-@media screen and (max-width: 867px) {
-    .card {
-        max-width: 1093px;
-        width: 90%;
-    }
+
+ 
+.myCard  {
+    padding: 3%;
 }
+
+ 
 
 
 
 /* Barr de progression */
 
-.container-bar {
-    width: 470px;
-    padding: 50px 0;
-
-    border-radius: 5px;
-    background-color: rgb(220, 217, 217);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    row-gap: 10px;
-}
 
 .circular-progress {
+
     position: relative;
-    height: 250px;
-    width: 250px;
+    height: 200px;
+    width: 200px;
     border-radius: 50%;
     transform: translate(-5%, 5%) rotate(15deg) skewY(-15deg) perspective(300px);
     display: flex;
@@ -374,7 +366,9 @@ option:hover{
     background: rgb(244, 243, 243);
     box-shadow:
         30px 30px 0px hwb(0 9% 91% / 0.187),
-        100px 100px 100px #938f8f11
+        100px 100px 100px #938f8f11;
+
+   
 }
 
 .circular-bar {
@@ -388,6 +382,7 @@ option:hover{
     /* border-right: 40px solid rgb(21, 185, 21); */
     border-radius: 50%;
     animation: spin linear 5.4s;
+    
 }
 
 .progress-value {
@@ -407,7 +402,7 @@ option:hover{
     justify-content: center;
     align-items: center;
     font-family: sans-serif;
-    font-size: 3.5rem;
+    font-size: 2.5rem;
     font-weight: 700;
 
 
@@ -415,6 +410,7 @@ option:hover{
 }
 
 .text {
+    text-align: center;
     font-size: 30px;
     font-weight: 500;
     color: #606060;
@@ -430,7 +426,6 @@ option:hover{
     }
 }
 
-
 /******CSS CARDS CLASSES*******/
 .cardClass {
     max-width: 230px;
@@ -438,17 +433,106 @@ option:hover{
     box-shadow: 0px 4px 30px 0px #0000001A;
 }
 
-
-
-.titleAccueil{
-    margin: 50px 50px 50px 40px;
+.pClass {
+    margin: 5px 0;
 }
 
 
-@media screen and (max-width: 867px) {
-    .card {
 
-        max-width: 1000px;
-        width: 80%;
+@media screen and (max-width: 999px) {
+    
+    .mySpan {
+        font-size: 15px;
+    }
+
+    .myCard {
+        padding-left: 5%;
+    }
+    .divAblay{
+        margin-left: 3%;
+    }
+
+    
+}
+@media screen and (max-width: 991px) {  
+    .barPro {
+        width: 900px; 
+
+    }
+    .rowPro{
+        margin-left: 25%;
     }
 }
+@media screen and (max-width: 980px) {  
+    .barPro {
+        width: 600px;
+        margin-left: 38px;
+    }
+    .hist{
+        margin-left: 20px;
+    }
+    .table{
+        margin-left: 20px;
+    }
+}
+@media screen and (max-width: 976px) {  
+    .barPro {
+        width: 670px;
+        margin-left: 38px;
+    }
+    /* .hist{
+        margin-left: 20px;
+    }
+    .table{
+        margin-left: 20px;
+    } */
+}
+
+
+@media screen and (max-width: 866px) {  
+    .barPro {
+        width: 520px;
+        margin-left: 45px;
+    }
+    .hist{
+        margin-left: 30px;
+    }
+    .table{
+        margin-left: 35px;
+    }
+    .rowclass{
+       margin-left: 35px;
+    }
+
+}
+
+
+
+/*debut job ablaye mediaquery progresse barr */
+@media screen and (max-width: 410px){
+    .container-bar{
+        width: 100%;
+        font-size: 15px;
+    }
+    .circular-progress{
+        width: 100px;
+        font-size: 15px;
+    }
+    .circular-bar{
+        width: 110px;
+        font-size: 15px;
+    }
+    .progress-value{
+        width: 50px;
+        font-size: 22px;
+
+    }
+    .text{
+        font-size: 20px;
+    }
+
+}
+    
+
+
+/* fin job ablaye */
