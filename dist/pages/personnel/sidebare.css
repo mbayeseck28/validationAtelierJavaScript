@@ -136,9 +136,11 @@ input{
 .sidebar li a:hover i, 
 .sidebar li a:active i, 
 .sidebar li a:focus i,
-.sidebar li a:active .links_name,
 .sidebar li a:focus .links_name {
     transition: all 0.5s ease;
+    color: #00E100;
+}
+.sidebar li a span.active{
     color: #00E100;
 }
 .sidebar li i{
