@@ -1,5 +1,6 @@
 // Import the functions you need from the SDKs you need
-import { initializeApp, onLog } from "firebase/app";
+import { initializeApp } from "firebase/app";
+
 // Importation des  services
 import {
   doc,
@@ -239,6 +240,7 @@ onSnapshot(eleve, (snapshot) => {
         classeMens.value = `${afficheInput.classe}`;
         classeMens.setAttribute('disabled', '');
         prixMens.value = montant2(`${afficheInput.classe}`);
+        prixMens.setAttribute('disabled', '');
       }
       const myMess = document.querySelector('.alertMens');
       myMess.classList.add('d-none');
