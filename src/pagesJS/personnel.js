@@ -31,7 +31,7 @@ import {
   gestionAssocie,
   asso,
   ajouterAssocier,
-  rechercheAssocie 
+   
 } from "./associe.js";
 
 import {
@@ -53,12 +53,13 @@ import {
 
 
 const firebaseConfig = {
-  apiKey: "AIzaSyBQ3SrfEimEPtzCFyxR0vWBK8BJ_K4Ma48",
-  authDomain: "mixte-feewi.firebaseapp.com",
-  projectId: "mixte-feewi",
-  storageBucket: "mixte-feewi.appspot.com",
-  messagingSenderId: "1083213454329",
-  appId: "1:1083213454329:web:df3deafe22a82ad34e3b28"
+  apiKey: "AIzaSyCSRo2EZwo5LQIO75FevIBvEKbDD61HNuY",
+  authDomain: "validation-atelier-js.firebaseapp.com",
+  databaseURL: "https://validation-atelier-js-default-rtdb.firebaseio.com",
+  projectId: "validation-atelier-js",
+  storageBucket: "validation-atelier-js.appspot.com",
+  messagingSenderId: "466332062090",
+  appId: "1:466332062090:web:ffbe45ef4a7371a7b5b873"
 };
 
 // Initialize Firebase
@@ -191,12 +192,14 @@ ajoutAsso.addEventListener("click", function (e) {
   ajouterAssocier(formAssocie);
 });
 
+
 // gestionAssocie(function (associe) {
 //   console.log(associe);
 //   const rechercheInput = document.getElementById("formAssocie");
 //   console.log(rechercheInput);
 //   rechercheAssocie(rechercheInput, associe);
 // })
+
 
 /*******************PARTIE EMPLOYER***************************** */
 const formEmployer = document.querySelector(".formEmployer");
