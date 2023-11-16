@@ -12,7 +12,14 @@
 }
 
 .myProfil i {
-    margin-top: 50px;
+    /* display: none; */
+    position: relative;
+    margin: 95px 60px -20px -70px;
+}
+.myProfil i:hover{
+    display: flex;
+    color: #00E100;
+
 }
 
 .edit{
@@ -64,43 +71,16 @@
     margin-left: 100px;
 }
 
-/* @media screen and (max-width: 1180px){ 
-    .ligne1, .ligne2, .ligne3, .ligne4{
-        display: flex;
-        flex-direction: column;
-        font-size: 26px;
-        gap: 50px;
-        margin-top: 30px;
-    }
 
-    .infoProfil{
-        display: flex;
-        gap: 80px;
-    }
-
-    .infoProfil h5{
-        margin-bottom: 20px;
-        font-size: 30px;        
-    }
-    .infoProfil .bouton{
-        height: 60px;
-    }
-    
-    .infoProfil button{
-        margin-top: 30px;
-        font-size: 26px;
-        height: 60px;
-        padding: 10px;
-    }
-
-} */
-
-@media screen and (max-width: 767px){ 
+@media screen and (max-width: 967px){ 
     .myContain{
-        margin-top: 150px;
+        /* margin-top: 150px; */
+        justify-content: center;
+        font-size: 12px;
     }
     .infoProfil{
-        margin-left: -25px;
+        /* font-size: 8px; */
+       flex-direction: column;
     }
 }
 
