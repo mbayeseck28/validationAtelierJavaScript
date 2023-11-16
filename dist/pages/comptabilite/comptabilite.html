@@ -114,9 +114,9 @@
                            <span class="tooltip">Personnel</span>
                        </li>
                        <li>
-                           <a href="comptabilite.html">
+                           <a class="active" href="comptabilite.html">
                                <i class="fa-solid fa-chart-pie"></i>
-                               <span class="links_name">Comptablité</span>
+                               <span class="links_name active">Comptablité</span>
                            </a>
                            <span class="tooltip">Comptablité</span>
                        </li>
@@ -172,47 +172,64 @@
                             </div>
                           </div>
                             
-                          <!-- <div class="row">
-                            <div class="card cage">
-                              <div class="card-body">
-                                  <h6 class="text-center pb-3">Evènements</h6>
-                                  <div class="milieu d-flex justify-content-between">
-                                      <p id="revenuTotal"></p>
-                                      <img src="../../../src/assets/images/icone revenu.png" alt="">
-                                  </div>
-                                  <p id="dateJour"></p>
+                          <div class="row right shadow">
+                            <div class="today-date">
+                              <div class="event-day">mer</div>
+                              <div class="event-date">16th novembre 2023</div>
+                            </div>
+                            <div class="events"></div>
+                            <div class="add-event-wrapper">
+                              <div class="add-event-header">
+                                <div class="title">Ajouter Evènement</div>
+                                <i class="fas fa-times close"></i>
+                              </div>
+                              <div class="add-event-body">
+                                <div class="add-event-input">
+                                  <input type="text" placeholder="Nom de l'évènement" class="event-name"/>
+                                </div>
+                                <div class="add-event-input">
+                                  <input type="text" placeholder="Description" class="event-descript" />
+                                </div>
+                                <div class="add-event-input">
+                                  <input type="text" placeholder="Heure de debut" class="event-time-from"/>
+                                </div>
+                                <div class="add-event-input">
+                                  <input type="text" placeholder="Heure de clôture" class="event-time-to"/>
+                                </div>
+                              </div>
+                              <div class="add-event-footer">
+                                <button class="add-event-btn">Ajouter</button>
                               </div>
                             </div>
-                          </div> -->
+                          </div>
 
                         </div>
-                        <div class="col-md-6">
-                            <div class="card cage">
-                                <!-- <div class="card-body"> -->
-                                    <div class="wrapper">
-                                        <header>
-                                          <p class="current-date"></p>
-                                          <div class="icons">
-                                            <span id="prev" class="material-symbols-rounded"> < </span>
-                                            <span id="next" class="material-symbols-rounded"> > </span>
-                                          </div>
-                                        </header>
-                                        <div class="calendar">
-                                          <ul class="weeks">
-                                            <li>Dim</li>
-                                            <li>Lun</li>
-                                            <li>Mar</li>
-                                            <li>Mer</li>
-                                            <li>Jeu</li>
-                                            <li>Ven</li>
-                                            <li>Sam</li>
-                                          </ul>
-                                          <ul class="days"></ul>
-                                        </div>
-                                    </div>
-                                <!-- </div> -->
+
+                        <div class="col-md-6 left">
+                          <div class="calendar">
+                            <div class="month">
+                              <i class="fas fa-angle-left prev"></i>
+                              <div class="date">aout 2023</div>
+                              <i class="fas fa-angle-right next"></i>
                             </div>
-                        </div>
+                            <div class="weekdays">
+                              <div>Dim</div>
+                              <div>Lun</div>
+                              <div>Mar</div>
+                              <div>Mer</div>
+                              <div>Jeu</div>
+                              <div>Ven</div>
+                              <div>Sam</div>
+                            </div>
+                            <div class="days"></div>
+                            <div class="goto-today">
+                              <div class="goto">
+                                <input type="text" placeholder="mm/aaaa" class="date-input" />
+                                <button class="goto-btn">Go</button>
+                              </div>
+                              <button class="today-btn">Aujourd'hui</button>
+                            </div>
+                          </div>
                     </div>
                     <br>
         
@@ -318,13 +335,10 @@
                                     <option value="4ème" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">4ème</option>
                                     <option value="3ème" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">3ème</option>
                               </select>
-
                             </div>
-                            <div class="mb-3 collapse" id="collapseExample">
-                              <div class="card card-body collapseExample">
-                                  <label for="prenom" class="form-label">Montant de l'inscription pour cette classe</label>
-                                  <input type="text" value="0" class="form-control shadow-sm prixInsc" required disabled id="montantPaye">
-                              </div>
+                            <div class="mb-3 d-none" id="divPrixIns">
+                              <label for="prixIns" class="form-label">Montant de l'inscription pour cette classe</label>
+                              <input type="text" class="form-control shadow-sm" disabled required id="prixIns">
                             </div>
                             <div id="liveAlertPlaceholder"></div>
                             <button type="submit" class="btn myBtn" id="liveAlertBtn">Enregistrer</button>
@@ -402,7 +416,7 @@
                               <div class="mb-3">
                                 <label for="listEleve" class="form-label">Elève</label>
                                 <select class="form-select" id="listEleve">
-                                  <!-- <option class="" disabled selected>Choisir un élève</option> -->
+                                  <option class="" disabled selected>Choisir un élève</option>
                                 </select>
                               </div>
                                 <div class="mb-3 d-none" id="divNom">
