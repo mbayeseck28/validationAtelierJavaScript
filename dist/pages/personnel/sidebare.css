@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Michroma&display=swap");
+
 *{
     margin: 0;
     padding: 0;
@@ -192,10 +194,6 @@ input{
     top: 15%;
     transform: translateY((-50%));
 }
-
-
-
-
 
 @media screen and (max-width: 941px){
     .calendrier{
