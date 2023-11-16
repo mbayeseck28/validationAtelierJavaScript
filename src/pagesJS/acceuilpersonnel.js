@@ -39,7 +39,6 @@ export function nombreEmployer() {
      let nombreEmployer = employer.length;
      const countEmployers = document.querySelector('.num2')
   let interval = 1000;  
-  //  countElement.forEach((countElement) => {
     //  console.log(countEmployers);
     let startValue = 0;
     countEmployers.setAttribute("data-val", `${nombreEmployer}`);
@@ -85,14 +84,8 @@ export function nombreAssocie() {
         startValue += 1;
         countElement.textContent = startValue;
         if (startValue == endValue) {
-          clearInterval(counter);
-          
+          clearInterval(counter); 
         }
       }, duration)
      })
-    
-  // });
 }
-
-
-// 
