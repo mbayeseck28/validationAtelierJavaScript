@@ -4,7 +4,9 @@
     box-sizing: border-box;
 }
 
-
+.sidebar li a span.active{
+    color: #00E100;
+}
 
 .la{
     text-align: right;

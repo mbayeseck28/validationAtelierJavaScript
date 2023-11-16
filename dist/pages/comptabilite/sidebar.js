@@ -138,7 +138,7 @@ function addListner() {
   days.forEach((day) => {
     day.addEventListener("click", (e) => {
       // afficher le modal pour ajouter un event
-      addEventWrapper.classList.toggle("active"); 
+    //   addEventWrapper.classList.toggle("active"); 
       
       getActiveDay(e.target.innerHTML);
       updateEvents(Number(e.target.innerHTML));
@@ -181,6 +181,12 @@ function addListner() {
         e.target.classList.add("active");
       }
     });
+
+    day.addEventListener("dblclick", function (e) {
+        // afficher le modal pour ajouter un event
+      addEventWrapper.classList.toggle("active");
+    });
+
   });
   
 }
@@ -265,8 +271,8 @@ function updateEvents(date) {
   });
   // Si aucun evenement n'est trouvé
   if (events === "") {
-    events = `<div class="no-event">
-            <h3>Aucun évènement sur cette date</h3>
+    events = `<div class="no-event pb-4">
+            <h6 class="text-center">Aucun évènement sur cette date</h6> 
         </div>`;
   }
   eventsContainer.innerHTML = events;
@@ -278,14 +284,14 @@ addEventCloseBtn.addEventListener("click", () => {
   addEventWrapper.classList.remove("active");
 });
 
-// Limiter à 10 caractères le nom d'un événement
+// Limiter à 50 caractères le nom d'un événement
 addEventTitle.addEventListener("input", (e) => {
-  addEventTitle.value = addEventTitle.value.slice(0, 10);
+  addEventTitle.value = addEventTitle.value.slice(0, 50);
 });
 
-// Limiter à 10 caractères la description d'un événement
+// Limiter à 50 caractères la description d'un événement
  addEventDescription.addEventListener("input", (e)=>{
-   addEventDescription.value = addEventDescription.value.slice(0, 10);
+   addEventDescription.value = addEventDescription.value.slice(0, 50);
  });
 
 
