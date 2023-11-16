@@ -2,7 +2,7 @@ document.getElementById("bouton").addEventListener("click", (e) => {
     
     const one = document.querySelector(".one");
     one.classList.add("transition-left");
-
+    
     
     setTimeout(() => {
         one.style.display = "none";
