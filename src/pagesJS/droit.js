@@ -16,22 +16,84 @@ document.getElementById("bouton").addEventListener("click", (e) => {
 
 // Importer les fonctions dont vous avez besoin à partir des SDKs dont vous avez besoin
 import { initializeApp } from 'firebase/app';
-import { getFirestore, doc, setDoc, serverTimestamp } from 'firebase/firestore';
+
+import {
+  getAuth,
+  signOut,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  onAuthStateChanged,
+  updateProfile,
+} from 'firebase/auth';
+
+import { getFirestore, collection, onSnapshot, doc, setDoc, serverTimestamp } from 'firebase/firestore';
 
 // Configuration de votre application web Firebase
 const firebaseConfig = {
-  apiKey: "AIzaSyBQ3SrfEimEPtzCFyxR0vWBK8BJ_K4Ma48",
-  authDomain: "mixte-feewi.firebaseapp.com",
-  projectId: "mixte-feewi",
-  storageBucket: "mixte-feewi.appspot.com",
-  messagingSenderId: "1083213454329",
-  appId: "1:1083213454329:web:df3deafe22a82ad34e3b28"
+
+  apiKey: "AIzaSyCSRo2EZwo5LQIO75FevIBvEKbDD61HNuY",
+  authDomain: "validation-atelier-js.firebaseapp.com",
+  databaseURL: "https://validation-atelier-js-default-rtdb.firebaseio.com",
+  projectId: "validation-atelier-js",
+  storageBucket: "validation-atelier-js.appspot.com",
+  messagingSenderId: "466332062090",
+  appId: "1:466332062090:web:ffbe45ef4a7371a7b5b873"
+
 };
 
 // Initialiser Firebase
 const app = initializeApp(firebaseConfig);
-
+const auth = getAuth(app);
 const db = getFirestore(app);
+
+/******************  affiche photo profil Nav bar  **********************/
+onAuthStateChanged(auth, (user) => {
+  if (user) {
+    console.log('Utilisateur connecté');
+    var userEmail = user.email;
+    const userRef = collection(db, 'utilisateurs');
+    onSnapshot(userRef, (snapshot) => {
+      let userRef = [];
+      snapshot.docs.forEach((doc) => {
+        userRef.push({ ...doc.data(), id: doc.id });
+      });
+      userRef.forEach((utilisateur) => {
+        // Créez une référence au document de l'utilisateur dans Firestore
+        const userDocRef = doc(db, 'utilisateurs', utilisateur.id);
+
+        if (utilisateur.email == userEmail) {
+          const ProfilNav = document.querySelector('.ProfilNav');
+          const profilVoir = document.querySelector('.profilVoir');
+          const nomUser = document.querySelector('.nomUser');
+          const statusUser = document.querySelector('.statusUser');
+          ProfilNav.src = utilisateur.url;
+          profilVoir.src = utilisateur.url;
+          nomUser.innerText = utilisateur.prenom + ' ' + utilisateur.nom;
+          statusUser.innerText = utilisateur.status;
+        }
+      });
+    });
+  } else {
+    console.log('Aucun utilisateur connecté');
+    window.location.href = '../../pages/auth/login/login.html';
+  }
+});
+
+
+/************     DECONNEXION       ***********/ 
+const btnDeconnexion = document.getElementById('btnDeconnexion');
+const signOutButtonPressed = async (e) => {
+  e.preventDefault();
+  try {
+    await signOut(auth);
+    console.log("Deconnecté");
+    window.location.href = '../../pages/auth/login/login.html';
+  } catch (error) {
+    console.log(error.code);
+  }
+}
+btnDeconnexion.addEventListener("click", signOutButtonPressed);
+
 
 // Référence Firestore
 const contenuRef = doc(db, 'droit', 'HnVUd5sHwFWRB0gmidmo');

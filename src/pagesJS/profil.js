@@ -33,9 +33,12 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
 const database = getDatabase();
+const user = auth.currentUser;
 
 const formProfil = document.getElementById('formProfil');
 formProfil.style.display = 'none';
+
+
 
 onAuthStateChanged(auth, (user) => {
   if (user) {
@@ -197,6 +200,8 @@ onAuthStateChanged(auth, (user) => {
     });
   } else {
     console.log('Aucun utilisateur connecté');
+    window.location.href = '../../pages/auth/login/login.html';
+    // user != auth.currentUser
   }
 });
 

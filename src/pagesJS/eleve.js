@@ -70,8 +70,10 @@ onAuthStateChanged(auth, (user) => {
 
   } else {
       console.log("Aucun utilisateur connecté");
+      window.location.href = '../../pages/auth/login/login.html';
   }
 });
+
 
 
 
