@@ -2,7 +2,10 @@
 var pageName = window.location.pathname.split('/').pop();
 
 if (pageName === 'inscription.html') {
+  import('./pagesJS/sidebar');
   import('./pagesJS/inscription');
+} else if (pageName === 'admin.html') {
+  import('./pagesJS/admin.js');
 } else if (pageName === 'login.html') {
   import('./pagesJS/login');
 } else if (pageName === 'acceuil.html') {

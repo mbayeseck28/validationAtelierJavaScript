@@ -28,6 +28,40 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
 
+/************     Profil Navbar       ***********/ 
+onAuthStateChanged(auth, (user) => {
+  if (user) {
+    // console.log("Utilisateur connecté");
+    var userEmail = user.email;
+    const userRef = collection(db, "utilisateurs");
+    onSnapshot(userRef, (snapshot) => {
+      let userRef = [];
+      snapshot.docs.forEach((doc) => {
+        userRef.push({ ...doc.data(), id: doc.id });
+      });
+      userRef.forEach((utilisateur) => {
+        // Créez une référence au document de l'utilisateur dans Firestore
+        const userDocRef = doc(db, "utilisateurs", utilisateur.id);
+
+        if (utilisateur.email == userEmail) {
+          const ProfilNav = document.querySelector(".ProfilNav");
+          const profilVoir = document.querySelector(".profilVoir");
+          const nomUser = document.querySelector(".nomUser");
+          const statusUser = document.querySelector(".statusUser");
+          ProfilNav.src = utilisateur.url;
+          profilVoir.src = utilisateur.url;
+          nomUser.innerText = utilisateur.prenom + " " + utilisateur.nom;
+          statusUser.innerText = utilisateur.status;
+        }
+      });
+    });
+  } else {
+    
+      console.log("Aucun utilisateur connecté");
+      window.location.href = '../../pages/auth/login/login.html';
+  }
+});
+
 const handleRegistration = async (event) => {
   event.preventDefault();
 
@@ -107,3 +141,13 @@ const handleRegistration = async (event) => {
 console.log('page inscription');
 const registrationForm = document.getElementById('registration-form');
 registrationForm.addEventListener('submit', handleRegistration);
+
+onAuthStateChanged(auth, (user) => {
+  if (user) {
+    console.log("utilisateur connecté");
+  } else {
+    
+      console.log("Aucun utilisateur connecté");
+      window.location.href = '../../pages/auth/login/login.html';
+  }
+});
