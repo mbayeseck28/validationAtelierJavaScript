@@ -3,6 +3,7 @@ import { getStorage, ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { getDatabase, ref as refDatabase, set, get } from 'firebase/database';
 import {
   getAuth,
+  signOut,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   onAuthStateChanged,
@@ -198,4 +199,18 @@ onAuthStateChanged(auth, (user) => {
   }
 });
 
+
+/************     DECONNEXION       ***********/ 
+const btnDeconnexion = document.getElementById('btnDeconnexion');
+const signOutButtonPressed = async (e) => {
+  e.preventDefault();
+  try {
+    await signOut(auth);
+    console.log("Deconnecté");
+    window.location.href = '../../pages/auth/login/login.html';
+  } catch (error) {
+    console.log(error.code);
+  }
+}
+btnDeconnexion.addEventListener("click", signOutButtonPressed);
 console.log('page profil');

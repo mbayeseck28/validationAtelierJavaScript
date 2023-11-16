@@ -39,6 +39,8 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app); 
 const db = getFirestore(app);
 
+
+
 /************     Profil Navbar       ***********/ 
 onAuthStateChanged(auth, (user) => {
   if (user) {
@@ -70,6 +72,7 @@ onAuthStateChanged(auth, (user) => {
 
 
   } else {
+    
       console.log("Aucun utilisateur connecté");
   }
 });
@@ -84,7 +87,7 @@ const signOutButtonPressed = async (e) => {
     window.location.href = '../../pages/auth/login/login.html';
   } catch (error) {
     console.log(error.code);
-  }
+  }v
 }
 btnDeconnexion.addEventListener("click", signOutButtonPressed);
 
@@ -115,7 +118,6 @@ onSnapshot(eleve, (snapshot) => {
   });
   eleves.sort((a, b) => b.dateDajout - a.dateDajout);
 
-  console.log(eleves);
   effectifClass6 = eleves.filter((utili) => utili.classe === "6ème").length;
   effectifClass5 = eleves.filter((utili) => utili.classe === "5ème").length;
   effectifClass4 = eleves.filter((utili) => utili.classe === "4ème").length;
@@ -178,7 +180,6 @@ onSnapshot(certiesRef2, (snapshot) => {
   });
   certiesRef2.sort((a, b) => b.dateDajout - a.dateDajout);
 
-  console.log(certiesRef2);
   let PaiementsEffec6 = certiesRef2.filter(
     (utili) => utili.classe === "6ème" && utili.mois === "novembre"
   );
@@ -275,3 +276,4 @@ getDocs(certiesRef2).then((snapshot) => {
   // console.log(certiesRef2);
   totalMens.innerHTML = `<b>${totalMensualiter}</b>`;
 });
+
