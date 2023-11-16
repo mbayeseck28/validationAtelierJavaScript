@@ -316,14 +316,28 @@ body {
     color: #00de00;
 }
 
+.btnPayer{
+    background-color: #000000;
+    color: #00de00;
+}
+.btnPayer:hover, .btnPayer:active, .btnPayer:focus{
+    color: #EFF2F6;
+    background-color: #00de00;
+}
+
 select {
     cursor: pointer;
 }
 
-select:hover{
+/* select:hover{
     background-color: #000000; 
     color: #00de00;
    
+} */
+
+option:hover{
+    background-color: #000000; 
+    color: #00de00;
 }
 
  
