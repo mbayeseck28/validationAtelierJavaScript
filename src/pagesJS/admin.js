@@ -5,8 +5,8 @@ const btnConnexion = document.querySelector('.btnConnexion')
 // console.log(emailAdmin,mdpAdmin,btnConnexion);
 
 btnConnexion.addEventListener('click', ()=>{
-    const emailAdminValide = "jesuisleboss@gmail.com"
-    const mdpAdminValide = "Maybossbi2023"
+    const emailAdminValide = "admin@gmail.com"
+    const mdpAdminValide = "admin2023"
     if (emailAdmin.value === emailAdminValide && mdpAdmin.value === mdpAdminValide){
         console.log("Conexxion reussit");
         window.location.href="../auth/inscription/inscription.html";
