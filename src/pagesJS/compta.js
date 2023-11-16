@@ -1,5 +1,6 @@
 // Import the functions you need from the SDKs you need
-import { initializeApp, onLog } from 'firebase/app';
+import { initializeApp } from 'firebase/app';
+
 // Importation des  services
 import {
   doc,
@@ -21,14 +22,14 @@ import {
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: 'AIzaSyBQ3SrfEimEPtzCFyxR0vWBK8BJ_K4Ma48',
-  authDomain: 'mixte-feewi.firebaseapp.com',
-  projectId: 'mixte-feewi',
-  storageBucket: 'mixte-feewi.appspot.com',
-  messagingSenderId: '1083213454329',
-  appId: '1:1083213454329:web:df3deafe22a82ad34e3b28',
+  apiKey: 'AIzaSyCSRo2EZwo5LQIO75FevIBvEKbDD61HNuY',
+  authDomain: 'validation-atelier-js.firebaseapp.com',
+  databaseURL: 'https://validation-atelier-js-default-rtdb.firebaseio.com',
+  projectId: 'validation-atelier-js',
+  storageBucket: 'validation-atelier-js.appspot.com',
+  messagingSenderId: '466332062090',
+  appId: '1:466332062090:web:ffbe45ef4a7371a7b5b873',
 };
-
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 
@@ -83,7 +84,8 @@ onSnapshot(eleve, (snapshot) => {
 
   const list = document.querySelector('#list');
   list.innerHTML = '';
-  // console.log(eleve);
+  console.log(eleve);
+
   eleve.forEach((utili) => {
     const list = document.querySelector('#list');
     const tr = document.createElement('tr');
@@ -111,19 +113,16 @@ form.addEventListener('submit', (e) => {
     prenom: form.prenom.value,
     type: form.type.value,
     classe: form.classeSelect.value,
-    montantInsc: parseInt(form.montantPaye.value),
+    montantInsc: parseInt(form.prixIns.value),
     dateDajout: serverTimestamp(),
   }).then(() => form.reset());
 });
-// Montant à inscrire
-let selectElement = document.getElementById('classeSelect');
-selectElement.addEventListener('change', function () {
-  let selectedOption = selectElement.options[selectElement.selectedIndex];
-  let selectedValue = selectedOption.value;
-  console.log(selectedValue);
-
-  document.getElementById('montantPaye').value = montant(selectedValue);
-  console.log(document.getElementById('montantPaye').value);
+form.addEventListener('input', (e) => {
+  const divPrixIns = document.getElementById('divPrixIns');
+  const prixIns = document.getElementById('prixIns');
+  divPrixIns.classList.remove('d-none');
+  prixIns.value = montant(`${classeSelect.value}`);
+  console.log(prixIns.value);
 });
 
 function montant(classe) {
@@ -192,6 +191,7 @@ onSnapshot(certiesRef2, (snapshot) => {
 });
 
 // ajout d'une mensualite
+
 // Récupération de la liste des inscrits
 const formMensuel = document.getElementById('formMensuel');
 const nomMens = document.getElementById('nomMens');
@@ -236,6 +236,7 @@ onSnapshot(eleve, (snapshot) => {
         classeMens.value = `${afficheInput.classe}`;
         classeMens.setAttribute('disabled', '');
         prixMens.value = montant2(`${afficheInput.classe}`);
+        prixMens.setAttribute('disabled', '');
       }
       const myMess = document.querySelector('.alertMens');
       myMess.classList.add('d-none');
@@ -385,13 +386,15 @@ onSnapshot(eleve, (snapshot) => {
   });
   const revenue = document.getElementById('revenue');
   revenue.innerHTML = '';
+  let bodyIns = document.createElement('tr');
+  bodyIns.innerHTML = `<td  colspan = '3'><h5 colspan='3' class='d-flex justify-content-center py-2 maMens me-5' >Inscriptions</h5></td>`;
+  revenue.appendChild(bodyIns);
   eleve.forEach((utili) => {
     let trbody = document.createElement('tr');
     trbody.innerHTML = `
       <td class="border border-1">${utili.dateDajout
         .toDate()
         .toLocaleDateString()}</td>
-        <td class="text-center">${utili.type}</td>
         <td class="text-center border border-1">${utili.prenom} ${
       utili.nom
     }</td>
@@ -404,6 +407,7 @@ onSnapshot(eleve, (snapshot) => {
     loaderContainer.style.display = 'none';
   });
 });
+
 onSnapshot(certiesRef2, (snapshot) => {
   let certiesRef2 = [];
   snapshot.docs.forEach((doc) => {
@@ -413,21 +417,24 @@ onSnapshot(certiesRef2, (snapshot) => {
   mens.innerHTML = '';
   certiesRef2.sort((a, b) => b.dateDajout - a.dateDajout);
 
+  let bodymens = document.createElement('tr');
+  bodymens.innerHTML = `<td  colspan = '3'><h5 colspan='3' class='d-flex justify-content-center py-2 maMens me-5' >Mensualités</h5></td>`;
+  mens.appendChild(bodymens);
+
   certiesRef2.forEach((utili) => {
     let trbody = document.createElement('tr');
+
     trbody.innerHTML = `
       <td class="border border-1">${utili.dateDajout
         .toDate()
         .toLocaleDateString()}</td>
-        <td class="text-center">${utili.type}</td>
         <td class="text-center border border-1">${utili.prenom} ${
       utili.nom
     }</td>
         <td class="border border-1">${utili.montantpay}Fcfa</td>
         `;
-    mens.appendChild(trbody);
 
-    // console.log(utili.type);
+    mens.appendChild(trbody);
   });
 });
 
@@ -483,12 +490,13 @@ Promise.all([totalGlobal(eleve), totalGlobal(certiesRef2)])
     //Calcule du revenue total
     function CalculDeLaSommeTotale() {
       const total = document.getElementById('total');
-      total.innerHTML = '';
       let trfoot = document.createElement('tr');
       trfoot.innerHTML = `
-    <td colspan="3"><b>Total</b></td>
+    <td colspan="2"><b>Total</b></td>
     <td><b>${totaleDuRevenu.toLocaleString('en-US')} Fcfa </b></td>
     `;
+      // total.innerHTML = '';
+
       total.appendChild(trfoot);
       const revTotal = document.getElementById('revenuTotal');
       revTotal.innerHTML = `${totaleDuRevenu.toLocaleString(
