@@ -56,3 +56,31 @@ function enregistrerModifications() {
 }
 
 document.getElementById("modif").addEventListener("click", enregistrerModifications);
+
+
+getDoc(contenuRef).then((docSnapshot) => {
+  if (docSnapshot.exists()) {
+      const contenu = docSnapshot.data().contenu;
+      quill.root.innerHTML = contenu;
+  }
+});
+
+// Mettre à jour le contenu en temps réel
+onSnapshot(contenuRef, (docSnapshot) => {
+  if (docSnapshot.exists()) {
+      const contenu = docSnapshot.data().contenu;
+      quill.root.innerHTML = contenu;
+  }
+});
+
+quill.on('text-change', function() {
+    var delta = quill.getContents();
+    var deltaString = JSON.stringify(delta);
+    localStorage.setItem('editor-content', deltaString);
+
+    setDoc(contenuRef, {
+      contenu: quill.root.innerHTML,
+      timestamp: serverTimestamp(),
+  });
+
+});
