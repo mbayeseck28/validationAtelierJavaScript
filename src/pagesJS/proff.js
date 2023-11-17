@@ -1,5 +1,3 @@
-console.log("proff");
-
 import { initializeApp } from "firebase/app";
 
 import {
@@ -18,9 +16,8 @@ const firebaseConfig = {
   projectId: "validation-atelier-js",
   storageBucket: "validation-atelier-js.appspot.com",
   messagingSenderId: "466332062090",
-  appId: "1:466332062090:web:ffbe45ef4a7371a7b5b873",
+  appId: "1:466332062090:web:ffbe45ef4a7371a7b5b873"
 };
-
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 

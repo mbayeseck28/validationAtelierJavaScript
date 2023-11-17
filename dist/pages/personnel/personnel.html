@@ -83,19 +83,9 @@
         </div>
         <div class="col-12 col-md-5 mt-3 text-center calendrier">
           <p>Année scolaire: <span>2022-2023</span></p>
-          <i class="fa-solid fa-angle-left ms-5 me-5"></i>
-          <i class="fa-solid fa-angle-right ms-5"></i>
         </div>
-        <div class="col-12 col-md-2 search">
-          <input
-            type="text"
-            name=""
-            id=""
-            placeholder="Rechercher"
-            class="p-3"
-          />
-        </div>
-        <div class="col-6 col-md-3 d-flex flex-row compte">
+        
+        <div class="col-6 col-md-3 d-flex flex-row compte me-md-5">
           <i class="fa-regular fa-bell d-none d-lg-block mt-1" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight"></i>
 
           <div class="offcanvas offcanvas-sm offcanvas-end " tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
@@ -114,7 +104,7 @@
             </div>
           </div>
 
-          <div class="profil ms-3">
+          <div class="profil ms-5 me-md-1">
             <img src="../../../src/assets/images/profil.jpeg" class="ProfilNav" alt="" />
           </div>
           <div class="btn-group">
@@ -125,8 +115,8 @@
                 <div class="col-6 col-md-2 mx-auto my-2 mt-3 imageDivProfile">
                   <img src="../../../src/assets/images/profil.jpeg" class="profilVoir" alt="" />
                 </div>
-               <h6 class="text-center mb-0 fst-italic">Nom Complet</h6>
-               <p class="mt-0 pt-0 text-light">Status</p>
+               <h6 class="text-center mb-0 fst-italic nomUser">Nom Complet</h6>
+               <p class="mt-0 pt-0 text-light statusUser">Status</p>
               </div>              
               <li>
                 <a class="dropdown-item   mt-3 " href="../profil/profil.html">
@@ -168,7 +158,7 @@
                  </li>
                  <li>
                      <a href="../personnel/personnel.html"><i class="fa-regular fa-user"></i>
-                         <span class="links_name">Personnel</span>
+                         <span class="links_name active">Personnel</span>
                      </a>
                      <span class="tooltip">Personnel</span>
                  </li>
@@ -216,32 +206,16 @@
           <!-----------PARTIE Acceuil----------->
 
           <section id="AccueilPersonnels">
-            <div class="myContDiv mb-5">
+            <div class="myContDiv mb-5 ">
               <h2 class="mt-5 fs-3 mt-lg-0 mb-3">Gestion Personnel</h2>
-              <div class="card border-0 shadow rounded-5 my-3 pt-4">
-                <div class="card-body pb-3 pb-lg-5">
+              <div class="card border-0 shadow rounded-5 my-0 my-lg-0 pt-0 pt-lg-2">
+                <div class="card-body pb-3 pb-lg-">
                   <div class="col-12">
                     <p class="h1 liste mb-3 mb-lg-0">
                       Liste de tous les professeurs de l'etablissement
                     </p>
                   </div>
-                  <div class="col-12 pb-0 pb-lg-4 d-flex mb-4 mt-5 justify-content-end">
-                    <form action="" class="col-10 col-md-6 col-lg-4">
-                      <div
-                        class="shadow d-flex mb-lg-0 align-items-center p-1 rounded-3 ps-2"
-                      >
-                        <input
-                          type="search"
-                          id="input"
-                          class="w-100 elements bg-transparent border-0 border-outline-none"
-                          placeholder="Rechercher un professeur..."
-                        />
-                        <span class="elements me-2"
-                          ><i class="fa-solid fa-magnifying-glass"></i
-                        ></span>
-                      </div>
-                    </form>
-                  </div>
+                 
 
                   <div class="row gy-4 px-3 pt-5 justify-content-between bordRaduis bg-white pb-3 pb-lg-5">
                     <div class="col-12 col-md col-lg-4 divCard mx-auto">
@@ -315,7 +289,7 @@
 
           <section id="Professeurs" class="mb-5">
             <div class="myContDiv mb-5">
-              <h2 class="mt-5 fs-3 mt-lg-0 mb-3">Gestion Personnel</h2>
+              <h2 class="mt-5 fs-3 mt-lg-0 mb-3">Professeurs</h2>
               <div class="card border-0 shadow rounded-5 my-3">
                 <div class="py-4 d-flex justify-content-between">
                   <button
@@ -492,7 +466,7 @@
 
          <section id="Associer" class="">
           <div class="myContDiv mb-5">
-            <h2 class="mt-5 fs-3 mt-lg-0 mb-3">Gestion Personnel</h2>
+            <h2 class="mt-5 fs-3 mt-lg-0 mb-3">Associés</h2>
             <div class="card border-0 shadow rounded-5 my-3">
               <div class="py-3 d-flex justify-content-between">
                 <button
@@ -646,7 +620,7 @@
 
          <section id="EMPLOYER" class="mb-5">
           <div class="myContDiv">
-            <h2 class="mt-5 fs-3 mt-lg-0 mb-3">Gestion Personnel</h2>
+            <h2 class="mt-5 fs-3 mt-lg-0 mb-3">Employés</h2>
             <div class="card border-0 shadow rounded-5 my-3">
               
               <div class="py-4 d-flex justify-content-between">

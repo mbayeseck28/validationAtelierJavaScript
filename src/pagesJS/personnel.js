@@ -1,6 +1,18 @@
 import { initializeApp } from "firebase/app";
 
 import {
+  doc,
+  updateDoc,
+  addDoc,
+  collection,
+  documentId,
+  getDocs,
+  getFirestore,
+  onSnapshot,
+  serverTimestamp,
+} from "firebase/firestore";
+
+import {
   nombreProfesseur,
   nombreEmployer,
   nombreAssocie,
@@ -19,7 +31,7 @@ import {
   gestionAssocie,
   asso,
   ajouterAssocier,
-  rechercheAssocie 
+   
 } from "./associe.js";
 
 import {
@@ -31,6 +43,15 @@ import {
   recherche,
 } from "./employer.js";
 
+import {
+  getAuth,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  onAuthStateChanged,
+  updateProfile ,
+} from "firebase/auth";
+
+
 const firebaseConfig = {
   apiKey: "AIzaSyCSRo2EZwo5LQIO75FevIBvEKbDD61HNuY",
   authDomain: "validation-atelier-js.firebaseapp.com",
@@ -38,16 +59,55 @@ const firebaseConfig = {
   projectId: "validation-atelier-js",
   storageBucket: "validation-atelier-js.appspot.com",
   messagingSenderId: "466332062090",
-  appId: "1:466332062090:web:ffbe45ef4a7371a7b5b873",
+  appId: "1:466332062090:web:ffbe45ef4a7371a7b5b873"
 };
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
+const db = getFirestore(app); 
+const auth = getAuth(app);
 
 /******* PARTIE ACCUEIL **********/
 nombreProfesseur();
 nombreEmployer();
 nombreAssocie();
+
+
+/******* PARTIE Porfil nav bar  **********/
+
+onAuthStateChanged(auth, (user) => {
+  if (user) {
+      console.log("Utilisateur connecté");
+      var userEmail = user.email;
+      const userRef = collection(db, "utilisateurs");
+      onSnapshot(userRef, (snapshot) => {
+        let userRef = [];
+        snapshot.docs.forEach((doc) => {
+          userRef.push({...doc.data(), id: doc.id })
+        })
+        userRef.forEach((utilisateur => {
+          // Créez une référence au document de l'utilisateur dans Firestore
+          const userDocRef = doc(db, "utilisateurs", utilisateur.id);
+          
+          if (utilisateur.email == userEmail) { 
+              const ProfilNav = document.querySelector('.ProfilNav');
+              const profilVoir = document.querySelector('.profilVoir');
+              const nomUser = document.querySelector('.nomUser');
+              const statusUser = document.querySelector('.statusUser') 
+              ProfilNav.src = utilisateur.url;
+              profilVoir.src = utilisateur.url;
+              nomUser.innerText = utilisateur.prenom + ' ' + utilisateur.nom;
+              statusUser.innerText = utilisateur.status;
+            
+          }
+        }))
+      });
+
+
+  } else {
+      console.log("Aucun utilisateur connecté");
+  }
+});
 
 /*******PARTIE PROFESSEURS ET EMPLOYER******/
 let id;
@@ -132,12 +192,14 @@ ajoutAsso.addEventListener("click", function (e) {
   ajouterAssocier(formAssocie);
 });
 
+
 // gestionAssocie(function (associe) {
 //   console.log(associe);
 //   const rechercheInput = document.getElementById("formAssocie");
 //   console.log(rechercheInput);
 //   rechercheAssocie(rechercheInput, associe);
 // })
+
 
 /*******************PARTIE EMPLOYER***************************** */
 const formEmployer = document.querySelector(".formEmployer");

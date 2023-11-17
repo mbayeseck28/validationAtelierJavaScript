@@ -79,19 +79,10 @@
         </div>
         <div class="col-12 col-md-5 mt-3 text-center calendrier">
           <p>Année scolaire: <span>2022-2023</span></p>
-          <i class="fa-solid fa-angle-left ms-5 me-5"></i>
-          <i class="fa-solid fa-angle-right ms-5"></i>
+          
         </div>
-        <div class="col-12 col-md-2 search">
-          <input
-            type="text"
-            name=""
-            id=""
-            placeholder="Rechercher"
-            class="p-3"
-          />
-        </div>
-        <div class="col-6 col-md-3 d-flex flex-row compte">
+       
+        <div class="col-6 col-md-3 d-flex flex-row compte me-md-5">
           <i
             class="fa-regular fa-bell mt-1"
             data-bs-toggle="offcanvas"
@@ -128,7 +119,7 @@
               </div>
             </div>
           </div>
-          <div class="profil ms-3">
+          <div class="profil ms-5 me-md-1">
             <img src="../../../src/assets/images/profil.jpeg" class="ProfilNav" alt="" />
           </div>
 
@@ -144,31 +135,31 @@
                 class="d-flex flex-column py-4 mb-2 justify-content-center gy-5 align-items-center divProfile"
               >
               <div class="col-6 col-md-2 mx-auto my-2 mt-3 imageDivProfile">
-                <img src="../../../src/assets/images/profil.jpeg" class="profilVoir" alt="" />
+                <img src="../../../src/assets/images/profil.jpeg" class="profilVoir rounded-circle" alt="" />
               </div>
-                <h6 class="text-center mb-0 fst-italic">Nom Complet</h6>
-                <p class="mt-0 pt-0 text-light">Status</p>
+                <h6 class="text-center mb-0 fst-italic nomUser">Nom Complet</h6>
+                <p class="mt-0 pt-0 text-light statusUser">Status</p>
               </div>
-              <li>
+              <li class="d-flex flex-column py-2">
                 <a
-                  class="dropdown-item mt-3"
+                  class="dropdown-item mt-3 activeBg"
                   href="../../pages/profil/profil.html"
                 >
                   <button
-                    class="btn btnGreen fw-bold btn-light shadow btn-sm w-100"
+                    class="btn btnGreen d-block fw-bold btn-light shadow btn-sm mb-2 w-100"
                     type="button"
                   >
                     Voir le profil
-                  </button></a
-                >
-              </li>
-              <li>
+                  </button>
+                </a>
+
                 <button
-                  class="btn btnGreen fw-bold btn-light shadow btn-sm w-100"
+                  class="btn btnGreen d-block fw-bold btn-light shadow btn-sm w-100"
                   type="button"
                 >
                   Deconnexion
                 </button>
+
               </li>
             </ul>
           </div>
@@ -188,7 +179,7 @@
               <li>
                 <a href="../accueil/acceuil.html">
                   <i class="fa-solid fa-table-columns"></i>
-                  <span class="links_name">Accueil</span>
+                  <span class="links_name active">Accueil</span>
                 </a>
                 <span class="tooltip">Accueil</span>
               </li>
@@ -239,17 +230,34 @@
         </div>
         <div class="col-12 col-md-10 mt-5 pt-5 myContain">
           <section class="accueil-body">
-            <h4 class="fw-bold ms-5 ms-lg-4 mt-5 mt-lg-2">Accueil</h4>
-
 
             <!-- CARTES DES DIFFERENTES CLASSES -->
+
             <div class="container-fluid">
-         <div class="card mb-3">
+              <div class="card bg-transparent p-3 pb-3 mb-3 border-0">
+                <div class="row mb-4">
+                  <!-- <h4 class="fw-bold ms-5 ms-lg-4 mt-5 mt-lg-2">Accueil</h4> -->
+                  <div class="col-lg-12 mt-5 mt-lg-0 d-flex justify-content-end align-items-center">
+                <select id="selectMois" class="rounded-3 px-3 py-2 shadow">
+                  <option value="octobre" >Octobre</option>
+                  <option value="novembre"  >Novembre</option>
+                  <option value="decembre" >Décembre</option>
+                  <option value="janvier" >Janvier</option>
+                  <option value="fevrier" >Février</option>
+                  <option value="mars" >mars</option>
+                  <option value="avril" >Avril</option>
+                  <option value="mai" >Mai</option>
+                  <option value="juin" >Juin</option>
+                </select>
+               <!-- <button id="affiche">affiche</button> -->
+              </div>
+
+              </div>
               <div class="row gy-3 mb-4 justify-content-center">
                 <div class="col-lg-3 col-md-6 col-sm-12">
                   <div class="card cardClass shadow mx-auto mb-3">
 
-                    <div class="card-header m-0 mt-2 mx-3 p-1 border-0 fw-light  bg-transparent text-center d-flex justify-content-between align-items-center">
+                    <div class="card-header m-0 mt-2 mx-3 p-1 border-0 fw-  bg-transparent text-center d-flex justify-content-between align-items-center">
 
                       <span class="text-">Classe :</span>
                       <button
@@ -259,7 +267,9 @@
                           cursor: pointer;
                         "
                         class="text-light p- border-0 rounded-3 px-1"
+                        
                       >
+                      
                         6ème
                       </button>
 
@@ -277,8 +287,10 @@
                       class="card-footer d-flex justify-content-between"
                       style="background-color: #eef0f2"
                     >
-                      <span class="fw-light">Effectif : </span>
-                      <span style="color: #00de00" id="effectif6">0</span>
+                      <!-- <span class="fw-dark text-dark">Effectif : </span>
+                      <span style="color: #00de00" id="effectif6">0</span> -->
+                      <p class="fw-dark text-dark m-0" >Effectif : <span style="" id="effectif6">0</span></p> 
+                      <p class=" border-0 m-0 p-0 text-" style="color: #00de00; cursor: pointer;" data-bs-toggle="modal" data-bs-target="#exampleModal">Detail</p>
                     </div>
                   </div>
                 </div>
@@ -287,7 +299,7 @@
                 <div class="col-lg-3 col-md-6 col-sm-12">
 
                   <div class="card shadow cardClass mx-auto mb-3">
-                    <div class="card-header m-0 mt-2 mx-3 p-1 border-0 fw-light  bg-transparent text-center d-flex justify-content-between align-items-center">
+                    <div class="card-header m-0 mt-2 mx-3 p-1 border-0 fw-  bg-transparent text-center d-flex justify-content-between align-items-center">
 
                       <span class="text-">Classe :</span>
 
@@ -298,8 +310,8 @@
                       <p class="pClass text-center fw-bold"><span class="fw-light">Paiements effectués</span></p>
                     </div>
                     <div class="card-footer d-flex justify-content-between" style=" background-color: #000000;">
-                      <span class="fw-light text-light">Effectif : </span> 
-                      <span style="color: #00de00;" id="effectif5">0</span>
+                      <p class="fw-light text-light m-0" >Effectif : <span style="" id="effectif5">0</span></p> 
+                      <p class=" border-0 m-0 p-0 text-white" style="color: #00de00; cursor: pointer;" data-bs-toggle="modal" data-bs-target="#exampleModal1">Detail</p>
                     </div>
                   </div>
                 </div>
@@ -307,7 +319,7 @@
                 <div class="col-lg-3 col-md-6 col-sm-12">
 
                   <div class="card shadow cardClass mx-auto mb-3">
-                    <div class="card-header m-0 mt-2 mx-3 p-1 border-0 fw-light  bg-transparent text-center d-flex justify-content-between align-items-center">
+                    <div class="card-header m-0 mt-2 mx-3 p-1 border-0 fw-  bg-transparent text-center d-flex justify-content-between align-items-center">
 
                       <span class="text-">Classe :</span>
                       <button
@@ -333,8 +345,10 @@
                       class="card-footer d-flex justify-content-between"
                       style="background-color: #00de00"
                     >
-                      <span class="fw-light">Effectif : </span>
-                      <span style="color: #fff" class="" id="effectif4">0</span>
+                      <!-- <span class="fw- text-light">Effectif : </span>
+                      <span style="color: #fff" class="" id="effectif4">0</span> -->
+                      <p class="fw- text-light m-0" >Effectif : <span style="color: #fff" id="effectif4">0</span></p> 
+                      <p class=" border-0 m-0 p-0 text-white" style="color: #00de00; cursor: pointer;" data-bs-toggle="modal" data-bs-target="#exampleModal2">Detail</p>
                     </div>
                   </div>
                 </div>
@@ -342,7 +356,7 @@
                 <div class="col-lg-3 col-md-6 col-sm-12">
 
                   <div class="card shadow cardClass mx-auto mb-3">
-                    <div class="card-header m-0 mt-2 mx-3 p-1 border-0 fw-light  bg-transparent text-center d-flex justify-content-between align-items-center">
+                    <div class="card-header m-0 mt-2 mx-3 p-1 border-0 fw-  bg-transparent text-center d-flex justify-content-between align-items-center">
 
                       <span class="text-">Classe :</span>
                       <button
@@ -351,7 +365,7 @@
                           background-color: #00de00;
                           cursor: pointer;
                         "
-                        class="text-dark p- border-0 rounded-3 px-1"
+                        class="text-light p- border-0 rounded-3 px-1"
                       >
                         3ème
                       </button>
@@ -366,8 +380,10 @@
                     </div>
 
                     <div class="card-footer d-flex justify-content-between" style=" background-color: #eef0f2;">
-                      <span class="fw-light">Effectif : </span> 
-                      <span style="color: #00de00;" id="effectif3">0</span>
+                      <!-- <span class="fw- text-dark">Effectif : </span> 
+                      <span style="color: #00de00;" id="effectif3">0</span> -->
+                      <p class="fw- text-dark m-0" >Effectif : <span style="color: #000000" id="effectif3">0</span></p> 
+                      <p class=" border-0 m-0 p-0 text-" style="color: #00de00; cursor: pointer;" data-bs-toggle="modal" data-bs-target="#exampleModal3">Detail</p>
                     </div>
                   </div>
                 </div>
@@ -376,10 +392,136 @@
 
             </div>
 
+            <!-- modal pour details paiement  -->
+            <!-- Button trigger modal -->
+            <!-- <button type="button" class="btn btn-primary" >
+              Launch demo modal
+            </button> -->
+
+            <!-- Modal -->
+            <div class="modal fade border-0 col-4" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                  <div class="modal-header border-0">
+                    <h5 class="modal-title border-0" id="exampleModalLabel">Detail classe 6ème</h5>
+                    <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
+                  </div>
+                  <div class="modal-body border-0">
+                    
+                    <table class="w-100 table  table-bordered table-hover">
+                      <thead class="">
+                          <tr class="border border-2 " style="background-color: #00de00; cursor: pointer;">
+                              <th class="fw-bold text-start py-2 ps-2">Prenom</th>
+                              <th class="fw-bold text-start py-2 ps-2">Nom</th>
+                              <th class="fw-bold text-center py-2 ps-2">Etat payement</th>
+                          </tr>
+                      </thead>
+                      <tbody id="list" class="">
+                      </tbody>
+                    </table>
+                  </div>
+                  <div class="modal-footer border-0">
+                    <button type="button" class="btn btnPayer" data-bs-dismiss="modal">Retour</button>
+                    <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Modal1 -->
+            <div class="modal fade border-0 col-4" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                  <div class="modal-header border-0">
+                    <h5 class="modal-title border-0" id="exampleModalLabel">Detail classe 5ème</h5>
+                    <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
+                  </div>
+                  <div class="modal-body border-0">
+                    
+                    <table class="w-100 table  table-bordered table-hover">
+                      <thead class="">
+                          <tr class="border border-2 " style="background-color: #00de00; cursor: pointer;">
+                              <th class="fw-bold text-start py-2 ps-2">Prenom</th>
+                              <th class="fw-bold text-start py-2 ps-2">Nom</th>
+                              <th class="fw-bold text-center py-2 ps-2">Etat payement</th>
+                          </tr>
+                      </thead>
+                      <tbody id="list1" class="">
+                      </tbody>
+                    </table>
+                  </div>
+                  <div class="modal-footer border-0">
+                    <button type="button" class="btn btnPayer" data-bs-dismiss="modal">Retour</button>
+                    <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Modal2 -->
+            <div class="modal fade border-0 col-4" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                  <div class="modal-header border-0">
+                    <h5 class="modal-title border-0" id="exampleModalLabel">Detail classe 4ème</h5>
+                    <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
+                  </div>
+                  <div class="modal-body border-0">
+                    
+                    <table class="w-100 table  table-bordered table-hover">
+                      <thead class="">
+                          <tr class="border border-2 " style="background-color: #00de00; cursor: pointer;">
+                              <th class="fw-bold text-start py-2 ps-2">Prenom</th>
+                              <th class="fw-bold text-start py-2 ps-2">Nom</th>
+                              <th class="fw-bold text-center py-2 ps-2">Etat payement</th>
+                          </tr>
+                      </thead>
+                      <tbody id="list2" class="">
+                      </tbody>
+                    </table>
+                  </div>
+                  <div class="modal-footer border-0">
+                    <button type="button" class="btn btnPayer" data-bs-dismiss="modal">Retour</button>
+                    <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Modal3 -->
+            <div class="modal fade border-0 col-4" id="exampleModal3" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                  <div class="modal-header border-0">
+                    <h5 class="modal-title border-0" id="exampleModalLabel">Detail classe 3ème</h5>
+                    <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
+                  </div>
+                  <div class="modal-body border-0">
+                    
+                    <table class="w-100 table  table-bordered table-hover">
+                      <thead class="">
+                          <tr class="border border-2 " style="background-color: #00de00; cursor: pointer;">
+                              <th class="fw-bold text-start py-2 ps-2">Prenom</th>
+                              <th class="fw-bold text-start py-2 ps-2">Nom</th>
+                              <th class="fw-bold text-center py-2 ps-2">Etat payement</th>
+                          </tr>
+                      </thead>
+                      <tbody id="list3" class="">
+                      </tbody>
+                    </table>
+                  </div>
+                  <div class="modal-footer border-0">
+                    <button type="button" class="btn btnPayer" data-bs-dismiss="modal">Retour</button>
+                    <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+                  </div>
+                </div>
+              </div>
+            </div>
+
             <div class="container-fluid mt-">
               <h5 class="fw-bold ms-">Historiques</h5>
               <div class="row">
-                <div class="col-md-6">
+                <div class="col-lg-6 col-md-12 div-tableau-hist">
                   <table
                     class="table bg-white rounded-3 shadow-sm table-striped table-hover">
                     <thead class="opacity-50">
@@ -403,7 +545,8 @@
                     </tbody>
                   </table>
                 </div>
-                <div class="container-bar col-md-5 bg-white rounded-3">
+
+                <div class="container-bar col-md-6 bg-white rounded-3">
                   <span class="text"> Revenus</span>
                   <div class="circular-progress">
                     <span class="circular-bar"></span>

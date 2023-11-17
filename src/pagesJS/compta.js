@@ -1,7 +1,9 @@
 // Import the functions you need from the SDKs you need
-import { initializeApp, onLog } from 'firebase/app';
+import { initializeApp } from 'firebase/app';
+
 // Importation des  services
 import {
+  doc,
   addDoc,
   collection,
   getDocs,
@@ -10,20 +12,61 @@ import {
   serverTimestamp,
 } from 'firebase/firestore';
 
+import {
+  getAuth,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  onAuthStateChanged,
+  updateProfile,
+} from 'firebase/auth';
+
 // Your web app's Firebase configuration
 const firebaseConfig = {
   apiKey: 'AIzaSyCSRo2EZwo5LQIO75FevIBvEKbDD61HNuY',
   authDomain: 'validation-atelier-js.firebaseapp.com',
+  databaseURL: 'https://validation-atelier-js-default-rtdb.firebaseio.com',
   projectId: 'validation-atelier-js',
   storageBucket: 'validation-atelier-js.appspot.com',
   messagingSenderId: '466332062090',
   appId: '1:466332062090:web:ffbe45ef4a7371a7b5b873',
 };
-
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 
 const db = getFirestore(app);
+const auth = getAuth(app);
+
+/******************  affiche photo profil Nav bar  **********************/
+onAuthStateChanged(auth, (user) => {
+  if (user) {
+    console.log('Utilisateur connecté');
+    var userEmail = user.email;
+    const userRef = collection(db, 'utilisateurs');
+    onSnapshot(userRef, (snapshot) => {
+      let userRef = [];
+      snapshot.docs.forEach((doc) => {
+        userRef.push({ ...doc.data(), id: doc.id });
+      });
+      userRef.forEach((utilisateur) => {
+        // Créez une référence au document de l'utilisateur dans Firestore
+        const userDocRef = doc(db, 'utilisateurs', utilisateur.id);
+
+        if (utilisateur.email == userEmail) {
+          const ProfilNav = document.querySelector('.ProfilNav');
+          const profilVoir = document.querySelector('.profilVoir');
+          const nomUser = document.querySelector('.nomUser');
+          const statusUser = document.querySelector('.statusUser');
+          ProfilNav.src = utilisateur.url;
+          profilVoir.src = utilisateur.url;
+          nomUser.innerText = utilisateur.prenom + ' ' + utilisateur.nom;
+          statusUser.innerText = utilisateur.status;
+        }
+      });
+    });
+  } else {
+    console.log('Aucun utilisateur connecté');
+  }
+});
 
 // Récupérer la collection
 const eleve = collection(db, 'inscScolarite');
@@ -41,6 +84,7 @@ onSnapshot(eleve, (snapshot) => {
 
   const list = document.querySelector('#list');
   list.innerHTML = '';
+  // console.log(eleve);
 
   eleve.forEach((utili) => {
     const list = document.querySelector('#list');
@@ -69,19 +113,16 @@ form.addEventListener('submit', (e) => {
     prenom: form.prenom.value,
     type: form.type.value,
     classe: form.classeSelect.value,
-    montantInsc: parseInt(form.montantPaye.value),
+    montantInsc: parseInt(form.prixIns.value),
     dateDajout: serverTimestamp(),
   }).then(() => form.reset());
 });
-// Montant à inscrire
-let selectElement = document.getElementById('classeSelect');
-selectElement.addEventListener('change', function () {
-  let selectedOption = selectElement.options[selectElement.selectedIndex];
-  let selectedValue = selectedOption.value;
-  console.log(selectedValue);
-
-  document.getElementById('montantPaye').value = montant(selectedValue);
-  console.log(document.getElementById('montantPaye').value);
+form.addEventListener('input', (e) => {
+  const divPrixIns = document.getElementById('divPrixIns');
+  const prixIns = document.getElementById('prixIns');
+  divPrixIns.classList.remove('d-none');
+  prixIns.value = montant(`${classeSelect.value}`);
+  console.log(prixIns.value);
 });
 
 function montant(classe) {
@@ -117,7 +158,6 @@ if (alertTrigger) {
 }
 // _________________________
 // Parti Mensualité
-
 // Mensualite
 onSnapshot(certiesRef2, (snapshot) => {
   let certiesRef2 = [];
@@ -152,60 +192,112 @@ onSnapshot(certiesRef2, (snapshot) => {
 
 // ajout d'une mensualite
 
-const myForm = document.querySelector('.myForm');
-const alertMens = document.querySelector('.alertMens');
-getDocs(eleve).then((snapshot) => {
+// Récupération de la liste des inscrits
+const formMensuel = document.getElementById('formMensuel');
+const nomMens = document.getElementById('nomMens');
+const prenomMens = document.getElementById('prenomMens');
+const prixMens = document.getElementById('prixMens');
+const divNom = document.getElementById('divNom');
+const divPrenom = document.getElementById('divPrenom');
+const divClasse = document.getElementById('divClasse');
+const divPrix = document.getElementById('divPrix');
+const classeMens = document.getElementById('classeMens');
+onSnapshot(eleve, (snapshot) => {
   let myTabeleve = [];
   snapshot.docs.forEach((doc) => {
     myTabeleve.push({ ...doc.data(), id: doc.id });
   });
-
-  myForm.addEventListener('submit', async (e) => {
-    e.preventDefault();
-
-    let conditionRempli = false;
-
-    for (const utili of myTabeleve) {
-      // Ajouter un nouveau document avec un id généré
-      if (
-        utili.nom.includes(myForm.nom.value) &&
-        utili.prenom.includes(myForm.prenom.value) &&
-        utili.classe.includes(myForm.classeSelect2.value)
-      ) {
-        await addDoc(certiesRef2, {
-          nom: myForm.nom.value,
-          prenom: myForm.prenom.value,
-          type: myForm.type.value,
-          classe: myForm.classeSelect2.value,
-          mois: myForm.mois.value,
-          montantpay: parseInt(myForm.montantAPaye.value),
-          dateDajout: serverTimestamp(),
-        });
-
-        myForm.reset();
-        conditionRempli = true;
-        break;
+  myTabeleve.sort((a, b) => b.dateDajout - a.dateDajout);
+  // console.log(myTabeleve);
+  const mySelect = document.getElementById('listEleve');
+  // mySelect.innerHTML = '';
+  myTabeleve.forEach((eleve) => {
+    // console.log(eleve);
+    let newOption = document.createElement('option');
+    newOption.value = eleve.id;
+    newOption.innerHTML = `
+    ${eleve.prenom} ${eleve.nom} 
+    `;
+    mySelect.appendChild(newOption);
+  });
+  formMensuel.addEventListener('input', (e) => {
+    // console.log(e.target.value);
+    myTabeleve.forEach((afficheInput) => {
+      if (afficheInput.id == e.target.value) {
+        // console.log(afficheInput);
+        divNom.classList.remove('d-none');
+        divPrenom.classList.remove('d-none');
+        divClasse.classList.remove('d-none');
+        divPrix.classList.remove('d-none');
+        nomMens.value = `${afficheInput.nom}`;
+        nomMens.setAttribute('disabled', '');
+        prenomMens.value = `${afficheInput.prenom}`;
+        prenomMens.setAttribute('disabled', '');
+        classeMens.value = `${afficheInput.classe}`;
+        classeMens.setAttribute('disabled', '');
+        prixMens.value = montant2(`${afficheInput.classe}`);
+        prixMens.setAttribute('disabled', '');
       }
-    }
+      const myMess = document.querySelector('.alertMens');
+      myMess.classList.add('d-none');
+    });
+  });
 
-    if (conditionRempli) {
-      return;
-    } else {
-      alertMens.classList.remove('d-none');
-      alertMens.innerHTML =
-        'Elève inexiste ou ne fait pas parti de cette classe...';
-    }
+  // tabMens.forEach((mens) => {
+  //   console.log(mens);
+  // });
+  let tabVerifMens = [];
+  formMensuel.addEventListener('submit', (e) => {
+    e.preventDefault();
+    // getDocs(certiesRef2).then((snapshot) => {
+    //   snapshot.docs.forEach((doc) => {
+    //     tabVerifMens.push({ ...doc.data(), id: doc.id });
+    //   });
+    //   console.log(tabVerifMens);
+    // tabVerifMens.forEach((mens) => {
+    //   if (
+    //     mens.prenom == prenomMens.value &&
+    //     mens.nom == nomMens.value &&
+    //     mens.mois == formMensuel.mois.value
+    //   ) {
+    //     console.log('Cet élève a déja payé ce mois');
+    //   }
+    //   else {
+    //       console.log("C'est top");
+    //   }
+    //   // console.log(mens.prenom);
+    //   // console.log(prenomMens.value);
+    //   // console.log(mens.nom);
+    //   // console.log(nomMens.value);
+    //   // console.log(mens.mois);
+    //   // console.log(formMensuel.mois.value);
+    //   // console.log('_______________');
+    // });
+    // console.log(tabVerifMens);
+    // });
+    addDoc(certiesRef2, {
+      nom: nomMens.value,
+      prenom: prenomMens.value,
+      type: formMensuel.type.value,
+      classe: classeMens.value,
+      mois: formMensuel.mois.value,
+      montantpay: parseInt(prixMens.value),
+      dateDajout: serverTimestamp(),
+    }).then(() => formMensuel.reset());
+    const myMess = document.querySelector('.alertMens');
+    myMess.classList.remove('d-none');
+    myMess.innerHTML = 'Payement effectué avec succès...';
   });
 });
 
-// Montant à inscrire
-let selectElement2 = document.getElementById('classeSelect2');
-selectElement2.addEventListener('change', function () {
-  let selectedOption = selectElement2.options[selectElement2.selectedIndex];
-  let selectedValue = selectedOption.value;
-  console.log(selectedValue);
-  document.getElementById('montantAPaye').value = montant2(selectedValue);
-});
+// Montant à payer
+
+// classeMens.addEventListener('change', function () {
+//   // let selectedOption = selectElement2.options[selectElement2.selectedIndex];
+//   let selectedValue = classeMens.value;
+//   // console.log(selectedValue);
+//   // document.getElementById('montantAPaye').value = montant2(selectedValue);
+// });
 
 function montant2(classe) {
   const montantMapping = {
@@ -325,13 +417,15 @@ onSnapshot(eleve, (snapshot) => {
   });
   const revenue = document.getElementById('revenue');
   revenue.innerHTML = '';
+  let bodyIns = document.createElement('tr');
+  bodyIns.innerHTML = `<td  colspan = '3'><h5 colspan='3' class='d-flex justify-content-center py-2 maMens me-5' >Inscriptions</h5></td>`;
+  revenue.appendChild(bodyIns);
   eleve.forEach((utili) => {
     let trbody = document.createElement('tr');
     trbody.innerHTML = `
       <td class="border border-1">${utili.dateDajout
         .toDate()
         .toLocaleDateString()}</td>
-        <td class="text-center">${utili.type}</td>
         <td class="text-center border border-1">${utili.prenom} ${
       utili.nom
     }</td>
@@ -344,6 +438,7 @@ onSnapshot(eleve, (snapshot) => {
     loaderContainer.style.display = 'none';
   });
 });
+
 onSnapshot(certiesRef2, (snapshot) => {
   let certiesRef2 = [];
   snapshot.docs.forEach((doc) => {
@@ -353,21 +448,24 @@ onSnapshot(certiesRef2, (snapshot) => {
   mens.innerHTML = '';
   certiesRef2.sort((a, b) => b.dateDajout - a.dateDajout);
 
+  let bodymens = document.createElement('tr');
+  bodymens.innerHTML = `<td  colspan = '3'><h5 colspan='3' class='d-flex justify-content-center py-2 maMens me-5' >Mensualités</h5></td>`;
+  mens.appendChild(bodymens);
+
   certiesRef2.forEach((utili) => {
     let trbody = document.createElement('tr');
+
     trbody.innerHTML = `
       <td class="border border-1">${utili.dateDajout
         .toDate()
         .toLocaleDateString()}</td>
-        <td class="text-center">${utili.type}</td>
         <td class="text-center border border-1">${utili.prenom} ${
       utili.nom
     }</td>
         <td class="border border-1">${utili.montantpay}Fcfa</td>
         `;
-    mens.appendChild(trbody);
 
-    // console.log(utili.type);
+    mens.appendChild(trbody);
   });
 });
 
@@ -380,7 +478,7 @@ getDocs(eleve).then((snapshot) => {
   eleve.forEach((utili) => {
     totalInscription += parseInt(utili.montantInsc);
   });
-  console.log(totalInscription);
+  // console.log(totalInscription);
 });
 
 getDocs(certiesRef2).then((snapshot) => {
@@ -392,7 +490,7 @@ getDocs(certiesRef2).then((snapshot) => {
   certiesRef2.forEach((utili) => {
     totalCertieRef2 += parseInt(utili.montantpay);
   });
-  console.log(totalCertieRef2);
+  // console.log(totalCertieRef2);
 });
 
 // console.log(total);
@@ -423,18 +521,19 @@ Promise.all([totalGlobal(eleve), totalGlobal(certiesRef2)])
     //Calcule du revenue total
     function CalculDeLaSommeTotale() {
       const total = document.getElementById('total');
-      total.innerHTML = '';
       let trfoot = document.createElement('tr');
       trfoot.innerHTML = `
-    <td colspan="3"><b>Total</b></td>
+    <td colspan="2"><b>Total</b></td>
     <td><b>${totaleDuRevenu.toLocaleString('en-US')} Fcfa </b></td>
     `;
+      // total.innerHTML = '';
+
       total.appendChild(trfoot);
       const revTotal = document.getElementById('revenuTotal');
       revTotal.innerHTML = `${totaleDuRevenu.toLocaleString(
         'en-US'
       )} <span class="fw-bold">FCFA</span>`;
-      console.log('Total global:', totaleDuRevenu);
+      // console.log('Total global:', totaleDuRevenu);
     }
     CalculDeLaSommeTotale();
   })
