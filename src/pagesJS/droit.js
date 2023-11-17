@@ -2,7 +2,7 @@ document.getElementById("bouton").addEventListener("click", (e) => {
     
     const one = document.querySelector(".one");
     one.classList.add("transition-left");
-
+    
     
     setTimeout(() => {
         one.style.display = "none";
@@ -20,12 +20,13 @@ import { getFirestore, doc, setDoc, serverTimestamp } from 'firebase/firestore';
 
 // Configuration de votre application web Firebase
 const firebaseConfig = {
-  apiKey: "AIzaSyBQ3SrfEimEPtzCFyxR0vWBK8BJ_K4Ma48",
-  authDomain: "mixte-feewi.firebaseapp.com",
-  projectId: "mixte-feewi",
-  storageBucket: "mixte-feewi.appspot.com",
-  messagingSenderId: "1083213454329",
-  appId: "1:1083213454329:web:df3deafe22a82ad34e3b28"
+  apiKey: "AIzaSyCSRo2EZwo5LQIO75FevIBvEKbDD61HNuY",
+  authDomain: "validation-atelier-js.firebaseapp.com",
+  databaseURL: "https://validation-atelier-js-default-rtdb.firebaseio.com",
+  projectId: "validation-atelier-js",
+  storageBucket: "validation-atelier-js.appspot.com",
+  messagingSenderId: "466332062090",
+  appId: "1:466332062090:web:ffbe45ef4a7371a7b5b873"
 };
 
 // Initialiser Firebase
@@ -34,7 +35,7 @@ const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
 // Référence Firestore
-const contenuRef = doc(db, 'droit', 'HnVUd5sHwFWRB0gmidmo');
+const contenuRef = doc(db, 'droit', 'zPxEvR7D72SaaZVQa5Wb');
 
 function enregistrerModifications() {
   // Récupérer le contenu de la div
@@ -55,3 +56,31 @@ function enregistrerModifications() {
 }
 
 document.getElementById("modif").addEventListener("click", enregistrerModifications);
+
+
+getDoc(contenuRef).then((docSnapshot) => {
+  if (docSnapshot.exists()) {
+      const contenu = docSnapshot.data().contenu;
+      quill.root.innerHTML = contenu;
+  }
+});
+
+// Mettre à jour le contenu en temps réel
+onSnapshot(contenuRef, (docSnapshot) => {
+  if (docSnapshot.exists()) {
+      const contenu = docSnapshot.data().contenu;
+      quill.root.innerHTML = contenu;
+  }
+});
+
+quill.on('text-change', function() {
+    var delta = quill.getContents();
+    var deltaString = JSON.stringify(delta);
+    localStorage.setItem('editor-content', deltaString);
+
+    setDoc(contenuRef, {
+      contenu: quill.root.innerHTML,
+      timestamp: serverTimestamp(),
+  });
+
+});
