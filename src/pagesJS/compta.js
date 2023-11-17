@@ -84,7 +84,7 @@ onSnapshot(eleve, (snapshot) => {
 
   const list = document.querySelector('#list');
   list.innerHTML = '';
-  console.log(eleve);
+  // console.log(eleve);
 
   eleve.forEach((utili) => {
     const list = document.querySelector('#list');
@@ -208,7 +208,7 @@ onSnapshot(eleve, (snapshot) => {
     myTabeleve.push({ ...doc.data(), id: doc.id });
   });
   myTabeleve.sort((a, b) => b.dateDajout - a.dateDajout);
-  console.log(myTabeleve);
+  // console.log(myTabeleve);
   const mySelect = document.getElementById('listEleve');
   // mySelect.innerHTML = '';
   myTabeleve.forEach((eleve) => {
@@ -224,7 +224,7 @@ onSnapshot(eleve, (snapshot) => {
     // console.log(e.target.value);
     myTabeleve.forEach((afficheInput) => {
       if (afficheInput.id == e.target.value) {
-        console.log(afficheInput);
+        // console.log(afficheInput);
         divNom.classList.remove('d-none');
         divPrenom.classList.remove('d-none');
         divClasse.classList.remove('d-none');
@@ -242,8 +242,39 @@ onSnapshot(eleve, (snapshot) => {
       myMess.classList.add('d-none');
     });
   });
+
+  // tabMens.forEach((mens) => {
+  //   console.log(mens);
+  // });
+  let tabVerifMens = [];
   formMensuel.addEventListener('submit', (e) => {
     e.preventDefault();
+    // getDocs(certiesRef2).then((snapshot) => {
+    //   snapshot.docs.forEach((doc) => {
+    //     tabVerifMens.push({ ...doc.data(), id: doc.id });
+    //   });
+    //   console.log(tabVerifMens);
+    // tabVerifMens.forEach((mens) => {
+    //   if (
+    //     mens.prenom == prenomMens.value &&
+    //     mens.nom == nomMens.value &&
+    //     mens.mois == formMensuel.mois.value
+    //   ) {
+    //     console.log('Cet élève a déja payé ce mois');
+    //   }
+    //   else {
+    //       console.log("C'est top");
+    //   }
+    //   // console.log(mens.prenom);
+    //   // console.log(prenomMens.value);
+    //   // console.log(mens.nom);
+    //   // console.log(nomMens.value);
+    //   // console.log(mens.mois);
+    //   // console.log(formMensuel.mois.value);
+    //   // console.log('_______________');
+    // });
+    // console.log(tabVerifMens);
+    // });
     addDoc(certiesRef2, {
       nom: nomMens.value,
       prenom: prenomMens.value,
@@ -261,12 +292,12 @@ onSnapshot(eleve, (snapshot) => {
 
 // Montant à payer
 
-classeMens.addEventListener('change', function () {
-  // let selectedOption = selectElement2.options[selectElement2.selectedIndex];
-  let selectedValue = classeMens.value;
-  console.log(selectedValue);
-  // document.getElementById('montantAPaye').value = montant2(selectedValue);
-});
+// classeMens.addEventListener('change', function () {
+//   // let selectedOption = selectElement2.options[selectElement2.selectedIndex];
+//   let selectedValue = classeMens.value;
+//   // console.log(selectedValue);
+//   // document.getElementById('montantAPaye').value = montant2(selectedValue);
+// });
 
 function montant2(classe) {
   const montantMapping = {
@@ -447,7 +478,7 @@ getDocs(eleve).then((snapshot) => {
   eleve.forEach((utili) => {
     totalInscription += parseInt(utili.montantInsc);
   });
-  console.log(totalInscription);
+  // console.log(totalInscription);
 });
 
 getDocs(certiesRef2).then((snapshot) => {
@@ -459,7 +490,7 @@ getDocs(certiesRef2).then((snapshot) => {
   certiesRef2.forEach((utili) => {
     totalCertieRef2 += parseInt(utili.montantpay);
   });
-  console.log(totalCertieRef2);
+  // console.log(totalCertieRef2);
 });
 
 // console.log(total);
@@ -502,7 +533,7 @@ Promise.all([totalGlobal(eleve), totalGlobal(certiesRef2)])
       revTotal.innerHTML = `${totaleDuRevenu.toLocaleString(
         'en-US'
       )} <span class="fw-bold">FCFA</span>`;
-      console.log('Total global:', totaleDuRevenu);
+      // console.log('Total global:', totaleDuRevenu);
     }
     CalculDeLaSommeTotale();
   })
