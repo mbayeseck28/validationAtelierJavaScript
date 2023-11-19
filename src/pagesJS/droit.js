@@ -2,7 +2,7 @@ document.getElementById("bouton").addEventListener("click", (e) => {
     
     const one = document.querySelector(".one");
     one.classList.add("transition-left");
-
+    
     
     setTimeout(() => {
         one.style.display = "none";
@@ -30,7 +30,6 @@ import { getFirestore, collection, onSnapshot, doc, setDoc, serverTimestamp } fr
 
 // Configuration de votre application web Firebase
 const firebaseConfig = {
-
   apiKey: "AIzaSyCSRo2EZwo5LQIO75FevIBvEKbDD61HNuY",
   authDomain: "validation-atelier-js.firebaseapp.com",
   databaseURL: "https://validation-atelier-js-default-rtdb.firebaseio.com",
@@ -38,7 +37,6 @@ const firebaseConfig = {
   storageBucket: "validation-atelier-js.appspot.com",
   messagingSenderId: "466332062090",
   appId: "1:466332062090:web:ffbe45ef4a7371a7b5b873"
-
 };
 
 // Initialiser Firebase
@@ -96,7 +94,7 @@ btnDeconnexion.addEventListener("click", signOutButtonPressed);
 
 
 // Référence Firestore
-const contenuRef = doc(db, 'droit', 'HnVUd5sHwFWRB0gmidmo');
+const contenuRef = doc(db, 'droit', 'zPxEvR7D72SaaZVQa5Wb');
 
 function enregistrerModifications() {
   // Récupérer le contenu de la div
