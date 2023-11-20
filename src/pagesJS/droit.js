@@ -1,24 +1,28 @@
 document.getElementById("bouton").addEventListener("click", (e) => {
-    
-    const one = document.querySelector(".one");
-    one.classList.add("transition-left");
-    
-    
-    setTimeout(() => {
-        one.style.display = "none";
-        one.classList.remove("transition-left");
-    }, 500); 
+  const one = document.querySelector(".one");
+  one.classList.add("transition-left");
 
-   
-    document.querySelector(".center2").style.display = "block";
+  setTimeout(() => {
+    one.style.display = "none";
+    one.classList.remove("transition-left");
+  }, 500);
+
+  document.querySelector(".center2").style.display = "block";
 });
 
+// Import the necessary functions from the required SDKs
+const { initializeApp } = require('firebase/app');
+const {
+  getFirestore,
+  doc,
+  setDoc,
+  getDoc,
+  onSnapshot,
+  serverTimestamp,
+} = require('firebase/firestore');
+import Quill from './quill.js';
+import 'quill/dist/quill.snow.css';
 
-// Importer les fonctions dont vous avez besoin à partir des SDKs dont vous avez besoin
-import { initializeApp } from 'firebase/app';
-import { getFirestore, doc, setDoc, serverTimestamp } from 'firebase/firestore';
-
-// Configuration de votre application web Firebase
 const firebaseConfig = {
   apiKey: "AIzaSyCSRo2EZwo5LQIO75FevIBvEKbDD61HNuY",
   authDomain: "validation-atelier-js.firebaseapp.com",
@@ -29,58 +33,83 @@ const firebaseConfig = {
   appId: "1:466332062090:web:ffbe45ef4a7371a7b5b873"
 };
 
-// Initialiser Firebase
 const app = initializeApp(firebaseConfig);
-
 const db = getFirestore(app);
-
-// Référence Firestore
 const contenuRef = doc(db, 'droit', 'zPxEvR7D72SaaZVQa5Wb');
 
-function enregistrerModifications() {
-  // Récupérer le contenu de la div
-  const contenuDiv = document.getElementById('editor-container').textContent;
+// Créez une promesse pour récupérer le document Firestore
+function loadContentFromFirestore() { 
+  return new Promise((resolve, reject) => {
+   getDoc(contenuRef)
+    .then((docSnapshot) => {
+      if (docSnapshot.exists()) {
+        // Parsez les données dans un format utilisable par Quill
+        const data = JSON.parse(docSnapshot.data().contenu);
+
+        // Chargez les données dans l'éditeur Quill
+        quill.setContents(data.ops);
+        resolve();
+      } else {
+        console.log("Aucun document trouvé!");
+        reject();
+      }
+    })
+    .catch((error) => {
+      console.log("Erreur lors de la récupération du document:", error);
+      reject();
+    });
+})
+};
+
+// Attendez que la promesse soit résolue avant d'exécuter le reste du code
+loadContentFromFirestore()
+  .then(() => {
+
+    // Mettez en place l'événement text-change pour détecter les modifications dans l'éditeur Quill
+    var change = new Quill.import('delta');
+    quill.on('text-change', function (delta, oldDelta, source) {
+  if (source === 'user') {
+    change = change.compose(delta);
+
+    sauvegarderContenuDansFirestore();
+  }
+var data = quill.getContents();
+var deltaString = JSON.stringify(data);
+localStorage.setItem('editor-content', deltaString);
 
 
-  // Enregistrer le contenu dans Firestore
+});
+
+document.addEventListener("DOMContentLoaded", function () {
+  loadContentFromFirestore();
+});
+
+
+
+document.getElementById("modif").addEventListener("click", () => {
+  sauvegarderContenuDansFirestore();
+});
+
+})
+  .catch(() => {
+    // Ce bloc sera exécuté en cas d'échec du chargement du contenu depuis Firestore
+    console.log("Le chargement du contenu depuis Firestore a échoué.");
+});
+
+
+function sauvegarderContenuDansFirestore() {
+
+  const contenu = quill.getContents();
+
+  // Save the content to Firestore
   setDoc(contenuRef, {
-    contenu: contenuDiv,
+    contenu: JSON.stringify(contenu),
     timestamp: serverTimestamp(),
   })
-  .then(() => {
-    console.log('Contenu enregistré avec succès dans Firestore!');
-  })
-  .catch((error) => {
-    console.error("Erreur lors de l'enregistrement du contenu:", error);
-  });
+    .then(() => {
+      console.log('Content saved successfully in Firestore!');
+    })
+    .catch((error) => {
+      console.error("Error saving content:", error);
+    });
 }
-
-document.getElementById("modif").addEventListener("click", enregistrerModifications);
-
-
-getDoc(contenuRef).then((docSnapshot) => {
-  if (docSnapshot.exists()) {
-      const contenu = docSnapshot.data().contenu;
-      quill.root.innerHTML = contenu;
-  }
-});
-
-// Mettre à jour le contenu en temps réel
-onSnapshot(contenuRef, (docSnapshot) => {
-  if (docSnapshot.exists()) {
-      const contenu = docSnapshot.data().contenu;
-      quill.root.innerHTML = contenu;
-  }
-});
-
-quill.on('text-change', function() {
-    var delta = quill.getContents();
-    var deltaString = JSON.stringify(delta);
-    localStorage.setItem('editor-content', deltaString);
-
-    setDoc(contenuRef, {
-      contenu: quill.root.innerHTML,
-      timestamp: serverTimestamp(),
-  });
-
-});
