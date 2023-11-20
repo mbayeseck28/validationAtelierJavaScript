@@ -266,7 +266,7 @@ function paiementMensualiter() {
   return sum
 }
 paiementMensualiter();
-console.log(sum);
+
 
 // partie ladji HISTORIQUE
 let date = new Date();
