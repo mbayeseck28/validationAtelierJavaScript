@@ -12,6 +12,7 @@ import {
   serverTimestamp,
 } from 'firebase/firestore';
 
+
 // import {
 //   getAuth,
 //   createUserWithEmailAndPassword,
@@ -69,6 +70,22 @@ import {
 //       console.log("Aucun utilisateur connecté");
 //   }
 // });
+
+
+/************     DECONNEXION       ***********/ 
+const btnDeconnexion = document.getElementById('btnDeconnexion');
+const signOutButtonPressed = async (e) => {
+  e.preventDefault();
+  try {
+    await signOut(auth);
+    console.log("Deconnecté");
+    window.location.href = '../../pages/auth/login/login.html';
+  } catch (error) {
+    console.log(error.code);
+  }
+}
+btnDeconnexion.addEventListener("click", signOutButtonPressed);
+
 
 let proff;
 
