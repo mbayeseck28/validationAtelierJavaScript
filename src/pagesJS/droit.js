@@ -1,7 +1,10 @@
-document.addEventListener('DOMContentLoaded', function () {
 document.getElementById("bouton").addEventListener("click", (e) => {
+  console.log("Bouton cliqué");
+
   const one = document.querySelector(".one");
   one.classList.add("transition-left");
+  console.log("Element avec la classe 'one':", one);
+
 
   setTimeout(() => {
     one.style.display = "none";
@@ -10,7 +13,7 @@ document.getElementById("bouton").addEventListener("click", (e) => {
 
   document.querySelector(".center2").style.display = "block";
 });
- })
+
 
 // Import the necessary functions from the required SDKs
 const { initializeApp } = require('firebase/app');
