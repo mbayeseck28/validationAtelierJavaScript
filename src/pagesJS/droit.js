@@ -19,7 +19,6 @@ import Quill from 'quill';
 import 'quill/dist/quill.snow.css';
 
 
-
 const firebaseConfig = {
   apiKey: "AIzaSyCSRo2EZwo5LQIO75FevIBvEKbDD61HNuY",
   authDomain: "validation-atelier-js.firebaseapp.com",
@@ -31,12 +30,15 @@ const firebaseConfig = {
 };
 
 const app = initializeApp(firebaseConfig);
+
+const auth = getAuth(app);
 const db = getFirestore(app);
 //const contenuRef = doc(db, 'droit', 'mZ2VxP5Ea2aAzJlzN9QV');
 
 document.getElementById("bouton").addEventListener("click", (e) => {
   const one = document.querySelector(".one");
   one.classList.add("transition-left");
+
 
   setTimeout(() => {
       one.style.display = "none";
