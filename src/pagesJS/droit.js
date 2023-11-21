@@ -16,7 +16,17 @@ document.getElementById("bouton").addEventListener("click", (e) => {
 
 // Importer les fonctions dont vous avez besoin à partir des SDKs dont vous avez besoin
 import { initializeApp } from 'firebase/app';
-import { getFirestore, doc, setDoc, serverTimestamp } from 'firebase/firestore';
+
+import {
+  getAuth,
+  signOut,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  onAuthStateChanged,
+  updateProfile,
+} from 'firebase/auth';
+
+import { getFirestore, collection, onSnapshot, doc, setDoc, serverTimestamp } from 'firebase/firestore';
 
 // Configuration de votre application web Firebase
 const firebaseConfig = {
@@ -31,8 +41,57 @@ const firebaseConfig = {
 
 // Initialiser Firebase
 const app = initializeApp(firebaseConfig);
-
+const auth = getAuth(app);
 const db = getFirestore(app);
+
+/******************  affiche photo profil Nav bar  **********************/
+onAuthStateChanged(auth, (user) => {
+  if (user) {
+    console.log('Utilisateur connecté');
+    var userEmail = user.email;
+    const userRef = collection(db, 'utilisateurs');
+    onSnapshot(userRef, (snapshot) => {
+      let userRef = [];
+      snapshot.docs.forEach((doc) => {
+        userRef.push({ ...doc.data(), id: doc.id });
+      });
+      userRef.forEach((utilisateur) => {
+        // Créez une référence au document de l'utilisateur dans Firestore
+        const userDocRef = doc(db, 'utilisateurs', utilisateur.id);
+
+        if (utilisateur.email == userEmail) {
+          const ProfilNav = document.querySelector('.ProfilNav');
+          const profilVoir = document.querySelector('.profilVoir');
+          const nomUser = document.querySelector('.nomUser');
+          const statusUser = document.querySelector('.statusUser');
+          ProfilNav.src = utilisateur.url;
+          profilVoir.src = utilisateur.url;
+          nomUser.innerText = utilisateur.prenom + ' ' + utilisateur.nom;
+          statusUser.innerText = utilisateur.status;
+        }
+      });
+    });
+  } else {
+    console.log('Aucun utilisateur connecté');
+    window.location.href = '../../pages/auth/login/login.html';
+  }
+});
+
+
+/************     DECONNEXION       ***********/ 
+const btnDeconnexion = document.getElementById('btnDeconnexion');
+const signOutButtonPressed = async (e) => {
+  e.preventDefault();
+  try {
+    await signOut(auth);
+    console.log("Deconnecté");
+    window.location.href = '../../pages/auth/login/login.html';
+  } catch (error) {
+    console.log(error.code);
+  }
+}
+btnDeconnexion.addEventListener("click", signOutButtonPressed);
+
 
 // Référence Firestore
 const contenuRef = doc(db, 'droit', 'zPxEvR7D72SaaZVQa5Wb');
@@ -56,3 +115,31 @@ function enregistrerModifications() {
 }
 
 document.getElementById("modif").addEventListener("click", enregistrerModifications);
+
+
+getDoc(contenuRef).then((docSnapshot) => {
+  if (docSnapshot.exists()) {
+      const contenu = docSnapshot.data().contenu;
+      quill.root.innerHTML = contenu;
+  }
+});
+
+// Mettre à jour le contenu en temps réel
+onSnapshot(contenuRef, (docSnapshot) => {
+  if (docSnapshot.exists()) {
+      const contenu = docSnapshot.data().contenu;
+      quill.root.innerHTML = contenu;
+  }
+});
+
+quill.on('text-change', function() {
+    var delta = quill.getContents();
+    var deltaString = JSON.stringify(delta);
+    localStorage.setItem('editor-content', deltaString);
+
+    setDoc(contenuRef, {
+      contenu: quill.root.innerHTML,
+      timestamp: serverTimestamp(),
+  });
+
+});
