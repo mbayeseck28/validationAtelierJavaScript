@@ -89,6 +89,18 @@ body{
     transform: translate(-50%, -50%);
 }
 
+.h2 {
+    border: 1px solid black;
+    padding: 5px;
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.h4 {
+    margin-bottom: 20px;
+    margin-top : 15px;
+}
+
 .i1{
     color: #00E100;
     font-size: 30px;

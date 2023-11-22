@@ -10,7 +10,6 @@ module.exports = {
     watch: true,
     module: {
         rules: [
-          // other rules...
     
           {
             test: /\.css$/,

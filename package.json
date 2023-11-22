@@ -11,14 +11,12 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "firebase": "^10.5.2",
-<<<<<<< HEAD
-    "quill": "^1.3.6"
-=======
-    "page": "^1.11.6"
->>>>>>> 05995200ed87726eeff12768b723905ca456d6f4
+    "firebase": "^10.6.0",
+    "page": "^1.11.6",
+    "quill": "^1.3.7"
   },
   "devDependencies": {
+    "@babel/preset-env": "^7.23.3",
     "css-loader": "^6.8.1",
     "style-loader": "^3.3.3",
     "webpack": "^5.89.0",
