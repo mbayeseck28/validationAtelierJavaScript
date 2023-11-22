@@ -70,7 +70,7 @@ onAuthStateChanged(auth, (user) => {
 });
 
 function deconnexion() {
-  console.log("function deconnexion");
+  // console.log("function deconnexion");
   const btnGreen = document.querySelector(".btnGreen");
   btnGreen.addEventListener("click", function () {
     const auth = getAuth();
@@ -122,6 +122,7 @@ onSnapshot(eleve, (snapshot) => {
 });
 
 const selectMois = document.getElementById("selectMois");
+console.log(selectMois.value);
 
 // const dateDuJour = new Date();
 // const moisActuel = dateDuJour.getMonth() + 1;
@@ -133,18 +134,19 @@ selectMois.addEventListener("change", (e) => {
   paiementMensualiter();
 });
 
-function paiementMensualiter() {
+function getMensualiter() {
   onSnapshot(certiesRef2, (snapshot) => {
+    const moisSelectionne = selectMois.value;
     let certiesRef2 = [];
     snapshot.docs.forEach((doc) => {
       certiesRef2.push({ ...doc.data(), id: doc.id });
     });
     certiesRef2.sort((a, b) => b.dateDajout - a.dateDajout);
 
-    const moisSelectionne = selectMois.value;
     const PaiementsEffec = certiesRef2.filter(
       (utili) => utili.classe === "6ème" && utili.mois === moisSelectionne
     );
+
     const PaiementsEffe5 = certiesRef2.filter(
       (utili) => utili.classe === "5ème" && utili.mois === moisSelectionne
     );
@@ -178,30 +180,6 @@ function paiementMensualiter() {
     const list4 = document.querySelector("#list2");
     const list3 = document.querySelector("#list3");
 
-    function afficheEleves(listElement, nonPayments, payments) {
-      listElement.innerHTML = "";
-
-      nonPayments.forEach((nonPayment) => {
-        const tr = document.createElement("tr");
-        tr.innerHTML = `
-          <td class="mx-auto text-center m-0">${nonPayment.nom}</td>
-          <td class="mx-auto text-center m-0">${nonPayment.prenom}</td>
-          <td class="mx-auto text-center m-0">Non payé</td>
-        `;
-        listElement.appendChild(tr);
-      });
-
-      payments.forEach((payment) => {
-        const tr = document.createElement("tr");
-        tr.innerHTML = `
-          <td class="mx-auto text-center m-0">${payment.nom}</td>
-          <td class="mx-auto text-center m-0">${payment.prenom}</td>
-          <td class="mx-auto text-center m-0">Payé</td>
-        `;
-        listElement.appendChild(tr);
-      });
-    }
-
     afficheEleves(list, elevesNonPayesClasse6, PaiementsEffec);
     afficheEleves(list5, elevesNonPayesClasse5, PaiementsEffe5);
     afficheEleves(list4, elevesNonPayesClasse4, PaiementsEffe4);
@@ -216,6 +194,36 @@ function paiementMensualiter() {
     paiement3.innerHTML =
       Math.round((PaiementsEffe3.length / effectifClass3) * 100) + "%";
   });
+}
+
+function afficheEleves(listElement, nonPayments, payments) {
+  listElement.innerHTML = "";
+
+  nonPayments.forEach((nonPayment) => {
+    const tr = document.createElement("tr");
+    tr.innerHTML = `
+    <td class="mx-auto text-center m-0">${nonPayment.nom}</td>
+    <td class="mx-auto text-center m-0">${nonPayment.prenom}</td>
+    <td class="mx-auto text-center m-0">Non payé</td>
+    `;
+    listElement.appendChild(tr);
+  });
+
+  payments.forEach((payment) => {
+    const tr = document.createElement("tr");
+    tr.innerHTML = `
+    <td class="mx-auto text-center m-0">${payment.nom}</td>
+    <td class="mx-auto text-center m-0">${payment.prenom}</td>
+    <td class="mx-auto text-center m-0">Payé</td>
+    `;
+    listElement.appendChild(tr);
+  });
+}
+
+window.onload = paiementMensualiter()
+
+function paiementMensualiter() {
+  getMensualiter();
 
   let sum =
     parseFloat(paiement6.innerHTML) +
@@ -225,8 +233,12 @@ function paiementMensualiter() {
 
   sum = sum / 4;
   sum = sum.toFixed(0);
-  console.log(sum);
+  progressBar(sum);
+ 
+}
+paiementMensualiter();
 
+function progressBar(sum) {
   let circularProgress = document.querySelector(".circular-progress");
   let progressValue = document.querySelector(".progress-value");
 
@@ -254,12 +266,9 @@ function paiementMensualiter() {
         clearInterval(progress);
       }
     }, speed);
-    console.log(moisSelectionne, sum);
+    // console.log(moisSelectionne, sum);
   }
-  return sum
 }
-paiementMensualiter();
-
 
 // partie ladji HISTORIQUE
 let date = new Date();
