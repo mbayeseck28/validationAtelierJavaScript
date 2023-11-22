@@ -36,21 +36,10 @@ width: 100%;
 
 .transition-left {
    transform: translateX(100%);
-   transition: transform 0.8s  ease-in-out; */
+   transition: transform 0.8s  ease-in-out; 
     
-  }
+}
 
-
-
-  .show-center2 {
-    display: block !important;
-    transform: translateX(0);
-    opacity: 1;
-  }
-/* .transition-left-center2 {
-    transform: translateX(100%);
-    transition: transform 0.5s ease-in-out;
-}  */
 
 body{
     background: #EFF2F6;
@@ -89,13 +78,21 @@ body{
     transform: translate(-50%, -50%);
 }
 
-.h2 {
-    border: 1px solid black;
-    padding: 5px;
-    text-align: center;
-    margin-bottom: 40px;
+
+
+#editor-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    border: 1px solid #ccc;
+    padding: 10px;
 }
 
+/* Style pour les boutons */
+#editor-buttons button {
+    margin-bottom: 20px;
+    color: #fff;
+    background-color: #00E100;
+}
 .h4 {
     margin-bottom: 20px;
     margin-top : 15px;

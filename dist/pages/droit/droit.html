@@ -188,25 +188,33 @@
                                 <button onclick="execCommand('insertOrderedList')">Liste ordonnée</button>
                                 <button onclick="execCommand('insertUnorderedList')">Liste non ordonnée</button>
                                 <button onclick="alignText('center')">Centrer</button>
+                                <button onclick="undo()">Annuler</button>
                             </div>
                             <div id="editor-container" class="content" contenteditable="true">
                               
-                              <h2 class="border border-3 border-black text-center" id="titre1" contenteditable>Hygiéne</h2>
-                              <h4 id="soutitre1" contenteditable>Hygiene</h4>
+                              <div class="border border-3 border-black text-center" id="titre1" contenteditable>
+                                <h3>Hygiéne</h3>
+                              </div>
+                               <div id="soutitre1" contenteditable>
+                                <h4>Hygiene</h4>
+                               </div>                             
+                              
                               <p class="mb-3" id="p1" contenteditable>Lorem ipsum dolor sit amet consectetur adipisicing elit. <br>
                                 Deserunt in ipsam iusto nisi quos reiciendis quidem nostrum repudiandae <br>
                                 architecto voluptatibus illo hic asperiores voluptate aperiam, veniam dicta nam non? Sunt! <br>
                                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum, voluptas officiis. Ad, culpa voluptate illo, necessitatibus at minima dolores voluptatum facere natus rem cumque, ducimus quo sint dolorem. Iusto, dolore!
                               </p>
-          
 
-                              <h4 id="soustitre2" contenteditable>Sécurité</h4>
+                              <div id="soutitre2" contenteditable>
+                                <h4>Securité</h4>
+                               </div>
                               <p class="mb-5" id="p2" contenteditable>Lorem ipsum dolor sit amet consectetur adipisicing elit. <br>
                                 Deserunt in ipsam iusto nisi quos reiciendis quidem nostrum repudiandae <br>
                                 architecto voluptatibus illo hic asperiores voluptate aperiam, veniam dicta nam non? Sunt!
                               </p>
-          
-                              <h2 class="border border-3 border-black text-center" id="titre2" contenteditable>Accueil et Surveillance</h2>
+                              <div class="border border-3 border-black fs-4 text-center" id="titre3" contenteditable>
+                                Accueil et Surveillance
+                              </div>
                               <div id="p3">
                                 <p class="mb-2" contenteditable>Lorem ipsum dolor sit amet consectetur adipisicing elit.
                                   Deserunt in ipsam iusto nisi quos reiciendis quidem nostrum repudiandae
@@ -241,7 +249,9 @@
             
                               </div>
                               
-                              <h2 class="border border-3 border-black text-center" id="titre3" contenteditable>Sécurité et Protection de l'éléve</h2>
+                              <div class="border border-3 border-black fs-4 text-center" id="titre3" contenteditable>
+                                Sécurité et Protection de l'éléve 
+                              </div>
                               <p class="mb-3" id="p4" contenteditable>Lorem ipsum dolor sit amet consectetur adipisicing elit.
                                 Deserunt in ipsam iusto nisi quos reiciendis quidem nostrum repudiandae 
                                 architecto voluptatibus illo hic asperiores voluptate aperiam, veniam dicta nam non? Sunt!
@@ -250,7 +260,33 @@
                             </div>
                             
                           <script>
-                                                        
+                            const editor = document.getElementById('editor-container');
+
+                            // Fonction pour exécuter les commandes d'édition
+                            function execCommand(command) {
+                                document.execCommand(command, false, null);
+                            }
+                    
+                            // Fonction pour aligner le texte
+                            function alignText(alignValue) {
+                                document.getElementById('editor-container').style.textAlign = alignValue;
+                            }
+                    
+                            // Fonction pour annuler la dernière action
+                            function undo() {
+                                document.execCommand('undo', false, null);
+                            }
+                    
+                            // Ajoutez un écouteur d'événements à chaque élément
+                            editor.addEventListener('input', () => {
+                                updateContent();
+                            });
+                    
+                            function updateContent() {
+                                const editorContent = editor.innerHTML;
+                                console.log(editorContent);
+                            }
+                            
                                 function telechargerPDF() {
                                   // Récupérer le contenu avec les classes CSS
                                   var contentWithStyles = document.getElementById('editor-container').innerHTML;
@@ -258,7 +294,14 @@
                                   // Ajouter les styles CSS pour le PDF, y compris la bordure de page
                                   var styles = `
                                       <style>
+                                        #editor-container {
+                                          max-width: 1500px;
                                           
+                                          margin: 10px 40px;
+                                          border: 1px solid #ccc;
+                                          padding: 10px;
+                                      }
+
                                           h2 {
                                               border: 1px solid black;
                                               padding: 5px;
