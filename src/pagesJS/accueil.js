@@ -5,6 +5,7 @@ import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { getDatabase, ref as refDatabase, set, get } from "firebase/database";
 import {
   getAuth,
+  signOut,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   onAuthStateChanged,
@@ -38,6 +39,7 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
 
+/************     Profil Navbar       ***********/
 onAuthStateChanged(auth, (user) => {
   if (user) {
     // console.log("Utilisateur connecté");
@@ -66,25 +68,23 @@ onAuthStateChanged(auth, (user) => {
     });
   } else {
     console.log("Aucun utilisateur connecté");
+    window.location.href = "../../pages/auth/login/login.html";
   }
 });
 
-function deconnexion() {
-  // console.log("function deconnexion");
-  const btnGreen = document.querySelector(".btnGreen");
-  btnGreen.addEventListener("click", function () {
-    const auth = getAuth();
-    signOut(auth)
-      .then(() => {
-        console.log("Utilisateur déconnecté");
-        window.location.href = "../../pages/auth/login/login.html";
-      })
-      .catch((error) => {
-        console.error("Erreur lors de la déconnexion :", error);
-      });
-  });
-}
-deconnexion();
+/************     DECONNEXION       ***********/
+const btnDeconnexion = document.getElementById("btnDeconnexion");
+const signOutButtonPressed = async (e) => {
+  e.preventDefault();
+  try {
+    await signOut(auth);
+    console.log("Deconnecté");
+    window.location.href = "../../pages/auth/login/login.html";
+  } catch (error) {
+    console.log(error.code);
+  }
+};
+btnDeconnexion.addEventListener("click", signOutButtonPressed);
 
 // Récupérer la collection
 const eleve = collection(db, "inscScolarite");
@@ -108,6 +108,7 @@ onSnapshot(eleve, (snapshot) => {
     eleves.push({ ...doc.data(), id: doc.id });
   });
   eleves.sort((a, b) => b.dateDajout - a.dateDajout);
+
   noPay = eleves;
   // console.log(eleves);
   effectifClass6 = eleves.filter((utili) => utili.classe === "6ème").length;
@@ -220,7 +221,7 @@ function afficheEleves(listElement, nonPayments, payments) {
   });
 }
 
-window.onload = paiementMensualiter()
+window.onload = paiementMensualiter();
 
 function paiementMensualiter() {
   getMensualiter();
@@ -234,7 +235,6 @@ function paiementMensualiter() {
   sum = sum / 4;
   sum = sum.toFixed(0);
   progressBar(sum);
- 
 }
 paiementMensualiter();
 
