@@ -13,7 +13,7 @@ document.getElementById("bouton").addEventListener("click", (e) => {
 // Import the necessary functions from the required SDKs
 // Importer les fonctions dont vous avez besoin à partir des SDKs dont vous avez besoin
 import { initializeApp } from 'firebase/app';
-import { getFirestore, doc, getDoc, setDoc, serverTimestamp, getDocFromServer } from 'firebase/firestore';
+import { getFirestore, collection, doc, getDoc, setDoc, serverTimestamp, getDocFromServer } from 'firebase/firestore';
 
 
 const firebaseConfig = {
@@ -41,27 +41,48 @@ function getDataFromFirestore() {
   console.log("Tentative de récupération du contenu depuis Firestore...");
   console.log("ContenuRef :", contenuRef);
 
-  getDoc(contenuRef)
-    .then((doc) => {
-      console.log("Réponse de Firestore :", doc);
-      if (doc.exists()) {
-        const data = doc.data();
-        console.log("Données du document :", data);
-        // Mettez à jour le contenu de l'éditeur avec les données de Firestore
-        document.getElementById('editor-container').innerHTML = data.contenu;
-        console.log("Contenu mis à jour :", data.contenu);
-      } else {
-        console.log("Aucun document trouvé !");
-      }
-    })
-    .catch((error) => {
-      console.error("Erreur lors de la récupération du document depuis Firestore:", error);
-    });
+  const docSnap = getDoc(contenuRef);
+
+  if (docSnap.exists()) {
+    console.log("Document data:", docSnap.data());
+
+    // Assurez-vous que l'élément avec l'ID 'editor-container' existe sur votre page HTML
+    const editorContainer = document.getElementById('editor-container');
+    
+    if (editorContainer) {
+      editorContainer.textContent = docSnap.data().contenu;
+    } else {
+      console.error("L'élément avec l'ID 'editor-container' n'a pas été trouvé sur la page.");
+    }
+  } else {
+    // docSnap.data() sera undefined dans ce cas
+    console.log("Aucun document trouvé !");
+  }
 }
+
+//   getDoc(contenuRef)
+//     .then((docSnap) => {
+//       console.log("Réponse de Firestore :", doc);
+//       if (docSnap.exists()) {
+//         const data = docSnap.data().contenu;
+//         console.log("Données du document :", data);
+//         // Mettez à jour le contenu de l'éditeur avec les données de Firestore
+//         document.getElementById('editor-container').textContent = "";
+//         document.getElementById('editor-container').textContent = data;
+//         console.log("Contenu mis à jour :", data);
+//       } else {
+//         console.log("Aucun document trouvé !");
+//       }
+//     })
+//     .catch((error) => {
+//       console.error("Erreur lors de la récupération du document depuis Firestore:", error);
+//     });
+// }
 
 function sauvegarderContenuDansFirestore() {
   
-  const contenuDiv = document.getElementById('editor-container').innerHTML;
+  const contenuDiv = document.getElementById('editor-container').textContent;
+
 
   console.log("Contenu à sauvegarder :", contenuDiv);
 
