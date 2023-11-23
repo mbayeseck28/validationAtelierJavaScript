@@ -31,34 +31,36 @@ const db = getFirestore(app);
 const contenuRef = doc(db, 'droit', 'mZ2VxP5Ea2aAzJlzN9QV');
 
 
-
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("DOMContentLoaded", async function () {
   // Charger le contenu depuis Firestore dès que la page est prête
-  getDataFromFirestore()
+  await getDataFromFirestore();
 });
 
-function getDataFromFirestore() {
+async function getDataFromFirestore() {
   console.log("Tentative de récupération du contenu depuis Firestore...");
-  console.log("ContenuRef :", contenuRef);
 
-  const docSnap = getDoc(contenuRef);
+  try {
+    const docSnap = await getDoc(contenuRef);
 
-  if (docSnap.exists()) {
-    console.log("Document data:", docSnap.data());
+    if (docSnap.exists()) {
+      console.log("Document data:", docSnap.data());
 
-    // Assurez-vous que l'élément avec l'ID 'editor-container' existe sur votre page HTML
-    const editorContainer = document.getElementById('editor-container');
-    
-    if (editorContainer) {
-      editorContainer.textContent = docSnap.data().contenu;
+      // Assurez-vous que l'élément avec l'ID 'editor-container' existe sur votre page HTML
+      const editorContainer = document.getElementById('editor-container');
+
+      if (editorContainer) {
+        editorContainer.innerHTML = docSnap.data().contenu;
+      } else {
+        console.error("L'élément avec l'ID 'editor-container' n'a pas été trouvé sur la page.");
+      }
     } else {
-      console.error("L'élément avec l'ID 'editor-container' n'a pas été trouvé sur la page.");
+      console.log("Aucun document trouvé !");
     }
-  } else {
-    // docSnap.data() sera undefined dans ce cas
-    console.log("Aucun document trouvé !");
+  } catch (error) {
+    console.error("Erreur lors de la récupération des données depuis Firestore:", error);
   }
 }
+
 
 //   getDoc(contenuRef)
 //     .then((docSnap) => {
@@ -81,7 +83,7 @@ function getDataFromFirestore() {
 
 function sauvegarderContenuDansFirestore() {
   
-  const contenuDiv = document.getElementById('editor-container').textContent;
+  const contenuDiv = document.getElementById('editor-container').innerHTML;
 
 
   console.log("Contenu à sauvegarder :", contenuDiv);

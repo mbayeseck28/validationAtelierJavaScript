@@ -190,13 +190,13 @@
                                 <button onclick="alignText('center')">Centrer</button>
                                 <button onclick="undo()">Annuler</button>
                             </div>
-                            <div id="editor-container" class="content" contenteditable="true">
+                            <div id="editor-container" class="content">
                               
-                              <div class="border border-3 border-black text-center" id="titre1" contenteditable>
-                                <h3>Hygiéne</h3>
+                              <div class="border border-3 border-black text-center" id="titre1">
+                                <h3 contenteditable="">Hygiéne</h3>
                               </div>
-                               <div id="soutitre1" contenteditable>
-                                <h4>Hygiene</h4>
+                               <div id="soutitre1">
+                                <h4 contenteditable="">Hygiene</h4>
                                </div>                             
                               
                               <p class="mb-3" id="p1" contenteditable>Lorem ipsum dolor sit amet consectetur adipisicing elit. <br>
@@ -205,15 +205,15 @@
                                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum, voluptas officiis. Ad, culpa voluptate illo, necessitatibus at minima dolores voluptatum facere natus rem cumque, ducimus quo sint dolorem. Iusto, dolore!
                               </p>
 
-                              <div id="soutitre2" contenteditable>
-                                <h4>Securité</h4>
+                              <div id="soutitre2">
+                                <h4 contenteditable="">Securité</h4>
                               </div>
                               <p class="mb-5" id="p2" contenteditable>Lorem ipsum dolor sit amet consectetur adipisicing elit. <br>
                                 Deserunt in ipsam iusto nisi quos reiciendis quidem nostrum repudiandae <br>
                                 architecto voluptatibus illo hic asperiores voluptate aperiam, veniam dicta nam non? Sunt!
                               </p>
                               <div class="border border-3 border-black fs-4 text-center" id="titre3" contenteditable>
-                                Accueil et Surveillance
+                                 <h3 contenteditable="">Accueil et Surveillance</h3>
                               </div>
                               <div id="p3">
                                 <p class="mb-2" contenteditable>Lorem ipsum dolor sit amet consectetur adipisicing elit.
@@ -250,7 +250,7 @@
                               </div>
                               
                               <div class="border border-3 border-black fs-4 text-center" id="titre3" contenteditable>
-                                Sécurité et Protection de l'éléve 
+                                <h3 contenteditable="">Sécurité et Protection de l'éléve</h3> 
                               </div>
                               <p class="mb-3" id="p4" contenteditable>Lorem ipsum dolor sit amet consectetur adipisicing elit.
                                 Deserunt in ipsam iusto nisi quos reiciendis quidem nostrum repudiandae 
@@ -284,6 +284,7 @@
                     
                             function updateContent() {
                                 const editorContent = editor.innerHTML;
+                                getDataFromFirestore()
                                 console.log(editorContent);
                             }
                             
