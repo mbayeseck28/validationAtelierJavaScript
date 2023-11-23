@@ -13,7 +13,7 @@ document.getElementById("bouton").addEventListener("click", (e) => {
 // Import the necessary functions from the required SDKs
 // Importer les fonctions dont vous avez besoin à partir des SDKs dont vous avez besoin
 import { initializeApp } from 'firebase/app';
-import { getFirestore, collection, doc, getDoc, setDoc, serverTimestamp, getDocFromServer } from 'firebase/firestore';
+import { getFirestore, collection, doc, getDoc, setDoc, serverTimestamp, getDocFromServer, addDoc } from 'firebase/firestore';
 
 
 const firebaseConfig = {
@@ -36,30 +36,41 @@ document.addEventListener("DOMContentLoaded", async function () {
   await getDataFromFirestore();
 });
 
-async function getDataFromFirestore() {
-  console.log("Tentative de récupération du contenu depuis Firestore...");
+// db.collection("droit").doc("mZ2VxP5Ea2aAzJlzN9QV")
+//     .onSnapshot((doc) => {
+//         console.log("Current data: ", doc.data());
+//         updateStarCount(postElement, doc.data().HTML );
+//     });
 
-  try {
-    const docSnap = await getDoc(contenuRef);
+//     function updateStarCount(el, val) {
+//       el.innerHTML = `${val} post`;
+//       consol.log(val);
+//     }
+// async function getDataFromFirestore() {
+//   console.log("Tentative de récupération du contenu depuis Firestore...");
 
-    if (docSnap.exists()) {
-      console.log("Document data:", docSnap.data());
+//   try {
+//     const docSnap = await getDoc(contenuRef);
 
-      // Assurez-vous que l'élément avec l'ID 'editor-container' existe sur votre page HTML
-      const editorContainer = document.getElementById('editor-container');
+//     if (docSnap.exists()) {
+//       console.log("Document data:", docSnap.data());
 
-      if (editorContainer) {
-        editorContainer.innerHTML = docSnap.data().contenu;
-      } else {
-        console.error("L'élément avec l'ID 'editor-container' n'a pas été trouvé sur la page.");
-      }
-    } else {
-      console.log("Aucun document trouvé !");
-    }
-  } catch (error) {
-    console.error("Erreur lors de la récupération des données depuis Firestore:", error);
-  }
-}
+//       // Assurez-vous que l'élément avec l'ID 'editor-container' existe sur votre page HTML
+//       const editorContainer = document.getElementById('editor-container');
+
+//       if (editorContainer) {
+//         editorContainer.innerText = docSnap.data().HTML;
+
+//       } else {
+//         console.error("L'élément avec l'ID 'editor-container' n'a pas été trouvé sur la page.");
+//       }
+//     } else {
+//       console.log("Aucun document trouvé !");
+//     }
+//   } catch (error) {
+//     console.error("Erreur lors de la récupération des données depuis Firestore:", error);
+//   }
+// }
 
 
 //   getDoc(contenuRef)
@@ -81,29 +92,47 @@ async function getDataFromFirestore() {
 //     });
 // }
 
-function sauvegarderContenuDansFirestore() {
-  
-  const contenuDiv = document.getElementById('editor-container').innerHTML;
+const contenus = collection(db, "textes")
+
+ 
+const addForm = document.querySelector(".ajouter");
+addForm.addEventListener("submit", (e) => {
+  e.preventDefault()
 
 
-  console.log("Contenu à sauvegarder :", contenuDiv);
-
-
-
-
-  // Save the content to Firestore
-  return setDoc(contenuRef, {
-    contenu: contenuDiv,
-    timestamp: serverTimestamp(),
+  addDoc(contenus, {
+    title1 : addForm.titre1.value,
+    title2 :addForm.titre2.value,
+    title3 : addForm.titre3.value,
+    soustitre1: addForm.soutitre1.value,
+    soustitre2 : addForm.soutitre2.value,
+    dateDajout : serverTimestamp()
   })
-    .then(() => {
-      console.log('Content saved successfully in Firestore!');
-    })
-    .catch((error) => {
-      console.error("Error saving content:", error);
-    });
-}
-
-document.getElementById("modif").addEventListener("click",  () => {
-  sauvegarderContenuDansFirestore();
 })
+
+// function sauvegarderContenuDansFirestore() {
+  
+//   const contenuDiv = document.getElementById('editor-container').innerText;
+
+
+//   console.log("Contenu à sauvegarder :", contenuDiv);
+
+
+
+
+//   // Save the content to Firestore
+//   return setDoc(contenuRef, {
+//     contenu: contenuDiv,
+//     timestamp: serverTimestamp(),
+//   })
+//     .then(() => {
+//       console.log('Content saved successfully in Firestore!');
+//     })
+//     .catch((error) => {
+//       console.error("Error saving content:", error);
+//     });
+// }
+
+// document.getElementById("modif").addEventListener("click",  () => {
+//   sauvegarderContenuDansFirestore();
+// })

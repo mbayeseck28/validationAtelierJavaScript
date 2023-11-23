@@ -190,74 +190,90 @@
                                 <button onclick="alignText('center')">Centrer</button>
                                 <button onclick="undo()">Annuler</button>
                             </div>
-                            <div id="editor-container" class="content">
+                            <form class="ajouter" action="">
+                              <div id="editor-container" class="content">
                               
-                              <div class="border border-3 border-black text-center" id="titre1">
-                                <h3 contenteditable="">Hygiéne</h3>
-                              </div>
-                               <div id="soutitre1">
-                                <h4 contenteditable="">Hygiene</h4>
-                               </div>                             
-                              
-                              <p class="mb-3" id="p1" contenteditable>Lorem ipsum dolor sit amet consectetur adipisicing elit. <br>
-                                Deserunt in ipsam iusto nisi quos reiciendis quidem nostrum repudiandae <br>
-                                architecto voluptatibus illo hic asperiores voluptate aperiam, veniam dicta nam non? Sunt! <br>
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum, voluptas officiis. Ad, culpa voluptate illo, necessitatibus at minima dolores voluptatum facere natus rem cumque, ducimus quo sint dolorem. Iusto, dolore!
-                              </p>
-
-                              <div id="soutitre2">
-                                <h4 contenteditable="">Securité</h4>
-                              </div>
-                              <p class="mb-5" id="p2" contenteditable>Lorem ipsum dolor sit amet consectetur adipisicing elit. <br>
-                                Deserunt in ipsam iusto nisi quos reiciendis quidem nostrum repudiandae <br>
-                                architecto voluptatibus illo hic asperiores voluptate aperiam, veniam dicta nam non? Sunt!
-                              </p>
-                              <div class="border border-3 border-black fs-4 text-center" id="titre3" contenteditable>
-                                 <h3 contenteditable="">Accueil et Surveillance</h3>
-                              </div>
-                              <div id="p3">
-                                <p class="mb-2" contenteditable>Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                                  Deserunt in ipsam iusto nisi quos reiciendis quidem nostrum repudiandae
+                                <div class="border border-3 border-black text-center" id="titre1">
+                                  <h3 contenteditable="">
+                                    <input type="text" name="titre1" placeholder="Category: " id="title1">
+                                  </h3>
+                                  
+                                </div>
+                                 <div id="soutitre1">
+                                  <h4 contenteditable="">
+                                    <input type="text" name="soutitre1" placeholder="Category: " id="soustitre1">
+                                  </h4>
+                                 </div>                             
+                                
+                                <p class="mb-3" id="p1" contenteditable>Lorem ipsum dolor sit amet consectetur adipisicing elit. <br>
+                                  Deserunt in ipsam iusto nisi quos reiciendis quidem nostrum repudiandae <br>
                                   architecto voluptatibus illo hic asperiores voluptate aperiam, veniam dicta nam non? Sunt! <br>
-                                  Lorem ipsum dolor sit amet consectetur, adipisicing elit. Exercitationem deleniti aliquam tempora quam, enim nulla praesentium distinctio earum, voluptas consequuntur, deserunt perspiciatis expedita ipsam harum rem quae hic? Reiciendis, accusamus?
+                                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum, voluptas officiis. Ad, culpa voluptate illo, necessitatibus at minima dolores voluptatum facere natus rem cumque, ducimus quo sint dolorem. Iusto, dolore!
                                 </p>
-                                <p class="mb-2" contenteditable>Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                                  Deserunt in ipsam iusto nisi quos reiciendis quidem nostrum repudiandae
-                                  architecto voluptatibus illo hic asperiores voluptate aperiam, veniam dicta nam non? Sunt!
-                                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil minus, hic voluptas laboriosam cum maiores aspernatur nemo excepturi. Accusamus accusantium odio, explicabo nam eum aliquid alias assumenda aliquam dolores minus.
-                                </p>
-                                <p class="mb-2"contenteditable>Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                                  Deserunt in ipsam iusto nisi quos reiciendis quidem nostrum repudiandae
-                                  architecto voluptatibus illo hic asperiores voluptate aperiam, veniam dicta nam non? Sunt!
-                                </p>
-                                <p class="mb-2" contenteditable>Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                                  Deserunt in ipsam iusto nisi quos reiciendis quidem nostrum repudiandae
-                                  architecto voluptatibus illo hic asperiores voluptate aperiam, veniam dicta nam non? Sunt!
-                                </p>
-                                <p class="mb-2" contenteditable>Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                                  Deserunt in ipsam iusto nisi quos reiciendis quidem nostrum repudiandae
-                                  architecto voluptatibus illo hic asperiores voluptate aperiam, veniam dicta nam non? Sunt!
-                                  Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ipsum eius quos at ad, vero possimus veritatis. Cupiditate rerum quos voluptate molestias natus sequi minima dolor cumque cum, non ipsam delectus!
-                                  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos molestias repellendus architecto vel, est perferendis numquam id consequatur veritatis quasi, quam quidem tempora accusantium aut quod. Consequuntur vero illum praesentium!
   
+                                <div id="soutitre2">
+                                  <h4 contenteditable="">
+                                    <input type="text" name="soutitre2" placeholder="Category: " id="soustitre2">
+                                  </h4>
+                                </div>
+                                <p class="mb-5" id="p2" contenteditable>Lorem ipsum dolor sit amet consectetur adipisicing elit. <br>
+                                  Deserunt in ipsam iusto nisi quos reiciendis quidem nostrum repudiandae <br>
+                                  architecto voluptatibus illo hic asperiores voluptate aperiam, veniam dicta nam non? Sunt!
                                 </p>
-                                <p class="mb-5" contenteditable>Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                                  Deserunt in ipsam iusto nisi quos reiciendis quidem nostrum repudiandae
-                                  architecto voluptatibus illo hic asperiores voluptate aperiam, veniam dicta nam non? Sunt! 
-                                  Lorem ipsum dolor, sit amet consectetur adipisicing elit. Libero omnis sint in explicabo facere repellendus nulla corporis commodi facilis, accusamus adipisci. Tenetur suscipit sint consectetur quae veritatis cum repudiandae natus!
+                                <div class="border border-3 border-black fs-4 text-center" id="titre2" contenteditable>
+                                   <h3 contenteditable="">
+                                    <input type="text" name="titre2" placeholder="Category: " id="title2">
+                                   </h3>
+                                </div>
+                                <div id="p3">
+                                  <p class="mb-2" contenteditable>Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                                    Deserunt in ipsam iusto nisi quos reiciendis quidem nostrum repudiandae
+                                    architecto voluptatibus illo hic asperiores voluptate aperiam, veniam dicta nam non? Sunt! <br>
+                                    Lorem ipsum dolor sit amet consectetur, adipisicing elit. Exercitationem deleniti aliquam tempora quam, enim nulla praesentium distinctio earum, voluptas consequuntur, deserunt perspiciatis expedita ipsam harum rem quae hic? Reiciendis, accusamus?
+                                  </p>
+                                  <p class="mb-2" contenteditable>Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                                    Deserunt in ipsam iusto nisi quos reiciendis quidem nostrum repudiandae
+                                    architecto voluptatibus illo hic asperiores voluptate aperiam, veniam dicta nam non? Sunt!
+                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil minus, hic voluptas laboriosam cum maiores aspernatur nemo excepturi. Accusamus accusantium odio, explicabo nam eum aliquid alias assumenda aliquam dolores minus.
+                                  </p>
+                                  <p class="mb-2"contenteditable>Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                                    Deserunt in ipsam iusto nisi quos reiciendis quidem nostrum repudiandae
+                                    architecto voluptatibus illo hic asperiores voluptate aperiam, veniam dicta nam non? Sunt!
+                                  </p>
+                                  <p class="mb-2" contenteditable>Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                                    Deserunt in ipsam iusto nisi quos reiciendis quidem nostrum repudiandae
+                                    architecto voluptatibus illo hic asperiores voluptate aperiam, veniam dicta nam non? Sunt!
+                                  </p>
+                                  <p class="mb-2" contenteditable>Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                                    Deserunt in ipsam iusto nisi quos reiciendis quidem nostrum repudiandae
+                                    architecto voluptatibus illo hic asperiores voluptate aperiam, veniam dicta nam non? Sunt!
+                                    Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ipsum eius quos at ad, vero possimus veritatis. Cupiditate rerum quos voluptate molestias natus sequi minima dolor cumque cum, non ipsam delectus!
+                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos molestias repellendus architecto vel, est perferendis numquam id consequatur veritatis quasi, quam quidem tempora accusantium aut quod. Consequuntur vero illum praesentium!
+    
+                                  </p>
+                                  <p class="mb-5" contenteditable>Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                                    Deserunt in ipsam iusto nisi quos reiciendis quidem nostrum repudiandae
+                                    architecto voluptatibus illo hic asperiores voluptate aperiam, veniam dicta nam non? Sunt! 
+                                    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Libero omnis sint in explicabo facere repellendus nulla corporis commodi facilis, accusamus adipisci. Tenetur suscipit sint consectetur quae veritatis cum repudiandae natus!
+                                  </p>
+              
+                                </div>
+                                
+                                <div class="border border-3 border-black fs-4 text-center" id="titre3" contenteditable>
+                                  <h3 contenteditable="">
+                                    <input type="text" name="titre3" placeholder="Category: " id="title3">
+                                  </h3> 
+                                </div>
+                                <p class="mb-3" id="p4" contenteditable>Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                                  Deserunt in ipsam iusto nisi quos reiciendis quidem nostrum repudiandae 
+                                  architecto voluptatibus illo hic asperiores voluptate aperiam, veniam dicta nam non? Sunt!
+                                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam voluptatem, natus beatae illo ullam facilis. Tempora, provident odit recusandae in non a impedit fugit unde reprehenderit libero? Rem, quas quis.
                                 </p>
-            
+                                
                               </div>
-                              
-                              <div class="border border-3 border-black fs-4 text-center" id="titre3" contenteditable>
-                                <h3 contenteditable="">Sécurité et Protection de l'éléve</h3> 
-                              </div>
-                              <p class="mb-3" id="p4" contenteditable>Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                                Deserunt in ipsam iusto nisi quos reiciendis quidem nostrum repudiandae 
-                                architecto voluptatibus illo hic asperiores voluptate aperiam, veniam dicta nam non? Sunt!
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam voluptatem, natus beatae illo ullam facilis. Tempora, provident odit recusandae in non a impedit fugit unde reprehenderit libero? Rem, quas quis.
-                              </p>
-                            </div>
+                              <button id="saveButton" type="submit">Submit texte</button> 
+                            </form>
+                            
                             
                           <script>
                             const editor = document.getElementById('editor-container');
