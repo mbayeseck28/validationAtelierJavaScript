@@ -110,6 +110,11 @@ body{
     margin-left: 0px;
 }
 
+textarea{
+    border: none;
+    background-color: #F8F9FA;
+}
+
 @media screen and (max-width : 768px) {
     .center h1{
         font-size: 20px;
