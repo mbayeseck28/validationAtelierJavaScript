@@ -3,6 +3,7 @@ import { getStorage, ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { getDatabase, ref as refDatabase, set, get } from 'firebase/database';
 import {
   getAuth,
+  signOut,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   onAuthStateChanged,
@@ -32,9 +33,12 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
 const database = getDatabase();
+const user = auth.currentUser;
 
 const formProfil = document.getElementById('formProfil');
 formProfil.style.display = 'none';
+
+
 
 onAuthStateChanged(auth, (user) => {
   if (user) {
@@ -196,7 +200,23 @@ onAuthStateChanged(auth, (user) => {
     });
   } else {
     console.log('Aucun utilisateur connecté');
+    window.location.href = '../../pages/auth/login/login.html';
+    // user != auth.currentUser
   }
 });
 
+
+/************     DECONNEXION       ***********/ 
+const btnDeconnexion = document.getElementById('btnDeconnexion');
+const signOutButtonPressed = async (e) => {
+  e.preventDefault();
+  try {
+    await signOut(auth);
+    console.log("Deconnecté");
+    window.location.href = '../../pages/auth/login/login.html';
+  } catch (error) {
+    console.log(error.code);
+  }
+}
+btnDeconnexion.addEventListener("click", signOutButtonPressed);
 console.log('page profil');

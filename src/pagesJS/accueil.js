@@ -5,6 +5,7 @@ import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { getDatabase, ref as refDatabase, set, get } from "firebase/database";
 import {
   getAuth,
+  signOut,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   onAuthStateChanged,
@@ -31,13 +32,14 @@ const firebaseConfig = {
   projectId: "validation-atelier-js",
   storageBucket: "validation-atelier-js.appspot.com",
   messagingSenderId: "466332062090",
-  appId: "1:466332062090:web:ffbe45ef4a7371a7b5b873"
+  appId: "1:466332062090:web:ffbe45ef4a7371a7b5b873",
 };
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
 
+/************     Profil Navbar       ***********/
 onAuthStateChanged(auth, (user) => {
   if (user) {
     // console.log("Utilisateur connecté");
@@ -66,30 +68,28 @@ onAuthStateChanged(auth, (user) => {
     });
   } else {
     console.log("Aucun utilisateur connecté");
+    window.location.href = "../../pages/auth/login/login.html";
   }
 });
 
-function deconnexion() {
-  console.log("function deconnexion");
-  const btnGreen = document.querySelector(".btnGreen");
-  btnGreen.addEventListener("click", function () {
-    const auth = getAuth();
-    signOut(auth)
-      .then(() => {
-        console.log("Utilisateur déconnecté");
-        window.location.href = "../../pages/auth/login/login.html";
-      })
-      .catch((error) => {
-        console.error("Erreur lors de la déconnexion :", error);
-      });
-  });
-}
-deconnexion();
+/************     DECONNEXION       ***********/
+const btnDeconnexion = document.getElementById("btnDeconnexion");
+const signOutButtonPressed = async (e) => {
+  e.preventDefault();
+  try {
+    await signOut(auth);
+    console.log("Deconnecté");
+    window.location.href = "../../pages/auth/login/login.html";
+  } catch (error) {
+    console.log(error.code);
+  }
+};
+btnDeconnexion.addEventListener("click", signOutButtonPressed);
 
 // Récupérer la collection
 const eleve = collection(db, "inscScolarite");
 const certiesRef2 = collection(db, "mensualites");
-let sum = 0;
+// let sum = 0;
 
 let effectifClass6;
 let effectifClass5;
@@ -100,105 +100,30 @@ const effectif6 = document.getElementById("effectif6");
 const effectif5 = document.getElementById("effectif5");
 const effectif4 = document.getElementById("effectif4");
 const effectif3 = document.getElementById("effectif3");
-let noPay
+let noPay;
+
 onSnapshot(eleve, (snapshot) => {
   let eleves = [];
   snapshot.docs.forEach((doc) => {
     eleves.push({ ...doc.data(), id: doc.id });
   });
   eleves.sort((a, b) => b.dateDajout - a.dateDajout);
-  noPay = eleves
+
+  noPay = eleves;
   // console.log(eleves);
   effectifClass6 = eleves.filter((utili) => utili.classe === "6ème").length;
   effectifClass5 = eleves.filter((utili) => utili.classe === "5ème").length;
   effectifClass4 = eleves.filter((utili) => utili.classe === "4ème").length;
   effectifClass3 = eleves.filter((utili) => utili.classe === "3ème").length;
 
-  effectif6.innerHTML = effectifClass6 ;
-  effectif5.innerHTML = effectifClass5 ;
+  effectif6.innerHTML = effectifClass6;
+  effectif5.innerHTML = effectifClass5;
   effectif4.innerHTML = effectifClass4;
   effectif3.innerHTML = effectifClass3;
 });
 
-// onSnapshot(certiesRef2, (snapshot) => {
-//   let certiesRef2 = [];
-//   snapshot.docs.forEach((doc) => {
-//     certiesRef2.push({ ...doc.data(), id: doc.id });
-//   });
-//   certiesRef2.sort((a, b) => b.dateDajout - a.dateDajout);
-
-//   // console.log(certiesRef2);
-//   let PaiementsEffec6 = certiesRef2.filter(
-//     (utili) => utili.classe === "6ème" && utili.mois === "novembre"
-//   );
-//   let PaiementsEffec5 = certiesRef2.filter(
-//     (utili) => utili.classe === "5ème" && utili.mois === "novembre"
-//   );
-//   let PaiementsEffec4 = certiesRef2.filter(
-//     (utili) => utili.classe === "4ème" && utili.mois === "novembre"
-//   );
-//   let PaiementsEffec3 = certiesRef2.filter(
-//     (utili) => utili.classe === "3ème" && utili.mois === "novembre"
-//   );
-
-//   paiement6.innerHTML =
-//     Math.round((PaiementsEffec6.length / effectifClass6) * 100) + "%";
-//   paiement5.innerHTML =
-//     Math.round((PaiementsEffec5.length / effectifClass5) * 100) + "%";
-//   paiement4.innerHTML =
-//     Math.round((PaiementsEffec4.length / effectifClass4) * 100) + "%";
-//   paiement3.innerHTML =
-//     Math.round((PaiementsEffec3.length / effectifClass3) * 100) + "%";
-  
-//   sum =
-//     parseFloat(paiement6.innerHTML) +
-//     parseFloat(paiement5.innerHTML) +
-//     parseFloat(paiement4.innerHTML) +
-//     parseFloat(paiement3.innerHTML);
-
-//     sum = sum / 4;
-//     sum = sum.toFixed(0);
-    
-    
-  
-//     /*****PARTIE PROGRESS BAR****/
-  
-//     let circularProgress = document.querySelector(".circular-progress");
-//     let progressValue = document.querySelector(".progress-value");
-  
-//     let progressStartValue = 0;
-//     let progressEndValue = typeof sum !== "undefined" ? sum : 0;
-//     let speed = 70;
-  
-//     if (isNaN(sum)) {
-      
-//     } else if (sum === "0") {
-//       progressStartValue = 0;
-//       progressValue.textContent = `${progressStartValue}%`;
-//       circularProgress.style.background = `conic-gradient(rgb(32, 215, 32) ${
-//         progressStartValue * 3.6
-//       }deg, #ededed 0deg)`;
-//     } else if (!isNaN(sum) && sum !== "0") {
-//       let progress = setInterval(() => {
-//         progressStartValue++;
-  
-//         progressValue.textContent = `${progressStartValue}%`;
-//         circularProgress.style.background = `conic-gradient(rgb(32, 215, 32) ${
-//           progressStartValue * 3.6
-//         }deg, #ededed 0deg)`;
-  
-//         if (progressStartValue == progressEndValue) {
-//           clearInterval(progress);
-//         }
-//       }, speed);
-//       sum = ""
-//       console.log(sum);
-//     }
-
-// });
-
-
 const selectMois = document.getElementById("selectMois");
+console.log(selectMois.value);
 
 // const dateDuJour = new Date();
 // const moisActuel = dateDuJour.getMonth() + 1;
@@ -206,196 +131,23 @@ const selectMois = document.getElementById("selectMois");
 // console.log(dateDuJour, moisActuel);
 // selectMois.value = moisActuel.toString();
 
-// selectMois.addEventListener("change", (e) => {
-//   const moisSelectionne = selectMois.value;
-//   // const mois = e.target.value;
-//   console.log(moisSelectionne);
-//   sum = "0"
-//   onSnapshot(certiesRef2, (snapshot) => {
-//     let certiesRef2 = [];
-//     snapshot.docs.forEach((doc) => {
-//       certiesRef2.push({ ...doc.data(), id: doc.id });
-//     });
-//     certiesRef2.sort((a, b) => b.dateDajout - a.dateDajout);
-
-//     let PaiementsEffec6 = certiesRef2.filter(
-//       (utili) => utili.classe === "6ème" && utili.mois === moisSelectionne
-//     );
-//     let PaiementsEffec5 = certiesRef2.filter(
-//       (utili) => utili.classe === "5ème" && utili.mois === moisSelectionne
-//     );
-//     let PaiementsEffec4 = certiesRef2.filter(
-//       (utili) => utili.classe === "4ème" && utili.mois === moisSelectionne
-//     );
-//     let PaiementsEffec3 = certiesRef2.filter(
-//       (utili) => utili.classe === "3ème" && utili.mois === moisSelectionne
-//     );
-
-//     paiement6.innerHTML =
-//       Math.round((PaiementsEffec6.length / effectifClass6) * 100) + "%";
-//     paiement5.innerHTML =
-//       Math.round((PaiementsEffec5.length / effectifClass5) * 100) + "%";
-//     paiement4.innerHTML =
-//       Math.round((PaiementsEffec4.length / effectifClass4) * 100) + "%";
-//     paiement3.innerHTML =
-//       Math.round((PaiementsEffec3.length / effectifClass3) * 100) + "%";
-//   });
-//   sum = ""
-//   sum =
-//     parseFloat(paiement6.innerHTML) +
-//     parseFloat(paiement5.innerHTML) +
-//     parseFloat(paiement4.innerHTML) +
-//     parseFloat(paiement3.innerHTML);
-
-//   sum = sum / 4;
-//   sum = sum.toFixed(0);
-  
-//   // console.log(sum);
-//   // console.log(Number.isNaN(sum));
-
-//   /*****PARTIE PROGRESS BAR****/
-
-//   let circularProgress = document.querySelector(".circular-progress");
-//   let progressValue = document.querySelector(".progress-value");
-
-//   let progressStartValue = 0;
-//   let progressEndValue = typeof sum !== "undefined" ? sum : 0;
-//   let speed = 70;
-
-//   if (isNaN(sum)) {
-    
-//   } else if (sum === "0") {
-//     progressStartValue = 0;
-//     progressValue.textContent = `${progressStartValue}%`;
-//     circularProgress.style.background = `conic-gradient(rgb(32, 215, 32) ${
-//       progressStartValue * 3.6
-//     }deg, #ededed 0deg)`;
-//   } else if (!isNaN(sum) && sum !== "0") {
-//     let progress = setInterval(() => {
-//       progressStartValue++;
-
-//       progressValue.textContent = `${progressStartValue}%`;
-//       circularProgress.style.background = `conic-gradient(rgb(32, 215, 32) ${
-//         progressStartValue * 3.6
-//       }deg, #ededed 0deg)`;
-
-//       if (progressStartValue == progressEndValue) {
-//         clearInterval(progress);
-//       }
-//     }, speed);
-//     sum = ""
-//     console.log(sum);
-//   }
-
-//   //  }
-
-//   // }
-
-//   // let progress = setInterval(() => {
-//   //         progressStartValue++;
-
-//   //         progressValue.textContent = `${progressStartValue}%`;
-//   //         circularProgress.style.background = `conic-gradient(rgb(32, 215, 32) ${
-//   //           progressStartValue * 3.6
-//   //         }deg, #ededed 0deg)`;
-
-//   //         if (progressStartValue == progressEndValue) {
-//   //           clearInterval(progress);
-//   //         }
-//   //       }, speed);
-// });
-sum = ''
-console.log(sum);
 selectMois.addEventListener("change", (e) => {
-  paiementMensualiter()
-  
+  paiementMensualiter();
+});
 
-  // console.log(moisSelectionne);
-  // sum = "";
-  // onSnapshot(certiesRef2, (snapshot) => {
-  //   let certiesRef2 = [];
-  //   snapshot.docs.forEach((doc) => {
-  //     certiesRef2.push({ ...doc.data(), id: doc.id });
-  //   });
-  //   certiesRef2.sort((a, b) => b.dateDajout - a.dateDajout);
- 
-  //   let PaiementsEffec6 = certiesRef2.filter(
-  //     (utili) => utili.classe === "6ème" && utili.mois === moisSelectionne
-  //   );
-  //   let PaiementsEffec5 = certiesRef2.filter(
-  //     (utili) => utili.classe === "5ème" && utili.mois === moisSelectionne
-  //   );
-  //   let PaiementsEffec4 = certiesRef2.filter(
-  //     (utili) => utili.classe === "4ème" && utili.mois === moisSelectionne
-  //   );
-  //   let PaiementsEffec3 = certiesRef2.filter(
-  //     (utili) => utili.classe === "3ème" && utili.mois === moisSelectionne
-  //   );
- 
-  //   paiement6.innerHTML =
-  //     Math.round((PaiementsEffec6.length / effectifClass6) * 100) + "%";
-  //   paiement5.innerHTML =
-  //     Math.round((PaiementsEffec5.length / effectifClass5) * 100) + "%";
-  //   paiement4.innerHTML =
-  //     Math.round((PaiementsEffec4.length / effectifClass4) * 100) + "%";
-  //   paiement3.innerHTML =
-  //     Math.round((PaiementsEffec3.length / effectifClass3) * 100) + "%";
-  // });
-  // sum =
-  //   parseFloat(paiement6.innerHTML) +
-  //   parseFloat(paiement5.innerHTML) +
-  //   parseFloat(paiement4.innerHTML) +
-  //   parseFloat(paiement3.innerHTML);
- 
-  // sum = sum / 4;
-  // sum = sum.toFixed(0);
- 
-  // let circularProgress = document.querySelector(".circular-progress");
-  // let progressValue = document.querySelector(".progress-value");
- 
-  // let progressStartValue = 0;
-  // let progressEndValue = typeof sum !== "undefined" ? sum : 0;
-  // let speed = 70;
- 
-  // if (isNaN(sum)) {
-  //   // Ne faites rien si sum est NaN
-  // } else if (sum === "0") {
-  //   progressStartValue = 0;
-  //   progressValue.textContent = `${progressStartValue}%`;
-  //   circularProgress.style.background = `conic-gradient(rgb(32, 215, 32) ${
-  //     progressStartValue * 3.6
-  //   }deg, #ededed 0deg)`;
-  // } else if (!isNaN(sum) && sum !== "0") {
-  //   let progress = setInterval(() => {
-  //     progressStartValue++;
- 
-  //     progressValue.textContent = `${progressStartValue}%`;
-  //     circularProgress.style.background = `conic-gradient(rgb(32, 215, 32) ${
-  //       progressStartValue * 3.6
-  //     }deg, #ededed 0deg)`;
- 
-  //     if (progressStartValue == progressEndValue) {
-  //       clearInterval(progress);
-  //     }
-  //   }, speed);
-  //   console.log(moisSelectionne, sum);
-  // }
- });
-
- 
-
-function paiementMensualiter() {
+function getMensualiter() {
   onSnapshot(certiesRef2, (snapshot) => {
+    const moisSelectionne = selectMois.value;
     let certiesRef2 = [];
     snapshot.docs.forEach((doc) => {
       certiesRef2.push({ ...doc.data(), id: doc.id });
     });
     certiesRef2.sort((a, b) => b.dateDajout - a.dateDajout);
 
-    const moisSelectionne = selectMois.value;
     const PaiementsEffec = certiesRef2.filter(
       (utili) => utili.classe === "6ème" && utili.mois === moisSelectionne
     );
+
     const PaiementsEffe5 = certiesRef2.filter(
       (utili) => utili.classe === "5ème" && utili.mois === moisSelectionne
     );
@@ -411,7 +163,6 @@ function paiementMensualiter() {
     const tousElevesClasse4 = noPay.filter((eleve) => eleve.classe === "4ème");
     const tousElevesClasse3 = noPay.filter((eleve) => eleve.classe === "3ème");
 
-    
     const elevesNonPayesClasse6 = tousElevesClasse6.filter((eleve) => {
       return !PaiementsEffec.some((pai) => pai.prenom === eleve.prenom);
     });
@@ -425,107 +176,99 @@ function paiementMensualiter() {
       return !PaiementsEffe3.some((pai) => pai.prenom === eleve.prenom);
     });
 
+    const list = document.querySelector("#list");
+    const list5 = document.querySelector("#list1");
+    const list4 = document.querySelector("#list2");
+    const list3 = document.querySelector("#list3");
 
-    const list = document.querySelector('#list');
-    const list5 = document.querySelector('#list1');
-    const list4 = document.querySelector('#list2');
-    const list3 = document.querySelector('#list3');
-    console.log(list5);
-    list.innerHTML = ""
-    elevesNonPayesClasse6.forEach(utili => {
-      const tr = document.createElement('tr');
+    afficheEleves(list, elevesNonPayesClasse6, PaiementsEffec);
+    afficheEleves(list5, elevesNonPayesClasse5, PaiementsEffe5);
+    afficheEleves(list4, elevesNonPayesClasse4, PaiementsEffe4);
+    afficheEleves(list3, elevesNonPayesClasse3, PaiementsEffe3);
 
-      tr.innerHTML = `
-      <td class="mx-auto text-center m-0">${utili.nom}</td>
-      <td class="mx-auto text-center m-0">${utili.prenom}</td>
-      <td class="mx-auto text-center m-0 d-none d-lg-block">Non payé </td>
-      `;
-      list.appendChild(tr);
-    })
-
-    list5.innerHTML = ""
-    elevesNonPayesClasse5.forEach(utili => {
-      const tr = document.createElement('tr');
-
-      tr.innerHTML = `
-      <td class="mx-auto text-center m-0">${utili.nom}</td>
-      <td class="mx-auto text-center m-0">${utili.prenom}</td>
-      <td class="mx-auto text-center m-0">Non payé </td>
-      `;
-      list5.appendChild(tr);
-    })
-
-    list4.innerHTML = ""
-    elevesNonPayesClasse4.forEach(utili => {
-      const tr = document.createElement('tr');
-
-      tr.innerHTML = `
-      <td class="mx-auto text-center m-0">${utili.nom}</td>
-      <td class="mx-auto text-center m-0">${utili.prenom}</td>
-      <td class="mx-auto text-center m-0">Non payé </td>
-      `;
-      list4.appendChild(tr);
-    })
-
-    list3.innerHTML = ""
-    elevesNonPayesClasse3.forEach(utili => {
-      const tr = document.createElement('tr');
-
-      tr.innerHTML = `
-      <td class="mx-auto text-center m-0">${utili.nom}</td>
-      <td class="mx-auto text-center m-0">${utili.prenom}</td>
-      <td class="mx-auto text-center m-0">Non payé </td>
-      `;
-      list3.appendChild(tr);
-    })
-   
-    let PaiementsEffec6 = certiesRef2.filter(
-      (utili) => utili.classe === "6ème" && utili.mois === moisSelectionne
-    );
-    let PaiementsEffec5 = certiesRef2.filter(
-      (utili) => utili.classe === "5ème" && utili.mois === moisSelectionne
-    );
-    let PaiementsEffec4 = certiesRef2.filter(
-      (utili) => utili.classe === "4ème" && utili.mois === moisSelectionne
-    );
-    let PaiementsEffec3 = certiesRef2.filter(
-      (utili) => utili.classe === "3ème" && utili.mois === moisSelectionne
-    );
-    let classe6 = noPay.filter(
-      (utili) => utili.classe === "6ème" 
-      );
-      
-
-      classe6.forEach((pai) => {
-          let nonPayer = PaiementsEffec6.filter(
-            (utili) => utili.prenom  !== pai.prenom
-            );
-            console.log(nonPayer);
-        })
-
-      console.log(classe6, PaiementsEffec6, );
     paiement6.innerHTML =
-      Math.round((PaiementsEffec6.length / effectifClass6) * 100) + "%";
+      Math.round((PaiementsEffec.length / effectifClass6) * 100) + "%";
     paiement5.innerHTML =
-      Math.round((PaiementsEffec5.length / effectifClass5) * 100) + "%";
+      Math.round((PaiementsEffe5.length / effectifClass5) * 100) + "%";
     paiement4.innerHTML =
-      Math.round((PaiementsEffec4.length / effectifClass4) * 100) + "%";
+      Math.round((PaiementsEffe4.length / effectifClass4) * 100) + "%";
     paiement3.innerHTML =
-      Math.round((PaiementsEffec3.length / effectifClass3) * 100) + "%";
+      Math.round((PaiementsEffe3.length / effectifClass3) * 100) + "%";
+  });
+}
+
+function afficheEleves(listElement, nonPayments, payments) {
+  listElement.innerHTML = "";
+
+  nonPayments.forEach((nonPayment) => {
+    const tr = document.createElement("tr");
+    tr.innerHTML = `
+    <td class="mx-auto text-center m-0">${nonPayment.nom}</td>
+    <td class="mx-auto text-center m-0">${nonPayment.prenom}</td>
+    <td class="mx-auto text-center m-0">Non payé</td>
+    `;
+    listElement.appendChild(tr);
   });
 
- let  sum =
-  parseFloat(paiement6.innerHTML) +
-  parseFloat(paiement5.innerHTML) +
-  parseFloat(paiement4.innerHTML) +
-  parseFloat(paiement3.innerHTML);
+  payments.forEach((payment) => {
+    const tr = document.createElement("tr");
+    tr.innerHTML = `
+    <td class="mx-auto text-center m-0">${payment.nom}</td>
+    <td class="mx-auto text-center m-0">${payment.prenom}</td>
+    <td class="mx-auto text-center m-0">Payé</td>
+    `;
+    listElement.appendChild(tr);
+  });
+}
 
-sum = sum / 4;
-sum = sum.toFixed(0);
-console.log(sum);
-} 
-paiementMensualiter()
- 
+window.onload = paiementMensualiter();
+
+function paiementMensualiter() {
+  getMensualiter();
+
+  let sum =
+    parseFloat(paiement6.innerHTML) +
+    parseFloat(paiement5.innerHTML) +
+    parseFloat(paiement4.innerHTML) +
+    parseFloat(paiement3.innerHTML);
+
+  sum = sum / 4;
+  sum = sum.toFixed(0);
+  progressBar(sum);
+}
+paiementMensualiter();
+
+function progressBar(sum) {
+  let circularProgress = document.querySelector(".circular-progress");
+  let progressValue = document.querySelector(".progress-value");
+
+  let progressStartValue = 0;
+  let progressEndValue = typeof sum !== "undefined" ? sum : 0;
+  let speed = 70;
+
+  if (isNaN(sum)) {
+  } else if (sum === "0") {
+    progressStartValue = 0;
+    progressValue.textContent = `${progressStartValue}%`;
+    circularProgress.style.background = `conic-gradient(rgb(32, 215, 32) ${
+      progressStartValue * 3.6
+    }deg, #ededed 0deg)`;
+  } else if (!isNaN(sum) && sum !== "0") {
+    let progress = setInterval(() => {
+      progressStartValue++;
+
+      progressValue.textContent = `${progressStartValue}%`;
+      circularProgress.style.background = `conic-gradient(rgb(32, 215, 32) ${
+        progressStartValue * 3.6
+      }deg, #ededed 0deg)`;
+
+      if (progressStartValue == progressEndValue) {
+        clearInterval(progress);
+      }
+    }, speed);
+    // console.log(moisSelectionne, sum);
+  }
+}
 
 // partie ladji HISTORIQUE
 let date = new Date();
@@ -551,7 +294,9 @@ getDocs(eleve).then((snapshot) => {
     totalInscription += parseInt(utili.montantInsc);
   });
 
-  totalIns.innerHTML = `<b>${totalInscription.toLocaleString('en-US')} Fcfa</b>`;
+  totalIns.innerHTML = `<b>${totalInscription.toLocaleString(
+    "en-US"
+  )} Fcfa</b>`;
 });
 
 getDocs(certiesRef2).then((snapshot) => {
@@ -565,5 +310,38 @@ getDocs(certiesRef2).then((snapshot) => {
   });
 
   // console.log(certiesRef2);
-  totalMens.innerHTML = `<b>${totalMensualiter.toLocaleString('en-US')} Fcfa</b>`;
+  totalMens.innerHTML = `<b>${totalMensualiter.toLocaleString(
+    "en-US"
+  )} Fcfa</b>`;
+});
+
+let sidebar = document.querySelector(".sidebar");
+let closeBtn = document.querySelector("#btn");
+let menu = document.querySelector("#menu");
+let myContain = document.querySelector(".myContain");
+menu.style.color = "#ffffff7e";
+
+closeBtn.addEventListener("click", () => {
+  sidebar.classList.toggle("open");
+  myContain.classList.toggle("col-md-10");
+  myContain.classList.toggle("offset-md-1");
+  myContain.classList.toggle("col-md-9");
+  myContain.classList.toggle("col-lg-9");
+  myContain.classList.toggle("offset-md-3", "bg-dark");
+  myContain.classList.toggle("offset-lg-3");
+  myContain.classList.toggle("mx-md-none");
+  myContain.classList.toggle("mx-md-auto");
+});
+
+menu.addEventListener("click", () => {
+  if (sidebar.classList.contains("displayBlock")) {
+    sidebar.classList.remove("displayBlock");
+    sidebar.style.display = "none";
+    menu.style.marginLeft = "0px";
+  } else {
+    sidebar.classList.add("displayBlock");
+    sidebar.style.display = "block";
+    closeBtn.style.display = "none";
+    menu.style.marginLeft = "150px";
+  }
 });

@@ -1,23 +1,15 @@
-// import { onAuthStateChanged } from 'firebase/auth';
-// import { getAuth } from 'firebase/auth';
-
-
-
-// onAuthStateChanged(auth, (user) => {
-//     if (!user) {
-//         window.location.href = "../auth/login/login.html";
-//     }
-// });
-
 
 var pageName = window.location.pathname.split('/').pop();
 
 if (pageName === 'inscription.html') {
+  import('./pagesJS/sidebar');
   import('./pagesJS/inscription');
+} else if (pageName === 'admin.html') {
+  import('./pagesJS/admin.js');
 } else if (pageName === 'login.html') {
   import('./pagesJS/login');
 } else if (pageName === 'acceuil.html') {
-  import('./pagesJS/sidebar');
+  // import('./pagesJS/sidebar');
   import('./pagesJS/accueil');
 } else if (pageName === 'profil.html') {
   import('./pagesJS/sidebar');
