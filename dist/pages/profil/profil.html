@@ -66,96 +66,60 @@
     <title>Profil Mixte Feewu</title>
   </head>
   <body>
-    <div class="container-fluid"> 
-
+    <div class="container-fluid">
       <div
-        class="row nav p-2 mt-md-0 d-flex justify-content-between align-items-center"
-      >
+        class="row nav p-2 mt-md-0 d-flex justify-content-between align-items-center">
         <div class="col-6 col-md-2 logo">
           <img src="../../../src/assets/images/logo.png" alt="" />
         </div>
         <div class="col-12 col-md-5 mt-3 text-center calendrier">
-          <p>Année scolaire: <span>2022-2023</span></p>
+          <p>Année scolaire: <span>2023-2024</span></p>
         </div>
-        <div class="col-12 col-md-2 search">
-          <input
-            type="text"
-            name=""
-            id=""
-            placeholder="Rechercher"
-            class="p-3"
-          />
-        </div>
-        <div class="col-6 col-md-3 d-flex flex-row compte">
-          <i class="fa-regular fa-bell mt-1" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight"
-            aria-controls="offcanvasRight"></i>
+        <div class="col-6 col-md-3 d-flex flex-row compte me-md-5">
 
+          <i class="fa-regular fa-bell d-none d-lg-block mt-1" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight"></i>
 
-          <div
-            class="offcanvas offcanvas-sm offcanvas-end"
-            tabindex="-1"
-            id="offcanvasRight"
-            aria-labelledby="offcanvasRightLabel"
-          >
+          <div class="offcanvas offcanvas-sm offcanvas-end " tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
             <div class="offcanvas-header">
               <h5 id="offcanvasRightLabel">Notifications</h5>
-              <i
-                class="fa-solid fa-gear"
-                data-bs-dismiss="offcanvas"
-                aria-label="Close"
-              ></i>
+              <i class="fa-solid fa-gear" data-bs-dismiss="offcanvas" aria-label="Close"></i>
             </div>
             <div class="offcanvas-body">
-              <div
-                class="container d-flex align-items-center justify-content-center h-100"
-              >
-                <div
-                  class="row h-100 d-flex align-items-center justify-content-center"
-                >
-                  <div
-                    class="col-md-12 text-center d-flex align-items-center justify-content-center h-100"
-                  >
+              <div class="container d-flex align-items-center justify-content-center h-100">
+                <div class="row  h-100 d-flex align-items-center justify-content-center">
+                  <div class="col-md-12 text-center d-flex align-items-center justify-content-center h-100">
                     <p>Vous n'avez pas de notification</p>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-          <div class="profil ms-5 me-md-1">
+
+          
+          <div class="profil  ms-5 me-md-1">
             <img src="../../../src/assets/images/profil.jpeg" class="ProfilNav" alt="" />
           </div>
           <div class="btn-group">
-            <i
-              class="fa-solid angle-down ms-3 mt-1 dropdown-toggle"
-              data-bs-toggle="dropdown"
-              aria-expanded="false"
-            ></i>
-
+            <i class="fa-solid angle-down ms-3 mt-1 dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"></i>
+            
             <ul class="dropdown-menu rounded-5 pt-0 pb-4">
-              <div
-                class="d-flex flex-column py-4 mb-2 justify-content-center gy-5 align-items-center divProfile"
-              >
+              <div class="d-flex flex-column py-4 mb-2 justify-content-center gy-5 align-items-center divProfile">
+                
                 <div class="col-6 col-md-2 mx-auto my-2 mt-3 imageDivProfile">
                   <img src="../../../src/assets/images/profil.jpeg" class="profilVoir" alt="" />
                 </div>
-                <h6 class="text-center mb-0 fst-italic nomUser">Nom Complet</h6>
-                <p class="mt-0 pt-0 text-light statusUser">Status</p>
-              </div>
+               <h6 class="text-center mb-0 fst-italic nomUser">Nom Complet</h6>
+               <p class="mt-0 pt-0 text-light statusUser">Status</p>
+              </div>              
               <li>
-                <a class="dropdown-item mt-3" href="#">
-                  <button
-                    class="btn btnGreen fw-bold btn-light shadow btn-sm w-100"
-                    type="button"
-                  >
-                    Voir le profil
-                  </button></a
-                >
+                <a class="dropdown-item   mt-3 " href="../profil/profil.html">
+                <button class="btn btnGreen fw-bold btn-light shadow btn-sm w-100" type="button">
+                 Voir le profil
+                </button>
+              </a>
               </li>
               <li>
-                  <button
-                    class="btn btnGreen fw-bold btn-light shadow btn-sm w-100"
-                    id="btnDeconnexion"
-                  >
+                  <button class="btn btnGreen fw-bold btn-light shadow btn-sm w-100" id="btnDeconnexion">
                     Deconnexion
                   </button>
               </li>
@@ -228,7 +192,7 @@
       </div>
         <div class="col-lg-9 col-md-9 myContain">
           <!-- <h3>Profil</h3> -->
-          <div class="myProfil m-5 d-flex justify-content-center">
+          <div class="myProfil mt-5 mt-md-3  mb-4 d-flex justify-content-center">
             <img src="../../../src/assets/images/profil.jpeg" alt="" id="imgProfil"/>
             <i class="fa-solid fa-camera edit" data-bs-toggle="modal" data-bs-target="#exampleModal"></i>
           </div>
@@ -246,8 +210,7 @@
                   </div>
                 </div>
                 <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary save" data-bs-dismiss="modal">Save</button>
+                <button type="button" class="btn btn-success save" data-bs-dismiss="modal">Save</button>
                 </div>
             </div>
             </div>
@@ -261,87 +224,64 @@
             </div>
             <span class="loading"><img src="../../../src/assets/images/Group 850.png" alt=""></span>
           </div>
-            <form id="formProfil" class="infoProfil p-3 mb-5 col-lg-9 col-md-5 col align-self-end container">
+            <form id="formProfil" class="infoProfil  shadow bg-light  p-3 mb-5 col-lg-9 col-md-5 col ms-4 col-12 container">
               
               <div class="row ligne1 mt-4 d-flex flex-wrap d-flex justify-content-between align-items-center flex-md-column flex-lg-row">
-                  <h5 class="my-4 text-md-center">Informations Personnelles</h5>
-                  <div class="col-lg-12 col-md-4 mb-4 d-md-flex">
-                    <div class="row">
-                      <label class="col-4" for="userPrenom">Prenom:</label>
-                      <input class="col-8" type="text" id="userPrenom">
+                  <h5 class="mb-4 text-md-">Informations Personnelles</h5>
+                    <div class="row justify-content-center">
+                      <div class="col-12 col-md-5 col-lg-4 mb-4">
+                        <label class="" for="userPrenom">Prenom:</label>
+                      <input class=" -outline-none  " type="text" id="userPrenom">
+                      </div>
+                      <div class="col-12 col-md-5 col-lg-4 mb-4">
+                        <label class="" for="userNom">Nom:</label>
+                      <input class="" type="text" id="userNom">
+                      </div>
+                      <div class="col-12 col-md-5 col-lg-4 mb-4">
+                        <label class="" for="userStatus">Statut:</label>
+                      <input class=" bouton rounded col-4" type="text" id="userStatus">
+                      </div>
+                      <div class="col-12 col-md-5 col-lg-4 mb-3">
+                        <label class="" for="userAdress">Adresse:</label>
+                      <input class=" " type="text" id="userAdress">
+                      </div>
+                      <div class="col-12 col-md-5 col-lg-4 mb-3">
+                        <label class="" for="userEmail">Email:</label>
+                      <input class=" " type="email" id="userEmail">
+                      </div>
+                      <div class="col-12 col-md-5 col-lg-4 mb-3">
+                        <label class="" for="userTel">Téléphone:</label>
+                        <input class=" " type="text" id="userTel">
+                      </div>
                     </div>
-                  </div>
-                  <div class="col-12 col-md-4 mb-4 d-md-flex">
-                    <div class="row">
-                      <label class="col-4" for="userNom">Nom:</label>
-                      <input class="col-8" type="text" id="userNom">
-                    </div>
-                  </div>
-                  <div class="col-12 col-md-4 mb-4 d-md-flex">
-                    <div class="row">
-                      <label class="col-4" for="userStatus">Statut:</label>
-                      <input class="col-8 bouton" type="text" id="userStatus">
-                    </div>
-                  </div>
                 </div>
-                
-                <div class="row ligne2 d-flex flex-wrap  justify-content-between align-items-center flex-md-column flex-lg-row">
-                  <div class="col-12 col-md-4 mb-4 d-md-flex">
-                    <div class="row">
-                      <label class="col-4" for="userAdress">Adresse:</label>
-                      <input class="col-8" type="text" id="userAdress">
-                    </div>
-                  </div>
-                  <div class="col-12 col-md-4 mb-4 d-md-flex">
-                    <div class="row">
-                      <label class="col-4" for="userEmail">Email:</label>
-                      <input class="col-8" type="email" id="userEmail">
-                    </div>
-                  </div>
-                  <div class="col-12 col-md-4 mb-5 d-md-flex">
-                    <div class="row">
-                      <label class="col-4" for="userTel">Téléphone:</label>
-                      <input class="col-8" type="text" id="userTel">
-                    </div>
-                  </div>
-                </div>
-
-                
+  
                 <div class="row ligne3 d-flex flex-wrap d-flex align-items-center flex-md-column flex-lg-row">
-                  <h5 class=" my-4 text-md-center">Informations Générales</h5>
-                  <div class="col-12 col-md-4 mb-4 d-md-flex">
-                    <div class="row">
-                      <label class="col-4" for="nomEcole">Nom de l'école:</label>
-                      <input class="col-8" type="text" id="nomEcole">
+                  <h5 class=" my-4 text-md-">Informations Générales</h5>
+                  <div class="row justify-content-between">
+                    <div class="col-12 col-md-5 col-lg-6 mb-4">
+                      <label class="" for="emailEcole">Email:</label>
+                      <input class="" type="text" id="emailEcole">
                     </div>
-                  </div>
-                  <div class="col-12 col-md-4 mb-4 d-md-flex">
-                    <div class="row">
-                      <label class="col-4" for="adresseEcole">Adresse:</label>
-                      <input class="col-8" type="text" id="adresseEcole">
+                   
+                    <div class="col-12 col-md-5 text-end col-lg-6 mb-4">
+                      <label class="" for="nomEcole">Nom de l'école:</label>
+                      <input class="" type="text" id="nomEcole">
                     </div>
-                  </div>
-                  <div class="col-12 col-md-4 mb-4 d-md-flex">
-                    <div class="row">
-                      <label class="col-4" for="emailEcole">Email:</label>
-                      <input class="col-8" type="text" id="emailEcole">
+                    <div class="col-12 col-md-5 col-lg-12 mb-5">
+                      <label class="" for="adresseEcole">Adresse:</label>
+                      <input class="" type="text" id="adresseEcole">
                     </div>
-                  </div>
-                </div>
-                
-                <div class="row ligne4 d-flex flex-wrap d-flex justify-content-between align-items-center flex-md-column flex-lg-row">
-                  <div class="col-12 col-md-4 mb-4 d-md-flex">
-                    <div class="row">
-                      <label class="col-4 col-md-6" for="secteurEcole">Secteur: </label>
-                      <input class="col-8 bouton col-md-6" type="text" id="secteurEcole">
+                    
+                    <div class="col-12  col-md-5  col-lg-6 ">
+                      <label class="" for="secteurEcole">Secteur: </label>
+                      <input class=" bouton rounded-3 col-4 px-1" type="text" id="secteurEcole">
+                    </div>
+                    <div class="col-12  col-md-5  col-lg-6  d-flex justify-content-end">
+                      <button id="btnEnregistrerInfo" class="rounded-3">Enregistrer</button>
                     </div>
                   </div>
                 </div>
-
-              
-              <div class="d-flex justify-content-end">
-                <button id="btnEnregistrerInfo">Enregistrer</button>
-              </div>
             </form>
         </div>
       </div>

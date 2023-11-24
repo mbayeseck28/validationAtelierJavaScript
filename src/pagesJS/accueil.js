@@ -89,18 +89,24 @@ btnDeconnexion.addEventListener("click", signOutButtonPressed);
 // Récupérer la collection
 const eleve = collection(db, "inscScolarite");
 const certiesRef2 = collection(db, "mensualites");
-// let sum = 0;
-
-let effectifClass6;
-let effectifClass5;
-let effectifClass4;
-let effectifClass3;
 
 const effectif6 = document.getElementById("effectif6");
 const effectif5 = document.getElementById("effectif5");
 const effectif4 = document.getElementById("effectif4");
 const effectif3 = document.getElementById("effectif3");
+
+let paiement6 = document.getElementById("paiement6");
+let paiement5 = document.getElementById("paiement5");
+let paiement4 = document.getElementById("paiement4");
+let paiement3 = document.getElementById("paiement3");
+
+let effectifClass6;
+let effectifClass5;
+let effectifClass4;
+let effectifClass3;
 let noPay;
+
+
 
 onSnapshot(eleve, (snapshot) => {
   let eleves = [];
@@ -125,13 +131,7 @@ onSnapshot(eleve, (snapshot) => {
 const selectMois = document.getElementById("selectMois");
 console.log(selectMois.value);
 
-// const dateDuJour = new Date();
-// const moisActuel = dateDuJour.getMonth() + 1;
-
-// console.log(dateDuJour, moisActuel);
-// selectMois.value = moisActuel.toString();
-
-selectMois.addEventListener("change", (e) => {
+selectMois.addEventListener("change", () => {
   paiementMensualiter();
 });
 
@@ -185,15 +185,26 @@ function getMensualiter() {
     afficheEleves(list5, elevesNonPayesClasse5, PaiementsEffe5);
     afficheEleves(list4, elevesNonPayesClasse4, PaiementsEffe4);
     afficheEleves(list3, elevesNonPayesClasse3, PaiementsEffe3);
-
-    paiement6.innerHTML =
-      Math.round((PaiementsEffec.length / effectifClass6) * 100) + "%";
+    
+    paiement6.innerHTML = `${
+      Math.round((PaiementsEffec.length / effectifClass6) * 100) + "%"
+    }`;
     paiement5.innerHTML =
       Math.round((PaiementsEffe5.length / effectifClass5) * 100) + "%";
     paiement4.innerHTML =
       Math.round((PaiementsEffe4.length / effectifClass4) * 100) + "%";
     paiement3.innerHTML =
       Math.round((PaiementsEffe3.length / effectifClass3) * 100) + "%";
+
+    let sum =
+      parseFloat(paiement6.innerHTML) +
+      parseFloat(paiement5.innerHTML) +
+      parseFloat(paiement4.innerHTML) +
+      parseFloat(paiement3.innerHTML);
+
+    sum = sum / 4;
+    sum = sum.toFixed(0);
+    progressBar(sum);
   });
 }
 
@@ -221,20 +232,8 @@ function afficheEleves(listElement, nonPayments, payments) {
   });
 }
 
-window.onload = paiementMensualiter();
-
 function paiementMensualiter() {
   getMensualiter();
-
-  let sum =
-    parseFloat(paiement6.innerHTML) +
-    parseFloat(paiement5.innerHTML) +
-    parseFloat(paiement4.innerHTML) +
-    parseFloat(paiement3.innerHTML);
-
-  sum = sum / 4;
-  sum = sum.toFixed(0);
-  progressBar(sum);
 }
 paiementMensualiter();
 
