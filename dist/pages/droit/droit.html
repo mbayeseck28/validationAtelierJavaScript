@@ -7,7 +7,6 @@
         <!-- Font favicon -->
         <!-- <link rel="icon" href="images/favicon.png"> -->
         <!-- bootstrap5 -->
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.0/css/bootstrap.min.css">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
@@ -30,14 +29,20 @@
         return new bootstrap.Tooltip(tooltipTriggerEl)
         })
         </script>
-        <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
-
-        <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
         <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
         <link rel="stylesheet" href="droit.css">
         <link rel="stylesheet" href="sidebare.css">
-        
+        <script type="module" src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js"></script>
+        <script type="module" src="https://www.gstatic.com/firebasejs/9.0.0/firebase-firestore.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.0.272/jspdf.debug.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.js"></script>
+<script src="https://unpkg.com/html2pdf.js"></script>
+
+        <!-- Ajoutez ces scripts à votre fichier HTML -->
+
         <title>Droit</title>
     </head>
 <body>
@@ -86,11 +91,11 @@
                         <button class="btn btnGreen fw-bold btn-light shadow btn-sm w-100" type="button">
                          Voir le profil
                         </button></a></li>
-                      <li>        
-                        <button class="btn btnGreen fw-bold btn-light shadow btn-sm w-100" id="btnDeconnexion">
+                      <li><a class="dropdown-item" href="../auth/login/login.html">
+        
+                        <button class="btn btnGreen fw-bold btn-light shadow btn-sm w-100" type="button">
                           Deconnexion
-                        </button>
-                      </li>
+                        </button></a></li>
                     </ul>
                   </div>
             </div>
@@ -100,9 +105,9 @@
         <div class="row">
             <div class="col-12 col-md-2">
                 <div class="menu d-flex d-md-none">
-                       <i class="fa-solid fa-bars" id="menu"></i>
+                      <i class="fa-solid fa-bars" id="menu"></i>
                 </div>
-                <div class="sidebar pt-md-5 pt-lg-3">
+                <div class="sidebar">
                    <div class="logo-details" id="btn">
                    </div>
                    <ul class="nav-list">
@@ -172,140 +177,115 @@
                         </div>
                       </div>
                       
-                    </div>
-                    
-                      
-          
-                      <div class="center2 container bg-light rounded-4 mt-5 p-5">
-                        <div class="d-grid gap-2 d-md-flex justify-content-md-end mb-4">
-                          <button class="btn btn-primary" id="modif" onclick="enregistrerModifications()">
-                            Enregistrer les Modifications
-                          </button>
-                          <button class="btn btn-primary" id="bn2" onclick="telechargerPDF()">
-                            Telecharger le PDF
-                          </button>
+                    </div>        
+                    <div class="center2 container bg-light rounded-4 mt-5 p-5">
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-end mb-4">                          
+                          
+                          
                         </div>
-                        
-                            <div id="editor-container" class="content" contenteditable="true">
-                              
-                              <h2 class="border border-3 border-black text-center" id="titre1" contenteditable>Hygiéne</h2>
-                              <h4 id="soutitre1" contenteditable>Hygiene</h4>
-                              <p class="mb-3" id="p1" contenteditable>Lorem ipsum dolor sit amet consectetur adipisicing elit. <br>
-                                Deserunt in ipsam iusto nisi quos reiciendis quidem nostrum repudiandae <br>
-                                architecto voluptatibus illo hic asperiores voluptate aperiam, veniam dicta nam non? Sunt!
-                              </p>
-          
-
-                              <h4 id="soustitre2" contenteditable>Sécurité</h4>
-                              <p class="mb-5" id="p2" contenteditable>Lorem ipsum dolor sit amet consectetur adipisicing elit. <br>
-                                Deserunt in ipsam iusto nisi quos reiciendis quidem nostrum repudiandae <br>
-                                architecto voluptatibus illo hic asperiores voluptate aperiam, veniam dicta nam non? Sunt!
-                              </p>
-          
-                              <h2 class="border border-3 border-black text-center" id="titre2" contenteditable>Accueil et Surveillance</h2>
-                              <div id="p3">
-                                <p class="mb-2" contenteditable>Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                                  Deserunt in ipsam iusto nisi quos reiciendis quidem nostrum repudiandae
-                                  architecto voluptatibus illo hic asperiores voluptate aperiam, veniam dicta nam non? Sunt!
-                                </p>
-                                <p class="mb-2" contenteditable>Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                                  Deserunt in ipsam iusto nisi quos reiciendis quidem nostrum repudiandae
-                                  architecto voluptatibus illo hic asperiores voluptate aperiam, veniam dicta nam non? Sunt!
-                                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil minus, hic voluptas laboriosam cum maiores aspernatur nemo excepturi. Accusamus accusantium odio, explicabo nam eum aliquid alias assumenda aliquam dolores minus.
-                                </p>
-                                <p class="mb-2"contenteditable>Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                                  Deserunt in ipsam iusto nisi quos reiciendis quidem nostrum repudiandae
-                                  architecto voluptatibus illo hic asperiores voluptate aperiam, veniam dicta nam non? Sunt!
-                                </p>
-                                <p class="mb-2" contenteditable>Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                                  Deserunt in ipsam iusto nisi quos reiciendis quidem nostrum repudiandae
-                                  architecto voluptatibus illo hic asperiores voluptate aperiam, veniam dicta nam non? Sunt!
-                                </p>
-                                <p class="mb-2" contenteditable>Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                                  Deserunt in ipsam iusto nisi quos reiciendis quidem nostrum repudiandae
-                                  architecto voluptatibus illo hic asperiores voluptate aperiam, veniam dicta nam non? Sunt!
-                                  Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ipsum eius quos at ad, vero possimus veritatis. Cupiditate rerum quos voluptate molestias natus sequi minima dolor cumque cum, non ipsam delectus!
-                                  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos molestias repellendus architecto vel, est perferendis numquam id consequatur veritatis quasi, quam quidem tempora accusantium aut quod. Consequuntur vero illum praesentium!
-  
-                                </p>
-                                <p class="mb-5" contenteditable>Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                                  Deserunt in ipsam iusto nisi quos reiciendis quidem nostrum repudiandae
-                                  architecto voluptatibus illo hic asperiores voluptate aperiam, veniam dicta nam non? Sunt! 
-                                  Lorem ipsum dolor, sit amet consectetur adipisicing elit. Libero omnis sint in explicabo facere repellendus nulla corporis commodi facilis, accusamus adipisci. Tenetur suscipit sint consectetur quae veritatis cum repudiandae natus!
-                                </p>
-            
+                            
+                            <form class="ajouter bg-light" action="">
+                              <div class="d-grid gap-2 d-md-flex mb-4 justify-content-md-end">
+                                <button id="saveButton" class="fw-bold" type="submit">Submit Texte</button> 
+                              <button type="button" class="btn btn-primary" id="bn2" onclick="generatePDF()">
+                                Telecharger le PDF
+                              </button>
                               </div>
                               
-                              <h2 class="border border-3 border-black text-center" id="titre3" contenteditable>Sécurité et Protection de l'éléve</h2>
-                              <p class="mb-3" id="p4" contenteditable>Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                                Deserunt in ipsam iusto nisi quos reiciendis quidem nostrum repudiandae 
-                                architecto voluptatibus illo hic asperiores voluptate aperiam, veniam dicta nam non? Sunt!
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam voluptatem, natus beatae illo ullam facilis. Tempora, provident odit recusandae in non a impedit fugit unde reprehenderit libero? Rem, quas quis.
-                              </p>
-                            </div>
+                              <div id="editor-container" class="content">
+                              
+                                <div class="border border-3 border-black text-center" id="titre1">
+                                  <h3 contenteditable="">
+                                    <input type="text" class="text-center border-0 bg-light" name="title1" placeholder="Category:" id="title1" contenteditable="">
+                                  </h3>                                  
+                                </div>
+                                <div id="soutitre1">
+                                  <h4 contenteditable="">
+                                    <input type="text" class="border-0 bg-light" name="title4" placeholder="Category: " id="title4">
+                                  </h4>
+                                </div>      
+                                <textarea type="text" class="border-0 bg-light w-100" name="title6" placeholder="Category: " id="title6" contenteditable="" cols="143" rows="5"></textarea>                       
+                                <div id="soutitre2">
+                                    <h4>
+                                    <input type="text" class="border-0 bg-light" name="title5" placeholder="Category: " id="title5">
+                                    </h4>
+                                </div>
+                                <textarea type="text" class="border-0 bg-light w-100" name="title7" placeholder="Category: " id="title7" contenteditable="" cols="143" rows="5"></textarea>                       
+                                <div class="border border-3 border-black fs-4 text-center" id="titre2" contenteditable>
+                                    <input type="text" class="text-center border-0 bg-light" name="title2" placeholder="Category: " id="title2">
+                                </div>
+                                <div id="p3">
+                                  <textarea type="text" class="border-0 bg-light w-100" name="title8" placeholder="Category: " id="title8" contenteditable="" cols="143" rows="12"></textarea>                       
+
+              
+                                </div>
+                                
+                                <div class="border border-3 border-black fs-4 text-center" id="titre3" contenteditable>
+                                    <input type="text" class="text-center border-0 bg-light" name="title3" placeholder="Category: " id="title3">
+                                </div>
+                                <textarea type="text" class="border-0 bg-light w-100" name="title9" placeholder="Category: " id="title9" contenteditable="" cols="143" rows="5"></textarea>                       
+                              </div>
+
+                            </form>
+                            
                             
                           <script>
-                                var quill = new Quill('#editor-container', {
-                                    theme: 'snow'
-                                });
-
-
-                                document.addEventListener('DOMContentLoaded', function() {
-                                    var deltaString = localStorage.getItem('editor-content');
-                                    if (deltaString) {
-                                        var delta = JSON.parse(deltaString);
-                                        quill.setContents(delta);
-                                    }
-                                });
-
                             
-
-                                function telechargerPDF() {
-                                  // Récupérer le contenu avec les classes CSS
-                                  var contentWithStyles = document.getElementById('editor-container').innerHTML;
-                              
-                                  // Ajouter les styles CSS pour le PDF, y compris la bordure de page
-                                  var styles = `
-                                      <style>
-                                          
-                                          h2 {
-                                              border: 1px solid black;
-                                              padding: 5px;
-                                              text-align: center;
-                                              margin-bottom: 40px;
+                            let test = document.getElementById('saveButton');
+                            test.addEventListener('click', function(){
+                            alert('Document enregistré avec succès');                           
+                            });
+                            $(document).ready(function() {
+                              function generatePDF() {
+                                  var element = $("#editor-container")[0];
+                                  var originalHeight = element.style.height;
+                          
+                                  // Set the height to auto
+                                  element.style.height = "auto";
+                          
+                                  var pdf = new jsPDF('p', 'pt', 'a4');
+                                  html2canvas(element, {
+                                      onrendered: function(canvas) {
+                                          var imgData = canvas.toDataURL('image/png');
+                                          var imgWidth = 210; 
+                                          var pageHeight = 495;  
+                                          var imgHeight = canvas.height * imgWidth / canvas.width;
+                                          var heightLeft = imgHeight;
+                                          var doc = new jsPDF('p', 'mm');
+                                          var position = 0;
+                          
+                                          doc.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
+                                          heightLeft -= pageHeight;
+                          
+                                          while (heightLeft >= 0) {
+                                              position = heightLeft - imgHeight;
+                                              doc.addPage();
+                                              doc.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
+                                              heightLeft -= pageHeight;
                                           }
-                              
-                                          h4 {
-                                              margin-bottom: 20px;
-                                              margin-top : 15px;
-                                          }
-                                      </style>
-                                  `;
-                              
-                                  // Créer le contenu final avec les styles CSS
-                                  var finalContent = styles + contentWithStyles;
-                              
-                                  // Convertir le contenu HTML en PDF
-                                  html2pdf().from(finalContent).save();
+                                          doc.save('file.pdf');
+                          
+                                          // Reset the height
+                                          element.style.height = originalHeight;
+                                      }
+                                  });
                               }
+                          
+                              $("#bn2").click(function() {
+                                  generatePDF();
+                              });
+                          });
 
-                              
-                        
-                        
                         </script>
 
-                      </div>
-                      
-
-          
-                  </section>
+                    </div>
+            </section>
                 
             </div>
         </div>
     </div> 
-<!-- okjhggfgf -->
 
-    </script>
-     <script src="../../bundle.js"></script>
+
+    <script src="../../bundle.js"></script>
 </body>
 </html>

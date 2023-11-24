@@ -7,5 +7,18 @@ module.exports = {
         filename: "bundle.js",
     },
     devtool: "eval-cheap-source-map",
-    watch: true
+    watch: true,
+    module: {
+        rules: [
+    
+          {
+            test: /\.css$/,
+            use: ['style-loader', 'css-loader'],
+          },
+        ],
+      },
+    
 }
+
+
+
