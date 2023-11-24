@@ -310,8 +310,10 @@ function montant2(classe) {
   return montantMapping[classe] || 0;
 }
 // Recherche
-const rechercheInput = document.querySelector('#chercheInsc');
-const rechercheInput2 = document.querySelector('#chercheMens');
+const list = document.querySelector('#list');
+const list2 = document.querySelector('#list3');
+// const rechercheInput = document.querySelector('#chercheInsc');
+// const rechercheInput2 = document.querySelector('#chercheMens');
 const valeurInscInput1 = document.getElementById('classe');
 const valeurInscInput2 = document.getElementById('nomPren');
 const valeurMensInput1 = document.getElementById('classe2');
@@ -319,73 +321,57 @@ const valeurMensInput2 = document.getElementById('nomPren2');
 // // Fonction Rechercher
 
 // Pour inscription
-rechercheInput.addEventListener('input', (e) => {
-  let valeurInput1 = '';
-  let valeurInput2 = '';
-  let collectionFilter;
-  if (e.target === valeurInscInput1) {
-    valeurInput1 = e.target.value;
-    // console.log('Input 1:', valeurInput1);
-    collectionFilter = tabInsc.filter((element) =>
-      element.classe.toLowerCase().includes(valeurInput1.toLowerCase())
-    );
-  } else if (e.target === valeurInscInput2) {
-    valeurInput2 = e.target.value;
-    // console.log('Input 2:', valeurInput2);
-    collectionFilter = tabInsc.filter(
-      (element) =>
-        element.nom.toLowerCase().includes(valeurInput2.toLowerCase()) ||
-        element.prenom.toLowerCase().includes(valeurInput2.toLowerCase())
-    );
-  }
-
-  const list = document.querySelector('#list');
-  list.innerHTML = '';
-  if (collectionFilter.length) {
-    document.getElementById('erreurRefProff').innerHTML = '';
-    collectionFilter.forEach((utili) => {
+function filterInsc() {
+  const paysFilter = tabInsc.filter(
+    (pays) =>
+      (valeurInscInput1.value === 'tout' ||
+        pays.classe === valeurInscInput1.value) &&
+      (pays.nom.toLowerCase().includes(valeurInscInput2.value.toLowerCase()) ||
+        pays.prenom
+          .toLowerCase()
+          .includes(valeurInscInput2.value.toLowerCase()))
+  );
+  if (paysFilter.length === 0) {
+    list.innerHTML =
+      "<p class='fw-blod text-danger'>Aucun resultat trouvé.</p>";
+  } else {
+    list.innerHTML = '';
+    paysFilter.forEach((utili) => {
       const tr = document.createElement('tr');
 
       tr.innerHTML = `
-    <td class="text-start ps-2 py-2 border border-1">${utili.prenom}</td>
-    <td class="text-start ps-2 py-2 border border-1">${utili.nom}</td>
-    <td class="text-center py-2 border border-1">${utili.montantInsc.toLocaleString(
-      'en-US'
-    )} Fcfa</td>`;
+            <td class="text-start ps-2 py-2 border border-1">${
+              utili.prenom
+            }</td>
+            <td class="text-start ps-2 py-2 border border-1">${utili.nom}</td>
+            <td class="text-center py-2 border border-1">${utili.montantInsc.toLocaleString(
+              'en-US'
+            )} Fcfa</td>`;
       list.appendChild(tr);
-      let loaderContainer = document.querySelector('.chargement-page');
-      loaderContainer.style.display = 'none';
     });
-  } else {
-    document.getElementById('erreurRefProff').innerHTML =
-      'Aucun resultat trouver';
   }
-});
-rechercheInput2.addEventListener('input', (e) => {
-  let valeurInput1 = '';
-  let valeurInput2 = '';
-  let collectionFilter;
-  if (e.target === valeurMensInput1) {
-    valeurInput1 = e.target.value;
-    // console.log('Input 1:', valeurInput1);
-    collectionFilter = tabMens.filter((element) =>
-      element.classe.toLowerCase().includes(valeurInput1.toLowerCase())
-    );
-  } else if (e.target === valeurMensInput2) {
-    valeurInput2 = e.target.value;
-    // console.log('Input 2:', valeurInput2);
-    collectionFilter = tabMens.filter(
-      (element) =>
-        element.nom.toLowerCase().includes(valeurInput2.toLowerCase()) ||
-        element.prenom.toLowerCase().includes(valeurInput2.toLowerCase())
-    );
-  }
+}
 
-  const list = document.querySelector('#list3');
-  list.innerHTML = '';
-  if (collectionFilter.length) {
-    document.getElementById('erreurRefProff2').innerHTML = '';
-    collectionFilter.forEach((utili) => {
+valeurInscInput1.addEventListener('change', filterInsc);
+valeurInscInput2.addEventListener('input', filterInsc);
+// ________________________
+
+function filterMens() {
+  const paysFilter = tabMens.filter(
+    (pays) =>
+      (valeurMensInput1.value === 'dis' ||
+        pays.classe === valeurMensInput1.value) &&
+      (pays.nom.toLowerCase().includes(valeurMensInput2.value.toLowerCase()) ||
+        pays.prenom
+          .toLowerCase()
+          .includes(valeurMensInput2.value.toLowerCase()))
+  );
+  if (paysFilter.length === 0) {
+    list2.innerHTML =
+      "<p class='fw-blod text-danger'>Aucun resultat trouvé.</p>";
+  } else {
+    list2.innerHTML = '';
+    paysFilter.forEach((utili) => {
       const tr = document.createElement('tr');
       tr.innerHTML = `
       <td class="text-start ps-2 py-2 border border-1">${
@@ -397,15 +383,13 @@ rechercheInput2.addEventListener('input', (e) => {
       </td> <td class="text-center py-2 border border-1">${utili.montantpay.toLocaleString(
         'en-US'
       )} Fcfa</td>`;
-      list.appendChild(tr);
-      let loaderContainer = document.querySelector('.chargement-page');
-      loaderContainer.style.display = 'none';
+      list2.appendChild(tr);
     });
-  } else {
-    document.getElementById('erreurRefProff2').innerHTML =
-      'Aucun resultat trouver';
   }
-});
+}
+
+valeurMensInput1.addEventListener('change', filterMens);
+valeurMensInput2.addEventListener('input', filterMens);
 
 //___________________________________________________
 // //partie pape cheikh
