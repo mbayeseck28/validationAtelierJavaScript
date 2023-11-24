@@ -161,29 +161,27 @@
                             <div class="card border-0 shadow rounded-5 my-3">
                                 <p id="erreurProf" class="text-danger text-center fs-6 fw-bold"></p>
                               <div class="card-body ">
-                                <div
-                                  class="col-12 d-flex flex-column flex-lg-row justify-content-between align-items-center"
-                                >
-                                  <form action="" id="formEleve" class="col-12 col-md- col-lg-12 d-flex flex-column-reverse flex-md-row flex-lg-row justify-content-between">
-                                    <!-- <div class="col-4  col-md-4 col-lg-2">
-                                      <select class="form-select col" id="classe">
-                                        <option selected>Classe</option>
-                                        <option class="dis" disabled selected>Classe</option>
-                                            <option value="6ème">6ème</option>
-                                            <option value="5ème">5ème</option>
-                                            <option value="4ème">4ème</option>
-                                            <option value="3ème">3ème</option>
-                                      </select>
-                                    </div> -->
-                                    <div
-                                      class="shadow d-flex mb-lg-0 align-items-center p-1 rounded-3 ps-2 col-12 col-md-6 col-lg-4 mb-4 mb-md-0 mb-lg-0"
-                                    >
-                                      <input
-                                        type="search" class="w-100 elements me-3 bg-transparent border-0 border-outline-none" placeholder="Rechercher un élève..." />
-                                      <span class="elements me-2"><i class="fa-solid fa-magnifying-glass"></i></span>
-                                    </div>
-                                  </form>
-                                </div>
+
+                                <form class="d-flex justify-content-between flex-wrap" id="chercheInsc">
+                                  <div class="mb-2 d-flex h-75 justify-content-between myInput2">
+                                      <label for="classe" class="form-label mt-2 me-2">Classe: </label>
+                                      <select class="form-select form-select-lg mb-3 fs-6 p-1 shadow" id="classe" aria-label="Large select example">
+                                          <option class="" value="tout" selected>Classe</option>
+                                          <option value="6ème">6ème</option>
+                                          <option value="5ème">5ème</option>
+                                          <option value="4ème">4ème</option>
+                                          <option value="3ème">3ème</option>
+                                        </select>
+                                  </div>
+                                  <!-- <div class="mb-2 myInput">
+                                      <input class="form-control shadow w-100 myInput" type="search" placeholder="Rechercher" id="country-search" aria-label="Search">
+                                  </div> -->
+                                  <div class="shadow d-flex mb-lg-0 align-items-center p-0 rounded-3 ps-2 myInput h-75">
+                                    <input
+                                      type="search" class="w-100 bg-transparent border-0 border-outline-none  myInput" placeholder="Rechercher..." id="nomPren" />
+                                    <span class=" me-2"><i class="fa-solid fa-magnifying-glass"></i></span>
+                                  </div>
+                                </form>
               
                                 <div class="col-12 mt-4">
                                   <table class="w-100 px-3 m-0 table  table-bordered  table-">
