@@ -78,7 +78,24 @@ body{
     transform: translate(-50%, -50%);
 }
 
+.blue-alert {
+    background-color: #007bff;
+    color: white;
+    padding: 10px;
+    text-align: center;
+}
 
+#saveButton{
+    color: #00E100;
+    background-color: #000;
+    height: 40px;
+    width: 140px;
+}
+
+#bn2{
+    height: 40px;
+    
+}
 
 #editor-container {
     max-width: 1200px;

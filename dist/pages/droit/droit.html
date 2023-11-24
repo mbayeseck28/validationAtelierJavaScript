@@ -35,6 +35,12 @@
         <link rel="stylesheet" href="sidebare.css">
         <script type="module" src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js"></script>
         <script type="module" src="https://www.gstatic.com/firebasejs/9.0.0/firebase-firestore.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.0.272/jspdf.debug.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.js"></script>
+<script src="https://unpkg.com/html2pdf.js"></script>
+
         <!-- Ajoutez ces scripts à votre fichier HTML -->
 
         <title>Droit</title>
@@ -173,24 +179,19 @@
                       
                     </div>        
                     <div class="center2 container bg-light rounded-4 mt-5 p-5">
-                        <div class="d-grid gap-2 d-md-flex justify-content-md-end mb-4">
-                          <button type="button" class="btn btn-primary" id="modif">
-                            Enregistrer les Modifications
-                          </button>
-                          <button type="button" class="btn btn-primary" id="bn2" onclick="telechargerPDF()">
-                            Telecharger le PDF
-                          </button>
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-end mb-4">                          
+                          
+                          
                         </div>
-                            <div id="editor-buttons">
-                                <!-- Boutons pour les fonctionnalités -->
-                                <button onclick="execCommand('bold')">Gras</button>
-                                <button onclick="execCommand('italic')">Italique</button>
-                                <button onclick="execCommand('insertOrderedList')">Liste ordonnée</button>
-                                <button onclick="execCommand('insertUnorderedList')">Liste non ordonnée</button>
-                                <button onclick="alignText('center')">Centrer</button>
-                                <button onclick="undo()">Annuler</button>
-                            </div>
+                            
                             <form class="ajouter bg-light" action="">
+                              <div class="d-grid gap-2 d-md-flex mb-4 justify-content-md-end">
+                                <button id="saveButton" class="fw-bold" type="submit">Submit Texte</button> 
+                              <button type="button" class="btn btn-primary" id="bn2" onclick="generatePDF()">
+                                Telecharger le PDF
+                              </button>
+                              </div>
+                              
                               <div id="editor-container" class="content">
                               
                                 <div class="border border-3 border-black text-center" id="titre1">
@@ -203,98 +204,82 @@
                                     <input type="text" class="border-0 bg-light" name="title4" placeholder="Category: " id="title4">
                                   </h4>
                                 </div>      
-                                <textarea type="text" lass="border-0 bg-light" name="title6" placeholder="Category: " id="title6" contenteditable="" cols="143" rows="5"></textarea>                       
+                                <textarea type="text" class="border-0 bg-light w-100" name="title6" placeholder="Category: " id="title6" contenteditable="" cols="143" rows="5"></textarea>                       
                                 <div id="soutitre2">
                                     <h4>
                                     <input type="text" class="border-0 bg-light" name="title5" placeholder="Category: " id="title5">
                                     </h4>
                                 </div>
-                                <textarea type="text" lass="border-0 bg-light" name="title7" placeholder="Category: " id="title7" contenteditable="" cols="143" rows="5"></textarea>                       
+                                <textarea type="text" class="border-0 bg-light w-100" name="title7" placeholder="Category: " id="title7" contenteditable="" cols="143" rows="5"></textarea>                       
                                 <div class="border border-3 border-black fs-4 text-center" id="titre2" contenteditable>
                                     <input type="text" class="text-center border-0 bg-light" name="title2" placeholder="Category: " id="title2">
                                 </div>
                                 <div id="p3">
-                                  <textarea type="text" lass="border-0 bg-light" name="title8" placeholder="Category: " id="title8" contenteditable="" cols="143" rows="12"></textarea>                       
+                                  <textarea type="text" class="border-0 bg-light w-100" name="title8" placeholder="Category: " id="title8" contenteditable="" cols="143" rows="12"></textarea>                       
 
               
                                 </div>
                                 
                                 <div class="border border-3 border-black fs-4 text-center" id="titre3" contenteditable>
-                                    <input type="text" class="text-center border-0 bg-light w-100" name="title3" placeholder="Category: " id="title3">
+                                    <input type="text" class="text-center border-0 bg-light" name="title3" placeholder="Category: " id="title3">
                                 </div>
-                                <textarea type="text" lass="border-0 bg-light" name="title9" placeholder="Category: " id="title9" contenteditable="" cols="143" rows="5"></textarea>                       
+                                <textarea type="text" class="border-0 bg-light w-100" name="title9" placeholder="Category: " id="title9" contenteditable="" cols="143" rows="5"></textarea>                       
                               </div>
-                              <button id="saveButton" type="submit">Submit texte</button> 
+
                             </form>
                             
                             
                           <script>
-                            const editor = document.getElementById('editor-container');
-
-                            // Fonction pour exécuter les commandes d'édition
-                            function execCommand(command) {
-                                document.execCommand(command, false, null);
-                            }
-                    
-                            // Fonction pour aligner le texte
-                            function alignText(alignValue) {
-                                document.getElementById('editor-container').style.textAlign = alignValue;
-                            }
-                    
-                            // Fonction pour annuler la dernière action
-                            function undo() {
-                                document.execCommand('undo', false, null);
-                            }
-                    
-                            // Ajoutez un écouteur d'événements à chaque élément
-                            editor.addEventListener('input', () => {
-                                updateContent();
-                            });
-                    
-                            function updateContent() {
-                                const editorContent = editor.innerHTML;
-                                
-                                console.log(editorContent);
-                            }
                             
-                                function telechargerPDF() {
-                                  // Récupérer le contenu avec les classes CSS
-                                  var contentWithStyles = document.getElementById('editor-container').innerHTML;
-                              
-                                  // Ajouter les styles CSS pour le PDF, y compris la bordure de page
-                                  var styles = `
-                                      <style>
-                                        #editor-container {
-                                          max-width: 1700px;
-                                          margin: 10px 40px;
-                                          border: 1px solid #ccc;
-                                          padding: 10px;
+                            
+                  
+                          // Supprimer la classe blue-alert lorsque l'alerte est fermée
+                          window.addEventListener('focus', function() {
+                              document.body.classList.remove('blue-alert');
+                          });
+
+                            
+                            $(document).ready(function() {
+                              function generatePDF() {
+                                  var element = $("#editor-container")[0];
+                                  var originalHeight = element.style.height;
+                          
+                                  // Set the height to auto
+                                  element.style.height = "auto";
+                          
+                                  var pdf = new jsPDF('p', 'pt', 'a4');
+                                  html2canvas(element, {
+                                      onrendered: function(canvas) {
+                                          var imgData = canvas.toDataURL('image/png');
+                                          var imgWidth = 210; 
+                                          var pageHeight = 495;  
+                                          var imgHeight = canvas.height * imgWidth / canvas.width;
+                                          var heightLeft = imgHeight;
+                                          var doc = new jsPDF('p', 'mm');
+                                          var position = 0;
+                          
+                                          doc.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
+                                          heightLeft -= pageHeight;
+                          
+                                          while (heightLeft >= 0) {
+                                              position = heightLeft - imgHeight;
+                                              doc.addPage();
+                                              doc.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
+                                              heightLeft -= pageHeight;
+                                          }
+                                          doc.save('file.pdf');
+                          
+                                          // Reset the height
+                                          element.style.height = originalHeight;
                                       }
-
-                                          h2 {
-                                              border: 1px solid black;
-                                              padding: 5px;
-                                              text-align: center;
-                                              margin-bottom: 40px;
-                                          }
-                              
-                                          h4 {
-                                              margin-bottom: 20px;
-                                              margin-top : 15px;
-                                          }
-                                      </style>
-                                  `;
-                              
-                                  // Créer le contenu final avec les styles CSS
-                                  var finalContent = styles + contentWithStyles;
-                              
-                                  // Convertir le contenu HTML en PDF
-                                  html2pdf().from(finalContent).save();
+                                  });
                               }
+                          
+                              $("#bn2").click(function() {
+                                  generatePDF();
+                              });
+                          });
 
-                              
-                        
-                        
                         </script>
 
                     </div>

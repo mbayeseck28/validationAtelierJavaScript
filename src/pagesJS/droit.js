@@ -89,95 +89,14 @@ addForm.addEventListener("submit", (e) => {
     dateDajout : serverTimestamp()
   })
 })
-// const contenuRef = doc(db, 'droit', 'mZ2VxP5Ea2aAzJlzN9QV');
 
+document.getElementById('saveButton').addEventListener("submit", showAlert)
+function showAlert() {
+  alert('Document enregistré avec succès!');
+  // Ajouter la classe blue-alert à body pour l'effet de fond bleu
+  document.body.classList.add('blue-alert');
+}
+window.addEventListener('focus', function() {
+  document.body.classList.remove('blue-alert');
+});
 
-// document.addEventListener("DOMContentLoaded", async function () {
-//   // Charger le contenu depuis Firestore dès que la page est prête
-//   await getDataFromFirestore();
-// });
-
-// db.collection("droit").doc("mZ2VxP5Ea2aAzJlzN9QV")
-//     .onSnapshot((doc) => {
-//         console.log("Current data: ", doc.data());
-//         updateStarCount(postElement, doc.data().HTML );
-//     });
-
-//     function updateStarCount(el, val) {
-//       el.innerHTML = `${val} post`;
-//       consol.log(val);
-//     }
-// async function getDataFromFirestore() {
-//   console.log("Tentative de récupération du contenu depuis Firestore...");
-
-//   try {
-//     const docSnap = await getDoc(contenuRef);
-
-//     if (docSnap.exists()) {
-//       console.log("Document data:", docSnap.data());
-
-//       // Assurez-vous que l'élément avec l'ID 'editor-container' existe sur votre page HTML
-//       const editorContainer = document.getElementById('editor-container');
-
-//       if (editorContainer) {
-//         editorContainer.innerText = docSnap.data().HTML;
-
-//       } else {
-//         console.error("L'élément avec l'ID 'editor-container' n'a pas été trouvé sur la page.");
-//       }
-//     } else {
-//       console.log("Aucun document trouvé !");
-//     }
-//   } catch (error) {
-//     console.error("Erreur lors de la récupération des données depuis Firestore:", error);
-//   }
-// }
-
-
-//   getDoc(contenuRef)
-//     .then((docSnap) => {
-//       console.log("Réponse de Firestore :", doc);
-//       if (docSnap.exists()) {
-//         const data = docSnap.data().contenu;
-//         console.log("Données du document :", data);
-//         // Mettez à jour le contenu de l'éditeur avec les données de Firestore
-//         document.getElementById('editor-container').textContent = "";
-//         document.getElementById('editor-container').textContent = data;
-//         console.log("Contenu mis à jour :", data);
-//       } else {
-//         console.log("Aucun document trouvé !");
-//       }
-//     })
-//     .catch((error) => {
-//       console.error("Erreur lors de la récupération du document depuis Firestore:", error);
-//     });
-// }
-
-
-
-// function sauvegarderContenuDansFirestore() {
-  
-//   const contenuDiv = document.getElementById('editor-container').innerText;
-
-
-//   console.log("Contenu à sauvegarder :", contenuDiv);
-
-
-
-
-//   // Save the content to Firestore
-//   return setDoc(contenuRef, {
-//     contenu: contenuDiv,
-//     timestamp: serverTimestamp(),
-//   })
-//     .then(() => {
-//       console.log('Content saved successfully in Firestore!');
-//     })
-//     .catch((error) => {
-//       console.error("Error saving content:", error);
-//     });
-// }
-
-// document.getElementById("modif").addEventListener("click",  () => {
-//   sauvegarderContenuDansFirestore();
-// })
