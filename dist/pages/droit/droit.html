@@ -231,14 +231,10 @@
                             
                           <script>
                             
-                            
-                  
-                          // Supprimer la classe blue-alert lorsque l'alerte est fermée
-                          window.addEventListener('focus', function() {
-                              document.body.classList.remove('blue-alert');
-                          });
-
-                            
+                            let test = document.getElementById('saveButton');
+                            test.addEventListener('click', function(){
+                            alert('Document enregistré avec succès');                           
+                            });
                             $(document).ready(function() {
                               function generatePDF() {
                                   var element = $("#editor-container")[0];

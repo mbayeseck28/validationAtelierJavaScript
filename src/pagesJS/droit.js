@@ -88,15 +88,31 @@ addForm.addEventListener("submit", (e) => {
     title9 : addForm.title9.value,
     dateDajout : serverTimestamp()
   })
+
 })
 
-document.getElementById('saveButton').addEventListener("submit", showAlert)
-function showAlert() {
-  alert('Document enregistré avec succès!');
-  // Ajouter la classe blue-alert à body pour l'effet de fond bleu
-  document.body.classList.add('blue-alert');
-}
-window.addEventListener('focus', function() {
-  document.body.classList.remove('blue-alert');
-});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
