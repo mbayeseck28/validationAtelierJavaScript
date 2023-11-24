@@ -92,4 +92,8 @@ table thead, .myBtn{
     .infoGeneral .info{
         width: 100%;
     }  
-} 
+}
+
+input{
+    outline: none;
+}
