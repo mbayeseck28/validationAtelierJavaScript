@@ -122,6 +122,7 @@ onSnapshot(eleve, (snapshot) => {
   effectifClass4 = eleves.filter((utili) => utili.classe === "4ème").length;
   effectifClass3 = eleves.filter((utili) => utili.classe === "3ème").length;
 
+  
   effectif6.innerHTML = effectifClass6;
   effectif5.innerHTML = effectifClass5;
   effectif4.innerHTML = effectifClass4;
@@ -164,13 +165,13 @@ function getMensualiter() {
     const tousElevesClasse3 = noPay.filter((eleve) => eleve.classe === "3ème");
 
     const elevesNonPayesClasse6 = tousElevesClasse6.filter((eleve) => {
-      return !PaiementsEffec.some((pai) => pai.prenom === eleve.prenom);
+      return !PaiementsEffec.some((pai) => pai.prenom === eleve.prenom );
     });
     const elevesNonPayesClasse5 = tousElevesClasse5.filter((eleve) => {
       return !PaiementsEffe5.some((pai) => pai.prenom === eleve.prenom);
     });
     const elevesNonPayesClasse4 = tousElevesClasse4.filter((eleve) => {
-      return !PaiementsEffe4.some((pai) => pai.prenom === eleve.prenom);
+      return !PaiementsEffe4.some((pai) => pai.prenom === eleve.prenom && eleve.classe);
     });
     const elevesNonPayesClasse3 = tousElevesClasse3.filter((eleve) => {
       return !PaiementsEffe3.some((pai) => pai.prenom === eleve.prenom);
