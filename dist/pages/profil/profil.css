@@ -56,15 +56,30 @@
 .infoProfil .bouton{
     color: #ffffff;
     background-color: black;
-    height: 40px;
+    /* height: 40px; */
+    /* padding:8px  0px ; */
+}
+
+input{
+    outline: none;
+    background-color:  transparent;
+    color: #a1a4a1;
+}
+
+input:hover{
+    border: 1px solid black;
+    outline: none;
+    background-color:  #000000b8;
+    color: #ffffff;
+    border-radius: 5px;
 }
 
 .infoProfil button{
     border: none;
     color: #ffffff;
     background-color: black;
-    height: 60px;
-    padding: 20px;
+    /* height: 60px; */
+    padding:8px  20px ;
 }
 
 .marginLeft{
